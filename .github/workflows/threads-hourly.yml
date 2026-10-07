@@ -11,6 +11,9 @@ concurrency:
   group: threads-hourly
   cancel-in-progress: false
 
+permissions:
+  contents: write
+
 jobs:
   post:
     runs-on: ubuntu-latest
