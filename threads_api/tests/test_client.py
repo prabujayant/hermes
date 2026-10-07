@@ -104,22 +104,52 @@ class TestPublishing:
             return _response({"id": "container_1"})
 
         monkeypatch.setattr(client.session, "post", fake_post)
+        monkeypatch.setattr(
+            client.session,
+            "get",
+            lambda url, params: _response(
+                {"id": "container_1", "status": "FINISHED"}
+            ),
+        )
         result = client.publish_text("Hello world")
 
         assert result["id"] == "published_1"
         assert len(calls) == 2
         assert calls[0].endswith("/threads")
 
+    def test_publish_waits_for_container_ready(self, client, monkeypatch):
+        statuses = ["IN_PROGRESS", "FINISHED"]
+        monkeypatch.setattr(
+            client.session,
+            "get",
+            lambda url, params: _response({"status": statuses.pop(0)}),
+        )
+        monkeypatch.setattr(
+            client.session, "post", lambda url, data: _response({"id": "c1"})
+        )
+        monkeypatch.setattr("threads_api.client.time.sleep", lambda s: None)
+        assert client.wait_for_container("c1", timeout=60, interval=5) == "FINISHED"
+
+    def test_publish_fails_on_container_error(self, client, monkeypatch):
+        monkeypatch.setattr(
+            client.session,
+            "get",
+            lambda url, params: _response({"status": "ERROR"}),
+        )
+        with pytest.raises(ThreadsAPIError, match="failed processing"):
+            client.wait_for_container("c1", timeout=60, interval=5)
+
     def test_media_publish_waits_before_publishing(self, client, monkeypatch):
-        slept = []
-        monkeypatch.setattr("threads_api.client.time.sleep", slept.append)
+        monkeypatch.setattr(
+            client.session,
+            "get",
+            lambda url, params: _response({"status": "FINISHED"}),
+        )
         monkeypatch.setattr(
             client.session, "post", lambda url, data: _response({"id": "c1"})
         )
         client.create_image_container = lambda text, url: {"id": "c1"}
         client.publish_image("text", "https://example.com/a.jpg", wait_seconds=30)
-
-        assert slept == [30]
 
 
 class TestProfile:

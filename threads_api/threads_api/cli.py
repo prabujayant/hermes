@@ -189,7 +189,7 @@ def _cmd_post_hourly(args):
     backoff = 10
     for attempt in range(3):
         try:
-            ids = client.publish_thread(posts, reply_wait_seconds=30)
+            ids = client.publish_thread(posts, reply_wait_seconds=60)
             break
         except requests.RequestException as exc:
             if attempt == 2:
@@ -210,7 +210,7 @@ def _cmd_post_hourly(args):
             save_state(state)
             pillar, posts = _pick_fresh_thread(exclude_live=False)
             print(f"[{pillar}] {posts[0].splitlines()[0][:80]}")
-            ids = client.publish_thread(posts, reply_wait_seconds=30)
+            ids = client.publish_thread(posts, reply_wait_seconds=60)
             break
 
     run_at = now.isoformat()

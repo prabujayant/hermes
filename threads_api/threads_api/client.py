@@ -100,6 +100,38 @@ class ThreadsClient:
         """Delete own post. Requires threads_delete scope (100/day)."""
         return self._delete(media_id)
 
+    def get_container_status(self, container_id):
+        """Poll media-container readiness: PENDING/IN_PROGRESS/FINISHED/ERROR."""
+        payload = self._get(container_id, {"fields": "status"})
+        return (payload.get("status") or "UNKNOWN").upper()
+
+    def wait_for_container(self, container_id, timeout=90, interval=5):
+        """Block until the container is FINISHED (read-your-write).
+
+        Publishing the instant a container is created races server-side
+        replication and fails with code 24, especially from datacenter
+        networks. Polling status guarantees the publish will find it.
+        """
+        deadline = time.monotonic() + timeout
+        last = "UNKNOWN"
+        while True:
+            try:
+                last = self.get_container_status(container_id)
+            except ThreadsAPIError:
+                last = "UNKNOWN"
+            if last == "FINISHED":
+                return last
+            if last == "ERROR":
+                raise ThreadsAPIError(
+                    f"Media container {container_id} failed processing"
+                )
+            if time.monotonic() >= deadline:
+                raise ThreadsAPIError(
+                    f"Timed out waiting for container {container_id} "
+                    f"(last status {last})"
+                )
+            time.sleep(interval)
+
     def get_user_insights(self, metrics=("views", "likes", "followers_count")):
         """Account-level insights. Requires threads_manage_insights."""
         return self._get(
@@ -156,16 +188,16 @@ class ThreadsClient:
 
     def publish_text(self, text, reply_to_id=None):
         container = self.create_text_container(text, reply_to_id=reply_to_id)
+        self.wait_for_container(container["id"])
         return self.publish_container(container["id"])
 
-    def publish_thread(self, texts, reply_wait_seconds=30):
+    def publish_thread(self, texts, reply_wait_seconds=60):
         """Publish a hook + chained replies. Returns list of post ids.
 
         Uses reply_to_id chaining: post[0] is published first, each next
-        post replies to the previous published post id. Replies need ~30s
-        server-side processing between container creation and publishing
-        (same as image/video media), otherwise threads_publish returns
-        code 24 "resource does not exist".
+        post replies to the previous published post id. Every container
+        is polled until FINISHED before publishing — instant publishes
+        race server-side replication and fail with code 24.
         """
         if not texts:
             raise ValueError("Thread needs at least 1 post")
@@ -173,15 +205,14 @@ class ThreadsClient:
         reply_to = None
         for text in texts:
             container = self.create_text_container(text, reply_to_id=reply_to)
-            if reply_to is not None and reply_wait_seconds > 0:
-                time.sleep(reply_wait_seconds)
+            self.wait_for_container(container["id"], timeout=reply_wait_seconds)
             result = self.publish_container(container["id"])
             post_id = result.get("id")
             ids.append(post_id)
             reply_to = post_id
         return ids
 
-    def publish_replies(self, texts, root_post_id, reply_wait_seconds=30):
+    def publish_replies(self, texts, root_post_id, reply_wait_seconds=60):
         """Publish replies chained under an existing post. Returns post ids."""
         if not texts:
             raise ValueError("Need at least 1 reply")
@@ -189,27 +220,25 @@ class ThreadsClient:
         reply_to = root_post_id
         for text in texts:
             container = self.create_text_container(text, reply_to_id=reply_to)
-            if reply_wait_seconds > 0:
-                time.sleep(reply_wait_seconds)
+            self.wait_for_container(container["id"], timeout=reply_wait_seconds)
             result = self.publish_container(container["id"])
             post_id = result.get("id")
             ids.append(post_id)
             reply_to = post_id
         return ids
 
-    def publish_image(self, text, image_url, wait_seconds=30):
+    def publish_image(self, text, image_url, wait_seconds=90):
         container = self.create_image_container(text, image_url)
         return self._publish_after_wait(container["id"], wait_seconds)
 
-    def publish_video(self, text, video_url, wait_seconds=30):
+    def publish_video(self, text, video_url, wait_seconds=90):
         container = self.create_video_container(text, video_url)
         return self._publish_after_wait(container["id"], wait_seconds)
 
-    def publish_carousel(self, text, image_urls, wait_seconds=30):
+    def publish_carousel(self, text, image_urls, wait_seconds=90):
         container = self.create_carousel_container(text, image_urls)
         return self._publish_after_wait(container["id"], wait_seconds)
 
     def _publish_after_wait(self, creation_id, wait_seconds):
-        if wait_seconds > 0:
-            time.sleep(wait_seconds)
+        self.wait_for_container(creation_id, timeout=wait_seconds or 90)
         return self.publish_container(creation_id)
