@@ -1,4 +1,5 @@
 name: Threads hourly post
+# Publishes one bank thread per hour via threads_api post-hourly.
 
 on:
   schedule:
