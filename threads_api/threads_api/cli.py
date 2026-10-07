@@ -169,7 +169,7 @@ def _cmd_post_hourly(args):
 
     now = datetime.datetime.now(datetime.timezone.utc)
 
-    if not args.dry_run:
+    if not args.dry_run and not args.force:
         last = _last_run_at(POSTED_LOG)
         if last and (now - last).total_seconds() < 50 * 60:
             print(f"SKIP: last post {last.isoformat()} (<50 min ago)")
@@ -322,6 +322,11 @@ def build_parser():
         type=int,
         default=24,
         help="Daily post cap (default 24)",
+    )
+    hourly.add_argument(
+        "--force",
+        action="store_true",
+        help="Bypass time-since-last and daily-cap guards (testing)",
     )
     hourly.set_defaults(func=_cmd_post_hourly)
 

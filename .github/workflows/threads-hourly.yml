@@ -6,6 +6,11 @@ on:
     # :07 past the hour to dodge top-of-hour queue delays (UTC).
     - cron: "7 * * * *"
   workflow_dispatch:
+    inputs:
+      force:
+        description: "Bypass time/cap guards (testing)"
+        required: false
+        default: "false"
 
 concurrency:
   group: threads-hourly
@@ -43,7 +48,12 @@ jobs:
 
       - name: Publish next scheduled thread
         working-directory: threads_api
-        run: python -m threads_api.cli post-hourly
+        run: |
+          if [ "${{ inputs.force }}" = "true" ]; then
+            python -m threads_api.cli post-hourly --force
+          else
+            python -m threads_api.cli post-hourly
+          fi
 
       - name: Commit rotation state
         run: |
