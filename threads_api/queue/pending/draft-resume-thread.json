@@ -1,0 +1,13 @@
+{
+  "hook_style": "modeled on #1 'Things on your resume employers can't verify:' (98,222 views) + memorize listicle + debate CTA",
+  "note": "Reframed ethically: focuses on what to PROVE in interviews, not what to fake. Same curiosity gap, no dishonesty facilitation.",
+  "thread": [
+    "Things hiring managers can't tell from your resume (so prove them in the interview):",
+    "1/ How you debug when prod is on fire.\nAnyone can write 'debugged microservices.' Few can walk through logs, metrics, and the exact first 3 commands they'd run. That's the signal.",
+    "2/ Whether you actually unblock others.\n'Strong collaborator' means nothing. 'I unblocked 2 juniors by writing the runbook nobody wanted to write' means everything.",
+    "3/ How you disagree with a senior.\nManagers hire for this. Have one story: what you pushed back on, what data you brought, what you did when you lost.",
+    "4/ Whether your numbers are real.\n'Improved performance 40%' gets skimmed. 'p95 800ms -> 480ms by adding one composite index, verified in Grafana over 2 weeks' gets interviews.",
+    "5/ If you can delete code.\nEveryone ships. Few simplify. One story about killing a service, flag, or 2k lines beats 5 bullet points about building.",
+    "6/ I post daily breakdowns like this for backend, SQL, and interviews.\nFollow @owlsky17 so you don't miss the next one."
+  ]
+}

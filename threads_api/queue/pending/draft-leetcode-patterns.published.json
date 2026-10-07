@@ -1,0 +1,16 @@
+{
+  "texts": [
+    "IF YOU WANT TO CRACK CODING INTERVIEWS, STOP MEMORIZING SOLUTIONS.\n\nMEMORIZE THESE 5 PATTERNS INSTEAD: 1/5",
+    "Sliding window solves most array and string problems.\n\nIf the question asks for longest, shortest, or best subarray, don't brute force. Grow the window, shrink it when invalid. 2/5",
+    "Fast and slow pointers catch what loops hide.\n\nCycle detection, middle of a list, happy number. Two runners at different speeds turn O(n) memory into O(1). 3/5",
+    "DP is recognition, not memorization.\n\nAsk one question: can this be built from smaller answers? If yes, define the state, write the recurrence, fill the table. 4/5",
+    "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one. 5/5"
+  ],
+  "ids": [
+    "17974190787136790",
+    "18342261958286233",
+    "18215600524356676",
+    "18497935474102585",
+    "17912926749284223"
+  ]
+}
