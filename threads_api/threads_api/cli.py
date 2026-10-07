@@ -8,7 +8,17 @@ from .auth import save_credentials, start_oauth_flow
 from .client import ThreadsAPIError, ThreadsClient
 from .config import Config
 from .diagnose import run_checks
-from .generator import POSTED_LOG, mark_used, next_thread
+from .generator import (
+    POSTED_LOG,
+    choose_template,
+    hook_signature,
+    load_state,
+    load_templates,
+    mark_used,
+    next_thread,
+    save_state,
+    validate_thread,
+)
 from .insights import fetch_posts, render_report
 
 
@@ -122,6 +132,38 @@ def _last_run_at(path):
     return last
 
 
+def _pick_fresh_thread(exclude_live=True):
+    """Pick next bank thread, also skipping hooks already live recently.
+
+    Guards against stale state.json (manual posts, uncommitted runs):
+    the same hook text posted twice within minutes is rejected by
+    Meta with code 24, so live-post signatures join the dedup set.
+    """
+    templates = load_templates()
+    state = load_state()
+    if exclude_live:
+        try:
+            client = ThreadsClient()
+            page = client.list_posts(limit=10)
+            live = {
+                hook_signature((p.get("text") or ""))
+                for p in page.get("data", [])
+            }
+            state["recent_hooks"] = list(
+                state.get("recent_hooks", [])
+            ) + sorted(live)
+        except (ThreadsAPIError, requests.RequestException) as exc:
+            print(f"Live-dedup check skipped ({exc})")
+    template = choose_template(templates, state)
+    problems = validate_thread(template["posts"])
+    if problems:
+        raise RuntimeError(
+            f"Template from {template['source']} violates STYLE.md: "
+            + "; ".join(problems)
+        )
+    return template["pillar"], list(template["posts"])
+
+
 def _cmd_post_hourly(args):
     import datetime
 
@@ -136,7 +178,7 @@ def _cmd_post_hourly(args):
             print(f"SKIP: daily cap {args.max_per_day} reached")
             return 0
 
-    pillar, posts = next_thread()
+    pillar, posts = _pick_fresh_thread()
     print(f"[{pillar}] {posts[0].splitlines()[0][:80]}")
 
     if args.dry_run:
@@ -149,7 +191,7 @@ def _cmd_post_hourly(args):
         try:
             ids = client.publish_thread(posts, reply_wait_seconds=30)
             break
-        except (ThreadsAPIError, requests.RequestException) as exc:
+        except requests.RequestException as exc:
             if attempt == 2:
                 raise
             print(f"Attempt {attempt + 1} failed ({exc}); retry in {backoff}s")
@@ -157,6 +199,19 @@ def _cmd_post_hourly(args):
 
             time.sleep(backoff)
             backoff *= 2
+        except ThreadsAPIError as exc:
+            # API rejected the content (e.g. code 24 duplicate) — retrying
+            # identical text never helps, so switch to a fresh template.
+            print(f"Content rejected ({exc}); picking a different thread")
+            state = load_state()
+            state["recent_hooks"] = list(
+                state.get("recent_hooks", [])
+            ) + [hook_signature(posts[0])]
+            save_state(state)
+            pillar, posts = _pick_fresh_thread(exclude_live=False)
+            print(f"[{pillar}] {posts[0].splitlines()[0][:80]}")
+            ids = client.publish_thread(posts, reply_wait_seconds=30)
+            break
 
     run_at = now.isoformat()
     POSTED_LOG.parent.mkdir(parents=True, exist_ok=True)
