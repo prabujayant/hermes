@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Switched to a contrarian caps\u2011listicle cheatsheet with curiosity\u2011gap opener, each post a single actionable rule, ending with a comment CTA to drive replies and view\u2011time.",
-  "pivots": 6,
+  "hypothesis": "Switched to a concrete debugging framework with relatable failure stories and interactive comment CTA to drive engagement and replies.",
+  "pivots": 7,
   "streak": 0,
   "history": [
     {
@@ -78,6 +78,20 @@
         "18133749850668815",
         "18459252352187735",
         "18629963956041614"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-08T15:31:42.101886+00:00",
+      "pillar": "smart",
+      "hook_sig": "i spent 6 months chasing a production outage",
+      "ids": [
+        "18178973908434343",
+        "18074283443733179",
+        "17912882649499245",
+        "18115889929789866",
+        "18116335393804922",
+        "18125739617488393"
       ],
       "pivoted": true
     }
