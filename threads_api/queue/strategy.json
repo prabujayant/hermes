@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Pivoted from listicle hooks to a single curiosity-gap war story with a clear contrarian payoff, dropping the caps format that proved low-reach.",
-  "pivots": 13,
+  "hypothesis": "Pivoted to contrarian hot take on testing with integration-test challenge, dropping war-story and listicle formats that proved low-reach.",
+  "pivots": 14,
   "streak": 0,
   "history": [
     {
@@ -174,6 +174,19 @@
         "18348151474268741",
         "17921574288444647",
         "18117116692786074"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-08T23:01:06.472455+00:00",
+      "pillar": "smart",
+      "hook_sig": "we spend weeks designing perfect abstractions. the code",
+      "ids": [
+        "18012049772970483",
+        "18142480885613324",
+        "18086095265313529",
+        "18638896636060509",
+        "18139265821617588"
       ],
       "pivoted": true
     }
