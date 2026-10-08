@@ -1,6 +1,6 @@
 {
   "hypothesis": "Switched from debugging framework stories to contrarian clean code hot take to trigger debate and replies.",
-  "pivots": 8,
+  "pivots": 9,
   "streak": 0,
   "history": [
     {
@@ -105,6 +105,19 @@
         "17871866853637511",
         "18096823349541855",
         "18356014900169305"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-08T17:01:11.251594+00:00",
+      "pillar": "smart",
+      "hook_sig": "things hiring managers can't tell from your resume",
+      "ids": [
+        "18631735915043530",
+        "18123815710748794",
+        "17904478701350247",
+        "18640839304029009",
+        "18206870539373210"
       ],
       "pivoted": true
     }
