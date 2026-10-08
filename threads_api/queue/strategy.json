@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Switched to personal storytelling with a curiosity gap, focusing on relatable debugging experiences to drive engagement and replies.",
-  "pivots": 10,
+  "hypothesis": "Pivoted from personal storytelling to contrarian hot take with specific replacement strategy and direct challenge, proven to drive debate replies and profile clicks.",
+  "pivots": 11,
   "streak": 0,
   "history": [
     {
@@ -133,6 +133,20 @@
         "18643231867042793",
         "18356854366247854",
         "18099396908553565"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-08T20:01:49.036484+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want faster shipping, stop writing integration",
+      "ids": [
+        "18165933184468681",
+        "18131268748688390",
+        "18395598022167202",
+        "17967901923207236",
+        "17983863669109438",
+        "18132973279663384"
       ],
       "pivoted": true
     }
