@@ -49,17 +49,27 @@ def _key():
     return key
 
 
-def chat(messages, max_tokens=1500, temperature=0.7, retries=2):
-    """Send chat messages, trying each model in order. Returns text."""
+def chat(messages, max_tokens=1500, temperature=0.7, retries=2, model=None):
+    """Send chat messages, trying each model in order. Returns text.
+
+    Pass model (or list) to override the OPENROUTER_MODEL/FALLBACKS env
+    chain — required for parallel benchmarks sharing one process.
+    """
     key = _key()
     headers = {
         "Authorization": f"Bearer {key}",
         "Content-Type": "application/json",
     }
+    if model is None:
+        chain = _models()
+    elif isinstance(model, str):
+        chain = [model]
+    else:
+        chain = list(model)
     last_error = "no models configured"
-    for model in _models():
+    for current in chain:
         body = {
-            "model": model,
+            "model": current,
             "messages": messages,
             "max_tokens": max_tokens,
             "temperature": temperature,
@@ -69,14 +79,14 @@ def chat(messages, max_tokens=1500, temperature=0.7, retries=2):
                 response = requests.post(API_URL, headers=headers,
                                          json=body, timeout=TIMEOUT)
             except requests.RequestException as exc:
-                last_error = f"{model}: network error ({exc})"
+                last_error = f"{current}: network error ({exc})"
                 break  # next model, network is unlikely to heal by retry
             if response.status_code == 429:
                 wait = 20 * (attempt + 1)
                 if attempt < retries:
                     time.sleep(wait)
                     continue
-                last_error = f"{model}: rate limited (429, free tier caps)"
+                last_error = f"{current}: rate limited (429, free tier caps)"
                 break
             if response.status_code == 401:
                 raise LLMError(
@@ -90,7 +100,7 @@ def chat(messages, max_tokens=1500, temperature=0.7, retries=2):
                 )
             if response.status_code >= 400:
                 last_error = (
-                    f"{model}: HTTP {response.status_code} "
+                    f"{current}: HTTP {response.status_code} "
                     f"{response.text[:200]}"
                 )
                 break  # model-level error, try next model
@@ -103,10 +113,10 @@ def chat(messages, max_tokens=1500, temperature=0.7, retries=2):
                     or message.get("reasoning")
                 )
                 if not text or not str(text).strip():
-                    last_error = f"{model}: empty content"
+                    last_error = f"{current}: empty content"
                     break
                 return text
             except (ValueError, KeyError, IndexError) as exc:
-                last_error = f"{model}: bad response ({exc})"
+                last_error = f"{current}: bad response ({exc})"
                 break
     raise LLMError(f"All OpenRouter models failed. Last error: {last_error}")

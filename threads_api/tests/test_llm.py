@@ -60,6 +60,15 @@ def test_reasoning_fallback_when_content_null(monkeypatch):
     assert chat([{"role": "user", "content": "x"}]) == "fallback text"
 
 
+def test_model_param_overrides_env_chain(monkeypatch):
+    monkeypatch.setenv("OPENROUTER_API_KEY", "k")
+    monkeypatch.setenv("OPENROUTER_MODEL", "env-model")
+    seen = {}
+    _ok(monkeypatch, "hi", seen)
+    assert chat([{"role": "user", "content": "x"}], model="explicit-model") == "hi"
+    assert seen["model"] == "explicit-model"
+
+
 def test_falls_back_to_next_model(monkeypatch):
     monkeypatch.setenv("OPENROUTER_API_KEY", "k")
     monkeypatch.setenv("OPENROUTER_MODEL", "first-model")
