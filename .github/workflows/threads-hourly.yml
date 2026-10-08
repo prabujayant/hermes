@@ -3,10 +3,10 @@ name: Threads hourly post
 
 on:
   schedule:
-    # Every 20 min: free-tier cron skips runs under load, so 3 attempts
-    # per hour raise the odds one fires. The 50-min guard in post-hourly
-    # guarantees max one post per hour no matter how many fire.
-    - cron: "7,27,47 * * * *"
+    # Hourly. (Tried 3x/hour: GitHub deprioritises high-frequency
+    # schedules and fired zero runs in 9h. The 50-min guard keeps
+    # overlapping attempts from double-posting.)
+    - cron: "7 * * * *"
   workflow_dispatch:
     inputs:
       force:
