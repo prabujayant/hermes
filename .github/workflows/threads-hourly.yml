@@ -30,8 +30,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: "pip"
-          cache-dependency-path: threads_api/requirements.txt
+          # NOTE: no pip cache — on SKIP hours pip never runs, leaving
+          # no cache dir, which fails the run in setup-python's post step.
 
       - name: Schedule guard (stdlib only, skips install when idle)
         id: guard
