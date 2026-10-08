@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Switched to curiosity\u2011gap storytelling with a comment CTA to boost replies and view\u2011time.",
-  "pivots": 2,
+  "hypothesis": "Pivoted to a concise 5\u2011pattern retry cheatsheet with curiosity\u2011gap listicle hook and comment CTA to drive replies and view\u2011time.",
+  "pivots": 3,
   "streak": 0,
   "history": [
     {
@@ -26,6 +26,19 @@
         "18336105733275165",
         "18109870031611409",
         "18118598329766841"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-08T09:01:10.609421+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want scalable apis, stop guessing retry",
+      "ids": [
+        "18038159660839075",
+        "17933175216147763",
+        "18108349490349042",
+        "18493394737109757",
+        "18463099339139443"
       ],
       "pivoted": true
     }
