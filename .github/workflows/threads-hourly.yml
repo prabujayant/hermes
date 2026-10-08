@@ -88,6 +88,6 @@ jobs:
         run: |
           git config user.name "threads-bot"
           git config user.email "threads-bot@users.noreply.github.com"
-          git add threads_api/queue/state.json threads_api/queue/posted.jsonl || true
+          git add threads_api/queue/state.json threads_api/queue/posted.jsonl threads_api/queue/strategy.json || true
           git diff --cached --quiet || git commit -m "chore: hourly post rotation state"
           git push
