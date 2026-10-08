@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Switched to contrarian hot\u2011take cheatsheet with curiosity\u2011gap opener and comment CTA to boost replies and view\u2011time.",
-  "pivots": 4,
+  "hypothesis": "Switched to a contrarian caps\u2011listicle cheatsheet with curiosity\u2011gap opener, each post a single actionable rule, ending with a comment CTA to drive replies and view\u2011time.",
+  "pivots": 5,
   "streak": 0,
   "history": [
     {
@@ -52,6 +52,19 @@
         "18125168635913245",
         "18186478699413139",
         "18143632792604681"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-08T13:01:11.572807+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want scalable backend systems, stop copy\u2011pasting",
+      "ids": [
+        "18132199750740244",
+        "18396143926204232",
+        "17933193537143864",
+        "18100044641059799",
+        "17937599034400685"
       ],
       "pivoted": true
     }
