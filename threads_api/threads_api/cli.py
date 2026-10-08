@@ -102,6 +102,113 @@ def _cmd_delete(args):
     print(f"Deleted: {result.get('deleted_id', args.post_id)}")
 
 
+def _cmd_post_smart(args):
+    import datetime
+
+    from .strategist import (
+        SMART_MODELS,
+        build_prompt,
+        evaluate,
+        load_strategy,
+        parse_decision,
+        record_run,
+        save_strategy,
+        soft_validate,
+    )
+
+    now = datetime.datetime.now(datetime.timezone.utc)
+
+    if not args.dry_run and not args.force:
+        from .guard import should_run
+
+        run, reason = should_run(POSTED_LOG, max_per_day=args.max_per_day)
+        if not run:
+            print(f"SKIP: {reason}")
+            return 0
+
+    from .llm import chat as llm_chat
+
+    client = ThreadsClient()
+    posts = fetch_posts(client, max_posts=40, max_workers=20)
+    scorecard = evaluate(posts, now=now)
+    strategy = load_strategy()
+    pivoted = scorecard["pivot"]
+    print(
+        f"Median {scorecard['median']:,} views, "
+        f"floor {scorecard['floor']:,}, streak {scorecard['streak']}, "
+        f"pivot={pivoted}, hypothesis: {strategy['hypothesis'][:80]}"
+    )
+
+    prompt = build_prompt(scorecard, strategy)
+    if args.dry_run:
+        print("DRY-RUN: scorecard above, no LLM call, nothing published")
+        return 0
+
+    system = (
+        "You run a Threads account posting software engineering content. "
+        "Your only goal is views. Follow the output format exactly."
+    )
+    raw = llm_chat(
+        [{"role": "system", "content": system},
+         {"role": "user", "content": prompt}],
+        max_tokens=1500,
+        temperature=0.9,
+        model=SMART_MODELS,
+    )
+    try:
+        thread, hypothesis = parse_decision(raw)
+        problems = soft_validate(thread)
+        if problems:
+            raise ValueError("; ".join(problems))
+    except (ValueError, RuntimeError) as exc:
+        print(f"Strategist output rejected ({exc}); one retry with notes")
+        raw = llm_chat(
+            [{"role": "system", "content": system},
+             {"role": "user", "content": (
+                 prompt + f"\nYour last output failed: {exc}. "
+                 "Fix ONLY that and return the full thread again."
+             )}],
+            max_tokens=1500,
+            temperature=0.7,
+            model=SMART_MODELS,
+        )
+        try:
+            thread, hypothesis = parse_decision(raw)
+            problems = soft_validate(thread)
+            if problems:
+                raise ValueError("; ".join(problems))
+        except (ValueError, RuntimeError) as exc2:
+            print(f"LLM failed twice ({exc2}); bank fallback")
+            thread = None
+
+    if thread is None:
+        pillar, thread = _pick_fresh_thread()
+        hypothesis = strategy["hypothesis"]
+        print(f"Bank fallback [{pillar}]")
+
+    ids = client.publish_thread(thread, reply_wait_seconds=60)
+
+    run_at = now.isoformat()
+    POSTED_LOG.parent.mkdir(parents=True, exist_ok=True)
+    with open(POSTED_LOG, "a", encoding="utf-8") as handle:
+        handle.write(
+            json.dumps({"run_at": run_at, "pillar": "smart", "ids": ids})
+            + "\n"
+        )
+    # Keep bank dedup aware of the smart hook without breaking rotation.
+    bank_state = load_state()
+    bank_state["recent_hooks"] = list(
+        bank_state.get("recent_hooks", [])
+    ) + [hook_signature(thread[0])]
+    save_state(bank_state)
+
+    if hypothesis:
+        strategy["hypothesis"] = hypothesis[:300]
+    record_run(strategy, "smart", thread, ids, run_at, pivoted)
+    save_strategy(strategy)
+    print(f"Posted smart thread ({len(ids)}): {ids[0]}")
+
+
 def _account_brief(max_posts=100):
     """Compact data pack for the LLM: summary + top posts + themes."""
     client = ThreadsClient()
@@ -478,6 +585,27 @@ def build_parser():
         help="Bypass time-since-last and daily-cap guards (testing)",
     )
     hourly.set_defaults(func=_cmd_post_hourly)
+
+    smart = sub.add_parser(
+        "post-smart", help="Autonomous LLM loop: measure, decide, publish, pivot"
+    )
+    smart.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Evaluate + show scorecard without LLM call or publish",
+    )
+    smart.add_argument(
+        "--force",
+        action="store_true",
+        help="Bypass time-since-last and daily-cap guards (testing)",
+    )
+    smart.add_argument(
+        "--max-per-day",
+        type=int,
+        default=24,
+        help="Daily post cap (default 24)",
+    )
+    smart.set_defaults(func=_cmd_post_smart)
 
     return parser
 

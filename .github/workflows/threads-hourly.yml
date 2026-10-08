@@ -61,11 +61,12 @@ jobs:
         if: steps.guard.outputs.skip != 'true'
         working-directory: threads_api
         run: |
-          printf 'APP_ID=%s\nAPP_SECRET=%s\nACCESS_TOKEN=%s\nTHREADS_USER_ID=%s\n' \
+          printf 'APP_ID=%s\nAPP_SECRET=%s\nACCESS_TOKEN=%s\nTHREADS_USER_ID=%s\nOPENROUTER_API_KEY=%s\n' \
             "${{ secrets.APP_ID }}" \
             "${{ secrets.APP_SECRET }}" \
             "${{ secrets.ACCESS_TOKEN }}" \
-            "${{ secrets.THREADS_USER_ID }}" > .env
+            "${{ secrets.THREADS_USER_ID }}" \
+            "${{ secrets.OPENROUTER_API_KEY }}" > .env
 
       - name: Verify connection (fails loud on expired token)
         if: steps.guard.outputs.skip != 'true'
@@ -77,9 +78,9 @@ jobs:
         working-directory: threads_api
         run: |
           if [ "${{ inputs.force }}" = "true" ]; then
-            python -m threads_api.cli post-hourly --force
+            python -m threads_api.cli post-smart --force
           else
-            python -m threads_api.cli post-hourly
+            python -m threads_api.cli post-smart
           fi
 
       - name: Commit rotation state
