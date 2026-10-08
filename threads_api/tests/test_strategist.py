@@ -101,3 +101,21 @@ def test_soft_validate_enforces_hard_constraints():
 
 def test_pivot_constant_matches_threshold():
     assert PIVOT_STREAK == 2
+
+
+def test_repair_counters_appends_only_missing():
+    from threads_api.strategist import repair_counters
+
+    posts = ["hook with 1/3", "plain value post", "cta with 3/3"]
+    fixed = repair_counters(posts)
+    assert fixed[0] == "hook with 1/3"
+    assert fixed[1].endswith(" 2/3")
+    assert fixed[2] == "cta with 3/3"
+
+
+def test_repair_counters_salvages_failed_run_shape():
+    from threads_api.strategist import repair_counters, soft_validate
+
+    posts = [f"value point number {i} here" for i in range(1, 7)]
+    posts.append("Follow @owlsky17 for more")
+    assert soft_validate(repair_counters(posts)) == []

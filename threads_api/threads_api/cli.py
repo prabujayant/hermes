@@ -112,6 +112,7 @@ def _cmd_post_smart(args):
         load_strategy,
         parse_decision,
         record_run,
+        repair_counters,
         save_strategy,
         soft_validate,
     )
@@ -157,6 +158,7 @@ def _cmd_post_smart(args):
     )
     try:
         thread, hypothesis = parse_decision(raw)
+        thread = repair_counters(thread)
         problems = soft_validate(thread)
         if problems:
             raise ValueError("; ".join(problems))
@@ -174,6 +176,7 @@ def _cmd_post_smart(args):
         )
         try:
             thread, hypothesis = parse_decision(raw)
+            thread = repair_counters(thread)
             problems = soft_validate(thread)
             if problems:
                 raise ValueError("; ".join(problems))

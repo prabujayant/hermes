@@ -151,8 +151,11 @@ def build_prompt(scorecard, strategy):
         )
     lines.append(
         "Output: first your thread as 2-7 posts separated by a line with "
-        "exactly --- and nothing else (every post <=500 chars, numbered "
-        "k/N counters, last post ends with a follow or comment CTA). "
+        "exactly --- and nothing else (every post <=500 chars). "
+        "CRITICAL: end post 1 with ' 1/N', post 2 with ' 2/N', and so on "
+        "where N is the total post count — e.g. a 5-post thread ends its "
+        "posts with 1/5 2/5 3/5 4/5 5/5. A post without its counter is "
+        "rejected. Last post ends with a follow or comment CTA. "
         "After the posts, on its own final line: HYPOTHESIS: <one line>."
     )
     return "\n".join(lines)
@@ -176,6 +179,21 @@ def parse_decision(raw):
             f"strategist returned {len(posts)} usable posts, need 2-7"
         )
     return posts, hypothesis
+
+
+def repair_counters(posts):
+    """Append missing k/N counters. Only touches posts with no counter
+    pattern at all, so model-written numbering is never double-tagged."""
+    import re
+
+    n = len(posts)
+    repaired = []
+    for i, post in enumerate(posts, start=1):
+        if re.search(r"\d+/\d+", post):
+            repaired.append(post)
+        else:
+            repaired.append(post.rstrip() + f" {i}/{n}")
+    return repaired
 
 
 def soft_validate(posts):
