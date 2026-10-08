@@ -434,6 +434,20 @@ def _cmd_post_hourly(args):
             time.sleep(backoff)
             backoff *= 2
         except ThreadsAPIError as exc:
+            # Could be transient Meta flakiness (seen: code 24 on both
+            # attempts, success minutes later) or a content rejection.
+            # Retry the SAME thread once after 60s before abandoning it:
+            # retrying identical text never helps a true rejection, but
+            # switching templates on a transient wastes a good thread.
+            import time
+
+            print(f"Publish hit API error ({exc}); retry same thread in 60s")
+            time.sleep(60)
+            try:
+                ids = client.publish_thread(thread, reply_wait_seconds=60)
+                break
+            except (ThreadsAPIError, requests.RequestException) as exc2:
+                print(f"Retry failed ({exc2}); picking a different thread")
             # API rejected the content (e.g. code 24 duplicate) — retrying
             # identical text never helps, so switch to a fresh template.
             print(f"Content rejected ({exc}); picking a different thread")
