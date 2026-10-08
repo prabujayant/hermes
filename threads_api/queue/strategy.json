@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Pivoted from personal storytelling to contrarian hot take with specific replacement strategy and direct challenge, proven to drive debate replies and profile clicks.",
-  "pivots": 11,
+  "hypothesis": "Changed to contrarian, challenge\u2011driven hooks with clear formulas and one\u2011tag posts.",
+  "pivots": 12,
   "streak": 0,
   "history": [
     {
@@ -147,6 +147,20 @@
         "17967901923207236",
         "17983863669109438",
         "18132973279663384"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-08T21:01:09.741518+00:00",
+      "pillar": "smart",
+      "hook_sig": "you think you know how to write fast",
+      "ids": [
+        "17985384165108353",
+        "18106589846254541",
+        "18115639361015368",
+        "17978011166922653",
+        "17922055629223497",
+        "18035151968896561"
       ],
       "pivoted": true
     }
