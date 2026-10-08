@@ -1,6 +1,6 @@
 {
   "hypothesis": "Switched to a contrarian caps\u2011listicle cheatsheet with curiosity\u2011gap opener, each post a single actionable rule, ending with a comment CTA to drive replies and view\u2011time.",
-  "pivots": 5,
+  "pivots": 6,
   "streak": 0,
   "history": [
     {
@@ -65,6 +65,19 @@
         "17933193537143864",
         "18100044641059799",
         "17937599034400685"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-08T14:01:11.967806+00:00",
+      "pillar": "smart",
+      "hook_sig": "things that quietly kill engineering careers: 1/5",
+      "ids": [
+        "18082551386357173",
+        "18096205835439826",
+        "18133749850668815",
+        "18459252352187735",
+        "18629963956041614"
       ],
       "pivoted": true
     }
