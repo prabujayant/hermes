@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Switched from debugging framework stories to contrarian clean code hot take to trigger debate and replies.",
-  "pivots": 9,
+  "hypothesis": "Switched to personal storytelling with a curiosity gap, focusing on relatable debugging experiences to drive engagement and replies.",
+  "pivots": 10,
   "streak": 0,
   "history": [
     {
@@ -118,6 +118,21 @@
         "17904478701350247",
         "18640839304029009",
         "18206870539373210"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-08T18:01:13.057576+00:00",
+      "pillar": "smart",
+      "hook_sig": "i switched to a personal storytelling hook with",
+      "ids": [
+        "18134970178737083",
+        "18379586767239323",
+        "18096653936540728",
+        "17872035597640124",
+        "18643231867042793",
+        "18356854366247854",
+        "18099396908553565"
       ],
       "pivoted": true
     }
