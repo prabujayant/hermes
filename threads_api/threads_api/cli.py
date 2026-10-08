@@ -94,44 +94,6 @@ def _cmd_delete(args):
     print(f"Deleted: {result.get('deleted_id', args.post_id)}")
 
 
-def _recent_posts_today(path):
-    """Count posted.jsonl receipts from today (UTC)."""
-    import datetime
-
-    today = datetime.datetime.now(datetime.timezone.utc).date().isoformat()
-    count = 0
-    try:
-        with open(path, encoding="utf-8") as handle:
-            for line in handle:
-                try:
-                    if json.loads(line).get("run_at", "")[:10] == today:
-                        count += 1
-                except ValueError:
-                    continue
-    except OSError:
-        pass
-    return count
-
-
-def _last_run_at(path):
-    """UTC datetime of the most recent receipt, or None."""
-    import datetime
-
-    last = None
-    try:
-        with open(path, encoding="utf-8") as handle:
-            for line in handle:
-                try:
-                    stamp = json.loads(line).get("run_at")
-                    if stamp:
-                        last = datetime.datetime.fromisoformat(stamp)
-                except ValueError:
-                    continue
-    except OSError:
-        pass
-    return last
-
-
 def _pick_fresh_thread(exclude_live=True):
     """Pick next bank thread, also skipping hooks already live recently.
 
@@ -170,12 +132,13 @@ def _cmd_post_hourly(args):
     now = datetime.datetime.now(datetime.timezone.utc)
 
     if not args.dry_run and not args.force:
-        last = _last_run_at(POSTED_LOG)
-        if last and (now - last).total_seconds() < 50 * 60:
-            print(f"SKIP: last post {last.isoformat()} (<50 min ago)")
-            return 0
-        if _recent_posts_today(POSTED_LOG) >= args.max_per_day:
-            print(f"SKIP: daily cap {args.max_per_day} reached")
+        from .guard import should_run
+
+        run, reason = should_run(
+            POSTED_LOG, max_per_day=args.max_per_day
+        )
+        if not run:
+            print(f"SKIP: {reason}")
             return 0
 
     pillar, posts = _pick_fresh_thread()
