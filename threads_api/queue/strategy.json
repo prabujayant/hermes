@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Switched to a concrete debugging framework with relatable failure stories and interactive comment CTA to drive engagement and replies.",
-  "pivots": 7,
+  "hypothesis": "Switched from debugging framework stories to contrarian clean code hot take to trigger debate and replies.",
+  "pivots": 8,
   "streak": 0,
   "history": [
     {
@@ -92,6 +92,19 @@
         "18115889929789866",
         "18116335393804922",
         "18125739617488393"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-08T15:59:14.761878+00:00",
+      "pillar": "smart",
+      "hook_sig": "i spent 3 years optimizing for clean code",
+      "ids": [
+        "18094744670247152",
+        "18090941276230759",
+        "17871866853637511",
+        "18096823349541855",
+        "18356014900169305"
       ],
       "pivoted": true
     }
