@@ -13,7 +13,8 @@
     "if you want behavioral rounds to remember you,",
     "i spent 6 months chasing a production outage",
     "i shipped a feature that crashed production at",
-    "if you want scalable apis, stop guessing retry"
+    "if you want scalable apis, stop guessing retry",
+    "everyone says \u201cbreak it into microservices.\u201d here\u2019s why"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
