@@ -320,7 +320,10 @@ def _cmd_write_thread(args):
                     "Pillar: " + pillar + "\n"
                     "Output ONLY the 5 posts, separated by a line "
                     "containing exactly --- and nothing else. "
-                    "Every post under 500 characters."
+                    "Every post under 500 characters. "
+                    "Plain ASCII only: no em dashes, no en dashes, "
+                    "commas and plain hyphens only. The last post is "
+                    "always the follow CTA for @owlsky17."
                 ),
             },
         ],

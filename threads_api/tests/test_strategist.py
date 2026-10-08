@@ -83,7 +83,7 @@ def test_soft_validate_allows_style_experiments():
     posts = [
         "a lowercase debate hook, no caps at all 1/3",
         "value with opinion 2/3",
-        "comment YOUR take below 3/3",
+        "Follow @owlsky17 for more 3/3",
     ]
     assert soft_validate(posts) == []
 
@@ -129,10 +129,38 @@ def test_repair_thread_appends_missing_cta():
     assert "Follow @owlsky17" in repair_thread(posts)[-1]
 
 
-def test_repair_thread_keeps_comment_cta():
+def test_repair_thread_appends_follow_over_comment_cta():
     from threads_api.strategist import repair_thread
 
     posts = ["hook here", "value here", "comment YOUR take here"]
     fixed = repair_thread(posts)
-    assert "Follow @owlsky17" not in fixed[-1]
-    assert fixed[-1].endswith("3/3")
+    assert "Follow @owlsky17" in fixed[-1]
+    assert fixed[-1].rstrip().endswith("3/3")
+
+
+def test_ascii_clean_removes_fancy_dashes():
+    from threads_api.strategist import ascii_clean
+
+    assert ascii_clean("a — b") == "a, b"
+    assert ascii_clean("a–b") == "a-b"
+    assert ascii_clean("plain - text") == "plain - text"
+
+
+def test_repair_thread_normalises_dashes():
+    from threads_api.strategist import repair_thread, soft_validate
+
+    posts = ["hook here — with dash", "value–here",
+             "Follow @owlsky17 for more"]
+    fixed = repair_thread(posts)
+    assert soft_validate(fixed) == []
+    assert all("—" not in p and "–" not in p for p in fixed)
+
+
+def test_soft_validate_rejects_dashes_and_comment_only_cta():
+    from threads_api.strategist import soft_validate
+
+    assert any("non-ASCII" in p
+               for p in soft_validate(["hook — here 1/2",
+                                        "Follow @owlsky17 2/2"]))
+    assert any("follow CTA" in p
+               for p in soft_validate(["hook 1/2", "comment below 2/2"]))

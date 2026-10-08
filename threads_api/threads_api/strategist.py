@@ -40,9 +40,12 @@ NICHE_PLAYBOOK = """Proven viral moves in the coding niche on Threads:
 - Caps-listicle hook: IF YOU WANT X, STOP Y. MEMORIZE THESE N Z.
 - Debate hot take ending in a challenge (highest reply rates).
 - Contrarian lessons: 'most X advice is outdated, here is what changed'.
-- Cheatsheet/stack thread ending in a comment CTA (comment X for Y).
+- Cheatsheet/stack thread with a strong payoff post.
 - Algorithm facts: replies (esp. replies-to-replies in the first hours),
-  profile clicks and view-time drive reach. One topic tag per post."""
+  profile clicks and view-time drive reach. One topic tag per post.
+House rules (non-negotiable): plain ASCII text only. NEVER use em
+dashes or en dashes, use commas or plain hyphens. The final post is
+ALWAYS the follow CTA for @owlsky17, never a comment CTA."""
 
 
 def load_strategy(path=STRATEGY_PATH):
@@ -119,6 +122,15 @@ def evaluate(posts, now=None):
     }
 
 
+def ascii_clean(text):
+    """Replace em/en dashes and fancy hyphens so the model never sees
+    (and copies) them in scorecards, hypotheses, or examples."""
+    import re
+
+    text = re.sub(r"\s+[—–]\s+", ", ", text)
+    return re.sub(r"[—–‐‑]", "-", text)
+
+
 def build_prompt(scorecard, strategy):
     """Strategist prompt: scorecard in, thread + hypothesis out."""
     lines = [
@@ -132,9 +144,9 @@ def build_prompt(scorecard, strategy):
         flag = "UNDER" if item["under"] else "ok"
         lines.append(
             f"- [{flag}] {item['views']} views, {item['engagement']} eng "
-            f"({item['age_h']}h old): {item['text']}"
+            f"({item['age_h']}h old): {ascii_clean(item['text'])}"
         )
-    lines.append(f"Current hypothesis: {strategy['hypothesis']}")
+    lines.append(f"Current hypothesis: {ascii_clean(strategy['hypothesis'])}")
     lines.append(NICHE_PLAYBOOK)
 
     if scorecard["pivot"]:
@@ -153,9 +165,12 @@ def build_prompt(scorecard, strategy):
         "Output: first your thread as 2-7 posts separated by a line with "
         "exactly --- and nothing else (every post <=500 chars). "
         "CRITICAL: end post 1 with ' 1/N', post 2 with ' 2/N', and so on "
-        "where N is the total post count — e.g. a 5-post thread ends its "
+        "where N is the total post count (e.g. a 5-post thread ends its "
         "posts with 1/5 2/5 3/5 4/5 5/5. A post without its counter is "
-        "rejected. Last post ends with a follow or comment CTA. "
+        "rejected. Use plain ASCII only: no em dashes, no en dashes, no "
+        "fancy unicode, commas and plain hyphens only. The LAST post is "
+        "always exactly the follow CTA: 'Follow @owlsky17 so you don't "
+        "miss the next one.' plus its counter. "
         "After the posts, on its own final line: HYPOTHESIS: <one line>."
     )
     return "\n".join(lines)
@@ -197,14 +212,22 @@ def repair_counters(posts):
 
 
 def repair_thread(posts):
-    """Deterministic salvage: counters + follow CTA. Appends only what
-    is missing, never rewrites model content."""
-    fixed = repair_counters(posts)
+    """Deterministic salvage: ASCII dashes, counters, follow CTA.
+
+    Appends only what is missing, never rewrites model content (except
+    swapping non-ASCII dashes for ASCII equivalents).
+    """
+    fixed = [ascii_clean(p) for p in posts]
+    fixed = repair_counters(fixed)
     if fixed:
         tail = fixed[-1].lower()
-        if "follow @" not in tail and "comment" not in tail:
-            fixed[-1] = fixed[-1].rstrip() + (
-                "\n\nFollow @owlsky17 so you don't miss the next one."
+        if "follow @" not in tail:
+            import re
+
+            stripped = re.sub(r"\s*\d+/\d+\s*$", "", fixed[-1]).rstrip()
+            fixed[-1] = (
+                stripped + "\n\nFollow @owlsky17 so you don't "
+                "miss the next one."
             )
             fixed = repair_counters(fixed)
     return fixed
@@ -219,9 +242,11 @@ def soft_validate(posts):
             problems.append(f"post {i}: {len(post)} chars, max 500")
         if f"{i}/{n}" not in post:
             problems.append(f"post {i}: missing {i}/{n} counter")
+        if ascii_clean(post) != post:
+            problems.append(f"post {i}: non-ASCII dashes present")
     tail = posts[-1].lower() if posts else ""
-    if "follow @" not in tail and "comment" not in tail:
-        problems.append("last post needs a follow or comment CTA")
+    if "follow @" not in tail:
+        problems.append("last post must be the follow CTA for @owlsky17")
     return problems
 
 
