@@ -19,7 +19,15 @@ from .generator import (
     save_state,
     validate_thread,
 )
-from .insights import fetch_posts, render_report
+from .insights import (
+    engagement_of,
+    engagement_rate,
+    fetch_posts,
+    render_report,
+    views_of,
+    word_frequencies,
+)
+from .llm import LLMError, chat
 
 
 def _cmd_auth(args):
@@ -92,6 +100,159 @@ def _cmd_delete(args):
     client = ThreadsClient()
     result = client.delete_post(args.post_id)
     print(f"Deleted: {result.get('deleted_id', args.post_id)}")
+
+
+def _account_brief(max_posts=100):
+    """Compact data pack for the LLM: summary + top posts + themes."""
+    client = ThreadsClient()
+    posts = fetch_posts(client, max_posts=max_posts, max_workers=20)
+    from .insights import summarise
+
+    summary = summarise(posts) or {}
+    ranked = sorted(
+        [p for p in posts if (p.get("metrics") or {}).get("views") is not None],
+        key=views_of,
+        reverse=True,
+    )[:15]
+    lines = [
+        f"Posts analysed: {summary.get('analysed', len(posts))}, "
+        f"total views: {summary.get('total_views', 0):,}, "
+        f"median: {summary.get('median_views', 0):,}, "
+        f"top share: {summary.get('top_share', 0):.1f}%"
+    ]
+    for i, post in enumerate(ranked, start=1):
+        text = (post.get("text") or "")[:200].replace("\n", " ")
+        lines.append(
+            f"#{i} views={views_of(post):,} eng={engagement_of(post)} "
+            f"rate={engagement_rate(post) * 100:.1f}% "
+            f"date={(post.get('timestamp') or '')[:10]} text={text}"
+        )
+    top_words = word_frequencies(ranked).most_common(12)
+    lines.append("Top words: " + ", ".join(f"{w}({c})" for w, c in top_words))
+    return "\n".join(lines)
+
+
+def _cmd_analyze(args):
+    brief = _account_brief(max_posts=args.max_posts)
+    report = chat(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "You are a Threads growth analyst for a software "
+                    "engineering account. Be concrete, cite the data, "
+                    "no generic advice."
+                ),
+            },
+            {
+                "role": "user",
+                "content": (
+                    "Here is my account performance data:\n\n" + brief + "\n\n"
+                    "Report exactly these sections:\n"
+                    "1. Top 3 view drivers (patterns with numbers)\n"
+                    "2. Top 2 engagement drivers (what earns replies)\n"
+                    "3. Next 3 post topics with a suggested hook line each\n"
+                    "4. One thing to stop doing\n"
+                    "Keep it under 400 words."
+                ),
+            },
+        ],
+        max_tokens=1200,
+        temperature=0.4,
+    )
+    print(report)
+    if args.out:
+        with open(args.out, "w", encoding="utf-8") as handle:
+            handle.write(report)
+        print(f"\nSaved to {args.out}")
+
+
+def _load_style_guide():
+    path = Config.ROOT / "queue" / "STYLE.md"
+    try:
+        return path.read_text(encoding="utf-8")
+    except OSError:
+        return "Hook ALL CAPS with 1/N counter; replies sentence case with k/N; last post follows @owlsky17."
+
+
+def _cmd_write_thread(args):
+    pillar = args.pillar or "leetcode"
+    examples = [
+        t["posts"]
+        for t in load_templates()
+        if t["pillar"] == pillar
+    ][:2]
+    fewshot = ""
+    for posts in examples:
+        fewshot += "\n---EXAMPLE---\n" + "\n---\n".join(posts) + "\n"
+    raw = chat(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "You write viral Threads posts for a software "
+                    "engineering account. Follow the house style exactly."
+                ),
+            },
+            {
+                "role": "user",
+                "content": (
+                    "House style:\n" + _load_style_guide() + "\n"
+                    + fewshot
+                    + f"\nWrite ONE new 5-post thread about: {args.topic}\n"
+                    "Pillar: " + pillar + "\n"
+                    "Output ONLY the 5 posts, separated by a line "
+                    "containing exactly --- and nothing else. "
+                    "Every post under 500 characters."
+                ),
+            },
+        ],
+        max_tokens=1500,
+        temperature=0.8,
+    )
+    posts = [
+        chunk.strip()
+        for chunk in raw.split("\n---\n")
+        if chunk.strip()
+    ]
+    # Tolerate the model numbering the separators differently.
+    posts = [p for p in posts if len(p) > 10][:5]
+    problems = validate_thread(posts)
+    if problems:
+        print("STYLE CHECK FAILED:")
+        for problem in problems:
+            print(f"  - {problem}")
+        print("\n--- RAW MODEL OUTPUT ---\n" + raw)
+        raise RuntimeError("AI output violates STYLE.md; nothing saved.")
+
+    slug = "".join(
+        c if c.isalnum() else "-" for c in args.topic.lower()
+    ).strip("-")[:40] or "thread"
+    draft_path = Config.ROOT / "queue" / "pending" / f"draft-ai-{slug}.json"
+    draft_path.parent.mkdir(parents=True, exist_ok=True)
+    draft_path.write_text(
+        json.dumps(
+            {"topic": args.topic, "pillar": pillar, "style": "AI",
+             "thread": posts},
+            indent=2,
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    print(f"Draft saved to {draft_path}")
+    for i, post in enumerate(posts, start=1):
+        print(f"\n[{i}/5] {post}")
+
+    if args.publish:
+        client = ThreadsClient()
+        ids = client.publish_thread(posts, reply_wait_seconds=60)
+        receipt = draft_path.with_suffix(".published.json")
+        receipt.write_text(
+            json.dumps({"texts": posts, "ids": ids}, indent=2,
+                       ensure_ascii=False),
+            encoding="utf-8",
+        )
+        print(f"\nPublished: {ids}")
 
 
 def _pick_fresh_thread(exclude_live=True):
@@ -272,6 +433,31 @@ def build_parser():
     delete.add_argument("--post-id", required=True, help="Media ID from publish or list")
     delete.set_defaults(func=_cmd_delete)
 
+    analyze = sub.add_parser(
+        "analyze", help="AI analysis of your top posts (uses OpenRouter)"
+    )
+    analyze.add_argument(
+        "--max-posts", type=int, default=100, help="Posts to fetch (default 100)"
+    )
+    analyze.add_argument("--out", help="Also save the report to this file")
+    analyze.set_defaults(func=_cmd_analyze)
+
+    write = sub.add_parser(
+        "write-thread", help="AI-draft a thread in house style (uses OpenRouter)"
+    )
+    write.add_argument("--topic", required=True, help="Thread topic")
+    write.add_argument(
+        "--pillar",
+        default="leetcode",
+        help="Style pillar for examples (default leetcode)",
+    )
+    write.add_argument(
+        "--publish",
+        action="store_true",
+        help="Publish after validation (default: draft only)",
+    )
+    write.set_defaults(func=_cmd_write_thread)
+
     hourly = sub.add_parser(
         "post-hourly", help="Publish next bank thread (for cron/Actions)"
     )
@@ -308,6 +494,7 @@ def main(argv=None):
         outcome = args.func(args)
     except (
         ThreadsAPIError,
+        LLMError,
         EnvironmentError,
         ValueError,
         RuntimeError,

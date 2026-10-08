@@ -132,6 +132,29 @@ Long-lived tokens expire after ~60 days: the workflow runs `verify`
 first and fails loud so you notice. Re-run `auth` locally and update
 the secrets when that happens.
 
+## AI analysis and writing (OpenRouter, free models)
+
+```bash
+python -m threads_api.cli analyze --max-posts 100
+python -m threads_api.cli write-thread --topic "sql joins" --pillar sql
+python -m threads_api.cli write-thread --topic "sql joins" --publish
+```
+
+Setup: add `OPENROUTER_API_KEY` to `.env` (get one at
+https://openrouter.ai/keys — never commit it). Defaults use the
+`openrouter/free` router; override with `OPENROUTER_MODEL` and
+`OPENROUTER_FALLBACKS` (comma-separated).
+
+- `analyze` feeds your top posts + metrics to the model and reports
+  view drivers, engagement drivers, next topics, and what to stop.
+- `write-thread` drafts one 5-post thread in `queue/STYLE.md`,
+  validated before saving to `queue/pending/draft-ai-*.json`.
+  Nothing publishes without `--publish`.
+
+Free-tier budget: 20 req/min, 50 req/day without credits (1000/day
+after buying ≥10 credits). Each command costs 1–3 requests, so keep
+these on-demand — the hourly loop stays on template rotation.
+
 ## Development
 
 ```bash
