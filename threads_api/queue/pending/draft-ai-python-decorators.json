@@ -1,0 +1,12 @@
+{
+  "topic": "python decorators",
+  "pillar": "leetcode",
+  "style": "AI",
+  "thread": [
+    "IF YOU WANT TO WRITE CLEAN PYTHON FOR INTERVIEWS, STOP REPEATING BOILERPLATE IN EVERY FUNCTION.\n\nMEMORIZE THESE 3 DECORATOR PATTERNS: 1/5",
+    "The `@lru_cache` decorator turns exponential recursion into linear DP.\n\nAdd `@lru_cache(maxsize=None)` above your recursive function. Fibonacci, grid paths, coin change — all go from O(2^n) to O(n) with one line. 2/5",
+    "`@dataclass` replaces 20 lines of `__init__`, `__repr__`, `__eq__` boilerplate.\n\nUse `@dataclass(frozen=True)` for immutable LeetCode nodes (TreeNode, ListNode). Cleaner code, fewer bugs, faster to type under time pressure. 3/5",
+    "`@contextmanager` from `contextlib` lets you write setup/teardown as a generator.\n\nWrap DB connections, file handles, or mock patches in `with` blocks. Keeps test code flat and resources deterministic — interviewers notice. 4/5",
+    "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one. 5/5"
+  ]
+}
