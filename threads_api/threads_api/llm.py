@@ -96,7 +96,16 @@ def chat(messages, max_tokens=1500, temperature=0.7, retries=2):
                 break  # model-level error, try next model
             try:
                 payload = response.json()
-                return payload["choices"][0]["message"]["content"]
+                message = payload["choices"][0]["message"]
+                text = (
+                    message.get("content")
+                    or message.get("reasoning_content")
+                    or message.get("reasoning")
+                )
+                if not text or not str(text).strip():
+                    last_error = f"{model}: empty content"
+                    break
+                return text
             except (ValueError, KeyError, IndexError) as exc:
                 last_error = f"{model}: bad response ({exc})"
                 break

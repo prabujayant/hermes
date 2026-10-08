@@ -46,6 +46,20 @@ def test_missing_key_raises_before_network(monkeypatch):
         chat([{"role": "user", "content": "x"}])
 
 
+def test_reasoning_fallback_when_content_null(monkeypatch):
+    monkeypatch.setenv("OPENROUTER_API_KEY", "k")
+    monkeypatch.setattr(
+        llm.requests, "post",
+        lambda url, headers=None, json=None, timeout=None: _Resp(
+            200, {"choices": [{"message": {
+                "content": None,
+                "reasoning_content": "fallback text",
+            }}]},
+        ),
+    )
+    assert chat([{"role": "user", "content": "x"}]) == "fallback text"
+
+
 def test_falls_back_to_next_model(monkeypatch):
     monkeypatch.setenv("OPENROUTER_API_KEY", "k")
     monkeypatch.setenv("OPENROUTER_MODEL", "first-model")
