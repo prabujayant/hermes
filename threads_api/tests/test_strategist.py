@@ -119,3 +119,20 @@ def test_repair_counters_salvages_failed_run_shape():
     posts = [f"value point number {i} here" for i in range(1, 7)]
     posts.append("Follow @owlsky17 for more")
     assert soft_validate(repair_counters(posts)) == []
+
+
+def test_repair_thread_appends_missing_cta():
+    from threads_api.strategist import repair_thread, soft_validate
+
+    posts = [f"value point number {i} here" for i in range(1, 5)]
+    assert soft_validate(repair_thread(posts)) == []
+    assert "Follow @owlsky17" in repair_thread(posts)[-1]
+
+
+def test_repair_thread_keeps_comment_cta():
+    from threads_api.strategist import repair_thread
+
+    posts = ["hook here", "value here", "comment YOUR take here"]
+    fixed = repair_thread(posts)
+    assert "Follow @owlsky17" not in fixed[-1]
+    assert fixed[-1].endswith("3/3")

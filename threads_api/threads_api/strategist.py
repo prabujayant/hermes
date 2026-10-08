@@ -196,6 +196,20 @@ def repair_counters(posts):
     return repaired
 
 
+def repair_thread(posts):
+    """Deterministic salvage: counters + follow CTA. Appends only what
+    is missing, never rewrites model content."""
+    fixed = repair_counters(posts)
+    if fixed:
+        tail = fixed[-1].lower()
+        if "follow @" not in tail and "comment" not in tail:
+            fixed[-1] = fixed[-1].rstrip() + (
+                "\n\nFollow @owlsky17 so you don't miss the next one."
+            )
+            fixed = repair_counters(fixed)
+    return fixed
+
+
 def soft_validate(posts):
     """Enforce only hard constraints; style is the model's playground."""
     problems = []

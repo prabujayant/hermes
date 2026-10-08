@@ -112,7 +112,7 @@ def _cmd_post_smart(args):
         load_strategy,
         parse_decision,
         record_run,
-        repair_counters,
+        repair_thread,
         save_strategy,
         soft_validate,
     )
@@ -158,7 +158,7 @@ def _cmd_post_smart(args):
     )
     try:
         thread, hypothesis = parse_decision(raw)
-        thread = repair_counters(thread)
+        thread = repair_thread(thread)
         problems = soft_validate(thread)
         if problems:
             raise ValueError("; ".join(problems))
@@ -176,7 +176,7 @@ def _cmd_post_smart(args):
         )
         try:
             thread, hypothesis = parse_decision(raw)
-            thread = repair_counters(thread)
+            thread = repair_thread(thread)
             problems = soft_validate(thread)
             if problems:
                 raise ValueError("; ".join(problems))
@@ -189,7 +189,14 @@ def _cmd_post_smart(args):
         hypothesis = strategy["hypothesis"]
         print(f"Bank fallback [{pillar}]")
 
-    ids = client.publish_thread(thread, reply_wait_seconds=60)
+    try:
+        ids = _publish_resilient(client, thread)
+    except (ThreadsAPIError, requests.RequestException) as exc:
+        print(f"Smart publish failed ({exc}); bank fallback")
+        pillar, thread = _pick_fresh_thread()
+        hypothesis = strategy["hypothesis"]
+        print(f"Bank fallback [{pillar}]")
+        ids = _publish_resilient(client, thread)
 
     run_at = now.isoformat()
     POSTED_LOG.parent.mkdir(parents=True, exist_ok=True)
@@ -397,6 +404,35 @@ def _pick_fresh_thread(exclude_live=True):
     return template["pillar"], list(template["posts"])
 
 
+def _publish_resilient(client, thread):
+    """Publish with Meta-flake tolerance. Returns post ids.
+
+    Retries network errors 3x with backoff; on API errors (e.g. code 24
+    during a replication-lag window) waits 60s and retries the SAME
+    thread once. Raises the last error if all fail — caller falls back
+    to a different thread.
+    """
+    import time
+
+    backoff = 10
+    for attempt in range(3):
+        try:
+            return client.publish_thread(thread, reply_wait_seconds=60)
+        except requests.RequestException as exc:
+            if attempt == 2:
+                raise
+            print(
+                f"Attempt {attempt + 1} network error ({exc}); "
+                f"retry in {backoff}s"
+            )
+            time.sleep(backoff)
+            backoff *= 2
+        except ThreadsAPIError as exc:
+            print(f"Publish hit API error ({exc}); retry same thread in 60s")
+            time.sleep(60)
+            return client.publish_thread(thread, reply_wait_seconds=60)
+
+
 def _cmd_post_hourly(args):
     import datetime
 
@@ -420,46 +456,20 @@ def _cmd_post_hourly(args):
         return 0
 
     client = ThreadsClient()
-    backoff = 10
-    for attempt in range(3):
-        try:
-            ids = client.publish_thread(posts, reply_wait_seconds=60)
-            break
-        except requests.RequestException as exc:
-            if attempt == 2:
-                raise
-            print(f"Attempt {attempt + 1} failed ({exc}); retry in {backoff}s")
-            import time
-
-            time.sleep(backoff)
-            backoff *= 2
-        except ThreadsAPIError as exc:
-            # Could be transient Meta flakiness (seen: code 24 on both
-            # attempts, success minutes later) or a content rejection.
-            # Retry the SAME thread once after 60s before abandoning it:
-            # retrying identical text never helps a true rejection, but
-            # switching templates on a transient wastes a good thread.
-            import time
-
-            print(f"Publish hit API error ({exc}); retry same thread in 60s")
-            time.sleep(60)
-            try:
-                ids = client.publish_thread(thread, reply_wait_seconds=60)
-                break
-            except (ThreadsAPIError, requests.RequestException) as exc2:
-                print(f"Retry failed ({exc2}); picking a different thread")
-            # API rejected the content (e.g. code 24 duplicate) — retrying
-            # identical text never helps, so switch to a fresh template.
-            print(f"Content rejected ({exc}); picking a different thread")
-            state = load_state()
-            state["recent_hooks"] = list(
-                state.get("recent_hooks", [])
-            ) + [hook_signature(posts[0])]
-            save_state(state)
-            pillar, posts = _pick_fresh_thread(exclude_live=False)
-            print(f"[{pillar}] {posts[0].splitlines()[0][:80]}")
-            ids = client.publish_thread(posts, reply_wait_seconds=60)
-            break
+    try:
+        ids = _publish_resilient(client, posts)
+    except (ThreadsAPIError, requests.RequestException) as exc:
+        # API rejected the content (e.g. code 24 duplicate) — retrying
+        # identical text never helps, so switch to a fresh template.
+        print(f"Content rejected ({exc}); picking a different thread")
+        state = load_state()
+        state["recent_hooks"] = list(
+            state.get("recent_hooks", [])
+        ) + [hook_signature(posts[0])]
+        save_state(state)
+        pillar, posts = _pick_fresh_thread(exclude_live=False)
+        print(f"[{pillar}] {posts[0].splitlines()[0][:80]}")
+        ids = _publish_resilient(client, posts)
 
     run_at = now.isoformat()
     POSTED_LOG.parent.mkdir(parents=True, exist_ok=True)
