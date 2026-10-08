@@ -11,7 +11,8 @@
     "if you want to become a top 1%",
     "if you want queries that scale past a",
     "if you want behavioral rounds to remember you,",
-    "i spent 6 months chasing a production outage"
+    "i spent 6 months chasing a production outage",
+    "i shipped a feature that crashed production at"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
