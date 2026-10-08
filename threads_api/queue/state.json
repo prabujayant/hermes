@@ -1,12 +1,14 @@
 {
-  "last_pillar": "leetcode",
+  "last_pillar": "backend",
   "recent_hooks": [
     "if you want to crack coding interviews, stop",
     "if you want apis that don't break clients,",
     "if you want to write sql like a",
     "if you want to pass system design interviews,",
     "if you want to become a senior engineer",
-    "if you want to master dynamic programming, stop"
+    "if you want to master dynamic programming, stop",
+    "if you want systems that survive traffic spikes,",
+    "if you want to become a top 1%"
   ],
-  "last_run": "2026-10-08T04:46:19.305522+00:00"
+  "last_run": "2026-10-08T04:59:25.451646+00:00"
 }
