@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Changed to contrarian, challenge\u2011driven hooks with clear formulas and one\u2011tag posts.",
-  "pivots": 12,
+  "hypothesis": "Pivoted from listicle hooks to a single curiosity-gap war story with a clear contrarian payoff, dropping the caps format that proved low-reach.",
+  "pivots": 13,
   "streak": 0,
   "history": [
     {
@@ -161,6 +161,19 @@
         "17978011166922653",
         "17922055629223497",
         "18035151968896561"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-08T22:01:09.646357+00:00",
+      "pillar": "smart",
+      "hook_sig": "we spent six months optimizing a database query",
+      "ids": [
+        "18356016859174302",
+        "18070213082764334",
+        "18348151474268741",
+        "17921574288444647",
+        "18117116692786074"
       ],
       "pivoted": true
     }
