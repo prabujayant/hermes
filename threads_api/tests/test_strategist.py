@@ -66,9 +66,9 @@ def test_build_prompt_no_pivot_when_winning():
 
 
 def test_parse_decision_splits_posts_and_hypothesis():
-    raw = "HOOK 1/3\n---\nValue 2/3\n---\nFollow @owlsky17 3/3\nHYPOTHESIS: hooks win"
+    raw = "HOOK\n---\nValue\n---\nFollow @owlsky17\nHYPOTHESIS: hooks win"
     posts, hyp = parse_decision(raw)
-    assert posts == ["HOOK 1/3", "Value 2/3", "Follow @owlsky17 3/3"]
+    assert posts == ["HOOK", "Value", "Follow @owlsky17"]
     assert hyp == "hooks win"
 
 
@@ -81,21 +81,21 @@ def test_parse_decision_rejects_garbage():
 
 def test_soft_validate_allows_style_experiments():
     posts = [
-        "a lowercase debate hook, no caps at all 1/3",
-        "value with opinion 2/3",
-        "Follow @owlsky17 for more 3/3",
+        "a lowercase debate hook, no caps at all",
+        "value with opinion",
+        "Follow @owlsky17 for more",
     ]
     assert soft_validate(posts) == []
 
 
 def test_soft_validate_enforces_hard_constraints():
-    problems = soft_validate(["only one post here 1/1"])
+    problems = soft_validate(["only one post here"])
     assert any("CTA" in p for p in problems)
-    problems = soft_validate(["x" * 501 + " 1/2", "Follow @owlsky17 2/2"])
+    problems = soft_validate(["x" * 501, "Follow @owlsky17"])
     assert any("chars" in p for p in problems)
-    problems = soft_validate(["hook 1/2", "no cta here 2/2"])
+    problems = soft_validate(["hook", "no cta here"])
     assert any("CTA" in p for p in problems)
-    problems = soft_validate(["hook", "Follow @owlsky17 2/2"])
+    problems = soft_validate(["hook 1/2", "Follow @owlsky17"])
     assert any("counter" in p for p in problems)
 
 
@@ -103,22 +103,30 @@ def test_pivot_constant_matches_threshold():
     assert PIVOT_STREAK == 2
 
 
-def test_repair_counters_appends_only_missing():
-    from threads_api.strategist import repair_counters
-
-    posts = ["hook with 1/3", "plain value post", "cta with 3/3"]
-    fixed = repair_counters(posts)
-    assert fixed[0] == "hook with 1/3"
-    assert fixed[1].endswith(" 2/3")
-    assert fixed[2] == "cta with 3/3"
+def test_build_prompt_bans_counters():
+    posts = [_post("winner", 500, 5)]
+    prompt = build_prompt(evaluate(posts), {"hypothesis": "x"})
+    assert "do NOT number the posts" in prompt
+    assert "do NOT write counters" in prompt
 
 
-def test_repair_counters_salvages_failed_run_shape():
-    from threads_api.strategist import repair_counters, soft_validate
+def test_repair_thread_strips_counters():
+    from threads_api.strategist import repair_thread, soft_validate
+
+    posts = ["hook here 1/3", "plain value post 2/3", "cta here 3/3"]
+    fixed = repair_thread(posts)
+    assert fixed == ["hook here", "plain value post",
+                     "cta here\n\nFollow @owlsky17 so you don't "
+                     "miss the next one."]
+    assert soft_validate(fixed) == []
+
+
+def test_repair_thread_salvages_failed_run_shape():
+    from threads_api.strategist import repair_thread, soft_validate
 
     posts = [f"value point number {i} here" for i in range(1, 7)]
     posts.append("Follow @owlsky17 for more")
-    assert soft_validate(repair_counters(posts)) == []
+    assert soft_validate(repair_thread(posts)) == []
 
 
 def test_repair_thread_appends_missing_cta():
@@ -135,7 +143,7 @@ def test_repair_thread_appends_follow_over_comment_cta():
     posts = ["hook here", "value here", "comment YOUR take here"]
     fixed = repair_thread(posts)
     assert "Follow @owlsky17" in fixed[-1]
-    assert fixed[-1].rstrip().endswith("3/3")
+    assert "1/5" not in fixed[-1] and "3/3" not in fixed[-1]
 
 
 def test_ascii_clean_removes_fancy_dashes():

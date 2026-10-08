@@ -4,6 +4,7 @@ import sys
 
 import requests
 
+from . import llm as llm_module
 from .auth import save_credentials, start_oauth_flow
 from .client import ThreadsAPIError, ThreadsClient
 from .config import Config
@@ -156,6 +157,7 @@ def _cmd_post_smart(args):
         temperature=0.9,
         model=SMART_MODELS,
     )
+    print(f"Strategist model: {llm_module.last_model}")
     try:
         thread, hypothesis = parse_decision(raw)
         thread = repair_thread(thread)
@@ -289,7 +291,7 @@ def _load_style_guide():
     try:
         return path.read_text(encoding="utf-8")
     except OSError:
-        return "Hook ALL CAPS with 1/N counter; replies sentence case with k/N; last post follows @owlsky17."
+        return "Hook ALL CAPS, no counters; replies sentence case; last post follows @owlsky17."
 
 
 def _cmd_write_thread(args):
@@ -321,6 +323,8 @@ def _cmd_write_thread(args):
                     "Output ONLY the 5 posts, separated by a line "
                     "containing exactly --- and nothing else. "
                     "Every post under 500 characters. "
+                    "Do NOT number the posts and do NOT write counters "
+                    "like 1/5 anywhere. "
                     "Plain ASCII only: no em dashes, no en dashes, "
                     "commas and plain hyphens only. The last post is "
                     "always the follow CTA for @owlsky17."

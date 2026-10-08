@@ -1,1 +1,32 @@
-[{"pillar": "career", "posts": ["IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS: 1/5", "Own outcomes, not tickets.\n\nJuniors close tasks. Seniors move metrics. Ask what number your work changes. 2/5", "Write the doc nobody wants to write.\n\nDesign docs, runbooks, postmortems. Visibility compounds faster than commits. 3/5", "Delete code on purpose.\n\nEvery quarter, kill something: a flag, a service, dead code. Simplifiers get promoted. 4/5", "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one. 5/5"]}, {"pillar": "career", "posts": ["THINGS THAT QUIETLY KILL ENGINEERING CAREERS: 1/5", "Never asking questions.\n\nSilent confusion ships bugs. The fastest engineers ask the dumb question on day one. 2/5", "Avoiding code review feedback.\n\nDefensiveness freezes growth. Treat every comment as free mentoring. 3/5", "Staying comfortable one level too long.\n\nIf you are the expert in every room, you are in the wrong rooms. 4/5", "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one. 5/5"]}, {"pillar": "career", "posts": ["IF YOU WANT YOUR SIDE PROJECT TO SURVIVE, STOP ADDING FEATURES.\n\nMEMORIZE THESE 5 RULES: 1/5", "Ship to one user first.\n\nYourself counts. Real usage teaches more than ten planned features. 2/5", "Boring tech wins weekends.\n\nMonolith, Postgres, one host. Excitement is for work hours. 3/5", "Log progress in public.\n\nWeekly demos beat yearly launches. Accountability ships products. 4/5", "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one. 5/5"]}]
+[
+ {
+  "pillar": "career",
+  "posts": [
+   "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:",
+   "Own outcomes, not tickets.\n\nJuniors close tasks. Seniors move metrics. Ask what number your work changes.",
+   "Write the doc nobody wants to write.\n\nDesign docs, runbooks, postmortems. Visibility compounds faster than commits.",
+   "Delete code on purpose.\n\nEvery quarter, kill something: a flag, a service, dead code. Simplifiers get promoted.",
+   "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+  ]
+ },
+ {
+  "pillar": "career",
+  "posts": [
+   "THINGS THAT QUIETLY KILL ENGINEERING CAREERS:",
+   "Never asking questions.\n\nSilent confusion ships bugs. The fastest engineers ask the dumb question on day one.",
+   "Avoiding code review feedback.\n\nDefensiveness freezes growth. Treat every comment as free mentoring.",
+   "Staying comfortable one level too long.\n\nIf you are the expert in every room, you are in the wrong rooms.",
+   "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+  ]
+ },
+ {
+  "pillar": "career",
+  "posts": [
+   "IF YOU WANT YOUR SIDE PROJECT TO SURVIVE, STOP ADDING FEATURES.\n\nMEMORIZE THESE 5 RULES:",
+   "Ship to one user first.\n\nYourself counts. Real usage teaches more than ten planned features.",
+   "Boring tech wins weekends.\n\nMonolith, Postgres, one host. Excitement is for work hours.",
+   "Log progress in public.\n\nWeekly demos beat yearly launches. Accountability ships products.",
+   "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+  ]
+ }
+]

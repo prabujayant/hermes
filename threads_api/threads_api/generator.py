@@ -1,8 +1,8 @@
 """Template-bank content engine for the hourly auto-poster.
 
 Every thread produced here must satisfy queue/STYLE.md:
-caps hook with 1/N counter, sentence-case value replies with k/N
-counters, follow-CTA last post, each post <= 500 chars.
+caps hook, sentence-case value replies, follow-CTA last post,
+each post <= 500 chars. No post counters.
 """
 
 import json
@@ -96,6 +96,8 @@ def choose_template(templates, state):
 
 def validate_thread(posts):
     """Enforce STYLE.md. Returns list of problems (empty = valid)."""
+    import re
+
     problems = []
     n = len(posts)
     if not 5 <= n <= 7:
@@ -103,8 +105,8 @@ def validate_thread(posts):
     for i, post in enumerate(posts, start=1):
         if len(post) > 500:
             problems.append(f"post {i}: {len(post)} chars, max 500")
-        if f"{i}/{n}" not in post:
-            problems.append(f"post {i}: missing {i}/{n} counter")
+        if re.search(r"\d+/\d+", post):
+            problems.append(f"post {i}: counters like 1/5 are not allowed")
     if posts:
         letters = [c for c in posts[0] if c.isalpha()]
         if letters and sum(c.isupper() for c in letters) / len(letters) < 0.7:

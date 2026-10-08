@@ -18,10 +18,10 @@ BANK_DIR = Config.ROOT / "queue" / "bank"
 
 
 def good_thread(n=5):
-    posts = [f"HOOK LINE HERE {1}/{n}"]
+    posts = ["HOOK LINE HERE"]
     for i in range(2, n):
-        posts.append(f"Value point number {i}. {i}/{n}")
-    posts.append(f"Follow @owlsky17 so you don't miss the next one. {n}/{n}")
+        posts.append(f"Value point number {i}.")
+    posts.append("Follow @owlsky17 so you don't miss the next one.")
     return posts
 
 
@@ -39,23 +39,23 @@ def test_bank_covers_every_pillar():
 
 
 def test_validation_catches_style_violations():
-    assert validate_thread(["x"]) != []  # wrong count, no counter/CTA
+    assert validate_thread(["x"]) != []  # wrong count, no CTA
     bad_caps = good_thread()
-    bad_caps[0] = f"lowercase hook 1/5"
+    bad_caps[0] = "lowercase hook"
     assert any("CAPS" in p for p in validate_thread(bad_caps))
     bad_cta = good_thread()
-    bad_cta[-1] = "bye 5/5"
+    bad_cta[-1] = "bye"
     assert any("CTA" in p for p in validate_thread(bad_cta))
     bad_len = good_thread()
-    bad_len[2] = "x" * 501 + " 3/5"
+    bad_len[2] = "x" * 501
     assert any("chars" in p for p in validate_thread(bad_len))
-    bad_counter = good_thread()
-    bad_counter[1] = "no counter here"
-    assert any("counter" in p for p in validate_thread(bad_counter))
+    bad_counters = good_thread()
+    bad_counters[1] = "Value point with 2/5 counter"
+    assert any("counter" in p for p in validate_thread(bad_counters))
 
 
 def test_hook_signature_stable():
-    assert hook_signature("IF YOU WANT X STOP Y MEMORIZE THESE 5 THINGS: 1/5") == (
+    assert hook_signature("IF YOU WANT X STOP Y MEMORIZE THESE 5 THINGS") == (
         "if you want x stop y memorize these"
     )
 
@@ -71,7 +71,7 @@ def test_rotation_cycles_pillars_without_repeating_hooks(tmp_path):
                     {
                         "pillar": pillar,
                         "posts": [
-                            f"SECOND HOOK FOR {pillar.upper()} HERE 1/5"
+                            f"SECOND HOOK FOR {pillar.upper()} HERE"
                         ]
                         + good_thread()[1:],
                     },

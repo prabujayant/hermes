@@ -9,7 +9,7 @@ Closed loop (runs hourly, free models only — never paid in auto mode):
      strategy change (new angle/format/topic), recorded in state.
 
 The model has freedom to experiment: only API-hard constraints are
-enforced (<=500 chars, 2-7 posts, counters, a CTA). Hook style, topics
+enforced (<=500 chars, 2-7 posts, follow CTA). Hook style, topics
 and formats are its playground — views are the judge.
 """
 
@@ -164,13 +164,11 @@ def build_prompt(scorecard, strategy):
     lines.append(
         "Output: first your thread as 2-7 posts separated by a line with "
         "exactly --- and nothing else (every post <=500 chars). "
-        "CRITICAL: end post 1 with ' 1/N', post 2 with ' 2/N', and so on "
-        "where N is the total post count (e.g. a 5-post thread ends its "
-        "posts with 1/5 2/5 3/5 4/5 5/5. A post without its counter is "
-        "rejected. Use plain ASCII only: no em dashes, no en dashes, no "
-        "fancy unicode, commas and plain hyphens only. The LAST post is "
-        "always exactly the follow CTA: 'Follow @owlsky17 so you don't "
-        "miss the next one.' plus its counter. "
+        "CRITICAL: do NOT number the posts, do NOT write counters like "
+        "1/5 or 2/5 anywhere, just write the post text. Use plain ASCII "
+        "only: no em dashes, no en dashes, no fancy unicode, commas and "
+        "plain hyphens only. The LAST post is always exactly the follow "
+        "CTA: 'Follow @owlsky17 so you don't miss the next one.' "
         "After the posts, on its own final line: HYPOTHESIS: <one line>."
     )
     return "\n".join(lines)
@@ -196,54 +194,44 @@ def parse_decision(raw):
     return posts, hypothesis
 
 
-def repair_counters(posts):
-    """Append missing k/N counters. Only touches posts with no counter
-    pattern at all, so model-written numbering is never double-tagged."""
+def repair_thread(posts):
+    """Deterministic salvage: ASCII dashes, no counters, follow CTA.
+
+    Strips any k/N counters the model added anyway, swaps non-ASCII
+    dashes, appends the follow CTA if missing. Never rewrites content.
+    """
     import re
 
-    n = len(posts)
-    repaired = []
-    for i, post in enumerate(posts, start=1):
-        if re.search(r"\d+/\d+", post):
-            repaired.append(post)
-        else:
-            repaired.append(post.rstrip() + f" {i}/{n}")
-    return repaired
-
-
-def repair_thread(posts):
-    """Deterministic salvage: ASCII dashes, counters, follow CTA.
-
-    Appends only what is missing, never rewrites model content (except
-    swapping non-ASCII dashes for ASCII equivalents).
-    """
-    fixed = [ascii_clean(p) for p in posts]
-    fixed = repair_counters(fixed)
+    fixed = []
+    for post in posts:
+        post = ascii_clean(post)
+        post = re.sub(r"\s*\d+/\d+\s*$", "", post).rstrip()
+        fixed.append(post)
     if fixed:
         tail = fixed[-1].lower()
         if "follow @" not in tail:
-            import re
-
-            stripped = re.sub(r"\s*\d+/\d+\s*$", "", fixed[-1]).rstrip()
+            stripped = fixed[-1].rstrip()
             fixed[-1] = (
                 stripped + "\n\nFollow @owlsky17 so you don't "
                 "miss the next one."
             )
-            fixed = repair_counters(fixed)
     return fixed
 
 
 def soft_validate(posts):
     """Enforce only hard constraints; style is the model's playground."""
     problems = []
-    n = len(posts)
     for i, post in enumerate(posts, start=1):
         if len(post) > 500:
             problems.append(f"post {i}: {len(post)} chars, max 500")
-        if f"{i}/{n}" not in post:
-            problems.append(f"post {i}: missing {i}/{n} counter")
         if ascii_clean(post) != post:
             problems.append(f"post {i}: non-ASCII dashes present")
+    for post in posts:
+        import re
+
+        if re.search(r"\d+/\d+", post):
+            problems.append("counters like 1/5 are not allowed")
+            break
     tail = posts[-1].lower() if posts else ""
     if "follow @" not in tail:
         problems.append("last post must be the follow CTA for @owlsky17")

@@ -69,6 +69,20 @@ def test_model_param_overrides_env_chain(monkeypatch):
     assert seen["model"] == "explicit-model"
 
 
+def test_last_model_tracks_serving_model(monkeypatch):
+    from threads_api import llm as llm_module
+
+    monkeypatch.setenv("OPENROUTER_API_KEY", "k")
+    monkeypatch.setattr(
+        llm_module.requests, "post",
+        lambda url, headers=None, json=None, timeout=None: _Resp(
+            200, {"choices": [{"message": {"content": "hi"}}],
+                  "model": "some-model-123"}),
+    )
+    assert chat([{"role": "user", "content": "x"}], model="req-model") == "hi"
+    assert llm_module.last_model == "some-model-123"
+
+
 def test_falls_back_to_next_model(monkeypatch):
     monkeypatch.setenv("OPENROUTER_API_KEY", "k")
     monkeypatch.setenv("OPENROUTER_MODEL", "first-model")

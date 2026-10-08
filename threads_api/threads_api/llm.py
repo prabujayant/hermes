@@ -20,6 +20,9 @@ API_URL = "https://openrouter.ai/api/v1/chat/completions"
 DEFAULT_MODEL = "openrouter/free"
 TIMEOUT = 90
 
+# Last model that successfully served a request (for logging).
+last_model = None
+
 
 class LLMError(Exception):
     """Raised for transport, auth, rate-limit, or bad-payload failures."""
@@ -115,6 +118,8 @@ def chat(messages, max_tokens=1500, temperature=0.7, retries=2, model=None):
                 if not text or not str(text).strip():
                     last_error = f"{current}: empty content"
                     break
+                global last_model
+                last_model = payload.get("model", current)
                 return text
             except (ValueError, KeyError, IndexError) as exc:
                 last_error = f"{current}: bad response ({exc})"
