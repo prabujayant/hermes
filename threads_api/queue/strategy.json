@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Switched from contrarian hot takes to a curiosity-gap cheatsheet format with a concrete 4-step framework, specific metrics, and a reply-driving challenge in the final value post.",
-  "pivots": 23,
+  "hypothesis": "Pivoted from failing caps-listicle hooks to a story-driven contrarian hook with a specific debate challenge to drive replies and profile clicks.",
+  "pivots": 24,
   "streak": 0,
   "history": [
     {
@@ -308,6 +308,21 @@
         "18263089096307656",
         "18011234963970373",
         "18095249006138226"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T08:56:15.811661+00:00",
+      "pillar": "smart",
+      "hook_sig": "i watched a principal engineer delete 80 percent",
+      "ids": [
+        "18109831922183516",
+        "18200095996381802",
+        "18252061819308669",
+        "18107277428337203",
+        "18115571272818082",
+        "18271577839305348",
+        "18098181002536763"
       ],
       "pivoted": true
     }
