@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Pivoted to contrarian hot take with direct challenge CTA to drive replies and profile clicks, dropping war-story format that generated zero reach.",
-  "pivots": 18,
+  "hypothesis": "Switched back to curiosity-gap war story format with concrete metrics and a surprise reveal, since the contrarian hot take approach generated zero reach in 8+ hours.",
+  "pivots": 19,
   "streak": 0,
   "history": [
     {
@@ -239,6 +239,20 @@
         "18097436798439893",
         "18069098489500892",
         "18112191557607616"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T04:01:09.375940+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want faster code, stop trusting your",
+      "ids": [
+        "18105666482256392",
+        "18147843229561299",
+        "17872827348649802",
+        "18148436710501615",
+        "17911018800498399",
+        "18101282408374278"
       ],
       "pivoted": true
     }
