@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Pivoted from generic senior advice listicles to a specific high stakes incident curiosity gap, contrarian lesson on flag hygiene, actionable checklist payoff, and a debate challenge for replies.",
-  "pivots": 28,
+  "hypothesis": "Swapped generic listicle hooks for a single vivid Friday-deploy war story with concrete numbers, a named three-phase rule engineers can copy-paste, and a blunt definition-of-done challenge to spark replies-to-replies.",
+  "pivots": 29,
   "streak": 0,
   "history": [
     {
@@ -375,6 +375,20 @@
         "18013414535957880",
         "18104059703458543",
         "18012742016986497"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T14:01:13.457933+00:00",
+      "pillar": "smart",
+      "hook_sig": "i shipped a config change on a friday.",
+      "ids": [
+        "17992335624066544",
+        "18117761918282247",
+        "18125503804930752",
+        "18096452852536132",
+        "18106090232342209",
+        "18443728504130127"
       ],
       "pivoted": true
     }
