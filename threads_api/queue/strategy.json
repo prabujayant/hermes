@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Pivoted from generic listicles to one named incident with a runnable three-phase audit and a public-reply challenge to force replies-to-replies and profile clicks.",
-  "pivots": 32,
+  "hypothesis": "Shifted from generic listicles to a detailed",
+  "pivots": 33,
   "streak": 0,
   "history": [
     {
@@ -431,6 +431,18 @@
         "18092969798676844",
         "18030814832850842",
         "17947680534326491"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T18:01:11.805812+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to slash incident response time",
+      "ids": [
+        "18135453973728580",
+        "18080506700348485",
+        "17993887809048540",
+        "18014777852750606"
       ],
       "pivoted": true
     }
