@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Switched from caps-listicle hooks to personal counterexamples that disprove senior advice, using debate-triggering hot takes with real payoff stories.",
-  "pivots": 27,
+  "hypothesis": "Pivoted from generic senior advice listicles to a specific high stakes incident curiosity gap, contrarian lesson on flag hygiene, actionable checklist payoff, and a debate challenge for replies.",
+  "pivots": 28,
   "streak": 0,
   "history": [
     {
@@ -362,6 +362,19 @@
         "18097215320453546",
         "18052432538807312",
         "18144123490574431"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T13:01:11.936822+00:00",
+      "pillar": "smart",
+      "hook_sig": "i shipped a feature flag on friday. by",
+      "ids": [
+        "17980032174106037",
+        "18134592145657753",
+        "18013414535957880",
+        "18104059703458543",
+        "18012742016986497"
       ],
       "pivoted": true
     }
