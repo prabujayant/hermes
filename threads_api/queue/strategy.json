@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Swapped generic listicles for a single named war story with a copy-pasteable three-phase rule and a measurable definition-of-done challenge to drive replies-to-replies and profile clicks.",
-  "pivots": 31,
+  "hypothesis": "Pivoted from generic listicles to one named incident with a runnable three-phase audit and a public-reply challenge to force replies-to-replies and profile clicks.",
+  "pivots": 32,
   "streak": 0,
   "history": [
     {
@@ -417,6 +417,20 @@
         "18117778340059051",
         "18059464169717274",
         "17996046594010904"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T17:01:10.224322+00:00",
+      "pillar": "smart",
+      "hook_sig": "a memory leak crashed our payments service every",
+      "ids": [
+        "18632890906021944",
+        "18105772462980959",
+        "18089488361691192",
+        "18092969798676844",
+        "18030814832850842",
+        "17947680534326491"
       ],
       "pivoted": true
     }

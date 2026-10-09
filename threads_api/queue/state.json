@@ -41,7 +41,8 @@
     "i shipped a feature flag on friday. by",
     "i shipped a config change on a friday.",
     "friday 4:47 pm. deploy to prod. green build.",
-    "things hiring managers can't tell from your resume"
+    "things hiring managers can't tell from your resume",
+    "a memory leak crashed our payments service every"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
