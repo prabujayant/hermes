@@ -1,6 +1,6 @@
 {
   "hypothesis": "Switched back to curiosity-gap war story format with concrete metrics and a surprise reveal, since the contrarian hot take approach generated zero reach in 8+ hours.",
-  "pivots": 20,
+  "pivots": 21,
   "streak": 0,
   "history": [
     {
@@ -266,6 +266,19 @@
         "18130842037753492",
         "18106618418254541",
         "17979879552120969"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T06:01:10.820592+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to become a senior engineer",
+      "ids": [
+        "18123822004899715",
+        "18103187195010664",
+        "18177558859382759",
+        "18118430069277898",
+        "18636798790052404"
       ],
       "pivoted": true
     }
