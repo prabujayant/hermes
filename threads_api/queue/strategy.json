@@ -1,6 +1,6 @@
 {
   "hypothesis": "Pivoted from failing caps-listicle hooks to a story-driven contrarian hook with a specific debate challenge to drive replies and profile clicks.",
-  "pivots": 25,
+  "pivots": 26,
   "streak": 0,
   "history": [
     {
@@ -336,6 +336,19 @@
         "18113066537155862",
         "17961775446241993",
         "17965050446983080"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T11:01:19.478925+00:00",
+      "pillar": "smart",
+      "hook_sig": "things that quietly kill engineering careers:",
+      "ids": [
+        "18113379488463962",
+        "17912542926521709",
+        "17967722715190936",
+        "18123800486298096",
+        "18046886498818638"
       ],
       "pivoted": true
     }
