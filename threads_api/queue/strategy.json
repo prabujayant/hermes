@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Switched to a debugging war story with a specific technical revelation to drive curiosity and engagement.",
-  "pivots": 17,
+  "hypothesis": "Pivoted to contrarian hot take with direct challenge CTA to drive replies and profile clicks, dropping war-story format that generated zero reach.",
+  "pivots": 18,
   "streak": 0,
   "history": [
     {
@@ -226,6 +226,19 @@
         "18133791922662806",
         "18080260058371443",
         "17909770980552426"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T03:01:12.889423+00:00",
+      "pillar": "smart",
+      "hook_sig": "stop chasing clean code. the best engineers i",
+      "ids": [
+        "18106597627960408",
+        "18100022705378998",
+        "18097436798439893",
+        "18069098489500892",
+        "18112191557607616"
       ],
       "pivoted": true
     }
