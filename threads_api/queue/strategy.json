@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Pivoted from failing caps-listicle hooks to a story-driven contrarian hook with a specific debate challenge to drive replies and profile clicks.",
-  "pivots": 26,
+  "hypothesis": "Switched from caps-listicle hooks to personal counterexamples that disprove senior advice, using debate-triggering hot takes with real payoff stories.",
+  "pivots": 27,
   "streak": 0,
   "history": [
     {
@@ -349,6 +349,19 @@
         "17967722715190936",
         "18123800486298096",
         "18046886498818638"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T12:01:15.341924+00:00",
+      "pillar": "smart",
+      "hook_sig": "threads, my most viral engineering posts all follow",
+      "ids": [
+        "18638586625006099",
+        "18126843911487282",
+        "18097215320453546",
+        "18052432538807312",
+        "18144123490574431"
       ],
       "pivoted": true
     }
