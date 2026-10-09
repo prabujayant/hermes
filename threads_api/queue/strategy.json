@@ -1,6 +1,6 @@
 {
   "hypothesis": "Shifted from generic listicles to a detailed",
-  "pivots": 33,
+  "pivots": 34,
   "streak": 0,
   "history": [
     {
@@ -443,6 +443,18 @@
         "18080506700348485",
         "17993887809048540",
         "18014777852750606"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T19:01:10.253695+00:00",
+      "pillar": "smart",
+      "hook_sig": "i spent 6 months debugging a memory leak",
+      "ids": [
+        "18010239029973007",
+        "17905279143566577",
+        "17960859027228267",
+        "18717896740042353"
       ],
       "pivoted": true
     }
