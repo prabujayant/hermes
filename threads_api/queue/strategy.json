@@ -1,6 +1,6 @@
 {
   "hypothesis": "Switched back to curiosity-gap war story format with concrete metrics and a surprise reveal, since the contrarian hot take approach generated zero reach in 8+ hours.",
-  "pivots": 19,
+  "pivots": 20,
   "streak": 0,
   "history": [
     {
@@ -253,6 +253,19 @@
         "18148436710501615",
         "17911018800498399",
         "18101282408374278"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T05:01:10.067736+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to pass system design interviews,",
+      "ids": [
+        "18125821148490351",
+        "17941048611403577",
+        "18130842037753492",
+        "18106618418254541",
+        "17979879552120969"
       ],
       "pivoted": true
     }
