@@ -1,6 +1,6 @@
 {
   "hypothesis": "Pivoted from failing caps-listicle hooks to a story-driven contrarian hook with a specific debate challenge to drive replies and profile clicks.",
-  "pivots": 24,
+  "pivots": 25,
   "streak": 0,
   "history": [
     {
@@ -323,6 +323,19 @@
         "18115571272818082",
         "18271577839305348",
         "18098181002536763"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T10:01:15.121198+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want behavioral rounds to remember you,",
+      "ids": [
+        "18172237690457166",
+        "18145090900597613",
+        "18113066537155862",
+        "17961775446241993",
+        "17965050446983080"
       ],
       "pivoted": true
     }
