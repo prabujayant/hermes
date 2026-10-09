@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Pivoted to debate hot take with explicit challenge CTA to drive replies and replies-to-replies, using contrarian lesson format with concrete incident data instead of curiosity-gap war stories.",
-  "pivots": 22,
+  "hypothesis": "Switched from contrarian hot takes to a curiosity-gap cheatsheet format with a concrete 4-step framework, specific metrics, and a reply-driving challenge in the final value post.",
+  "pivots": 23,
   "streak": 0,
   "history": [
     {
@@ -294,6 +294,20 @@
         "18430567846144290",
         "17954932347269690",
         "18186468334419003"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T08:01:16.091235+00:00",
+      "pillar": "smart",
+      "hook_sig": "the production debugging checklist that cut my mttr",
+      "ids": [
+        "18080392706341009",
+        "18106435589223614",
+        "18119214491066917",
+        "18263089096307656",
+        "18011234963970373",
+        "18095249006138226"
       ],
       "pivoted": true
     }
