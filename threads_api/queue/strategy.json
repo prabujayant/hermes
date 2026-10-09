@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Switched to caps-listicle hook with immediate actionable filter, contrarian claim about log reading, specific time savings proof, and team-wiki challenge to drive replies-to-replies.",
-  "pivots": 16,
+  "hypothesis": "Switched to a debugging war story with a specific technical revelation to drive curiosity and engagement.",
+  "pivots": 17,
   "streak": 0,
   "history": [
     {
@@ -213,6 +213,19 @@
         "18097737524346202",
         "18116523380075428",
         "18135883054642565"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T02:01:07.797697+00:00",
+      "pillar": "smart",
+      "hook_sig": "things that quietly kill engineering careers: you think",
+      "ids": [
+        "18129825211797705",
+        "18286032481291382",
+        "18133791922662806",
+        "18080260058371443",
+        "17909770980552426"
       ],
       "pivoted": true
     }
