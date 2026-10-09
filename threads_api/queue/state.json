@@ -47,7 +47,8 @@
     "i spent 6 months debugging a memory leak",
     "if you want your code to stop being",
     "stop writing unit tests for every function. most",
-    "most teams treat flaky tests like weather, unavoidable,"
+    "most teams treat flaky tests like weather, unavoidable,",
+    "if you want faster shipping stop writing unit"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

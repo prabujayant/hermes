@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Pivoted from failure narratives to a contrarian measurable claim (delete tests, improve quality) with a direct debate challenge to trigger replies and profile clicks from engineers who disagree or want to prove me wrong.",
-  "pivots": 37,
+  "hypothesis": "Switched from failure narratives to a contrarian caps-listicle hot take (delete unit tests) with four punchy rules and a direct debate challenge to trigger high-reply engagement from engineers who disagree.",
+  "pivots": 38,
   "streak": 0,
   "history": [
     {
@@ -495,6 +495,21 @@
         "18079639391455262",
         "18108815174349148",
         "18076338356723443"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T23:01:06.126186+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want faster shipping stop writing unit",
+      "ids": [
+        "18172760365455456",
+        "17909272977505672",
+        "18094014137462053",
+        "17910491721306997",
+        "17912722755283272",
+        "18339039898283734",
+        "18113230133115629"
       ],
       "pivoted": true
     }
