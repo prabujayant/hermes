@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Switched from generic listicles to a story-driven hook that mirrors the proven viral pattern of failure first, payoff second.",
-  "pivots": 35,
+  "hypothesis": "Switched from failure stories to contrarian hot take with specific measurable claims (60 percent deleted, 40 percent faster builds, flat bug rate) to trigger debate replies and profile clicks from engineers who disagree or want proof.",
+  "pivots": 36,
   "streak": 0,
   "history": [
     {
@@ -468,6 +468,19 @@
         "17911996839517568",
         "17873880321637000",
         "18397349626163951"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T21:01:11.317385+00:00",
+      "pillar": "smart",
+      "hook_sig": "stop writing unit tests for every function. most",
+      "ids": [
+        "17949189081322036",
+        "18194864503398456",
+        "18106851982950564",
+        "18056487596572636",
+        "18120370922064956"
       ],
       "pivoted": true
     }
