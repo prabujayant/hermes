@@ -25,7 +25,8 @@
     "you think you know how to write fast",
     "we spent six months optimizing a database query",
     "we spend weeks designing perfect abstractions. the code",
-    "most engineers treat code reviews as quality gates."
+    "most engineers treat code reviews as quality gates.",
+    "if you want to debug faster, stop reading"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
