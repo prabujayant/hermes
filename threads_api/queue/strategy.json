@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Swapped generic listicle hooks for a single vivid Friday-deploy war story with concrete numbers, a named three-phase rule engineers can copy-paste, and a blunt definition-of-done challenge to spark replies-to-replies.",
-  "pivots": 29,
+  "hypothesis": "Swapped generic listicles for a single named war story with a copy-pasteable three-phase rule and a measurable definition-of-done challenge to drive replies-to-replies and profile clicks.",
+  "pivots": 30,
   "streak": 0,
   "history": [
     {
@@ -389,6 +389,21 @@
         "18096452852536132",
         "18106090232342209",
         "18443728504130127"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T15:01:13.628059+00:00",
+      "pillar": "smart",
+      "hook_sig": "friday 4:47 pm. deploy to prod. green build.",
+      "ids": [
+        "17950970247300908",
+        "17985638541087158",
+        "17904867282352886",
+        "18489893731106768",
+        "18133651006663542",
+        "18077081594739078",
+        "17905650675579081"
       ],
       "pivoted": true
     }
