@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Pivoted to contrarian hot take on testing with integration-test challenge, dropping war-story and listicle formats that proved low-reach.",
-  "pivots": 14,
+  "hypothesis": "Switched to curiosity-gap opener with contrarian data claim, replaced listicle/war-story formats with evidence-based process change narrative, ended with direct challenge to drive replies-to-replies.",
+  "pivots": 15,
   "streak": 0,
   "history": [
     {
@@ -187,6 +187,19 @@
         "18086095265313529",
         "18638896636060509",
         "18139265821617588"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-09T00:01:23.534724+00:00",
+      "pillar": "smart",
+      "hook_sig": "most engineers treat code reviews as quality gates.",
+      "ids": [
+        "18349825678254234",
+        "18120883522934885",
+        "18109547519463180",
+        "18410456308092143",
+        "17951936235278272"
       ],
       "pivoted": true
     }
