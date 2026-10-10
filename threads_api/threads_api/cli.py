@@ -206,6 +206,26 @@ def _cmd_post_smart(args):
         print("DRY-RUN: scorecard above, no LLM call, nothing published")
         return 0
 
+    from .strategist import BRAIN_MODELS, decide_direction
+
+    direction = None
+    try:
+        direction = decide_direction(
+            llm_chat, BRAIN_MODELS, scorecard, strategy, progress)
+        print(f"Brain model: {llm_module.last_model}")
+        print(f"Brain direction: {direction['topic']} / "
+              f"{direction['hook'][:100]}")
+        prompt += (
+            "\nStrategist direction, follow it exactly:\n"
+            f"TOPIC: {direction['topic']}\n"
+            f"HOOK: {direction['hook']}\n"
+            f"CHANGE: {direction['change']}\n"
+        )
+        if direction["hypothesis"]:
+            strategy["hypothesis"] = direction["hypothesis"][:300]
+    except Exception as exc:  # noqa: BLE001 - brain optional, writer covers
+        print(f"Brain failed ({exc}); strategist writes directly")
+
     system = (
         "You run a Threads account posting software engineering content. "
         "Your only goal is views. Follow the output format exactly."

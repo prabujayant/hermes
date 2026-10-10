@@ -411,3 +411,45 @@ def test_soft_validate_rejects_dashes_and_comment_only_cta():
                                         "Follow @owlsky17 2/2"]))
     assert any("follow CTA" in p
                for p in soft_validate(["hook 1/2", "comment below 2/2"]))
+
+
+def test_brain_chain_paid_primary_free_fallback():
+    from threads_api.strategist import BRAIN_MODELS, SMART_MODELS
+
+    assert BRAIN_MODELS[0] == "openai/gpt-6-luna-pro"
+    assert SMART_MODELS[0] == "nvidia/nemotron-3-ultra-550b-a55b:free"
+
+
+def test_decide_direction_parses_four_lines():
+    from threads_api.strategist import decide_direction
+
+    def fake_chat(messages, max_tokens=400, temperature=0.7, model=None):
+        return ("TOPIC: backend caching\n"
+                "HOOK: debate hot take on cache stampedes\n"
+                "CHANGE: switch from listicles to debate\n"
+                "HYPOTHESIS: debates earn replies")
+
+    posts = [_post("winner", 500, 5)]
+    direction = decide_direction(
+        fake_chat, ["m"], evaluate(posts),
+        {"hypothesis": "old"})
+    assert direction == {
+        "topic": "backend caching",
+        "hook": "debate hot take on cache stampedes",
+        "change": "switch from listicles to debate",
+        "hypothesis": "debates earn replies",
+    }
+
+
+def test_decide_direction_rejects_garbage():
+    import pytest
+
+    from threads_api.strategist import decide_direction
+
+    def fake_chat(messages, max_tokens=400, temperature=0.7, model=None):
+        return "just some rambling with no fields at all"
+
+    posts = [_post("winner", 500, 5)]
+    with pytest.raises(ValueError, match="TOPIC"):
+        decide_direction(fake_chat, ["m"], evaluate(posts),
+                         {"hypothesis": "old"})

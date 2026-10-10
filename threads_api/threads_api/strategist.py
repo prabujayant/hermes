@@ -61,7 +61,14 @@ def load_niche_scan(path=None, limit=10):
     return (data.get("fetched", ""), bool(data.get("public")),
             data.get("items", [])[:limit])
 
-# Free-only chain for the autonomous loop (never spend in auto mode).
+# Model chains. Brain (Pro) decides direction; hand (Nemotron) writes.
+# ~$0.01/day at hourly cadence. Free fallbacks keep posting on outage.
+BRAIN_MODELS = [
+    "openai/gpt-6-luna-pro",
+    "openai/gpt-6-luna",
+    "nvidia/nemotron-3-ultra-550b-a55b:free",
+]
+# Writer chain: best free voice first, paid ling-flash last resort.
 SMART_MODELS = [
     "nvidia/nemotron-3-ultra-550b-a55b:free",
     "poolside/laguna-s-2.1:free",
@@ -423,6 +430,67 @@ def repair_thread(posts):
                 "miss the next one."
             )
     return fixed
+
+
+def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
+                     max_tokens=400, temperature=0.7):
+    """Brain call: strategy direction only, no thread text.
+
+    Returns {topic, hook, change, hypothesis}. Raises ValueError when
+    the response does not follow the format — caller falls back to the
+    single-call path.
+    """
+    lines = [
+        "You are the chief strategist. Decide the next thread's "
+        "direction. Do NOT write the thread, only the plan.",
+        f"Mission: {VIEWS_GOAL:,} views and {FOLLOWERS_GOAL:,} followers. "
+        "Aggressive but honest: never fake, deceive, spam, or harass.",
+    ]
+    if progress and progress.get("followers") is not None:
+        lines.append(
+            f"Progress: {progress['followers']:,} followers, "
+            f"{progress.get('views_total', '?')} recent views."
+        )
+    judged = scorecard.get("judged", [])
+    lines.append(f"Measured posts: {scorecard.get('sample_size', len(judged))}, "
+                 f"median {scorecard.get('median_vph')}/h, "
+                 f"streak {scorecard.get('streak')}, "
+                 f"pivot={scorecard.get('pivot')}.")
+    for item in judged[-6:]:
+        flag = "UNDER" if item["under"] else "ok"
+        lines.append(
+            f"- [{flag}] {item['views']} views ({item['vph']}/h): "
+            f"{ascii_clean(item['text'][:120])}"
+        )
+    lines.append(f"Current hypothesis: {ascii_clean(strategy['hypothesis'])}")
+    lines.append(
+        "Reply with ONLY these 4 lines, no extra text:\n"
+        "TOPIC: <pillar: leetcode|backend|sql|interviews|career + subject>\n"
+        "HOOK: <hook formula name + one-line shape, e.g. 'debate hot take: "
+        "monoliths beat microservices for most teams'>\n"
+        "CHANGE: <what changes vs current hypothesis, or 'none'>\n"
+        "HYPOTHESIS: <updated one-line hypothesis>"
+    )
+    raw = llm_chat(
+        [{"role": "system",
+          "content": "You decide content strategy. Terse, exact format."},
+         {"role": "user", "content": "\n".join(lines)}],
+        max_tokens=max_tokens, temperature=temperature, model=models)
+    import re
+
+    def field(name):
+        match = re.search(rf"^{name}:\s*(.+)$", raw,
+                          re.MULTILINE | re.IGNORECASE)
+        if not match or not match.group(1).strip():
+            raise ValueError(f"brain response missing {name} line")
+        return match.group(1).strip()[:300]
+
+    return {
+        "topic": field("TOPIC"),
+        "hook": field("HOOK"),
+        "change": field("CHANGE"),
+        "hypothesis": field("HYPOTHESIS"),
+    }
 
 
 def finalize_thread(raw):
