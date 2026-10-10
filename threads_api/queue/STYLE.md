@@ -40,5 +40,6 @@ Use this format for EVERY thread draft unless told otherwise.
 - 5 posts total (1 hook + 3 value + 1 CTA) by default; 7 max.
 - Each post ≤ 500 chars (API limit).
 - Plain ASCII only: NEVER em dashes or en dashes, use commas or plain hyphens.
-- Topics that win: LeetCode patterns, backend, SQL, interviews, career.
+- Topics that win: LeetCode patterns, backend, SQL, interviews, career,
+  AI coding, system design.
 - No resume-dishonesty angles - reframe as "prove it in the interview".

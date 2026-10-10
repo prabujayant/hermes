@@ -11,7 +11,8 @@ from pathlib import Path
 
 from .config import Config
 
-PILLARS = ("leetcode", "backend", "sql", "interviews", "career")
+PILLARS = ("leetcode", "backend", "sql", "interviews", "career",
+            "ai-coding", "system-design")
 BANK_DIR = Config.ROOT / "queue" / "bank"
 STATE_PATH = Config.ROOT / "queue" / "state.json"
 POSTED_LOG = Config.ROOT / "queue" / "posted.jsonl"

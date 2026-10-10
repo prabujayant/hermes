@@ -500,6 +500,26 @@ def test_decide_direction_rejects_off_niche_topic():
                          {"hypothesis": "old"})
 
 
+def test_expanded_pillars_accepted():
+    from threads_api.generator import PILLARS
+    from threads_api.strategist import ALLOWED_PILLARS, decide_direction
+
+    assert "ai-coding" in PILLARS and "system-design" in PILLARS
+    assert set(PILLARS) == set(ALLOWED_PILLARS)
+
+    def fake_chat(messages, max_tokens=400, temperature=0.7, model=None):
+        return ("POST: YES go\n"
+                "TOPIC: ai-coding prompt tricks\n"
+                "HOOK: curious opener\n"
+                "CHANGE: new pillar\n"
+                "HYPOTHESIS: ai topics pop")
+
+    posts = [_post("winner", 500, 5)]
+    direction = decide_direction(fake_chat, ["m"], evaluate(posts),
+                                 {"hypothesis": "old"})
+    assert direction["pillar"] == "ai-coding"
+
+
 def test_analytics_digest_shows_trajectory_and_extremes():
     from threads_api.strategist import analytics_digest
 

@@ -2,7 +2,7 @@
 
 Imitate ONE leader's format per thread: copy its hook shape, structure,
 and pacing, applied to our pillars (backend, SQL, interviews, leetcode,
-career). Do not blend formats.
+career, AI coding, system design). Do not blend formats.
 
 ## 1. Matt Pocock (TypeScript/AI explainer threads, 250k+ audience)
 - ONE high-signal lesson per thread, calm clarifying voice.

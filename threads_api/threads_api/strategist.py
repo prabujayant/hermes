@@ -29,7 +29,8 @@ NICHE_POSTS_PATH = Config.ROOT / "queue" / "niche_posts.json"
 # Anything else (politics, crypto, general motivation, unrelated
 # topics) is rejected before publishing, no matter how viral it
 # looks elsewhere.
-ALLOWED_PILLARS = ("leetcode", "backend", "sql", "interviews", "career")
+ALLOWED_PILLARS = ("leetcode", "backend", "sql", "interviews", "career",
+                   "ai-coding", "system-design")
 
 
 def load_niche_brief(path=None):
@@ -561,9 +562,9 @@ def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
         "Reply with ONLY these 5 lines, no extra text:\n"
         "POST: <YES post this hour, or NO skip with one-line reason, e.g. "
         "dead traffic window or nothing worth saying>\n"
-        "TOPIC: <pillar: leetcode|backend|sql|interviews|career + subject>\n"
-        "Stay strictly inside those five pillars: no politics, crypto, "
-        "general motivation, or unrelated topics — off-niche answers are "
+        "TOPIC: <pillar: leetcode|backend|sql|interviews|career|ai-coding|system-design + subject>\n"
+        "Stay strictly inside those pillars: no politics, crypto, "
+        "general motivation, or unrelated topics. Off-niche answers are "
         "rejected.\n"
         "HOOK: <hook formula name + one-line shape, e.g. 'debate hot take: "
         "monoliths beat microservices for most teams'>\n"

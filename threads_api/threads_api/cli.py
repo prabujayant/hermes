@@ -105,7 +105,8 @@ def _cmd_delete(args):
 SCAN_AUTHORS = ["theprimeagen", "mattpocockuk", "codingwithroby",
                 "sahilbloom"]
 SCAN_QUERIES = ["backend engineering", "SQL", "coding interviews",
-                "leetcode", "AI agents", "vibe coding"]
+                "leetcode", "AI agents", "vibe coding",
+                "system design"]
 
 
 def _cmd_scan_niche(args):
@@ -239,7 +240,8 @@ def _cmd_post_smart(args):
             f"HOOK: {direction['hook']}\n"
             f"CHANGE: {direction['change']}\n"
             f"Stay strictly on the {direction['pillar']} pillar "
-            "(backend engineering, SQL, interviews, coding, careers). "
+            "(backend engineering, SQL, interviews, coding, careers, "
+            "AI coding, system design). "
             "No politics, crypto, general motivation, or unrelated topics."
         )
     except Exception as exc:  # noqa: BLE001 - brain optional, writer covers
