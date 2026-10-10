@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Swapped caps-listicle hooks for a specific debugging war story with GPS leap-second technical detail, contrarian \"spec vs reality\" lesson, and a debate challenge asking for stack traces to drive replies-to-replies and profile clicks.",
-  "pivots": 44,
+  "hypothesis": "Pivoted from failing caps-listicle hooks to curiosity-gap war story with contrarian distributed saga vs single DB lesson, debate challenge demanding counter-examples, and cheatsheet payoff to drive replies-to-replies and profile clicks.",
+  "pivots": 45,
   "streak": 0,
   "history": [
     {
@@ -592,6 +592,20 @@
         "18113092982149138",
         "17919329610241308",
         "18369334423244830"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-10T06:01:10.810937+00:00",
+      "pillar": "smart",
+      "hook_sig": "three years ago we bet the company on",
+      "ids": [
+        "18129752323775532",
+        "17898191259394284",
+        "18107742845522738",
+        "18114265868007146",
+        "18334109167302403",
+        "18128667022702378"
       ],
       "pivoted": true
     }
