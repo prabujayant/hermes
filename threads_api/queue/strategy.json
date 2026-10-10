@@ -1,21 +1,8 @@
 {
-  "hypothesis": "Switched to debate hot take format with specific technical challenge (mutation testing, contract tests, chaos engineering) ending in quantified reply prompt to drive replies-to-replies and profile clicks. Dropped storytelling, listicles, and curiosity gaps.",
+  "hypothesis": "Testing hot take with contract-test challenge drives replies-to-replies and profile clicks via specific technical action.",
   "pivots": 50,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-08T06:53:52.290124+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent 6 months chasing a production outage",
-      "ids": [
-        "18000036656816363",
-        "18077972915392670",
-        "18127160041888546",
-        "17948861709303332",
-        "18116145214822786"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-08T08:09:53.313849+00:00",
       "pillar": "smart",
@@ -679,6 +666,19 @@
         "17891123121457485"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-10T12:01:10.330447+00:00",
+      "pillar": "smart",
+      "hook_sig": "code coverage targets are the biggest lie in",
+      "ids": [
+        "18106729328578834",
+        "18068445320786871",
+        "18115088467957159",
+        "18179993491428810",
+        "18130142749702684"
+      ],
+      "pivoted": false
     }
   ]
 }
