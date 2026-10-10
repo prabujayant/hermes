@@ -4,19 +4,6 @@
   "streak": 0,
   "history": [
     {
-      "run_at": "2026-10-08T14:01:11.967806+00:00",
-      "pillar": "smart",
-      "hook_sig": "things that quietly kill engineering careers: 1/5",
-      "ids": [
-        "18082551386357173",
-        "18096205835439826",
-        "18133749850668815",
-        "18459252352187735",
-        "18629963956041614"
-      ],
-      "pivoted": true
-    },
-    {
       "run_at": "2026-10-08T15:31:42.101886+00:00",
       "pillar": "smart",
       "hook_sig": "i spent 6 months chasing a production outage",
@@ -686,6 +673,28 @@
         "17961074888999550",
         "18127641637838736",
         "18102892322226926"
+      ],
+      "pivoted": false
+    },
+    {
+      "run_at": "2026-10-10T17:01:14.239058+00:00",
+      "pillar": "smart",
+      "hook_sig": "things hiring managers can't tell from your resume",
+      "texts": [
+        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
+        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
+        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
+        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Caps-listicle hook on code review (new topic) replicates the 29-47 views/h velocity of P16 P17 P18 by keeping the proven IF YOU WANT X STOP Y format.",
+      "ids": [
+        "18252235015308156",
+        "18129449195479853",
+        "18119002246952097",
+        "18213793975359521",
+        "18132117916707199"
       ],
       "pivoted": false
     }
