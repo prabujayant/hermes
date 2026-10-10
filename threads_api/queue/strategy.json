@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Switched from caps-listicle hooks to a curiosity-gap story with a specific technical surprise, concrete allocation profiling lesson, and a reply challenge asking for stack traces to drive replies-to-replies and profile clicks.",
-  "pivots": 42,
+  "hypothesis": "Pivoted from failing caps-listicle hooks to a curiosity-gap debugging story with a specific lunar-cycle hook, concrete leap-second technical detail, contrarian lesson on time assumptions, and a debate challenge asking for stack traces to drive replies-to-replies and profile clicks.",
+  "pivots": 43,
   "streak": 0,
   "history": [
     {
@@ -564,6 +564,20 @@
         "17943861771348616",
         "18165641584485104",
         "18105282961973605"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-10T04:01:11.345360+00:00",
+      "pillar": "smart",
+      "hook_sig": "i found a bug that only appeared when",
+      "ids": [
+        "17894971674674140",
+        "18109763924336732",
+        "18310189195305195",
+        "18134612122734600",
+        "18092615900268374",
+        "17909004543550850"
       ],
       "pivoted": true
     }
