@@ -90,6 +90,23 @@ def test_niche_brief_file_exists_and_names_leaders():
         assert name in text
 
 
+def test_owner_brief_strips_comments_and_placeholders(tmp_path):
+    from threads_api.strategist import load_owner_brief
+
+    path = tmp_path / "owner.md"
+    path.write_text(
+        "# a comment\nBIO:\n- Paste bio here.\n- Real bio line.\n"
+        "ASSETS:\n- None listed yet.\n",
+        encoding="utf-8")
+    assert load_owner_brief(path=path) == "- Real bio line."
+
+
+def test_owner_brief_missing_file_is_silent(tmp_path):
+    from threads_api.strategist import load_owner_brief
+
+    assert load_owner_brief(path=tmp_path / "nope.md") == ""
+
+
 def test_niche_posts_sorted_views_desc_nulls_last(tmp_path):
     import json
 

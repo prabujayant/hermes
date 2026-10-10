@@ -34,6 +34,34 @@ def load_niche_brief(path=None):
         return ""
 
 
+def load_owner_brief(path=None):
+    """Owner-filled brief (bio, audience, assets, channels, constraints).
+
+    Comment lines (#) and placeholder lines are stripped so unfilled
+    sections stay silent instead of polluting the prompt.
+    """
+    try:
+        text = Path(
+            path or Config.ROOT / "queue" / "owner.md").read_text(
+                encoding="utf-8")
+    except OSError:
+        return ""
+    kept = []
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        content = stripped[2:] if stripped.startswith("- ") else stripped
+        if content.lower().startswith(("paste ", "describe ",
+                                       "none listed yet")):
+            continue
+        if stripped.rstrip(":") in ("BIO", "AUDIENCE", "ASSETS",
+                                    "CHANNELS", "CONSTRAINTS"):
+            continue
+        kept.append(line.rstrip())
+    return "\n".join(kept).strip()
+
+
 def load_niche_posts(path=None, limit=8):
     """Top creator posts by views (nulls last). Each entry: creator,
     hook, text, views, likes, format, topic."""
@@ -318,6 +346,10 @@ def build_prompt(scorecard, strategy, progress=None):
             "and copy its hook shape, structure, and pacing exactly, "
             "applied to our pillars. Do not blend formats:\n" + brief
         )
+    owner = load_owner_brief()
+    if owner:
+        lines.append("OWNER BRIEF - facts about the account owner, use them "
+                     "for positioning and never contradict them:\n" + owner)
     proof = load_niche_posts()
     if proof:
         lines.append(
