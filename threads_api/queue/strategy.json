@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Pivoted from failure narratives to a debate hot take with a direct reply challenge, controversial claim backed by specific incidents, and a concrete alternative \u2014 designed to trigger replies and profile clicks which drive Threads reach.",
-  "pivots": 41,
+  "hypothesis": "Switched from caps-listicle hooks to a curiosity-gap story with a specific technical surprise, concrete allocation profiling lesson, and a reply challenge asking for stack traces to drive replies-to-replies and profile clicks.",
+  "pivots": 42,
   "streak": 0,
   "history": [
     {
@@ -550,6 +550,20 @@
         "18112585676170678",
         "18114765818102197",
         "18623720011043766"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-10T03:01:14.314376+00:00",
+      "pillar": "smart",
+      "hook_sig": "we shipped a feature flag system to replace",
+      "ids": [
+        "18392894302160449",
+        "17905231512578076",
+        "18012673280765356",
+        "17943861771348616",
+        "18165641584485104",
+        "18105282961973605"
       ],
       "pivoted": true
     }
