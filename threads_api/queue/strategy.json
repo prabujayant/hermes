@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Switched from failing caps-listicle hooks to a curiosity-gap war story with specific failure metrics, a clear contrarian rule (modular monolith > microservices for small teams), a reusable decision framework, and zero listicle formatting to drive dwell time and profile clicks.",
-  "pivots": 46,
+  "hypothesis": "Pivoted from caps-listicle hooks to a contrarian war story with specific rollback metrics, a reusable decision framework (two-pizza team + single-box traffic threshold), and a debate-ending challenge to drive replies-to-replies and profile clicks. Dropped all listicle formatting, caps hooks, and gen",
+  "pivots": 47,
   "streak": 0,
   "history": [
     {
@@ -620,6 +620,21 @@
         "18095907674447181",
         "18114476837015037",
         "18019680839948983"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-10T08:01:10.352054+00:00",
+      "pillar": "smart",
+      "hook_sig": "we spent 18 months migrating to microservices. three",
+      "ids": [
+        "18409836646083669",
+        "18050233598815370",
+        "18631284487061051",
+        "18205534372372489",
+        "18121242059288313",
+        "17994585752844354",
+        "18494430169100785"
       ],
       "pivoted": true
     }
