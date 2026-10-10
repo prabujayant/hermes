@@ -1,21 +1,8 @@
 {
-  "hypothesis": "Contrarian code-review take with a concrete write-a-test challenge triggers replies-to-replies from engineers who have shipped bugs past review, driving profile clicks via specific technical action.",
+  "hypothesis": "Caps-listicle hook on code review (new topic) replicates the 29-47 views/h velocity of P16 P17 P18 by keeping the proven IF YOU WANT X STOP Y format.",
   "pivots": 50,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-08T13:01:11.572807+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want scalable backend systems, stop copy\u2011pasting",
-      "ids": [
-        "18132199750740244",
-        "18396143926204232",
-        "17933193537143864",
-        "18100044641059799",
-        "17937599034400685"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-08T14:01:11.967806+00:00",
       "pillar": "smart",
@@ -677,6 +664,28 @@
         "18129222242491923",
         "18074371349774771",
         "18384723466230542"
+      ],
+      "pivoted": false
+    },
+    {
+      "run_at": "2026-10-10T15:18:05.311835+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want better code reviews, stop nitpicking",
+      "texts": [
+        "IF YOU WANT BETTER CODE REVIEWS, STOP NITPICKING STYLE. MEMORIZE THESE 3 MOVES:",
+        "Move 1: Ask \"what could break here\" instead of \"does this follow the guide.\" The best reviewers hunt for failure modes, not formatting.",
+        "Move 2: Approve with questions, not demands. \"Have you considered X\" ships faster than \"Change this to Y\" and teaches more.",
+        "Move 3: Time-box the review. If you cannot finish in 20 minutes, the PR is too big. Split it and review the slices.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Caps-listicle hook on code review (new topic) replicates the 29-47 views/h velocity of P16 P17 P18 by keeping the proven IF YOU WANT X STOP Y format.",
+      "ids": [
+        "17994352211840754",
+        "17975069052148809",
+        "17961074888999550",
+        "18127641637838736",
+        "18102892322226926"
       ],
       "pivoted": false
     }
