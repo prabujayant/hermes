@@ -117,7 +117,8 @@ def test_prompt_leads_with_top_earner():
     prompt = build_prompt(evaluate(posts), {"hypothesis": "x"})
     assert "NICHE PROOF" in prompt
     assert "2,200,000 views" in prompt
-    assert prompt.index("ThePrimeagen") < prompt.index("codingwithroby")
+    proof = prompt[prompt.index("NICHE PROOF"):]
+    assert proof.index("ThePrimeagen") < proof.index("codingwithroby")
 
 
 def test_build_prompt_no_pivot_when_winning():
