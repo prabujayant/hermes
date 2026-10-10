@@ -1,21 +1,8 @@
 {
-  "hypothesis": "Testing hot take with contract-test challenge drives replies-to-replies and profile clicks via specific technical action.",
+  "hypothesis": "Contract-testing hot take with a concrete one-contract challenge triggers replies-to-replies from engineers who have felt integration pain, driving profile clicks via specific technical action.",
   "pivots": 50,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-08T08:09:53.313849+00:00",
-      "pillar": "smart",
-      "hook_sig": "i shipped a feature that crashed production at",
-      "ids": [
-        "18146814775574193",
-        "18124723573683562",
-        "18336105733275165",
-        "18109870031611409",
-        "18118598329766841"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-08T09:01:10.609421+00:00",
       "pillar": "smart",
@@ -677,6 +664,19 @@
         "18115088467957159",
         "18179993491428810",
         "18130142749702684"
+      ],
+      "pivoted": false
+    },
+    {
+      "run_at": "2026-10-10T13:01:10.528865+00:00",
+      "pillar": "smart",
+      "hook_sig": "most testing advice assumes you control both sides",
+      "ids": [
+        "18209530309367897",
+        "18105983351620458",
+        "17907875697563922",
+        "18641564728009537",
+        "18084319976327192"
       ],
       "pivoted": false
     }
