@@ -337,8 +337,8 @@ def build_prompt(scorecard, strategy, progress=None):
             "Change at most one factor. One line on why, citing post IDs."
         )
     lines.append(
-        "Output: first your thread as 2-7 posts separated by a line with "
-        "exactly --- and nothing else (every post <=500 chars). "
+        "Output: first your thread as EXACTLY 5 posts separated by a line "
+        "with exactly --- and nothing else (every post <=500 chars). "
         "CRITICAL: do NOT number the posts, do NOT write counters like "
         "1/5 or 2/5 anywhere, just write the post text. Use plain ASCII "
         "only: no em dashes, no en dashes, no fancy unicode, commas and "
