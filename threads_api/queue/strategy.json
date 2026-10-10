@@ -1,22 +1,8 @@
 {
-  "hypothesis": "Concrete race-condition walkthrough with minimal interleaving and before/after fix drives higher dwell time and replies from engineers who recognize the pattern, beating generic advice threads.",
+  "hypothesis": "Caps-listicle hook on AI agent verification loops (hot topic, contrarian \"don't trust first output\" angle) will exceed 300 views by matching P18/P19 format mechanics while tapping higher-variance AI debate surface.",
   "pivots": 50,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-08T20:01:49.036484+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want faster shipping, stop writing integration",
-      "ids": [
-        "18165933184468681",
-        "18131268748688390",
-        "18395598022167202",
-        "17967901923207236",
-        "17983863669109438",
-        "18132973279663384"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-08T21:01:09.741518+00:00",
       "pillar": "smart",
@@ -727,6 +713,29 @@
         "18012209693969921"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-10T22:01:17.237165+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want ai agents to ship production",
+      "texts": [
+        "IF YOU WANT AI AGENTS TO SHIP PRODUCTION CODE, STOP TRUSTING THEIR FIRST OUTPUT. MEMORIZE THESE 3 VERIFICATION LOOPS:\n\nMost devs treat agents like senior engineers who just need direction. They are not. They are overconfident juniors with infinite typing speed and zero accountability. The bug is not in the prompt. The bug is in the missing verification layer.",
+        "Loop 1: SYNTAX AND TYPE GATE. Run the agent output through the compiler and type checker before you even read it. If it does not compile, reject the patch and feed the error back. Do not fix it yourself. Force the agent to eat its own compiler errors until clean. This alone catches 40 percent of hallucinated APIs and phantom imports.",
+        "Loop 2: CONTRACT TEST GENERATION. Ask the agent to write the contract tests for the code it just produced. Not unit tests. Contract tests: input-output pairs that define the exact behavior at the boundary. If the agent cannot write the contract test, the spec was underspecified. Send it back with the missing constraints. This catches the silent contract drift that breaks consumers.",
+        "Loop 3: ADVERSARIAL EDGE CASE SWEEP. Prompt: \"List five inputs that would break this implementation in production. Include concurrency, nullability, partial failure, and resource exhaustion scenarios.\" Then make the agent harden the code against each. Ship the hardened version with the edge cases documented as regression tests. This is where the 3am pages live.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Caps-listicle hook on AI agent verification loops (hot topic, contrarian \"don't trust first output\" angle) will exceed 300 views by matching P18/P19 format mechanics while tapping higher-variance AI debate surface.",
+      "breakout": "",
+      "ids": [
+        "18096876302200688",
+        "18090300854218617",
+        "18101948402566172",
+        "18130569418814923",
+        "18111911207137520"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -736,5 +745,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 259,
-  "last_views": 3619
+  "last_views": 3773
 }
