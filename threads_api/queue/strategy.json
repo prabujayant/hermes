@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Pivoted from caps-listicle hooks to a contrarian war story with specific rollback metrics, a reusable decision framework (two-pizza team + single-box traffic threshold), and a debate-ending challenge to drive replies-to-replies and profile clicks. Dropped all listicle formatting, caps hooks, and gen",
-  "pivots": 47,
+  "hypothesis": "Switched from caps-listicle hooks to curiosity-gap opener with contrarian hot take (DRY is overrated) ending in specific reply challenge to drive replies-to-replies and profile clicks. Dropped all listicle formatting, caps hooks, and generic advice.",
+  "pivots": 48,
   "streak": 0,
   "history": [
     {
@@ -635,6 +635,21 @@
         "18121242059288313",
         "17994585752844354",
         "18494430169100785"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-10T09:01:08.925246+00:00",
+      "pillar": "smart",
+      "hook_sig": "i used to think senior engineers wrote better",
+      "ids": [
+        "18103808978194846",
+        "17902730400667231",
+        "18126343454484406",
+        "18093594380164095",
+        "18058189739563359",
+        "17962013061230271",
+        "18126344776879718"
       ],
       "pivoted": true
     }
