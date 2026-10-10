@@ -1,23 +1,8 @@
 {
-  "hypothesis": "Concrete before/after diff with a real race-condition walkthrough drives higher dwell time and replies from engineers who recognize the pattern, beating generic advice threads.",
+  "hypothesis": "Concrete race-condition walkthrough with minimal interleaving and before/after fix drives higher dwell time and replies from engineers who recognize the pattern, beating generic advice threads.",
   "pivots": 50,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-08T18:01:13.057576+00:00",
-      "pillar": "smart",
-      "hook_sig": "i switched to a personal storytelling hook with",
-      "ids": [
-        "18134970178737083",
-        "18379586767239323",
-        "18096653936540728",
-        "17872035597640124",
-        "18643231867042793",
-        "18356854366247854",
-        "18099396908553565"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-08T20:01:49.036484+00:00",
       "pillar": "smart",
@@ -719,6 +704,29 @@
         "18025343246872706"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-10T21:01:10.090902+00:00",
+      "pillar": "smart",
+      "hook_sig": "bug autopsy: a cache update that looks safe",
+      "texts": [
+        "BUG AUTOPSY: A CACHE UPDATE THAT LOOKS SAFE BUT ISNT\n\nTwo requests hit the same key. Both read the value, both increment, both write back. One increment vanishes. No locks, no transactions, just a plain Redis SET. The code review passed because it looked atomic.",
+        "THE VULNERABLE PATTERN\n\nasync function increment(key) {\n  const current = await redis.get(key)\n  const next = (current || 0) + 1\n  await redis.set(key, next)\n  return next\n}\n\nReads are fast. Writes are fast. The gap between them is where the bug lives. Under load that gap widens.",
+        "THE MINIMAL INTERLEAVING\n\nRequest A: GET key -> 5\nRequest B: GET key -> 5\nRequest A: SET key 6\nRequest B: SET key 6\n\nExpected final value: 7. Actual final value: 6. One request paid the latency cost for nothing. The counter drifts low under contention.",
+        "THE FIX: COMPARE AND SET LOOP\n\nasync function increment(key) {\n  while (true) {\n    const current = await redis.get(key)\n    const next = (current || 0) + 1\n    const ok = await redis.set(key, next, 'NX', 'XX')\n    if (ok) return next\n  }\n}\n\nRedis SET with NX XX acts as compare and set. If the value changed since our GET the SET fails and we retry. No external locks, single key, linearizable.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Concrete race-condition walkthrough with minimal interleaving and before/after fix drives higher dwell time and replies from engineers who recognize the pattern, beating generic advice threads.",
+      "breakout": "none",
+      "ids": [
+        "18110198693270443",
+        "18105714746213199",
+        "18151894117536610",
+        "17931099651165557",
+        "18012209693969921"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -728,5 +736,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 259,
-  "last_views": 3362
+  "last_views": 3619
 }
