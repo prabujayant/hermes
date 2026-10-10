@@ -61,10 +61,10 @@ def load_niche_scan(path=None, limit=10):
     return (data.get("fetched", ""), bool(data.get("public")),
             data.get("items", [])[:limit])
 
-# Model chains. Brain (Pro) decides direction; hand (Nemotron) writes.
-# ~$0.01/day at hourly cadence. Free fallbacks keep posting on outage.
+# Model chains. Brain (Luna base) decides direction; hand (Nemotron)
+# writes. Free fallbacks keep posting on outage. No Pro: base proved
+# equally reliable at a third of the price.
 BRAIN_MODELS = [
-    "openai/gpt-6-luna-pro",
     "openai/gpt-6-luna",
     "nvidia/nemotron-3-ultra-550b-a55b:free",
 ]

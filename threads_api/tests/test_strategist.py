@@ -416,7 +416,9 @@ def test_soft_validate_rejects_dashes_and_comment_only_cta():
 def test_brain_chain_paid_primary_free_fallback():
     from threads_api.strategist import BRAIN_MODELS, SMART_MODELS
 
-    assert BRAIN_MODELS[0] == "openai/gpt-6-luna-pro"
+    assert BRAIN_MODELS[0] == "openai/gpt-6-luna"
+    assert "openai/gpt-6-luna-pro" not in BRAIN_MODELS
+    assert BRAIN_MODELS[-1].endswith(":free")
     assert SMART_MODELS[0] == "nvidia/nemotron-3-ultra-550b-a55b:free"
 
 
