@@ -155,6 +155,22 @@ Free-tier budget: 20 req/min, 50 req/day without credits (1000/day
 after buying ≥10 credits). Each command costs 1–3 requests, so keep
 these on-demand — the hourly loop stays on template rotation.
 
+## Reply engine (answers comments automatically)
+
+```bash
+python -m threads_api.cli reply-comments --dry-run
+```
+
+Every `post-smart` run ends with a reply pass: it scans your 10
+newest threads for unanswered comments (<48h old, never your own,
+never twice), drafts all replies in ONE model call, and publishes
+only ones passing validation (≤280 chars, ASCII, no CTA, never
+argumentative, follow-up question encouraged).
+
+State lives in `queue/replies_state.json` (committed). Replies are
+the heaviest ranking signal, so this is the highest-ROI automation
+after posting itself.
+
 ## Learning from top creators (keyword search)
 
 ```bash

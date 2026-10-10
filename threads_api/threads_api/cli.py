@@ -277,6 +277,29 @@ def _cmd_post_smart(args):
     save_strategy(strategy)
     print(f"Posted smart thread ({len(ids)}): {ids[0]}")
 
+    try:
+        from .replier import answer_pending
+
+        done, skipped, _ = answer_pending(
+            client, llm_chat, SMART_MODELS, dry_run=args.dry_run)
+        print(f"Replies: {len(done)} posted, notes: {skipped[:3]}")
+    except Exception as exc:  # noqa: BLE001 - replies never break posting
+        print(f"Reply pass skipped ({exc})")
+
+
+def _cmd_reply_comments(args):
+    from .replier import answer_pending
+    from .llm import chat as llm_chat
+    from .strategist import SMART_MODELS
+
+    client = ThreadsClient()
+    done, skipped, _ = answer_pending(
+        client, llm_chat, SMART_MODELS,
+        max_replies=args.max, dry_run=args.dry_run)
+    print(f"Replies posted: {len(done)}")
+    for note in skipped[:10]:
+        print(f"  - {note}")
+
 
 def _account_brief(max_posts=100):
     """Compact data pack for the LLM: summary + top posts + themes."""
@@ -722,6 +745,18 @@ def build_parser():
         help="Daily post cap (default 24)",
     )
     smart.set_defaults(func=_cmd_post_smart)
+
+    reply = sub.add_parser(
+        "reply-comments", help="Answer pending comments (uses OpenRouter)"
+    )
+    reply.add_argument(
+        "--dry-run", action="store_true",
+        help="Show what would be answered without publishing",
+    )
+    reply.add_argument(
+        "--max", type=int, default=5, help="Max replies per run (default 5)"
+    )
+    reply.set_defaults(func=_cmd_reply_comments)
 
     return parser
 
