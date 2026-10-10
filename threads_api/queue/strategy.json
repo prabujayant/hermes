@@ -1,21 +1,8 @@
 {
-  "hypothesis": "Contract-testing hot take with a concrete one-contract challenge triggers replies-to-replies from engineers who have felt integration pain, driving profile clicks via specific technical action.",
+  "hypothesis": "Contrarian code-review take with a concrete write-a-test challenge triggers replies-to-replies from engineers who have shipped bugs past review, driving profile clicks via specific technical action.",
   "pivots": 50,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-08T09:01:10.609421+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want scalable apis, stop guessing retry",
-      "ids": [
-        "18038159660839075",
-        "17933175216147763",
-        "18108349490349042",
-        "18493394737109757",
-        "18463099339139443"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-08T10:01:13.920911+00:00",
       "pillar": "smart",
@@ -677,6 +664,18 @@
         "17907875697563922",
         "18641564728009537",
         "18084319976327192"
+      ],
+      "pivoted": false
+    },
+    {
+      "run_at": "2026-10-10T14:01:08.919901+00:00",
+      "pillar": "smart",
+      "hook_sig": "code reviews catch maybe 10 percent of real",
+      "ids": [
+        "18168098578481482",
+        "17982487869153295",
+        "18026455574873242",
+        "18016955519933296"
       ],
       "pivoted": false
     }
