@@ -338,6 +338,14 @@ def build_prompt(scorecard, strategy, progress=None):
             f"{ascii_clean(item['text'])}"
         )
     lines.append(f"Current hypothesis: {ascii_clean(strategy['hypothesis'])}")
+    history = [h for h in strategy.get("history", []) if isinstance(h, dict)]
+    if history:
+        lines.append("Your recent decisions and what they were:")
+        for entry in history[-3:]:
+            hook = entry.get("hook_sig", "?")
+            model = (entry.get("model") or "?").split("/")[-1][:28]
+            stamp = (entry.get("run_at") or "")[:16]
+            lines.append(f"- {stamp} [{model}]: {hook}")
     lines.append(NICHE_PLAYBOOK)
     brief = load_niche_brief()
     if brief:

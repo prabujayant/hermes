@@ -107,6 +107,24 @@ def test_owner_brief_missing_file_is_silent(tmp_path):
     assert load_owner_brief(path=tmp_path / "nope.md") == ""
 
 
+def test_prompt_recaps_recent_decisions():
+    posts = [_post("winner", 500, 5)]
+    strategy = {"hypothesis": "x", "history": [
+        {"run_at": "2026-10-10T10:00:00+00:00",
+         "hook_sig": "some hook words here",
+         "model": "openai/gpt-6-luna"},
+    ]}
+    prompt = build_prompt(evaluate(posts), strategy)
+    assert "recent decisions" in prompt.lower()
+    assert "some hook words here" in prompt
+
+
+def test_prompt_without_history_skips_recap():
+    posts = [_post("winner", 500, 5)]
+    prompt = build_prompt(evaluate(posts), {"hypothesis": "x"})
+    assert "recent decisions" not in prompt.lower()
+
+
 def test_niche_posts_sorted_views_desc_nulls_last(tmp_path):
     import json
 
