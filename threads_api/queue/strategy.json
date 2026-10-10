@@ -1,702 +1,708 @@
 {
-  "hypothesis": "Caps-listicle hook on code review (new topic) replicates the 29-47 views/h velocity of P16 P17 P18 by keeping the proven IF YOU WANT X STOP Y format.",
-  "pivots": 50,
-  "streak": 0,
-  "history": [
-    {
-      "run_at": "2026-10-08T15:31:42.101886+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent 6 months chasing a production outage",
-      "ids": [
-        "18178973908434343",
-        "18074283443733179",
-        "17912882649499245",
-        "18115889929789866",
-        "18116335393804922",
-        "18125739617488393"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-08T15:59:14.761878+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent 3 years optimizing for clean code",
-      "ids": [
-        "18094744670247152",
-        "18090941276230759",
-        "17871866853637511",
-        "18096823349541855",
-        "18356014900169305"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-08T17:01:11.251594+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "ids": [
-        "18631735915043530",
-        "18123815710748794",
-        "17904478701350247",
-        "18640839304029009",
-        "18206870539373210"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-08T18:01:13.057576+00:00",
-      "pillar": "smart",
-      "hook_sig": "i switched to a personal storytelling hook with",
-      "ids": [
-        "18134970178737083",
-        "18379586767239323",
-        "18096653936540728",
-        "17872035597640124",
-        "18643231867042793",
-        "18356854366247854",
-        "18099396908553565"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-08T20:01:49.036484+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want faster shipping, stop writing integration",
-      "ids": [
-        "18165933184468681",
-        "18131268748688390",
-        "18395598022167202",
-        "17967901923207236",
-        "17983863669109438",
-        "18132973279663384"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-08T21:01:09.741518+00:00",
-      "pillar": "smart",
-      "hook_sig": "you think you know how to write fast",
-      "ids": [
-        "17985384165108353",
-        "18106589846254541",
-        "18115639361015368",
-        "17978011166922653",
-        "17922055629223497",
-        "18035151968896561"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-08T22:01:09.646357+00:00",
-      "pillar": "smart",
-      "hook_sig": "we spent six months optimizing a database query",
-      "ids": [
-        "18356016859174302",
-        "18070213082764334",
-        "18348151474268741",
-        "17921574288444647",
-        "18117116692786074"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-08T23:01:06.472455+00:00",
-      "pillar": "smart",
-      "hook_sig": "we spend weeks designing perfect abstractions. the code",
-      "ids": [
-        "18012049772970483",
-        "18142480885613324",
-        "18086095265313529",
-        "18638896636060509",
-        "18139265821617588"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T00:01:23.534724+00:00",
-      "pillar": "smart",
-      "hook_sig": "most engineers treat code reviews as quality gates.",
-      "ids": [
-        "18349825678254234",
-        "18120883522934885",
-        "18109547519463180",
-        "18410456308092143",
-        "17951936235278272"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T01:01:08.521331+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to debug faster, stop reading",
-      "ids": [
-        "18341551483285459",
-        "18069950609765077",
-        "18097737524346202",
-        "18116523380075428",
-        "18135883054642565"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T02:01:07.797697+00:00",
-      "pillar": "smart",
-      "hook_sig": "things that quietly kill engineering careers: you think",
-      "ids": [
-        "18129825211797705",
-        "18286032481291382",
-        "18133791922662806",
-        "18080260058371443",
-        "17909770980552426"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T03:01:12.889423+00:00",
-      "pillar": "smart",
-      "hook_sig": "stop chasing clean code. the best engineers i",
-      "ids": [
-        "18106597627960408",
-        "18100022705378998",
-        "18097436798439893",
-        "18069098489500892",
-        "18112191557607616"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T04:01:09.375940+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want faster code, stop trusting your",
-      "ids": [
-        "18105666482256392",
-        "18147843229561299",
-        "17872827348649802",
-        "18148436710501615",
-        "17911018800498399",
-        "18101282408374278"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T05:01:10.067736+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to pass system design interviews,",
-      "ids": [
-        "18125821148490351",
-        "17941048611403577",
-        "18130842037753492",
-        "18106618418254541",
-        "17979879552120969"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T06:01:10.820592+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to become a senior engineer",
-      "ids": [
-        "18123822004899715",
-        "18103187195010664",
-        "18177558859382759",
-        "18118430069277898",
-        "18636798790052404"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T07:01:17.953697+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to catch production bugs, stop",
-      "ids": [
-        "17911363905515314",
-        "18371221870214732",
-        "18120633511940404",
-        "18114280943325725",
-        "18430567846144290",
-        "17954932347269690",
-        "18186468334419003"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T08:01:16.091235+00:00",
-      "pillar": "smart",
-      "hook_sig": "the production debugging checklist that cut my mttr",
-      "ids": [
-        "18080392706341009",
-        "18106435589223614",
-        "18119214491066917",
-        "18263089096307656",
-        "18011234963970373",
-        "18095249006138226"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T08:56:15.811661+00:00",
-      "pillar": "smart",
-      "hook_sig": "i watched a principal engineer delete 80 percent",
-      "ids": [
-        "18109831922183516",
-        "18200095996381802",
-        "18252061819308669",
-        "18107277428337203",
-        "18115571272818082",
-        "18271577839305348",
-        "18098181002536763"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T10:01:15.121198+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want behavioral rounds to remember you,",
-      "ids": [
-        "18172237690457166",
-        "18145090900597613",
-        "18113066537155862",
-        "17961775446241993",
-        "17965050446983080"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T11:01:19.478925+00:00",
-      "pillar": "smart",
-      "hook_sig": "things that quietly kill engineering careers:",
-      "ids": [
-        "18113379488463962",
-        "17912542926521709",
-        "17967722715190936",
-        "18123800486298096",
-        "18046886498818638"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T12:01:15.341924+00:00",
-      "pillar": "smart",
-      "hook_sig": "threads, my most viral engineering posts all follow",
-      "ids": [
-        "18638586625006099",
-        "18126843911487282",
-        "18097215320453546",
-        "18052432538807312",
-        "18144123490574431"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T13:01:11.936822+00:00",
-      "pillar": "smart",
-      "hook_sig": "i shipped a feature flag on friday. by",
-      "ids": [
-        "17980032174106037",
-        "18134592145657753",
-        "18013414535957880",
-        "18104059703458543",
-        "18012742016986497"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T14:01:13.457933+00:00",
-      "pillar": "smart",
-      "hook_sig": "i shipped a config change on a friday.",
-      "ids": [
-        "17992335624066544",
-        "18117761918282247",
-        "18125503804930752",
-        "18096452852536132",
-        "18106090232342209",
-        "18443728504130127"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T15:01:13.628059+00:00",
-      "pillar": "smart",
-      "hook_sig": "friday 4:47 pm. deploy to prod. green build.",
-      "ids": [
-        "17950970247300908",
-        "17985638541087158",
-        "17904867282352886",
-        "18489893731106768",
-        "18133651006663542",
-        "18077081594739078",
-        "17905650675579081"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T16:01:15.630606+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "ids": [
-        "18144806392597916",
-        "18060226811796543",
-        "18117778340059051",
-        "18059464169717274",
-        "17996046594010904"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T17:01:10.224322+00:00",
-      "pillar": "smart",
-      "hook_sig": "a memory leak crashed our payments service every",
-      "ids": [
-        "18632890906021944",
-        "18105772462980959",
-        "18089488361691192",
-        "18092969798676844",
-        "18030814832850842",
-        "17947680534326491"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T18:01:11.805812+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to slash incident response time",
-      "ids": [
-        "18135453973728580",
-        "18080506700348485",
-        "17993887809048540",
-        "18014777852750606"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T19:01:10.253695+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent 6 months debugging a memory leak",
-      "ids": [
-        "18010239029973007",
-        "17905279143566577",
-        "17960859027228267",
-        "18717896740042353"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T20:01:06.418768+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want your code to stop being",
-      "ids": [
-        "18378061942242160",
-        "17991947451046926",
-        "17911996839517568",
-        "17873880321637000",
-        "18397349626163951"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T21:01:11.317385+00:00",
-      "pillar": "smart",
-      "hook_sig": "stop writing unit tests for every function. most",
-      "ids": [
-        "17949189081322036",
-        "18194864503398456",
-        "18106851982950564",
-        "18056487596572636",
-        "18120370922064956"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T22:01:13.253733+00:00",
-      "pillar": "smart",
-      "hook_sig": "most teams treat flaky tests like weather, unavoidable,",
-      "ids": [
-        "18108703823611129",
-        "18638827867050533",
-        "18112083245057229",
-        "18079639391455262",
-        "18108815174349148",
-        "18076338356723443"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-09T23:01:06.126186+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want faster shipping stop writing unit",
-      "ids": [
-        "18172760365455456",
-        "17909272977505672",
-        "18094014137462053",
-        "17910491721306997",
-        "17912722755283272",
-        "18339039898283734",
-        "18113230133115629"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-10T00:01:11.424148+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to crack coding interviews, stop",
-      "ids": [
-        "18127416610860439",
-        "18030352868904031",
-        "18380470822230957",
-        "18106795676255105",
-        "18149613787540957"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-10T01:01:07.295939+00:00",
-      "pillar": "smart",
-      "hook_sig": "a senior engineer once told me the best",
-      "ids": [
-        "18094389221169585",
-        "18477124837117793",
-        "18145490218567952",
-        "18146243614520096",
-        "18129389875892562",
-        "17983932981095288"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-10T02:01:14.170215+00:00",
-      "pillar": "smart",
-      "hook_sig": "code reviews catch almost zero real bugs. they",
-      "ids": [
-        "17949640335302244",
-        "18111190082131390",
-        "18112585676170678",
-        "18114765818102197",
-        "18623720011043766"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-10T03:01:14.314376+00:00",
-      "pillar": "smart",
-      "hook_sig": "we shipped a feature flag system to replace",
-      "ids": [
-        "18392894302160449",
-        "17905231512578076",
-        "18012673280765356",
-        "17943861771348616",
-        "18165641584485104",
-        "18105282961973605"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-10T04:01:11.345360+00:00",
-      "pillar": "smart",
-      "hook_sig": "i found a bug that only appeared when",
-      "ids": [
-        "17894971674674140",
-        "18109763924336732",
-        "18310189195305195",
-        "18134612122734600",
-        "18092615900268374",
-        "17909004543550850"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-10T05:01:10.632146+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent three days hunting a bug that",
-      "ids": [
-        "18137301301653019",
-        "18060188816635676",
-        "18138765580715273",
-        "18113092982149138",
-        "17919329610241308",
-        "18369334423244830"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-10T06:01:10.810937+00:00",
-      "pillar": "smart",
-      "hook_sig": "three years ago we bet the company on",
-      "ids": [
-        "18129752323775532",
-        "17898191259394284",
-        "18107742845522738",
-        "18114265868007146",
-        "18334109167302403",
-        "18128667022702378"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-10T07:01:12.698461+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent six months debugging a distributed transaction",
-      "ids": [
-        "18107424788228443",
-        "17986122780103846",
-        "18420354124159066",
-        "18095907674447181",
-        "18114476837015037",
-        "18019680839948983"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-10T08:01:10.352054+00:00",
-      "pillar": "smart",
-      "hook_sig": "we spent 18 months migrating to microservices. three",
-      "ids": [
-        "18409836646083669",
-        "18050233598815370",
-        "18631284487061051",
-        "18205534372372489",
-        "18121242059288313",
-        "17994585752844354",
-        "18494430169100785"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-10T09:01:08.925246+00:00",
-      "pillar": "smart",
-      "hook_sig": "i used to think senior engineers wrote better",
-      "ids": [
-        "18103808978194846",
-        "17902730400667231",
-        "18126343454484406",
-        "18093594380164095",
-        "18058189739563359",
-        "17962013061230271",
-        "18126344776879718"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-10T10:01:11.674393+00:00",
-      "pillar": "smart",
-      "hook_sig": "code coverage targets are actively harmful. teams optimize",
-      "ids": [
-        "18019142621937038",
-        "17972109384174637",
-        "18118166513096448",
-        "18116732861003298",
-        "18055456913654007",
-        "17963135859223169"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-10T11:01:10.925109+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want behavioral rounds to remember you,",
-      "ids": [
-        "18114043406157622",
-        "17910480492502180",
-        "18115771409325099",
-        "17879725653543534",
-        "17891123121457485"
-      ],
-      "pivoted": true
-    },
-    {
-      "run_at": "2026-10-10T12:01:10.330447+00:00",
-      "pillar": "smart",
-      "hook_sig": "code coverage targets are the biggest lie in",
-      "ids": [
-        "18106729328578834",
-        "18068445320786871",
-        "18115088467957159",
-        "18179993491428810",
-        "18130142749702684"
-      ],
-      "pivoted": false
-    },
-    {
-      "run_at": "2026-10-10T13:01:10.528865+00:00",
-      "pillar": "smart",
-      "hook_sig": "most testing advice assumes you control both sides",
-      "ids": [
-        "18209530309367897",
-        "18105983351620458",
-        "17907875697563922",
-        "18641564728009537",
-        "18084319976327192"
-      ],
-      "pivoted": false
-    },
-    {
-      "run_at": "2026-10-10T14:01:08.919901+00:00",
-      "pillar": "smart",
-      "hook_sig": "code reviews catch maybe 10 percent of real",
-      "ids": [
-        "18168098578481482",
-        "17982487869153295",
-        "18026455574873242",
-        "18016955519933296"
-      ],
-      "pivoted": false
-    },
-    {
-      "run_at": "2026-10-10T14:15:56.336132+00:00",
-      "pillar": "smart",
-      "hook_sig": "most code reviews catch style nits and miss",
-      "ids": [
-        "18097426295409904",
-        "17952224646271227",
-        "18127838896836952",
-        "18129222242491923",
-        "18074371349774771",
-        "18384723466230542"
-      ],
-      "pivoted": false
-    },
-    {
-      "run_at": "2026-10-10T15:18:05.311835+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want better code reviews, stop nitpicking",
-      "texts": [
-        "IF YOU WANT BETTER CODE REVIEWS, STOP NITPICKING STYLE. MEMORIZE THESE 3 MOVES:",
-        "Move 1: Ask \"what could break here\" instead of \"does this follow the guide.\" The best reviewers hunt for failure modes, not formatting.",
-        "Move 2: Approve with questions, not demands. \"Have you considered X\" ships faster than \"Change this to Y\" and teaches more.",
-        "Move 3: Time-box the review. If you cannot finish in 20 minutes, the PR is too big. Split it and review the slices.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Caps-listicle hook on code review (new topic) replicates the 29-47 views/h velocity of P16 P17 P18 by keeping the proven IF YOU WANT X STOP Y format.",
-      "ids": [
-        "17994352211840754",
-        "17975069052148809",
-        "17961074888999550",
-        "18127641637838736",
-        "18102892322226926"
-      ],
-      "pivoted": false
-    },
-    {
-      "run_at": "2026-10-10T17:01:14.239058+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "texts": [
-        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
-        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
-        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
-        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Caps-listicle hook on code review (new topic) replicates the 29-47 views/h velocity of P16 P17 P18 by keeping the proven IF YOU WANT X STOP Y format.",
-      "ids": [
-        "18252235015308156",
-        "18129449195479853",
-        "18119002246952097",
-        "18213793975359521",
-        "18132117916707199"
-      ],
-      "pivoted": false
-    }
-  ]
+ "hypothesis": "Controversial technical takes plus visual debugging threads, tested at high frequency. Nemotron Ultra chief strategist plan.",
+ "pivots": 50,
+ "streak": 0,
+ "history": [
+  {
+   "run_at": "2026-10-08T15:31:42.101886+00:00",
+   "pillar": "smart",
+   "hook_sig": "i spent 6 months chasing a production outage",
+   "ids": [
+    "18178973908434343",
+    "18074283443733179",
+    "17912882649499245",
+    "18115889929789866",
+    "18116335393804922",
+    "18125739617488393"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-08T15:59:14.761878+00:00",
+   "pillar": "smart",
+   "hook_sig": "i spent 3 years optimizing for clean code",
+   "ids": [
+    "18094744670247152",
+    "18090941276230759",
+    "17871866853637511",
+    "18096823349541855",
+    "18356014900169305"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-08T17:01:11.251594+00:00",
+   "pillar": "smart",
+   "hook_sig": "things hiring managers can't tell from your resume",
+   "ids": [
+    "18631735915043530",
+    "18123815710748794",
+    "17904478701350247",
+    "18640839304029009",
+    "18206870539373210"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-08T18:01:13.057576+00:00",
+   "pillar": "smart",
+   "hook_sig": "i switched to a personal storytelling hook with",
+   "ids": [
+    "18134970178737083",
+    "18379586767239323",
+    "18096653936540728",
+    "17872035597640124",
+    "18643231867042793",
+    "18356854366247854",
+    "18099396908553565"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-08T20:01:49.036484+00:00",
+   "pillar": "smart",
+   "hook_sig": "if you want faster shipping, stop writing integration",
+   "ids": [
+    "18165933184468681",
+    "18131268748688390",
+    "18395598022167202",
+    "17967901923207236",
+    "17983863669109438",
+    "18132973279663384"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-08T21:01:09.741518+00:00",
+   "pillar": "smart",
+   "hook_sig": "you think you know how to write fast",
+   "ids": [
+    "17985384165108353",
+    "18106589846254541",
+    "18115639361015368",
+    "17978011166922653",
+    "17922055629223497",
+    "18035151968896561"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-08T22:01:09.646357+00:00",
+   "pillar": "smart",
+   "hook_sig": "we spent six months optimizing a database query",
+   "ids": [
+    "18356016859174302",
+    "18070213082764334",
+    "18348151474268741",
+    "17921574288444647",
+    "18117116692786074"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-08T23:01:06.472455+00:00",
+   "pillar": "smart",
+   "hook_sig": "we spend weeks designing perfect abstractions. the code",
+   "ids": [
+    "18012049772970483",
+    "18142480885613324",
+    "18086095265313529",
+    "18638896636060509",
+    "18139265821617588"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T00:01:23.534724+00:00",
+   "pillar": "smart",
+   "hook_sig": "most engineers treat code reviews as quality gates.",
+   "ids": [
+    "18349825678254234",
+    "18120883522934885",
+    "18109547519463180",
+    "18410456308092143",
+    "17951936235278272"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T01:01:08.521331+00:00",
+   "pillar": "smart",
+   "hook_sig": "if you want to debug faster, stop reading",
+   "ids": [
+    "18341551483285459",
+    "18069950609765077",
+    "18097737524346202",
+    "18116523380075428",
+    "18135883054642565"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T02:01:07.797697+00:00",
+   "pillar": "smart",
+   "hook_sig": "things that quietly kill engineering careers: you think",
+   "ids": [
+    "18129825211797705",
+    "18286032481291382",
+    "18133791922662806",
+    "18080260058371443",
+    "17909770980552426"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T03:01:12.889423+00:00",
+   "pillar": "smart",
+   "hook_sig": "stop chasing clean code. the best engineers i",
+   "ids": [
+    "18106597627960408",
+    "18100022705378998",
+    "18097436798439893",
+    "18069098489500892",
+    "18112191557607616"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T04:01:09.375940+00:00",
+   "pillar": "smart",
+   "hook_sig": "if you want faster code, stop trusting your",
+   "ids": [
+    "18105666482256392",
+    "18147843229561299",
+    "17872827348649802",
+    "18148436710501615",
+    "17911018800498399",
+    "18101282408374278"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T05:01:10.067736+00:00",
+   "pillar": "smart",
+   "hook_sig": "if you want to pass system design interviews,",
+   "ids": [
+    "18125821148490351",
+    "17941048611403577",
+    "18130842037753492",
+    "18106618418254541",
+    "17979879552120969"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T06:01:10.820592+00:00",
+   "pillar": "smart",
+   "hook_sig": "if you want to become a senior engineer",
+   "ids": [
+    "18123822004899715",
+    "18103187195010664",
+    "18177558859382759",
+    "18118430069277898",
+    "18636798790052404"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T07:01:17.953697+00:00",
+   "pillar": "smart",
+   "hook_sig": "if you want to catch production bugs, stop",
+   "ids": [
+    "17911363905515314",
+    "18371221870214732",
+    "18120633511940404",
+    "18114280943325725",
+    "18430567846144290",
+    "17954932347269690",
+    "18186468334419003"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T08:01:16.091235+00:00",
+   "pillar": "smart",
+   "hook_sig": "the production debugging checklist that cut my mttr",
+   "ids": [
+    "18080392706341009",
+    "18106435589223614",
+    "18119214491066917",
+    "18263089096307656",
+    "18011234963970373",
+    "18095249006138226"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T08:56:15.811661+00:00",
+   "pillar": "smart",
+   "hook_sig": "i watched a principal engineer delete 80 percent",
+   "ids": [
+    "18109831922183516",
+    "18200095996381802",
+    "18252061819308669",
+    "18107277428337203",
+    "18115571272818082",
+    "18271577839305348",
+    "18098181002536763"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T10:01:15.121198+00:00",
+   "pillar": "smart",
+   "hook_sig": "if you want behavioral rounds to remember you,",
+   "ids": [
+    "18172237690457166",
+    "18145090900597613",
+    "18113066537155862",
+    "17961775446241993",
+    "17965050446983080"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T11:01:19.478925+00:00",
+   "pillar": "smart",
+   "hook_sig": "things that quietly kill engineering careers:",
+   "ids": [
+    "18113379488463962",
+    "17912542926521709",
+    "17967722715190936",
+    "18123800486298096",
+    "18046886498818638"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T12:01:15.341924+00:00",
+   "pillar": "smart",
+   "hook_sig": "threads, my most viral engineering posts all follow",
+   "ids": [
+    "18638586625006099",
+    "18126843911487282",
+    "18097215320453546",
+    "18052432538807312",
+    "18144123490574431"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T13:01:11.936822+00:00",
+   "pillar": "smart",
+   "hook_sig": "i shipped a feature flag on friday. by",
+   "ids": [
+    "17980032174106037",
+    "18134592145657753",
+    "18013414535957880",
+    "18104059703458543",
+    "18012742016986497"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T14:01:13.457933+00:00",
+   "pillar": "smart",
+   "hook_sig": "i shipped a config change on a friday.",
+   "ids": [
+    "17992335624066544",
+    "18117761918282247",
+    "18125503804930752",
+    "18096452852536132",
+    "18106090232342209",
+    "18443728504130127"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T15:01:13.628059+00:00",
+   "pillar": "smart",
+   "hook_sig": "friday 4:47 pm. deploy to prod. green build.",
+   "ids": [
+    "17950970247300908",
+    "17985638541087158",
+    "17904867282352886",
+    "18489893731106768",
+    "18133651006663542",
+    "18077081594739078",
+    "17905650675579081"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T16:01:15.630606+00:00",
+   "pillar": "smart",
+   "hook_sig": "things hiring managers can't tell from your resume",
+   "ids": [
+    "18144806392597916",
+    "18060226811796543",
+    "18117778340059051",
+    "18059464169717274",
+    "17996046594010904"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T17:01:10.224322+00:00",
+   "pillar": "smart",
+   "hook_sig": "a memory leak crashed our payments service every",
+   "ids": [
+    "18632890906021944",
+    "18105772462980959",
+    "18089488361691192",
+    "18092969798676844",
+    "18030814832850842",
+    "17947680534326491"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T18:01:11.805812+00:00",
+   "pillar": "smart",
+   "hook_sig": "if you want to slash incident response time",
+   "ids": [
+    "18135453973728580",
+    "18080506700348485",
+    "17993887809048540",
+    "18014777852750606"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T19:01:10.253695+00:00",
+   "pillar": "smart",
+   "hook_sig": "i spent 6 months debugging a memory leak",
+   "ids": [
+    "18010239029973007",
+    "17905279143566577",
+    "17960859027228267",
+    "18717896740042353"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T20:01:06.418768+00:00",
+   "pillar": "smart",
+   "hook_sig": "if you want your code to stop being",
+   "ids": [
+    "18378061942242160",
+    "17991947451046926",
+    "17911996839517568",
+    "17873880321637000",
+    "18397349626163951"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T21:01:11.317385+00:00",
+   "pillar": "smart",
+   "hook_sig": "stop writing unit tests for every function. most",
+   "ids": [
+    "17949189081322036",
+    "18194864503398456",
+    "18106851982950564",
+    "18056487596572636",
+    "18120370922064956"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T22:01:13.253733+00:00",
+   "pillar": "smart",
+   "hook_sig": "most teams treat flaky tests like weather, unavoidable,",
+   "ids": [
+    "18108703823611129",
+    "18638827867050533",
+    "18112083245057229",
+    "18079639391455262",
+    "18108815174349148",
+    "18076338356723443"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-09T23:01:06.126186+00:00",
+   "pillar": "smart",
+   "hook_sig": "if you want faster shipping stop writing unit",
+   "ids": [
+    "18172760365455456",
+    "17909272977505672",
+    "18094014137462053",
+    "17910491721306997",
+    "17912722755283272",
+    "18339039898283734",
+    "18113230133115629"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-10T00:01:11.424148+00:00",
+   "pillar": "smart",
+   "hook_sig": "if you want to crack coding interviews, stop",
+   "ids": [
+    "18127416610860439",
+    "18030352868904031",
+    "18380470822230957",
+    "18106795676255105",
+    "18149613787540957"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-10T01:01:07.295939+00:00",
+   "pillar": "smart",
+   "hook_sig": "a senior engineer once told me the best",
+   "ids": [
+    "18094389221169585",
+    "18477124837117793",
+    "18145490218567952",
+    "18146243614520096",
+    "18129389875892562",
+    "17983932981095288"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-10T02:01:14.170215+00:00",
+   "pillar": "smart",
+   "hook_sig": "code reviews catch almost zero real bugs. they",
+   "ids": [
+    "17949640335302244",
+    "18111190082131390",
+    "18112585676170678",
+    "18114765818102197",
+    "18623720011043766"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-10T03:01:14.314376+00:00",
+   "pillar": "smart",
+   "hook_sig": "we shipped a feature flag system to replace",
+   "ids": [
+    "18392894302160449",
+    "17905231512578076",
+    "18012673280765356",
+    "17943861771348616",
+    "18165641584485104",
+    "18105282961973605"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-10T04:01:11.345360+00:00",
+   "pillar": "smart",
+   "hook_sig": "i found a bug that only appeared when",
+   "ids": [
+    "17894971674674140",
+    "18109763924336732",
+    "18310189195305195",
+    "18134612122734600",
+    "18092615900268374",
+    "17909004543550850"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-10T05:01:10.632146+00:00",
+   "pillar": "smart",
+   "hook_sig": "i spent three days hunting a bug that",
+   "ids": [
+    "18137301301653019",
+    "18060188816635676",
+    "18138765580715273",
+    "18113092982149138",
+    "17919329610241308",
+    "18369334423244830"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-10T06:01:10.810937+00:00",
+   "pillar": "smart",
+   "hook_sig": "three years ago we bet the company on",
+   "ids": [
+    "18129752323775532",
+    "17898191259394284",
+    "18107742845522738",
+    "18114265868007146",
+    "18334109167302403",
+    "18128667022702378"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-10T07:01:12.698461+00:00",
+   "pillar": "smart",
+   "hook_sig": "i spent six months debugging a distributed transaction",
+   "ids": [
+    "18107424788228443",
+    "17986122780103846",
+    "18420354124159066",
+    "18095907674447181",
+    "18114476837015037",
+    "18019680839948983"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-10T08:01:10.352054+00:00",
+   "pillar": "smart",
+   "hook_sig": "we spent 18 months migrating to microservices. three",
+   "ids": [
+    "18409836646083669",
+    "18050233598815370",
+    "18631284487061051",
+    "18205534372372489",
+    "18121242059288313",
+    "17994585752844354",
+    "18494430169100785"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-10T09:01:08.925246+00:00",
+   "pillar": "smart",
+   "hook_sig": "i used to think senior engineers wrote better",
+   "ids": [
+    "18103808978194846",
+    "17902730400667231",
+    "18126343454484406",
+    "18093594380164095",
+    "18058189739563359",
+    "17962013061230271",
+    "18126344776879718"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-10T10:01:11.674393+00:00",
+   "pillar": "smart",
+   "hook_sig": "code coverage targets are actively harmful. teams optimize",
+   "ids": [
+    "18019142621937038",
+    "17972109384174637",
+    "18118166513096448",
+    "18116732861003298",
+    "18055456913654007",
+    "17963135859223169"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-10T11:01:10.925109+00:00",
+   "pillar": "smart",
+   "hook_sig": "if you want behavioral rounds to remember you,",
+   "ids": [
+    "18114043406157622",
+    "17910480492502180",
+    "18115771409325099",
+    "17879725653543534",
+    "17891123121457485"
+   ],
+   "pivoted": true
+  },
+  {
+   "run_at": "2026-10-10T12:01:10.330447+00:00",
+   "pillar": "smart",
+   "hook_sig": "code coverage targets are the biggest lie in",
+   "ids": [
+    "18106729328578834",
+    "18068445320786871",
+    "18115088467957159",
+    "18179993491428810",
+    "18130142749702684"
+   ],
+   "pivoted": false
+  },
+  {
+   "run_at": "2026-10-10T13:01:10.528865+00:00",
+   "pillar": "smart",
+   "hook_sig": "most testing advice assumes you control both sides",
+   "ids": [
+    "18209530309367897",
+    "18105983351620458",
+    "17907875697563922",
+    "18641564728009537",
+    "18084319976327192"
+   ],
+   "pivoted": false
+  },
+  {
+   "run_at": "2026-10-10T14:01:08.919901+00:00",
+   "pillar": "smart",
+   "hook_sig": "code reviews catch maybe 10 percent of real",
+   "ids": [
+    "18168098578481482",
+    "17982487869153295",
+    "18026455574873242",
+    "18016955519933296"
+   ],
+   "pivoted": false
+  },
+  {
+   "run_at": "2026-10-10T14:15:56.336132+00:00",
+   "pillar": "smart",
+   "hook_sig": "most code reviews catch style nits and miss",
+   "ids": [
+    "18097426295409904",
+    "17952224646271227",
+    "18127838896836952",
+    "18129222242491923",
+    "18074371349774771",
+    "18384723466230542"
+   ],
+   "pivoted": false
+  },
+  {
+   "run_at": "2026-10-10T15:18:05.311835+00:00",
+   "pillar": "smart",
+   "hook_sig": "if you want better code reviews, stop nitpicking",
+   "texts": [
+    "IF YOU WANT BETTER CODE REVIEWS, STOP NITPICKING STYLE. MEMORIZE THESE 3 MOVES:",
+    "Move 1: Ask \"what could break here\" instead of \"does this follow the guide.\" The best reviewers hunt for failure modes, not formatting.",
+    "Move 2: Approve with questions, not demands. \"Have you considered X\" ships faster than \"Change this to Y\" and teaches more.",
+    "Move 3: Time-box the review. If you cannot finish in 20 minutes, the PR is too big. Split it and review the slices.",
+    "Follow @owlsky17 so you don't miss the next one."
+   ],
+   "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+   "hypothesis": "Caps-listicle hook on code review (new topic) replicates the 29-47 views/h velocity of P16 P17 P18 by keeping the proven IF YOU WANT X STOP Y format.",
+   "ids": [
+    "17994352211840754",
+    "17975069052148809",
+    "17961074888999550",
+    "18127641637838736",
+    "18102892322226926"
+   ],
+   "pivoted": false
+  },
+  {
+   "run_at": "2026-10-10T17:01:14.239058+00:00",
+   "pillar": "smart",
+   "hook_sig": "things hiring managers can't tell from your resume",
+   "texts": [
+    "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
+    "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
+    "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
+    "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
+    "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+   ],
+   "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+   "hypothesis": "Caps-listicle hook on code review (new topic) replicates the 29-47 views/h velocity of P16 P17 P18 by keeping the proven IF YOU WANT X STOP Y format.",
+   "ids": [
+    "18252235015308156",
+    "18129449195479853",
+    "18119002246952097",
+    "18213793975359521",
+    "18132117916707199"
+   ],
+   "pivoted": false
+  }
+ ],
+ "chief_strategist": {
+  "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+  "committed_views": 12000000,
+  "committed_followers": 15000,
+  "since": "2026-10-10"
+ }
 }
