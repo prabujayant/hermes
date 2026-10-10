@@ -90,6 +90,36 @@ def test_niche_brief_file_exists_and_names_leaders():
         assert name in text
 
 
+def test_niche_posts_sorted_views_desc_nulls_last(tmp_path):
+    import json
+
+    from threads_api.strategist import load_niche_posts
+
+    path = tmp_path / "niche_posts.json"
+    path.write_text(json.dumps({"posts": [
+        {"creator": "noname", "hook": "h", "views": None},
+        {"creator": "mid", "hook": "h", "views": 100},
+        {"creator": "top", "hook": "h", "views": 5000},
+        {"creator": "low", "hook": "h", "views": 50},
+    ]}), encoding="utf-8")
+    got = load_niche_posts(path=path)
+    assert [e["creator"] for e in got] == ["top", "mid", "low", "noname"]
+
+
+def test_niche_posts_missing_file_returns_empty(tmp_path):
+    from threads_api.strategist import load_niche_posts
+
+    assert load_niche_posts(path=tmp_path / "nope.json") == []
+
+
+def test_prompt_leads_with_top_earner():
+    posts = [_post("winner", 500, 5)]
+    prompt = build_prompt(evaluate(posts), {"hypothesis": "x"})
+    assert "NICHE PROOF" in prompt
+    assert "2,200,000 views" in prompt
+    assert prompt.index("ThePrimeagen") < prompt.index("codingwithroby")
+
+
 def test_build_prompt_no_pivot_when_winning():
     posts = [_post("winner", 500, 5)]
     score = evaluate(posts)

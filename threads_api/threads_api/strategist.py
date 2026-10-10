@@ -23,6 +23,7 @@ from .insights import engagement_of, views_of
 
 STRATEGY_PATH = Config.ROOT / "queue" / "strategy.json"
 NICHE_PATH = Config.ROOT / "queue" / "niche_leaders.md"
+NICHE_POSTS_PATH = Config.ROOT / "queue" / "niche_posts.json"
 
 
 def load_niche_brief(path=None):
@@ -31,6 +32,21 @@ def load_niche_brief(path=None):
         return Path(path or NICHE_PATH).read_text(encoding="utf-8")
     except OSError:
         return ""
+
+
+def load_niche_posts(path=None, limit=8):
+    """Top creator posts by views (nulls last). Each entry: creator,
+    hook, text, views, likes, format, topic."""
+    try:
+        data = json.loads(Path(path or NICHE_POSTS_PATH).read_text(
+            encoding="utf-8"))
+    except (ValueError, OSError):
+        return []
+    entries = data.get("posts", data if isinstance(data, list) else [])
+    entries = [e for e in entries if isinstance(e, dict)]
+    entries.sort(key=lambda e: (e.get("views") is None,
+                                -(e.get("views") or 0)))
+    return entries[:limit]
 
 # Free-only chain for the autonomous loop (never spend in auto mode).
 SMART_MODELS = [
@@ -198,6 +214,24 @@ def build_prompt(scorecard, strategy):
             "and copy its hook shape, structure, and pacing exactly, "
             "applied to our pillars. Do not blend formats:\n" + brief
         )
+    proof = load_niche_posts()
+    if proof:
+        lines.append(
+            "NICHE PROOF - real posts, real numbers. The top earner sets "
+            "the bar: imitate its format mechanics exactly for your "
+            "pillar and topic:"
+        )
+        for entry in proof:
+            views = entry.get("views")
+            score = f"{views:,} views" if views else "views n/a"
+            likes = entry.get("likes")
+            if likes:
+                score += f", {likes:,} likes"
+            lines.append(
+                f"- {entry.get('creator')}: {score} | "
+                f"format {entry.get('format')} | topic {entry.get('topic')} "
+                f"| hook: {ascii_clean(entry.get('hook') or '')}"
+            )
 
     if scorecard["pivot"]:
         lines.append(

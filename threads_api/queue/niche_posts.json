@@ -1,0 +1,119 @@
+{
+ "fetched": "2026-10-10",
+ "note": "Real viral posts from coding-niche leaders. views/llywood null where not publicly documented. text_kind marks verbatim vs paraphrase. Refresh monthly.",
+ "posts": [
+  {
+   "creator": "ThePrimeagen",
+   "handle": "@theprimeagen",
+   "hook": "Turning a niche dev grievance into a mainstream moment",
+   "text": "Sharp-tongued dev frustration turned into viral entertainment, brutal honesty with meme-ready takes that spark conversation.",
+   "views": 2200000,
+   "likes": 100000,
+   "format": "T1 warm contrarian",
+   "topic": "dev culture grievances",
+   "text_kind": "paraphrase"
+  },
+  {
+   "creator": "Notion co-founder",
+   "handle": null,
+   "hook": "AI coding agent lessons that contradict advice from 6 months ago",
+   "text": "Numbered hard lessons from real production AI-agent pain, framed as contradicting older advice.",
+   "views": 516000,
+   "likes": null,
+   "format": "contrarian lessons",
+   "topic": "AI coding agents",
+   "text_kind": "paraphrase"
+  },
+  {
+   "creator": "owlsky17 (own account)",
+   "handle": "@owlsky17",
+   "hook": "Things on your resume employers can't verify:",
+   "text": "Things on your resume employers can't verify:",
+   "views": 98222,
+   "likes": null,
+   "format": "curiosity-gap opener",
+   "topic": "career resumes",
+   "text_kind": "verbatim"
+  },
+  {
+   "creator": "Matt Pocock",
+   "handle": "@mattpocockuk",
+   "hook": "The Ultimate TypeScript Thread. Everything I've learned from leading TS dev teams. My goal is to turn you into a TypeScript wizard. And yes, this thread is EVERGREEN.",
+   "text": "The Ultimate TypeScript Thread. Everything I've learned from leading TS dev teams. My goal is to turn you into a TypeScript wizard. And yes, this thread is EVERGREEN.",
+   "views": null,
+   "likes": null,
+   "followers": 247000,
+   "format": "T7 listicle-thread promise",
+   "topic": "TypeScript mastery",
+   "text_kind": "verbatim"
+  },
+  {
+   "creator": "Matt Pocock",
+   "handle": "@mattpocockuk",
+   "hook": "Type vs interface benchmark with real numbers",
+   "text": "On 5000 interfaces per file: 12 seconds for interfaces, 5 seconds for types. Real benchmark, odd-precision numbers.",
+   "views": null,
+   "likes": null,
+   "format": "T2 data-point hook",
+   "topic": "TypeScript performance",
+   "text_kind": "paraphrase"
+  },
+  {
+   "creator": "ThePrimeagen",
+   "handle": "@theprimeagen",
+   "hook": "I asked Claude to find bugs in my hand-rolled code. It found 15. Every single one was fake.",
+   "text": "First-person AI teardown with numbers: $3 and 20 minutes, 15 reported bugs, every one an impossible condition. Story arc with receipts.",
+   "views": null,
+   "likes": null,
+   "format": "T10 how-I teardown",
+   "topic": "AI coding assistants",
+   "text_kind": "paraphrase"
+  },
+  {
+   "creator": "owlsky17 (own account)",
+   "handle": "@owlsky17",
+   "hook": "90% of software apps built with microservices could run completely fine on a single monolith and a solid Postgres instance. Change my mind.",
+   "text": "90% of software apps built with microservices could run completely fine on a single monolith and a solid Postgres instance. Change my mind.",
+   "views": 11302,
+   "likes": null,
+   "engagement_rate_pct": 1.9,
+   "format": "T1 warm contrarian",
+   "topic": "backend architecture",
+   "text_kind": "verbatim"
+  },
+  {
+   "creator": "codingwithroby",
+   "handle": "@codingwithroby",
+   "hook": "Building a macOS app with zero SwiftUI experience, learning the ecosystem as the models walk me through it.",
+   "text": "Learning in public: new stack, zero experience, AI models as tutors, showing mocks and mistakes as they happen.",
+   "views": null,
+   "likes": null,
+   "format": "build-in-public confession",
+   "topic": "learning AI-era stacks",
+   "text_kind": "paraphrase"
+  },
+  {
+   "creator": "Theo (t3.gg)",
+   "handle": "@t3dotgg",
+   "hook": "You're using AI agents wrong.",
+   "text": "Blunt contrarian AI take in one line, audience 500k+ subs. Conviction over nuance, invites argument.",
+   "views": null,
+   "likes": null,
+   "followers": 565000,
+   "format": "T1 warm contrarian",
+   "topic": "AI agents",
+   "text_kind": "paraphrase"
+  },
+  {
+   "creator": "Danny Thompson",
+   "handle": "@DThompsonDev",
+   "hook": "10 years at a gas station to Google engineer, self-taught.",
+   "text": "Career-transformation story: dead-end job, self-taught with free resources, community-built network, FAANG outcome. Proof beats advice.",
+   "views": null,
+   "likes": null,
+   "format": "T8 story thread",
+   "topic": "career change",
+   "text_kind": "paraphrase"
+  }
+ ]
+}
