@@ -73,6 +73,26 @@ SMART_MODELS = [
 # never spam, never harass. Win on hooks, formats, and volume.
 VIEWS_GOAL = 1_000_000_000
 FOLLOWERS_GOAL = 1_000_000
+# Sprint: the account owner ordered both goals in 1 month.
+SPRINT_END = datetime.date(2026, 11, 10)
+
+
+def sprint_status(today=None, followers=None, views=None):
+    """Pace math vs the sprint deadline. Returns dict for the prompt."""
+    today = today or datetime.datetime.now(datetime.timezone.utc).date()
+    days_left = max((SPRINT_END - today).days, 0)
+    out = {"days_left": days_left, "deadline": SPRINT_END.isoformat()}
+    if days_left > 0:
+        if followers is not None:
+            out["followers_per_day_needed"] = max(
+                (FOLLOWERS_GOAL - followers) / days_left, 0)
+        if views is not None:
+            out["views_per_day_needed"] = max(
+                (VIEWS_GOAL - views) / days_left, 0)
+    else:
+        out["followers_per_day_needed"] = 0
+        out["views_per_day_needed"] = 0
+    return out
 
 JUDGE_AFTER_HOURS = 3
 UNDERPERFORM_RATIO = 0.5
@@ -249,6 +269,18 @@ def build_prompt(scorecard, strategy, progress=None):
                 f"views ({vdelta_txt}), goal {VIEWS_GOAL:,}. Every thread "
                 "must buy reach."
             )
+        pace = sprint_status(followers=followers, views=views)
+        lines.append(
+            f"SPRINT: {pace['days_left']} days left until {pace['deadline']}. "
+            f"You need {pace.get('followers_per_day_needed', 0):,.0f} new "
+            f"followers/day and {pace.get('views_per_day_needed', 0):,.0f} "
+            "views/day from here. Steady singles will NOT get there. "
+            "Swing for fences: pick the highest-variance play available "
+            "(hot debate, breaking niche news, contrarian lesson, open "
+            "loop), not the safest one. If anything broke in the niche "
+            "in the last 48h (new model, outage, layoffs, viral debate), "
+            "ride it this hour."
+        )
     lines += [
         f"Measured posts: {scorecard['sample_size']} "
         f"(need {MIN_JUDGED} for strategy changes). "

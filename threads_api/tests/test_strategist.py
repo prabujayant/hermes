@@ -224,6 +224,37 @@ def test_prompt_carries_mission_and_progress():
     assert "NEVER fake numbers" in prompt
 
 
+def test_sprint_block_shows_pace_and_deadline():
+    import datetime
+
+    from threads_api.strategist import SPRINT_END, sprint_status
+
+    assert SPRINT_END == datetime.date(2026, 11, 10)
+    pace = sprint_status(today=datetime.date(2026, 10, 10),
+                         followers=258, views=4000)
+    assert pace["days_left"] == 31
+    assert pace["followers_per_day_needed"] > 30000
+    assert pace["views_per_day_needed"] > 30000000
+    posts = [_post("winner", 500, 5)]
+    prompt = build_prompt(
+        evaluate(posts), {"hypothesis": "x"},
+        {"followers": 258, "followers_delta": 0,
+         "views_total": 4000, "views_delta": 0})
+    assert "SPRINT" in prompt
+    assert "Swing for fences" in prompt
+
+
+def test_sprint_past_deadline_never_negative():
+    import datetime
+
+    from threads_api.strategist import sprint_status
+
+    pace = sprint_status(today=datetime.date(2026, 12, 1),
+                         followers=10, views=10)
+    assert pace["days_left"] == 0
+    assert pace["followers_per_day_needed"] == 0
+
+
 def test_prompt_without_progress_still_has_mission():
     posts = [_post("winner", 500, 5)]
     prompt = build_prompt(evaluate(posts), {"hypothesis": "x"})
