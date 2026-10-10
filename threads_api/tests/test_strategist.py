@@ -218,8 +218,8 @@ def test_prompt_carries_mission_and_progress():
         evaluate(posts), {"hypothesis": "x"},
         {"followers": 258, "followers_delta": 8,
          "views_total": 2114, "views_delta": 114})
-    assert "1,000,000,000" in prompt
-    assert "1,000,000" in prompt
+    assert "200,000" in prompt
+    assert "500" in prompt
     assert "258 followers" in prompt
     assert "NEVER fake numbers" in prompt
 
@@ -233,8 +233,8 @@ def test_sprint_block_shows_pace_and_deadline():
     pace = sprint_status(today=datetime.date(2026, 10, 10),
                          followers=258, views=4000)
     assert pace["days_left"] == 31
-    assert pace["followers_per_day_needed"] > 30000
-    assert pace["views_per_day_needed"] > 30000000
+    assert abs(pace["followers_per_day_needed"] - (500 - 258) / 31) < 1e-9
+    assert abs(pace["views_per_day_needed"] - (200000 - 4000) / 31) < 1e-6
     posts = [_post("winner", 500, 5)]
     prompt = build_prompt(
         evaluate(posts), {"hypothesis": "x"},

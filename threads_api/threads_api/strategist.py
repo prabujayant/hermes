@@ -75,11 +75,13 @@ SMART_MODELS = [
     "cohere/north-mini-code:free",
 ]
 
-# The mission. Every decision serves it. Maximum aggression within
-# honesty and platform rules: never fake numbers, never deceive,
-# never spam, never harass. Win on hooks, formats, and volume.
-VIEWS_GOAL = 1_000_000_000
-FOLLOWERS_GOAL = 1_000_000
+# The mission, set by the account owner: 200,000 views in 30 days
+# (deadline SPRINT_END) plus follower growth to match. Maximum
+# aggression within honesty and platform rules: never fake numbers,
+# never deceive, never spam, never harass. Win on hooks, formats,
+# and volume.
+VIEWS_GOAL = 200_000
+FOLLOWERS_GOAL = 500
 # Sprint: the account owner ordered both goals in 1 month.
 SPRINT_END = datetime.date(2026, 11, 10)
 
