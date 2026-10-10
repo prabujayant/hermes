@@ -22,6 +22,15 @@ from .generator import hook_signature
 from .insights import engagement_of, views_of
 
 STRATEGY_PATH = Config.ROOT / "queue" / "strategy.json"
+NICHE_PATH = Config.ROOT / "queue" / "niche_leaders.md"
+
+
+def load_niche_brief(path=None):
+    """Niche-leader playbook, editable without code changes."""
+    try:
+        return Path(path or NICHE_PATH).read_text(encoding="utf-8")
+    except OSError:
+        return ""
 
 # Free-only chain for the autonomous loop (never spend in auto mode).
 SMART_MODELS = [
@@ -182,13 +191,21 @@ def build_prompt(scorecard, strategy):
         )
     lines.append(f"Current hypothesis: {ascii_clean(strategy['hypothesis'])}")
     lines.append(NICHE_PLAYBOOK)
+    brief = load_niche_brief()
+    if brief:
+        lines.append(
+            "NICHE LEADERS - imitate as-is. Pick ONE leader format below "
+            "and copy its hook shape, structure, and pacing exactly, "
+            "applied to our pillars. Do not blend formats:\n" + brief
+        )
 
     if scorecard["pivot"]:
         lines.append(
             "PIVOT MODE: the current strategy is failing. Change AT MOST "
-            "ONE factor (topic, hook style, or format) versus the current "
-            "hypothesis, keep everything else. Explain the change in one "
-            "line and cite the specific post IDs that prove it."
+            "ONE factor (topic, hook style, format, or switch to an "
+            "untested niche-leader format from the brief) versus the "
+            "current hypothesis, keep everything else. Explain the change "
+            "in one line and cite the specific post IDs that prove it."
         )
     elif not scorecard["ready"]:
         lines.append(

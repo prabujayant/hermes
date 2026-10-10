@@ -63,6 +63,33 @@ def test_build_prompt_contains_pivot_orders():
     assert "P1" in prompt
 
 
+def test_prompt_includes_niche_leaders_brief(tmp_path):
+    from threads_api import strategist as st
+
+    brief_file = tmp_path / "niche.md"
+    brief_file.write_text("LEADER FORMAT XYZ", encoding="utf-8")
+    real_path = st.NICHE_PATH
+    st.NICHE_PATH = brief_file
+    try:
+        posts = [_post("winner", 500, 5)]
+        prompt = build_prompt(evaluate(posts), {"hypothesis": "x"})
+        assert "LEADER FORMAT XYZ" in prompt
+        assert "imitate as-is" in prompt.lower()
+    finally:
+        st.NICHE_PATH = real_path
+
+
+def test_niche_brief_file_exists_and_names_leaders():
+    from pathlib import Path
+
+    from threads_api.config import Config
+
+    text = (Config.ROOT / "queue" / "niche_leaders.md").read_text(
+        encoding="utf-8")
+    for name in ("Pocock", "roby", "Sahil", "follow CTA"):
+        assert name in text
+
+
 def test_build_prompt_no_pivot_when_winning():
     posts = [_post("winner", 500, 5)]
     score = evaluate(posts)
