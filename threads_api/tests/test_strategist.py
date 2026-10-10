@@ -191,6 +191,45 @@ def test_soft_validate_enforces_hard_constraints():
     assert any("counter" in p for p in problems)
 
 
+def test_track_progress_computes_deltas():
+    from threads_api.strategist import track_progress
+
+    state = {"last_followers": 250, "last_views": 2000}
+    progress = track_progress(
+        state, {"followers": 258, "views": 2114, "likes": 47})
+    assert progress == {"followers": 258, "followers_delta": 8,
+                        "views_total": 2114, "views_delta": 114}
+    assert state["last_followers"] == 258
+    assert state["last_views"] == 2114
+
+
+def test_track_progress_first_run_has_no_deltas():
+    from threads_api.strategist import track_progress
+
+    progress = track_progress(
+        {}, {"followers": 258, "views": 2114, "likes": 0})
+    assert progress["followers_delta"] is None
+    assert progress["views_delta"] is None
+
+
+def test_prompt_carries_mission_and_progress():
+    posts = [_post("winner", 500, 5)]
+    prompt = build_prompt(
+        evaluate(posts), {"hypothesis": "x"},
+        {"followers": 258, "followers_delta": 8,
+         "views_total": 2114, "views_delta": 114})
+    assert "1,000,000,000" in prompt
+    assert "1,000,000" in prompt
+    assert "258 followers" in prompt
+    assert "NEVER fake numbers" in prompt
+
+
+def test_prompt_without_progress_still_has_mission():
+    posts = [_post("winner", 500, 5)]
+    prompt = build_prompt(evaluate(posts), {"hypothesis": "x"})
+    assert "MISSION" in prompt
+
+
 def test_finalize_thread_end_to_end():
     from threads_api.strategist import finalize_thread
 

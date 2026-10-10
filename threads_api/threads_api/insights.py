@@ -45,6 +45,30 @@ def extract_metrics(payload):
     return metrics
 
 
+def extract_account_totals(payload):
+    """Account-level totals: views summed across days, likes/followers
+    from total_value. Returns {views, likes, followers} (None missing)."""
+    totals = {"views": None, "likes": None, "followers": None}
+    for item in (payload.get("data", []) or []):
+        name = item.get("name")
+        if name == "views":
+            day_values = [v.get("value", 0)
+                          for v in item.get("values", []) or []]
+            day_values = [v for v in day_values
+                          if isinstance(v, (int, float))]
+            if day_values:
+                totals["views"] = sum(day_values)
+        elif name == "likes":
+            value = (item.get("total_value") or {}).get("value")
+            if isinstance(value, (int, float)):
+                totals["likes"] = value
+        elif name == "followers_count":
+            value = (item.get("total_value") or {}).get("value")
+            if isinstance(value, (int, float)):
+                totals["followers"] = value
+    return totals
+
+
 def fetch_posts(client, max_posts=200, pause=0, on_progress=None, max_workers=20):
     """Fetch the account's posts, newest first, with per-post insights.
 

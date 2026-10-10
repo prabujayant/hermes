@@ -68,6 +68,12 @@ SMART_MODELS = [
     "cohere/north-mini-code:free",
 ]
 
+# The mission. Every decision serves it. Maximum aggression within
+# honesty and platform rules: never fake numbers, never deceive,
+# never spam, never harass. Win on hooks, formats, and volume.
+VIEWS_GOAL = 1_000_000_000
+FOLLOWERS_GOAL = 1_000_000
+
 JUDGE_AFTER_HOURS = 3
 UNDERPERFORM_RATIO = 0.5
 PIVOT_STREAK = 2
@@ -88,6 +94,29 @@ NICHE_PLAYBOOK = """Proven viral moves in the coding niche on Threads:
 House rules (non-negotiable): plain ASCII text only. NEVER use em
 dashes or en dashes, use commas or plain hyphens. The final post is
 ALWAYS the follow CTA for @owlsky17, never a comment CTA."""
+
+
+def track_progress(state, totals):
+    """Record goal counters, return progress dict with deltas vs last run."""
+    prev_followers = state.get("last_followers")
+    prev_views = state.get("last_views")
+    followers = (totals or {}).get("followers")
+    views = (totals or {}).get("views")
+    progress = {
+        "followers": followers,
+        "followers_delta": (followers - prev_followers
+                            if followers is not None
+                            and prev_followers is not None else None),
+        "views_total": views,
+        "views_delta": (views - prev_views
+                        if views is not None and prev_views is not None
+                        else None),
+    }
+    if followers is not None:
+        state["last_followers"] = followers
+    if views is not None:
+        state["last_views"] = views
+    return progress
 
 
 def load_strategy(path=STRATEGY_PATH):
@@ -197,9 +226,30 @@ def ascii_clean(text):
     return re.sub(r"[—–‐‑]", "-", text)
 
 
-def build_prompt(scorecard, strategy):
+def build_prompt(scorecard, strategy, progress=None):
     """Strategist prompt: scorecard in, thread + hypothesis out."""
     lines = [
+        f"MISSION: reach {VIEWS_GOAL:,} views and {FOLLOWERS_GOAL:,} "
+        "followers. Be maximally aggressive: bold hooks, sharp debates, "
+        "high-volume testing. NEVER fake numbers, deceive, spam, or "
+        "harass. Win on hooks, formats, and volume.",
+    ]
+    if progress:
+        followers = progress.get("followers")
+        fdelta = progress.get("followers_delta")
+        views = progress.get("views_total")
+        vdelta = progress.get("views_delta")
+        if followers is not None:
+            fdelta_txt = f"{fdelta:+,}" if fdelta is not None else "?"
+            views_txt = f"{views:,}" if views is not None else "?"
+            vdelta_txt = f"{vdelta:+,}" if vdelta is not None else "?"
+            lines.append(
+                f"Progress: {followers:,} followers ({fdelta_txt} since "
+                f"last check) of {FOLLOWERS_GOAL:,}; {views_txt} recent "
+                f"views ({vdelta_txt}), goal {VIEWS_GOAL:,}. Every thread "
+                "must buy reach."
+            )
+    lines += [
         f"Measured posts: {scorecard['sample_size']} "
         f"(need {MIN_JUDGED} for strategy changes). "
         f"Median velocity: {scorecard['median_vph']} views/h, "

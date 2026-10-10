@@ -53,6 +53,28 @@ class TestExtractMetrics:
         assert extract_metrics({}) == {}
 
 
+class TestAccountTotals:
+    def test_sums_views_reads_total_values(self):
+        from threads_api.insights import extract_account_totals
+
+        payload = {"data": [
+            {"name": "views",
+             "values": [{"value": 210}, {"value": 2114}]},
+            {"name": "likes", "values": [],
+             "total_value": {"value": 47}},
+            {"name": "followers_count", "values": [],
+             "total_value": {"value": 258}},
+        ]}
+        assert extract_account_totals(payload) == {
+            "views": 2324, "likes": 47, "followers": 258}
+
+    def test_missing_metrics_are_none(self):
+        from threads_api.insights import extract_account_totals
+
+        assert extract_account_totals({}) == {
+            "views": None, "likes": None, "followers": None}
+
+
 class TestMetricHelpers:
     def test_views_and_engagement(self):
         post = make_post("1", "hello", views=100, likes=10)

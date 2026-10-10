@@ -167,6 +167,7 @@ def _cmd_post_smart(args):
         load_strategy,
         record_run,
         save_strategy,
+        track_progress,
     )
 
     now = datetime.datetime.now(datetime.timezone.utc)
@@ -186,13 +187,21 @@ def _cmd_post_smart(args):
     scorecard = evaluate(posts, now=now)
     strategy = load_strategy()
     pivoted = scorecard["pivot"]
+    from .insights import extract_account_totals
+
+    try:
+        totals = extract_account_totals(client.get_user_insights())
+    except Exception:
+        totals = {"views": None, "likes": None, "followers": None}
+    progress = track_progress(strategy, totals)
     print(
         f"n={scorecard['sample_size']} median {scorecard['median_vph']}/h, "
         f"floor {scorecard['floor_vph']}/h, streak {scorecard['streak']}, "
-        f"pivot={pivoted}, hypothesis: {strategy['hypothesis'][:80]}"
+        f"pivot={pivoted}, followers={progress['followers']}, "
+        f"hypothesis: {strategy['hypothesis'][:80]}"
     )
 
-    prompt = build_prompt(scorecard, strategy)
+    prompt = build_prompt(scorecard, strategy, progress)
     if args.dry_run:
         print("DRY-RUN: scorecard above, no LLM call, nothing published")
         return 0
