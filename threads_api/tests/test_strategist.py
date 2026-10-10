@@ -112,6 +112,35 @@ def test_niche_posts_missing_file_returns_empty(tmp_path):
     assert load_niche_posts(path=tmp_path / "nope.json") == []
 
 
+def test_niche_scan_section_shows_freshness_and_scope(tmp_path):
+    import json
+
+    from threads_api import strategist as st
+
+    path = tmp_path / "scan.json"
+    path.write_text(json.dumps({
+        "fetched": "2026-10-10T00:00:00+00:00",
+        "public": True,
+        "items": [{"author": "prime", "text": "hot take here",
+                   "timestamp": "", "permalink": "", "via": "q"}],
+    }), encoding="utf-8")
+    fetched, public, items = st.load_niche_scan(path=path)
+    assert public is True
+    assert items[0]["author"] == "prime"
+
+    monkeypatch_holder = {"orig": st.load_niche_scan}
+    st.load_niche_scan = lambda: (
+        "2026-10-10T00:00:00+00:00", True, items)
+    try:
+        posts = [_post("winner", 500, 5)]
+        prompt = build_prompt(evaluate(posts), {"hypothesis": "x"})
+        assert "LIVE NICHE SCAN" in prompt
+        assert "@prime" in prompt
+        assert "hot take here" in prompt
+    finally:
+        st.load_niche_scan = monkeypatch_holder["orig"]
+
+
 def test_prompt_leads_with_top_earner():
     posts = [_post("winner", 500, 5)]
     prompt = build_prompt(evaluate(posts), {"hypothesis": "x"})

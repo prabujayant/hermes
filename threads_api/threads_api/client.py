@@ -100,6 +100,20 @@ class ThreadsClient:
         """Delete own post. Requires threads_delete scope (100/day)."""
         return self._delete(media_id)
 
+    def keyword_search(self, query, search_type="TOP", author_username=None,
+                       media_type="TEXT", limit=25):
+        """Search public Threads posts. Needs threads_keyword_search scope
+        AND Meta app approval for that permission; without approval the
+        API only returns the authenticated user's own posts. Note: no
+        view counts are available for other users' posts — TOP ranking
+        is Meta's popularity proxy."""
+        params = {"q": query, "search_type": search_type,
+                  "media_type": media_type, "limit": limit,
+                  "fields": "id,text,username,timestamp,permalink"}
+        if author_username:
+            params["author_username"] = author_username.lstrip("@")
+        return self._get("keyword_search", params)
+
     def get_container_status(self, container_id):
         """Poll media-container readiness: PENDING/IN_PROGRESS/FINISHED/ERROR."""
         payload = self._get(container_id, {"fields": "status"})

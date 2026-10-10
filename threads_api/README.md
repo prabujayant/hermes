@@ -155,6 +155,28 @@ Free-tier budget: 20 req/min, 50 req/day without credits (1000/day
 after buying ≥10 credits). Each command costs 1–3 requests, so keep
 these on-demand — the hourly loop stays on template rotation.
 
+## Learning from top creators (keyword search)
+
+```bash
+python -m threads_api.cli scan-niche
+```
+
+Pulls TOP-ranked posts for each pillar plus the latest from
+`theprimeagen`, `mattpocockuk`, `codingwithroby`, `sahilbloom` into
+`queue/niche_scan.json`, which the strategist reads every hour.
+Two-step unlock, both in your browser:
+
+1. Re-run `python -m threads_api.cli auth` and approve the new
+   `threads_keyword_search` scope (already added to the app).
+2. Request Meta approval: App Dashboard → App Review → request
+   `threads_keyword_search`. Until Meta approves, the API returns
+   only your own posts (the scan still runs, and says so).
+
+Note: Threads insights (view counts) are owner-only, so other
+accounts' posts come without view numbers — Meta's TOP ranking is
+the popularity signal. Your curated `queue/niche_posts.json`
+(documented view counts) stays the source of hard numbers.
+
 ## Development
 
 ```bash

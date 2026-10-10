@@ -102,6 +102,60 @@ def _cmd_delete(args):
     print(f"Deleted: {result.get('deleted_id', args.post_id)}")
 
 
+SCAN_AUTHORS = ["theprimeagen", "mattpocockuk", "codingwithroby",
+                "sahilbloom"]
+SCAN_QUERIES = ["backend engineering", "SQL", "coding interviews",
+                "leetcode", "AI agents", "vibe coding"]
+
+
+def _cmd_scan_niche(args):
+    import datetime
+
+    client = ThreadsClient()
+    try:
+        me = client.get_profile().get("username", "")
+    except ThreadsAPIError as exc:
+        raise RuntimeError(
+            f"Could not read profile ({exc}). If this is a permissions "
+            "error, re-run `auth` to grant the threads_keyword_search "
+            "scope, then request Meta approval for it (see README)."
+        )
+    items = {}
+    jobs = [("author:" + a, {"q": "software", "author_username": a})
+            for a in (args.authors.split(",") if args.authors else SCAN_AUTHORS)]
+    jobs += [(q, {"q": q}) for q in SCAN_QUERIES]
+    for label, params in jobs:
+        try:
+            page = client.keyword_search(limit=args.limit, **params)
+        except ThreadsAPIError as exc:
+            print(f"scan {label}: {exc}")
+            continue
+        for post in page.get("data", []):
+            pid = post.get("id")
+            if pid and pid not in items:
+                items[pid] = {
+                    "author": post.get("username", ""),
+                    "text": (post.get("text") or "")[:300],
+                    "timestamp": post.get("timestamp", ""),
+                    "permalink": post.get("permalink", ""),
+                    "via": label,
+                }
+    public = any(item["author"] != me for item in items.values())
+    out = {
+        "fetched": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "public": public,
+        "items": list(items.values())[:120],
+    }
+    out_path = Config.ROOT / "queue" / "niche_scan.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(out, indent=1, ensure_ascii=False),
+                         encoding="utf-8")
+    print(f"Scanned {len(items)} posts (public access: {public}) -> {out_path}")
+    if not public:
+        print("Only own posts visible: request Meta approval for "
+              "threads_keyword_search (see README), then re-scan.")
+
+
 def _cmd_post_smart(args):
     import datetime
 
@@ -588,6 +642,19 @@ def build_parser():
     delete = sub.add_parser("delete", help="Delete your own post (needs threads_delete)")
     delete.add_argument("--post-id", required=True, help="Media ID from publish or list")
     delete.set_defaults(func=_cmd_delete)
+
+    scan = sub.add_parser(
+        "scan-niche",
+        help="TOP-search pillars + top authors into queue/niche_scan.json",
+    )
+    scan.add_argument(
+        "--authors",
+        help="Comma-separated author usernames (default: built-in list)",
+    )
+    scan.add_argument(
+        "--limit", type=int, default=10, help="Posts per query (default 10)"
+    )
+    scan.set_defaults(func=_cmd_scan_niche)
 
     analyze = sub.add_parser(
         "analyze", help="AI analysis of your top posts (uses OpenRouter)"

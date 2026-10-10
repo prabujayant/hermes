@@ -167,3 +167,24 @@ class TestProfile:
         assert profile["username"] == "me"
         assert captured["url"].endswith("/me")
         assert "username" in captured["params"]["fields"]
+
+
+class TestKeywordSearch:
+    def test_sends_scope_params(self, client, monkeypatch):
+        seen = {}
+
+        def fake_get(url, params):
+            seen["url"] = url
+            seen.update(params)
+            return _response({"data": []})
+
+        monkeypatch.setattr(client.session, "get", fake_get)
+        client.keyword_search("backend", author_username="@primeagen",
+                             limit=5)
+
+        assert seen["url"].endswith("/keyword_search")
+        assert seen["q"] == "backend"
+        assert seen["search_type"] == "TOP"
+        assert seen["author_username"] == "primeagen"
+        assert seen["media_type"] == "TEXT"
+        assert seen["limit"] == 5

@@ -23,7 +23,7 @@ GRAPH_URL = "https://graph.threads.net/v1.0"
 
 LOCAL_HOSTS = {"localhost", "127.0.0.1", "::1"}
 
-SCOPES = "threads_basic,threads_content_publish,threads_manage_insights,threads_manage_replies,threads_read_replies,threads_delete"
+SCOPES = "threads_basic,threads_content_publish,threads_manage_insights,threads_manage_replies,threads_read_replies,threads_delete,threads_keyword_search"
 REDIRECT_TIMEOUT_SECONDS = 300
 
 

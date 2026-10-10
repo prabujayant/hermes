@@ -48,6 +48,19 @@ def load_niche_posts(path=None, limit=8):
                                 -(e.get("views") or 0)))
     return entries[:limit]
 
+
+def load_niche_scan(path=None, limit=10):
+    """Fresh TOP-ranked public posts from keyword_search. Returns
+    (fetched_iso, public_bool, items). Empty items when never scanned."""
+    try:
+        data = json.loads(Path(
+            path or Config.ROOT / "queue" / "niche_scan.json").read_text(
+                encoding="utf-8"))
+    except (ValueError, OSError):
+        return "", False, []
+    return (data.get("fetched", ""), bool(data.get("public")),
+            data.get("items", [])[:limit])
+
 # Free-only chain for the autonomous loop (never spend in auto mode).
 SMART_MODELS = [
     "nvidia/nemotron-3-ultra-550b-a55b:free",
@@ -231,6 +244,28 @@ def build_prompt(scorecard, strategy):
                 f"- {entry.get('creator')}: {score} | "
                 f"format {entry.get('format')} | topic {entry.get('topic')} "
                 f"| hook: {ascii_clean(entry.get('hook') or '')}"
+            )
+    fetched, public, scan_items = load_niche_scan()
+    if scan_items:
+        import datetime
+
+        try:
+            age_h = (datetime.datetime.now(datetime.timezone.utc)
+                     - datetime.datetime.fromisoformat(fetched)).total_seconds() / 3600
+            age_note = f"{age_h:.0f}h old"
+        except ValueError:
+            age_note = "unknown age"
+        scope = ("public TOP-ranked posts (popularity-ranked by Threads)"
+                 if public else
+                 "OWN posts only (Meta has not approved public search yet)")
+        lines.append(
+            f"LIVE NICHE SCAN ({age_note}, {scope}). Steal hooks and "
+            "angles that fit your pillar:"
+        )
+        for item in scan_items:
+            lines.append(
+                f"- @{item.get('author')} via {item.get('via')}: "
+                f"{ascii_clean((item.get('text') or '')[:220])}"
             )
 
     if scorecard["pivot"]:
