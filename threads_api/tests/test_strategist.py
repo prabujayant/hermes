@@ -474,11 +474,55 @@ def test_decide_direction_parses_four_lines():
     assert direction == {
         "post": True,
         "post_reason": "YES go",
+        "pillar": "backend",
         "topic": "backend caching",
         "hook": "debate hot take on cache stampedes",
         "change": "switch from listicles to debate",
         "hypothesis": "debates earn replies",
     }
+
+
+def test_decide_direction_rejects_off_niche_topic():
+    import pytest
+
+    from threads_api.strategist import decide_direction
+
+    def fake_chat(messages, max_tokens=400, temperature=0.7, model=None):
+        return ("POST: YES go\n"
+                "TOPIC: crypto trading signals\n"
+                "HOOK: hot take\n"
+                "CHANGE: none\n"
+                "HYPOTHESIS: coins moon")
+
+    posts = [_post("winner", 500, 5)]
+    with pytest.raises(ValueError, match="outside the niche"):
+        decide_direction(fake_chat, ["m"], evaluate(posts),
+                         {"hypothesis": "old"})
+
+
+def test_analytics_digest_shows_trajectory_and_extremes():
+    from threads_api.strategist import analytics_digest
+
+    posts = [_post("winner", 500, 30), _post("flop", 5, 26),
+             _post("mid", 100, 25)]
+    digest = analytics_digest(evaluate(posts))
+    assert "ANALYTICS" in digest
+    assert "Daily views trajectory" in digest
+    assert "Weakest:" in digest and "Strongest:" in digest
+    assert "replies" in digest
+
+
+def test_analytics_digest_empty_without_posts():
+    from threads_api.strategist import analytics_digest
+
+    assert analytics_digest({"judged": []}) == ""
+
+
+def test_prompt_includes_analytics_block():
+    posts = [_post("winner", 500, 5), _post("flop", 5, 6),
+             _post("mid", 100, 7)]
+    prompt = build_prompt(evaluate(posts), {"hypothesis": "x"})
+    assert "ANALYTICS (your full account data" in prompt
 
 
 def test_decide_direction_no_means_sit_out():

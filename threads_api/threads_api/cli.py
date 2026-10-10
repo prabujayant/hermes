@@ -238,6 +238,9 @@ def _cmd_post_smart(args):
             f"TOPIC: {direction['topic']}\n"
             f"HOOK: {direction['hook']}\n"
             f"CHANGE: {direction['change']}\n"
+            f"Stay strictly on the {direction['pillar']} pillar "
+            "(backend engineering, SQL, interviews, coding, careers). "
+            "No politics, crypto, general motivation, or unrelated topics."
         )
     except Exception as exc:  # noqa: BLE001 - brain optional, writer covers
         print(f"Brain failed ({exc}); strategist writes directly")

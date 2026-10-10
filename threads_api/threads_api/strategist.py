@@ -25,6 +25,12 @@ STRATEGY_PATH = Config.ROOT / "queue" / "strategy.json"
 NICHE_PATH = Config.ROOT / "queue" / "niche_leaders.md"
 NICHE_POSTS_PATH = Config.ROOT / "queue" / "niche_posts.json"
 
+# The account's niche. Every thread must live inside one of these.
+# Anything else (politics, crypto, general motivation, unrelated
+# topics) is rejected before publishing, no matter how viral it
+# looks elsewhere.
+ALLOWED_PILLARS = ("leetcode", "backend", "sql", "interviews", "career")
+
 
 def load_niche_brief(path=None):
     """Niche-leader playbook, editable without code changes."""
@@ -239,7 +245,14 @@ def evaluate(posts, now=None):
         vph = views_of(post) / max(age, 0.1)
         metrics = post.get("metrics") or {}
         text = (post.get("text") or "")[:160].replace("\n", " ")
+        try:
+            born = datetime.datetime.strptime(
+                post.get("timestamp") or "", "%Y-%m-%dT%H:%M:%S%z")
+            day = born.strftime("%Y-%m-%d")
+        except ValueError:
+            day = ""
         judged.append({
+            "date": day,
             "views": views_of(post),
             "vph": round(vph, 1),
             "likes": metrics.get("likes", 0),
@@ -281,6 +294,37 @@ def ascii_clean(text):
 
     text = re.sub(r"\s+[—–]\s+", ", ", text)
     return re.sub(r"[—–‐‑]", "-", text)
+
+
+def analytics_digest(scorecard):
+    """Compact account-analytics block: daily view trajectory plus the
+    best and worst judged posts with full numbers."""
+    judged = scorecard.get("judged", [])
+    if not judged:
+        return ""
+    days = {}
+    for item in judged:
+        if item.get("date"):
+            days[item["date"]] = days.get(item["date"], 0) + item["views"]
+    lines = ["ANALYTICS (your full account data, use it):"]
+    if days:
+        trail = ", ".join(f"{day}: {total:,} views"
+                          for day, total in sorted(days.items())[-5:])
+        lines.append(f"Daily views trajectory: {trail}.")
+    ranked = sorted(judged, key=lambda i: i["vph"])
+    if ranked:
+        lo, hi = ranked[0], ranked[-1]
+        lines.append(
+            f"Weakest: {lo['views']:,} views ({lo['vph']}/h, "
+            f"{lo['likes']} likes, {lo['replies']} replies): "
+            f"{ascii_clean(lo['text'][:100])}."
+        )
+        lines.append(
+            f"Strongest: {hi['views']:,} views ({hi['vph']}/h, "
+            f"{hi['likes']} likes, {hi['replies']} replies, "
+            f"rate {hi['rate_pct']}%): {ascii_clean(hi['text'][:100])}."
+        )
+    return "\n".join(lines)
 
 
 def build_prompt(scorecard, strategy, progress=None):
@@ -338,6 +382,9 @@ def build_prompt(scorecard, strategy, progress=None):
             f"{ascii_clean(item['text'])}"
         )
     lines.append(f"Current hypothesis: {ascii_clean(strategy['hypothesis'])}")
+    digest = analytics_digest(scorecard)
+    if digest:
+        lines.append(digest)
     history = [h for h in strategy.get("history", []) if isinstance(h, dict)]
     if history:
         lines.append("Your recent decisions and what they were:")
@@ -515,6 +562,9 @@ def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
         "POST: <YES post this hour, or NO skip with one-line reason, e.g. "
         "dead traffic window or nothing worth saying>\n"
         "TOPIC: <pillar: leetcode|backend|sql|interviews|career + subject>\n"
+        "Stay strictly inside those five pillars: no politics, crypto, "
+        "general motivation, or unrelated topics — off-niche answers are "
+        "rejected.\n"
         "HOOK: <hook formula name + one-line shape, e.g. 'debate hot take: "
         "monoliths beat microservices for most teams'>\n"
         "CHANGE: <what changes vs current hypothesis, or 'none'>\n"
@@ -535,10 +585,19 @@ def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
         return match.group(1).strip()[:300]
 
     post_raw = field("POST")
+    topic = field("TOPIC")
+    pillar = topic.strip().split()[0].lower().rstrip(":") \
+        if topic.strip() else ""
+    if pillar not in ALLOWED_PILLARS:
+        raise ValueError(
+            f"topic pillar '{pillar}' is outside the niche "
+            f"{'/'.join(ALLOWED_PILLARS)}"
+        )
     return {
         "post": not post_raw.upper().startswith("NO"),
         "post_reason": post_raw,
-        "topic": field("TOPIC"),
+        "pillar": pillar,
+        "topic": topic,
         "hook": field("HOOK"),
         "change": field("CHANGE"),
         "hypothesis": field("HYPOTHESIS"),
