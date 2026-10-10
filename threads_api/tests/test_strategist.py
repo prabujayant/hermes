@@ -99,6 +99,18 @@ def test_soft_validate_enforces_hard_constraints():
     assert any("counter" in p for p in problems)
 
 
+def test_finalize_thread_end_to_end():
+    from threads_api.strategist import finalize_thread
+
+    raw = ("HOOK HERE — WITH DASH 1/5\n---\nvalue here\n---\n"
+           "comment below\nHYPOTHESIS: x")
+    posts, hyp = finalize_thread(raw)
+    assert hyp == "x"
+    assert posts[0] == "HOOK HERE, WITH DASH"
+    assert "Follow @owlsky17" in posts[-1]
+    assert not any("1/5" in p for p in posts)
+
+
 def test_pivot_constant_matches_threshold():
     assert PIVOT_STREAK == 2
 

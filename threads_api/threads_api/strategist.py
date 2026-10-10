@@ -218,6 +218,17 @@ def repair_thread(posts):
     return fixed
 
 
+def finalize_thread(raw):
+    """Parse + repair + validate a model response. Returns (posts, hyp).
+    Raises ValueError with the reason on any failure."""
+    posts, hypothesis = parse_decision(raw)
+    posts = repair_thread(posts)
+    problems = soft_validate(posts)
+    if problems:
+        raise ValueError("; ".join(problems))
+    return posts, hypothesis
+
+
 def soft_validate(posts):
     """Enforce only hard constraints; style is the model's playground."""
     problems = []

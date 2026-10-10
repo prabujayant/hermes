@@ -16,7 +16,6 @@ from .generator import (
     load_state,
     load_templates,
     mark_used,
-    next_thread,
     save_state,
     validate_thread,
 )
@@ -110,12 +109,10 @@ def _cmd_post_smart(args):
         SMART_MODELS,
         build_prompt,
         evaluate,
+        finalize_thread,
         load_strategy,
-        parse_decision,
         record_run,
-        repair_thread,
         save_strategy,
-        soft_validate,
     )
 
     now = datetime.datetime.now(datetime.timezone.utc)
@@ -158,12 +155,19 @@ def _cmd_post_smart(args):
         model=SMART_MODELS,
     )
     print(f"Strategist model: {llm_module.last_model}")
+    taken_sigs = {hook_signature(p.get("text") or "") for p in posts}
+    taken_sigs |= set(load_state().get("recent_hooks", []))
+
+    def _attempt(raw_text):
+        thread, hypothesis = finalize_thread(raw_text)
+        if hook_signature(thread[0]) in taken_sigs:
+            raise ValueError(
+                f"hook too similar to a recent post: {thread[0][:60]}"
+            )
+        return thread, hypothesis
+
     try:
-        thread, hypothesis = parse_decision(raw)
-        thread = repair_thread(thread)
-        problems = soft_validate(thread)
-        if problems:
-            raise ValueError("; ".join(problems))
+        thread, hypothesis = _attempt(raw)
     except (ValueError, RuntimeError) as exc:
         print(f"Strategist output rejected ({exc}); one retry with notes")
         raw = llm_chat(
@@ -177,11 +181,7 @@ def _cmd_post_smart(args):
             model=SMART_MODELS,
         )
         try:
-            thread, hypothesis = parse_decision(raw)
-            thread = repair_thread(thread)
-            problems = soft_validate(thread)
-            if problems:
-                raise ValueError("; ".join(problems))
+            thread, hypothesis = _attempt(raw)
         except (ValueError, RuntimeError) as exc2:
             print(f"LLM failed twice ({exc2}); bank fallback")
             thread = None
@@ -190,6 +190,8 @@ def _cmd_post_smart(args):
         pillar, thread = _pick_fresh_thread()
         hypothesis = strategy["hypothesis"]
         print(f"Bank fallback [{pillar}]")
+
+    print(f"Hook: {thread[0].splitlines()[0][:120]}")
 
     try:
         ids = _publish_resilient(client, thread)
@@ -365,7 +367,7 @@ def _cmd_write_thread(args):
     )
     print(f"Draft saved to {draft_path}")
     for i, post in enumerate(posts, start=1):
-        print(f"\n[{i}/5] {post}")
+        print(f"\n[{i}] {post}")
 
     if args.publish:
         client = ThreadsClient()
@@ -414,10 +416,10 @@ def _pick_fresh_thread(exclude_live=True):
 def _publish_resilient(client, thread):
     """Publish with Meta-flake tolerance. Returns post ids.
 
-    Retries network errors 3x with backoff; on API errors (e.g. code 24
-    during a replication-lag window) waits 60s and retries the SAME
-    thread once. Raises the last error if all fail — caller falls back
-    to a different thread.
+    Retries network errors 3x with backoff. On API errors (code 24
+    during replication-lag windows, observed lasting over an hour)
+    retries the SAME thread at 60s and 180s before giving up — caller
+    falls back to a different thread only after all attempts fail.
     """
     import time
 
@@ -435,9 +437,21 @@ def _publish_resilient(client, thread):
             time.sleep(backoff)
             backoff *= 2
         except ThreadsAPIError as exc:
-            print(f"Publish hit API error ({exc}); retry same thread in 60s")
-            time.sleep(60)
-            return client.publish_thread(thread, reply_wait_seconds=60)
+            waits = [60, 180]
+            if attempt >= len(waits):
+                raise
+            wait = waits[attempt]
+            print(
+                f"Publish hit API error ({exc}); "
+                f"retry same thread in {wait}s"
+            )
+            time.sleep(wait)
+            try:
+                return client.publish_thread(thread, reply_wait_seconds=60)
+            except (ThreadsAPIError, requests.RequestException) as exc2:
+                if attempt == len(waits) - 1:
+                    raise
+                print(f"Retry failed ({exc2}); continuing")
 
 
 def _cmd_post_hourly(args):
