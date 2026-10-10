@@ -53,7 +53,8 @@
     "a senior engineer once told me the best",
     "code reviews catch almost zero real bugs. they",
     "we shipped a feature flag system to replace",
-    "i found a bug that only appeared when"
+    "i found a bug that only appeared when",
+    "i spent three days hunting a bug that"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
