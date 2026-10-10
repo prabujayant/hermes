@@ -34,6 +34,10 @@ JUDGE_AFTER_HOURS = 3
 UNDERPERFORM_RATIO = 0.5
 PIVOT_STREAK = 2
 LOOKBACK_POSTS = 20
+# No pivot without at least this many measured posts (small samples lie).
+MIN_JUDGED = 3
+# Velocity floor (views/hour) so dead-quiet accounts still get signal.
+MIN_VELOCITY_FLOOR = 2.0
 
 NICHE_PLAYBOOK = """Proven viral moves in the coding niche on Threads:
 - Curiosity-gap opener (open loop, payoff inside the thread).
@@ -79,32 +83,53 @@ def _age_hours(post, now):
 
 
 def evaluate(posts, now=None):
-    """Score recent posts. Returns dict with judged list + streak + median.
+    """Score recent posts fairly. Returns dict with judged list + verdict.
 
-    Only posts >= JUDGE_AFTER_HOURS old count. A judged post
-    underperforms when its views < UNDERPERFORM_RATIO * median.
+    Fairness rules (scorecard trustworthiness):
+    - Posts WITHOUT valid view data are excluded entirely (never flops).
+    - Posts younger than JUDGE_AFTER_HOURS are excluded (too early).
+    - Comparison uses views-PER-HOUR velocity, so a 4h post and a 20h
+      post are judged on the same scale instead of raw totals.
+    - Priority: reach (velocity) first; engagement rate breaks ties in
+      the prompt, not the score.
+    - A pivot needs MIN_JUDGED measured posts AND a PIVOT_STREAK of
+      consecutive underperformers (no strategy change on small samples).
     """
+    from .insights import engagement_rate
+
     now = now or datetime.datetime.now(datetime.timezone.utc)
-    views = sorted(
-        (views_of(p) for p in posts if (p.get("metrics") or {}).get("views") is not None)
+    measured = [
+        p for p in posts
+        if (p.get("metrics") or {}).get("views") is not None
+        and _age_hours(p, now) >= JUDGE_AFTER_HOURS
+    ]
+    velocities = sorted(
+        views_of(p) / max(_age_hours(p, now), 0.1) for p in measured
     )
-    median = views[len(views) // 2] if views else 0
-    floor = max(20, int(median * UNDERPERFORM_RATIO))
+    median_vph = velocities[len(velocities) // 2] if velocities else 0.0
+    floor_vph = max(MIN_VELOCITY_FLOOR, median_vph * UNDERPERFORM_RATIO)
 
     judged = []
-    for post in sorted(posts, key=lambda p: p.get("timestamp") or ""):
+    for post in sorted(measured, key=lambda p: p.get("timestamp") or ""):
         age = _age_hours(post, now)
-        if age < JUDGE_AFTER_HOURS:
-            continue
+        vph = views_of(post) / max(age, 0.1)
+        metrics = post.get("metrics") or {}
         text = (post.get("text") or "")[:160].replace("\n", " ")
         judged.append({
-            "text": text,
             "views": views_of(post),
+            "vph": round(vph, 1),
+            "likes": metrics.get("likes", 0),
+            "replies": metrics.get("replies", 0),
+            "reposts": metrics.get("reposts", 0),
+            "rate_pct": round(engagement_rate(post) * 100, 2),
             "engagement": engagement_of(post),
             "age_h": round(age, 1),
-            "under": views_of(post) < floor,
+            "text": text,
+            "under": vph < floor_vph,
         })
     judged = judged[-LOOKBACK_POSTS:]
+    for i, item in enumerate(judged, start=1):
+        item["id"] = f"P{i}"
 
     streak = 0
     for item in reversed(judged):
@@ -113,12 +138,15 @@ def evaluate(posts, now=None):
         else:
             break
 
+    ready = len(judged) >= MIN_JUDGED
     return {
-        "median": median,
-        "floor": floor,
+        "median_vph": round(median_vph, 1),
+        "floor_vph": round(floor_vph, 1),
         "judged": judged,
+        "sample_size": len(judged),
         "streak": streak,
-        "pivot": streak >= PIVOT_STREAK,
+        "ready": ready,
+        "pivot": ready and streak >= PIVOT_STREAK,
     }
 
 
@@ -134,32 +162,43 @@ def ascii_clean(text):
 def build_prompt(scorecard, strategy):
     """Strategist prompt: scorecard in, thread + hypothesis out."""
     lines = [
-        f"Rolling median views: {scorecard['median']}, "
-        f"underperform line: {scorecard['floor']}.",
+        f"Measured posts: {scorecard['sample_size']} "
+        f"(need {MIN_JUDGED} for strategy changes). "
+        f"Median velocity: {scorecard['median_vph']} views/h, "
+        f"underperform line: {scorecard['floor_vph']} views/h. "
+        "Reach decides; engagement rate only breaks ties.",
         f"Underperform streak: {scorecard['streak']} "
         f"(pivot at {PIVOT_STREAK}).",
-        "Recent judged posts (oldest first):",
+        "Recent judged posts, oldest first (cite IDs like P3):",
     ]
     for item in scorecard["judged"][-8:]:
         flag = "UNDER" if item["under"] else "ok"
         lines.append(
-            f"- [{flag}] {item['views']} views, {item['engagement']} eng "
-            f"({item['age_h']}h old): {ascii_clean(item['text'])}"
+            f"- {item['id']} [{flag}] {item['views']} views "
+            f"({item['vph']}/h, {item['age_h']}h old), "
+            f"likes {item['likes']}, replies {item['replies']}, "
+            f"reposts {item['reposts']}, rate {item['rate_pct']}%: "
+            f"{ascii_clean(item['text'])}"
         )
     lines.append(f"Current hypothesis: {ascii_clean(strategy['hypothesis'])}")
     lines.append(NICHE_PLAYBOOK)
 
     if scorecard["pivot"]:
         lines.append(
-            "PIVOT MODE: the current strategy is failing (views below "
-            "the line even after 3+ hours). Change the approach: new hook "
-            "formula, topic, or format. Keep what the winners above prove, "
-            "drop what the UNDER posts prove. Say what you changed in one line."
+            "PIVOT MODE: the current strategy is failing. Change AT MOST "
+            "ONE factor (topic, hook style, or format) versus the current "
+            "hypothesis, keep everything else. Explain the change in one "
+            "line and cite the specific post IDs that prove it."
+        )
+    elif not scorecard["ready"]:
+        lines.append(
+            "WARM-UP: too few measured posts to judge strategy. Post your "
+            "best guess from the playbook and say which factor you chose."
         )
     else:
         lines.append(
             "Double down on what works, vary topics so hooks never repeat. "
-            "One line on why you chose this thread."
+            "Change at most one factor. One line on why, citing post IDs."
         )
     lines.append(
         "Output: first your thread as 2-7 posts separated by a line with "
@@ -249,7 +288,13 @@ def soft_validate(posts):
     return problems
 
 
-def record_run(state, pillar, posts, ids, run_at, pivoted):
+def record_run(state, pillar, posts, ids, run_at, pivoted, model=None,
+               path=STRATEGY_PATH):
+    """Save draft + outcome accountability: full texts, model, hypothesis.
+
+    Later runs re-fetch live metrics for these IDs, so each entry links
+    the decision (texts/model/hypothesis) to its eventual performance.
+    """
     state["streak"] = 0
     if pivoted:
         state["pivots"] = state.get("pivots", 0) + 1
@@ -257,10 +302,13 @@ def record_run(state, pillar, posts, ids, run_at, pivoted):
         "run_at": run_at,
         "pillar": pillar,
         "hook_sig": hook_signature(posts[0]),
+        "texts": list(posts),
+        "model": model,
+        "hypothesis": (state.get("hypothesis") or "")[:300],
         "ids": ids,
         "pivoted": pivoted,
     }
     history = state.get("history", [])
     history.append(entry)
     state["history"] = history[-50:]
-    save_strategy(state)
+    save_strategy(state, path)

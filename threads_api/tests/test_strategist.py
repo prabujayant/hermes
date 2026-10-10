@@ -35,8 +35,9 @@ def test_evaluate_streak_and_pivot():
         _post("flop two", 5, 5),
     ]
     score = evaluate(posts)
-    assert score["median"] > 0
+    assert score["median_vph"] > 0
     assert score["streak"] == 2
+    assert score["ready"] is True
     assert score["pivot"] is True
 
 
@@ -51,11 +52,15 @@ def test_evaluate_streak_resets_on_winner():
 
 
 def test_build_prompt_contains_pivot_orders():
-    posts = [_post("flop one", 5, 6), _post("flop two", 5, 7)]
+    posts = [_post("flop one", 5, 8), _post("flop two", 5, 7),
+             _post("flop three", 5, 6)]
     score = evaluate(posts)
+    assert score["pivot"] is True
     prompt = build_prompt(score, {"hypothesis": "old idea"})
     assert "PIVOT MODE" in prompt
     assert "UNDER" in prompt
+    assert "AT MOST ONE factor" in prompt
+    assert "P1" in prompt
 
 
 def test_build_prompt_no_pivot_when_winning():
@@ -111,8 +116,73 @@ def test_finalize_thread_end_to_end():
     assert not any("1/5" in p for p in posts)
 
 
-def test_pivot_constant_matches_threshold():
-    assert PIVOT_STREAK == 2
+def test_evaluate_excludes_posts_without_view_data():
+    born = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=5)
+    no_data = {
+        "text": "mystery post",
+        "timestamp": born.strftime("%Y-%m-%dT%H:%M:%S+0000"),
+        "metrics": {},
+    }
+    posts = [no_data, _post("real flop", 5, 6), _post("real ok", 200, 7)]
+    score = evaluate(posts)
+    texts = [item["text"] for item in score["judged"]]
+    assert "mystery post" not in texts
+    assert len(score["judged"]) == 2
+
+
+def test_evaluate_compares_velocity_not_raw_totals():
+    # 100 views in 20h (5/h) vs 30 views in 4h (7.5/h): raw totals would
+    # call the second a flop; velocity judges fairly.
+    posts = [
+        _post("slow burner", 100, 20),
+        _post("fast starter", 30, 4),
+        _post("anchor", 60, 10),
+    ]
+    score = evaluate(posts)
+    by_text = {item["text"]: item for item in score["judged"]}
+    assert by_text["slow burner"]["vph"] == 5.0
+    assert by_text["fast starter"]["vph"] == 7.5
+    # Neither is far below the median velocity: no false flop.
+    assert by_text["fast starter"]["under"] is False
+
+
+def test_no_pivot_without_minimum_sample():
+    posts = [_post("flop one", 5, 6), _post("flop two", 5, 5)]
+    score = evaluate(posts)
+    assert score["sample_size"] == 2
+    assert score["streak"] == 2
+    assert score["ready"] is False
+    assert score["pivot"] is False
+
+
+def test_judged_items_carry_full_metrics_and_ids():
+    posts = [_post("winner", 500, 7), _post("flop", 5, 6),
+             _post("mid", 100, 5)]
+    score = evaluate(posts)
+    ids = [item["id"] for item in score["judged"]]
+    assert ids == ["P1", "P2", "P3"]
+    first = score["judged"][0]
+    for key in ("views", "vph", "likes", "replies", "reposts",
+                "rate_pct", "age_h", "text", "under"):
+        assert key in first
+
+
+def test_record_run_saves_texts_model_hypothesis(tmp_path):
+    from threads_api.strategist import load_strategy, record_run
+
+    state_file = tmp_path / "strategy.json"
+    state = load_strategy(state_file)
+    state["hypothesis"] = "test idea"
+    record_run(state, "smart", ["hook", "Follow @owlsky17"], ["id1"],
+               "2026-01-01T00:00:00+00:00", True, model="test-model",
+               path=state_file)
+    saved = load_strategy(state_file)
+    entry = saved["history"][-1]
+    assert entry["texts"] == ["hook", "Follow @owlsky17"]
+    assert entry["model"] == "test-model"
+    assert entry["hypothesis"] == "test idea"
+    assert entry["pivoted"] is True
+    assert saved["pivots"] == 1
 
 
 def test_build_prompt_bans_counters():

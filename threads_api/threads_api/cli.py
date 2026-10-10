@@ -133,8 +133,8 @@ def _cmd_post_smart(args):
     strategy = load_strategy()
     pivoted = scorecard["pivot"]
     print(
-        f"Median {scorecard['median']:,} views, "
-        f"floor {scorecard['floor']:,}, streak {scorecard['streak']}, "
+        f"n={scorecard['sample_size']} median {scorecard['median_vph']}/h, "
+        f"floor {scorecard['floor_vph']}/h, streak {scorecard['streak']}, "
         f"pivot={pivoted}, hypothesis: {strategy['hypothesis'][:80]}"
     )
 
@@ -218,7 +218,8 @@ def _cmd_post_smart(args):
 
     if hypothesis:
         strategy["hypothesis"] = hypothesis[:300]
-    record_run(strategy, "smart", thread, ids, run_at, pivoted)
+    record_run(strategy, "smart", thread, ids, run_at, pivoted,
+               model=llm_module.last_model)
     save_strategy(strategy)
     print(f"Posted smart thread ({len(ids)}): {ids[0]}")
 
