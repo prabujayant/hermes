@@ -50,7 +50,8 @@
     "most teams treat flaky tests like weather, unavoidable,",
     "if you want faster shipping stop writing unit",
     "if you want to crack coding interviews, stop",
-    "a senior engineer once told me the best"
+    "a senior engineer once told me the best",
+    "code reviews catch almost zero real bugs. they"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

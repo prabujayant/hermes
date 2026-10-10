@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Switched from contrarian hot takes to hands-on failure narratives with a curiosity-gap opener and practical takeaways.",
-  "pivots": 40,
+  "hypothesis": "Pivoted from failure narratives to a debate hot take with a direct reply challenge, controversial claim backed by specific incidents, and a concrete alternative \u2014 designed to trigger replies and profile clicks which drive Threads reach.",
+  "pivots": 41,
   "streak": 0,
   "history": [
     {
@@ -537,6 +537,19 @@
         "18146243614520096",
         "18129389875892562",
         "17983932981095288"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-10T02:01:14.170215+00:00",
+      "pillar": "smart",
+      "hook_sig": "code reviews catch almost zero real bugs. they",
+      "ids": [
+        "17949640335302244",
+        "18111190082131390",
+        "18112585676170678",
+        "18114765818102197",
+        "18623720011043766"
       ],
       "pivoted": true
     }
