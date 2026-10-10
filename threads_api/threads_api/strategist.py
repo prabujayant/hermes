@@ -487,6 +487,11 @@ def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
         "direction. Do NOT write the thread, only the plan.",
         f"Mission: {VIEWS_GOAL:,} views and {FOLLOWERS_GOAL:,} followers. "
         "Aggressive but honest: never fake, deceive, spam, or harass.",
+        "YOUR FREEDOM, granted by the owner: you decide WHEN to post "
+        "(answer NO to sit out a dead hour) and HOW to post (any topic, "
+        "hook, or format). It lasts as long as views and followers come: "
+        "every judged thread is scored, sustained misses narrow you back "
+        "to proven formats.",
     ]
     if progress and progress.get("followers") is not None:
         lines.append(
@@ -506,7 +511,9 @@ def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
         )
     lines.append(f"Current hypothesis: {ascii_clean(strategy['hypothesis'])}")
     lines.append(
-        "Reply with ONLY these 4 lines, no extra text:\n"
+        "Reply with ONLY these 5 lines, no extra text:\n"
+        "POST: <YES post this hour, or NO skip with one-line reason, e.g. "
+        "dead traffic window or nothing worth saying>\n"
         "TOPIC: <pillar: leetcode|backend|sql|interviews|career + subject>\n"
         "HOOK: <hook formula name + one-line shape, e.g. 'debate hot take: "
         "monoliths beat microservices for most teams'>\n"
@@ -527,7 +534,10 @@ def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
             raise ValueError(f"brain response missing {name} line")
         return match.group(1).strip()[:300]
 
+    post_raw = field("POST")
     return {
+        "post": not post_raw.upper().startswith("NO"),
+        "post_reason": post_raw,
         "topic": field("TOPIC"),
         "hook": field("HOOK"),
         "change": field("CHANGE"),

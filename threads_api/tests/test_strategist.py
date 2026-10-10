@@ -461,7 +461,8 @@ def test_decide_direction_parses_four_lines():
     from threads_api.strategist import decide_direction
 
     def fake_chat(messages, max_tokens=400, temperature=0.7, model=None):
-        return ("TOPIC: backend caching\n"
+        return ("POST: YES go\n"
+                "TOPIC: backend caching\n"
                 "HOOK: debate hot take on cache stampedes\n"
                 "CHANGE: switch from listicles to debate\n"
                 "HYPOTHESIS: debates earn replies")
@@ -471,11 +472,31 @@ def test_decide_direction_parses_four_lines():
         fake_chat, ["m"], evaluate(posts),
         {"hypothesis": "old"})
     assert direction == {
+        "post": True,
+        "post_reason": "YES go",
         "topic": "backend caching",
         "hook": "debate hot take on cache stampedes",
         "change": "switch from listicles to debate",
         "hypothesis": "debates earn replies",
     }
+
+
+def test_decide_direction_no_means_sit_out():
+    from threads_api.strategist import decide_direction
+
+    def fake_chat(messages, max_tokens=400, temperature=0.7, model=None):
+        return ("POST: NO dead traffic window\n"
+                "TOPIC: backend caching\n"
+                "HOOK: debate hot take\n"
+                "CHANGE: none\n"
+                "HYPOTHESIS: wait for peak hours")
+
+    posts = [_post("winner", 500, 5)]
+    direction = decide_direction(
+        fake_chat, ["m"], evaluate(posts),
+        {"hypothesis": "old"})
+    assert direction["post"] is False
+    assert "dead traffic" in direction["post_reason"]
 
 
 def test_decide_direction_rejects_garbage():
@@ -487,6 +508,6 @@ def test_decide_direction_rejects_garbage():
         return "just some rambling with no fields at all"
 
     posts = [_post("winner", 500, 5)]
-    with pytest.raises(ValueError, match="TOPIC"):
+    with pytest.raises(ValueError, match="POST"):
         decide_direction(fake_chat, ["m"], evaluate(posts),
                          {"hypothesis": "old"})

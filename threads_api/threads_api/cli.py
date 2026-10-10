@@ -215,14 +215,30 @@ def _cmd_post_smart(args):
         print(f"Brain model: {llm_module.last_model}")
         print(f"Brain direction: {direction['topic']} / "
               f"{direction['hook'][:100]}")
+        if direction["hypothesis"]:
+            strategy["hypothesis"] = direction["hypothesis"][:300]
+        if not direction["post"]:
+            print(f"Brain sits out this hour: {direction['post_reason']}")
+            history = strategy.get("history", [])
+            history.append({
+                "run_at": now.isoformat(),
+                "pillar": "smart-skip",
+                "hook_sig": "",
+                "texts": [],
+                "model": llm_module.last_model,
+                "hypothesis": strategy["hypothesis"][:300],
+                "ids": [],
+                "pivoted": False,
+            })
+            strategy["history"] = history[-50:]
+            save_strategy(strategy)
+            return 0
         prompt += (
             "\nStrategist direction, follow it exactly:\n"
             f"TOPIC: {direction['topic']}\n"
             f"HOOK: {direction['hook']}\n"
             f"CHANGE: {direction['change']}\n"
         )
-        if direction["hypothesis"]:
-            strategy["hypothesis"] = direction["hypothesis"][:300]
     except Exception as exc:  # noqa: BLE001 - brain optional, writer covers
         print(f"Brain failed ({exc}); strategist writes directly")
 
