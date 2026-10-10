@@ -4,19 +4,6 @@
   "streak": 0,
   "history": [
     {
-      "run_at": "2026-10-08T10:01:13.920911+00:00",
-      "pillar": "smart",
-      "hook_sig": "everyone says \u201cbreak it into microservices.\u201d here\u2019s why",
-      "ids": [
-        "18164051116491399",
-        "18099749843430532",
-        "18125168635913245",
-        "18186478699413139",
-        "18143632792604681"
-      ],
-      "pivoted": true
-    },
-    {
       "run_at": "2026-10-08T13:01:11.572807+00:00",
       "pillar": "smart",
       "hook_sig": "if you want scalable backend systems, stop copy\u2011pasting",
@@ -676,6 +663,20 @@
         "17982487869153295",
         "18026455574873242",
         "18016955519933296"
+      ],
+      "pivoted": false
+    },
+    {
+      "run_at": "2026-10-10T14:15:56.336132+00:00",
+      "pillar": "smart",
+      "hook_sig": "most code reviews catch style nits and miss",
+      "ids": [
+        "18097426295409904",
+        "17952224646271227",
+        "18127838896836952",
+        "18129222242491923",
+        "18074371349774771",
+        "18384723466230542"
       ],
       "pivoted": false
     }
