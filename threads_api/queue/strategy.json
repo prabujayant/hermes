@@ -1,6 +1,6 @@
 {
-  "hypothesis": "Switched from caps-listicle hooks to curiosity-gap opener with contrarian hot take (DRY is overrated) ending in specific reply challenge to drive replies-to-replies and profile clicks. Dropped all listicle formatting, caps hooks, and generic advice.",
-  "pivots": 48,
+  "hypothesis": "Switched to debate hot take format with specific technical challenge (mutation testing, contract tests, chaos engineering) ending in quantified reply prompt to drive replies-to-replies and profile clicks. Dropped storytelling, listicles, and curiosity gaps.",
+  "pivots": 49,
   "streak": 0,
   "history": [
     {
@@ -650,6 +650,20 @@
         "18058189739563359",
         "17962013061230271",
         "18126344776879718"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-10T10:01:11.674393+00:00",
+      "pillar": "smart",
+      "hook_sig": "code coverage targets are actively harmful. teams optimize",
+      "ids": [
+        "18019142621937038",
+        "17972109384174637",
+        "18118166513096448",
+        "18116732861003298",
+        "18055456913654007",
+        "17963135859223169"
       ],
       "pivoted": true
     }
