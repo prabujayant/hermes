@@ -1,6 +1,6 @@
 {
   "hypothesis": "Switched from failure narratives to a contrarian caps-listicle hot take (delete unit tests) with four punchy rules and a direct debate challenge to trigger high-reply engagement from engineers who disagree.",
-  "pivots": 38,
+  "pivots": 39,
   "streak": 0,
   "history": [
     {
@@ -510,6 +510,19 @@
         "17912722755283272",
         "18339039898283734",
         "18113230133115629"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-10T00:01:11.424148+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to crack coding interviews, stop",
+      "ids": [
+        "18127416610860439",
+        "18030352868904031",
+        "18380470822230957",
+        "18106795676255105",
+        "18149613787540957"
       ],
       "pivoted": true
     }
