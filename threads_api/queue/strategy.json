@@ -1,21 +1,8 @@
 {
-  "hypothesis": "Visual before/after diff with a concrete race-condition walkthrough beats generic advice, drives dwell time and replies from engineers who recognize the pattern.",
+  "hypothesis": "Concrete before/after diff with a real race-condition walkthrough drives higher dwell time and replies from engineers who recognize the pattern, beating generic advice threads.",
   "pivots": 50,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-08T17:01:11.251594+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "ids": [
-        "18631735915043530",
-        "18123815710748794",
-        "17904478701350247",
-        "18640839304029009",
-        "18206870539373210"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-08T18:01:13.057576+00:00",
       "pillar": "smart",
@@ -711,6 +698,27 @@
         "17927963052424113"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-10T20:01:09.174691+00:00",
+      "pillar": "smart",
+      "hook_sig": "production bug autopsy: a tiny code diff fixes",
+      "texts": [
+        "production bug autopsy: a tiny code diff fixes a race that passed every test\n\nthe bug: inventory reservation decremented twice under load. tests mocked the database, ran sequential, never triggered the interleaving. production got 500 orders for 200 units.",
+        "BEFORE (passed all tests, failed production):\n\nasync function reserve(itemId, qty) {\n  const item = await db.items.find(itemId);\n  if (item.stock < qty) throw new Error('OOS');\n  await db.items.update(itemId, { stock: item.stock - qty });\n  return { reserved: qty };\n}\n\ntwo requests read stock=5, both pass check, both write stock=3. sold 4, only had 2.",
+        "AFTER (same interface, serializable):\n\nasync function reserve(itemId, qty) {\n  const result = await db.transaction(async (tx) => {\n    const item = await tx.items.lockForUpdate(itemId);\n    if (item.stock < qty) throw new Error('OOS');\n    await tx.items.update(itemId, { stock: item.stock - qty });\n    return { reserved: qty };\n  });\n  return result;\n}\n\nselect for update locks the row. second request waits, sees stock=3, fails correctly.",
+        "why tests missed it: unit tests stubbed db, integration tests ran single-threaded, load tests used fake latency. the race window is 2ms between read and write. you only catch it with concurrent writers against a real database.\n\nthe fix is three lines. the lesson: if your test suite cannot produce the bug, it cannot prove the fix.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Concrete before/after diff with a real race-condition walkthrough drives higher dwell time and replies from engineers who recognize the pattern, beating generic advice threads.",
+      "breakout": "none",
+      "ids": [
+        "18128418787868315",
+        "17950670064338552",
+        "17959509213249925",
+        "18025343246872706"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -720,5 +728,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 259,
-  "last_views": 3024
+  "last_views": 3362
 }
