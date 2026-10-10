@@ -239,11 +239,21 @@ def _cmd_post_smart(args):
             f"TOPIC: {direction['topic']}\n"
             f"HOOK: {direction['hook']}\n"
             f"CHANGE: {direction['change']}\n"
-            f"Stay strictly on the {direction['pillar']} pillar "
-            "(backend engineering, SQL, interviews, coding, careers, "
-            "AI coding, system design). "
-            "No politics, crypto, general motivation, or unrelated topics."
         )
+        if direction.get("breakout"):
+            print(f"BREAKOUT play: {direction['breakout'][:150]}")
+            prompt += (
+                "Approved breakout beyond the home pillars: "
+                f"{direction['breakout']}\n"
+            )
+        else:
+            prompt += (
+                f"Stay strictly on the {direction['pillar']} pillar "
+                "(backend engineering, SQL, interviews, coding, careers, "
+                "AI coding, system design). "
+                "No politics, crypto, general motivation, or unrelated "
+                "topics."
+            )
     except Exception as exc:  # noqa: BLE001 - brain optional, writer covers
         print(f"Brain failed ({exc}); strategist writes directly")
 
@@ -323,7 +333,8 @@ def _cmd_post_smart(args):
     if hypothesis:
         strategy["hypothesis"] = hypothesis[:300]
     record_run(strategy, "smart", thread, ids, run_at, pivoted,
-               model=llm_module.last_model)
+               model=llm_module.last_model,
+               breakout=(direction or {}).get("breakout", ""))
     save_strategy(strategy)
     print(f"Posted smart thread ({len(ids)}): {ids[0]}")
 

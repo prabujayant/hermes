@@ -559,17 +559,21 @@ def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
         )
     lines.append(f"Current hypothesis: {ascii_clean(strategy['hypothesis'])}")
     lines.append(
-        "Reply with ONLY these 5 lines, no extra text:\n"
+        "Reply with ONLY these lines, no extra text:\n"
         "POST: <YES post this hour, or NO skip with one-line reason, e.g. "
         "dead traffic window or nothing worth saying>\n"
-        "TOPIC: <pillar: leetcode|backend|sql|interviews|career|ai-coding|system-design + subject>\n"
-        "Stay strictly inside those pillars: no politics, crypto, "
-        "general motivation, or unrelated topics. Off-niche answers are "
-        "rejected.\n"
+        "TOPIC: <pillar + subject. Home pillars: leetcode|backend|sql|"
+        "interviews|career|ai-coding|system-design. BREAKOUT: if you are "
+        "highly confident something OUTSIDE these pillars will go viral, "
+        "use it, but then BREAKOUT below is REQUIRED>\n"
+        "BREAKOUT: <none, or: why this off-pillar topic will go viral + "
+        "which niche-proof entry it imitates>\n"
         "HOOK: <hook formula name + one-line shape, e.g. 'debate hot take: "
         "monoliths beat microservices for most teams'>\n"
         "CHANGE: <what changes vs current hypothesis, or 'none'>\n"
-        "HYPOTHESIS: <updated one-line hypothesis>"
+        "HYPOTHESIS: <updated one-line hypothesis>\n"
+        "Style is fully yours: any hook shape, any format, any structure. "
+        "Only hard rules: plain ASCII, no counters, follow CTA last."
     )
     raw = llm_chat(
         [{"role": "system",
@@ -589,15 +593,22 @@ def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
     topic = field("TOPIC")
     pillar = topic.strip().split()[0].lower().rstrip(":") \
         if topic.strip() else ""
+    breakout = ""
+    try:
+        breakout = field("BREAKOUT")
+    except ValueError:
+        breakout = ""
     if pillar not in ALLOWED_PILLARS:
-        raise ValueError(
-            f"topic pillar '{pillar}' is outside the niche "
-            f"{'/'.join(ALLOWED_PILLARS)}"
-        )
+        if not breakout or breakout.lower().startswith("none"):
+            raise ValueError(
+                f"topic pillar '{pillar}' is outside the niche "
+                f"{'/'.join(ALLOWED_PILLARS)} without a BREAKOUT case"
+            )
     return {
         "post": not post_raw.upper().startswith("NO"),
         "post_reason": post_raw,
         "pillar": pillar,
+        "breakout": breakout,
         "topic": topic,
         "hook": field("HOOK"),
         "change": field("CHANGE"),
@@ -637,7 +648,7 @@ def soft_validate(posts):
 
 
 def record_run(state, pillar, posts, ids, run_at, pivoted, model=None,
-               path=STRATEGY_PATH):
+               breakout="", path=STRATEGY_PATH):
     """Save draft + outcome accountability: full texts, model, hypothesis.
 
     Later runs re-fetch live metrics for these IDs, so each entry links
@@ -653,6 +664,7 @@ def record_run(state, pillar, posts, ids, run_at, pivoted, model=None,
         "texts": list(posts),
         "model": model,
         "hypothesis": (state.get("hypothesis") or "")[:300],
+        "breakout": (breakout or "")[:300],
         "ids": ids,
         "pivoted": pivoted,
     }

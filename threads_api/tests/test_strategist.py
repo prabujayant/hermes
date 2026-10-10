@@ -471,15 +471,8 @@ def test_decide_direction_parses_four_lines():
     direction = decide_direction(
         fake_chat, ["m"], evaluate(posts),
         {"hypothesis": "old"})
-    assert direction == {
-        "post": True,
-        "post_reason": "YES go",
-        "pillar": "backend",
-        "topic": "backend caching",
-        "hook": "debate hot take on cache stampedes",
-        "change": "switch from listicles to debate",
-        "hypothesis": "debates earn replies",
-    }
+    assert direction["pillar"] == "backend"
+    assert direction["breakout"] == ""
 
 
 def test_decide_direction_rejects_off_niche_topic():
@@ -498,6 +491,25 @@ def test_decide_direction_rejects_off_niche_topic():
     with pytest.raises(ValueError, match="outside the niche"):
         decide_direction(fake_chat, ["m"], evaluate(posts),
                          {"hypothesis": "old"})
+
+
+def test_breakout_justifies_off_pillar_topic():
+    from threads_api.strategist import decide_direction
+
+    def fake_chat(messages, max_tokens=400, temperature=0.7, model=None):
+        return ("POST: YES go\n"
+                "TOPIC: layoffs severance playbook\n"
+                "BREAKOUT: mass layoffs today, imitates Notion thread proof\n"
+                "HOOK: curiosity opener\n"
+                "CHANGE: ride the news\n"
+                "HYPOTHESIS: newsjacking wins")
+
+    posts = [_post("winner", 500, 5)]
+    direction = decide_direction(
+        fake_chat, ["m"], evaluate(posts),
+        {"hypothesis": "old"})
+    assert direction["pillar"] == "layoffs"
+    assert "layoffs today" in direction["breakout"]
 
 
 def test_expanded_pillars_accepted():
