@@ -461,6 +461,19 @@ def build_prompt(scorecard, strategy, progress=None, posts=None):
             f"{ascii_clean(item['text'])}"
         )
     lines.append(f"Current hypothesis: {ascii_clean(strategy['hypothesis'])}")
+    lines.append(
+        "TAKEOVER STANDING ORDERS (owner-mandated, every hour): "
+        "1. One unusually useful original post beats filler: a sharp "
+        "hook plus a concrete takeaway, example, or diagram. "
+        "2. Think in series: when a topic pops, plan follow-ups that "
+        "deepen it, each ending with a question people want to answer. "
+        "3. Replies earn reach: favor angles that invite specific "
+        "comments, and keep the follow CTA earning the follow. "
+        "4. Seven-day tests only: double down solely on posts beating "
+        "usual reach and replies; kill the rest. "
+        "5. Watch for collab openings with relevant creators (flag them "
+        "in your hypothesis line; the owner negotiates)."
+    )
     digest = analytics_digest(scorecard)
     if digest:
         lines.append(digest)
@@ -635,7 +648,9 @@ def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
         "(answer NO to sit out a dead hour) and HOW to post (any topic, "
         "hook, or format). It lasts as long as views and followers come: "
         "every judged thread is scored, sustained misses narrow you back "
-        "to proven formats.",
+        "to proven formats. TAKEOVER ORDERS: prefer one unusually useful "
+        "original post over filler; think in follow-up series; favor "
+        "angles that invite specific comments.",
     ]
     if progress and progress.get("followers") is not None:
         lines.append(

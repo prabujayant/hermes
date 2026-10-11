@@ -125,6 +125,32 @@ def test_prompt_without_history_skips_recap():
     assert "recent decisions" not in prompt.lower()
 
 
+def test_prompt_carries_takeover_orders():
+    posts = [_post("winner", 500, 5)]
+    prompt = build_prompt(evaluate(posts), {"hypothesis": "x"})
+    assert "TAKEOVER STANDING ORDERS" in prompt
+    assert "unusually useful original post" in prompt
+
+
+def test_decide_prompt_carries_takeover_orders():
+    from threads_api.strategist import decide_direction
+
+    seen = {}
+
+    def fake_chat(messages, max_tokens=400, temperature=0.7, model=None):
+        seen["prompt"] = messages[-1]["content"]
+        return ("POST: YES go\n"
+                "TOPIC: backend caching\n"
+                "HOOK: debate\n"
+                "CHANGE: none\n"
+                "HYPOTHESIS: debates earn replies")
+
+    posts = [_post("winner", 500, 5)]
+    decide_direction(fake_chat, ["m"], evaluate(posts),
+                     {"hypothesis": "old"})
+    assert "TAKEOVER ORDERS" in seen["prompt"]
+
+
 def test_niche_posts_sorted_views_desc_nulls_last(tmp_path):
     import json
 
