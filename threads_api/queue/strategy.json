@@ -1,22 +1,8 @@
 {
-  "hypothesis": "A contrarian database-selection post grounded in migration tradeoffs and clear access patterns will earn more specific replies than generic interview advice",
-  "pivots": 74,
+  "hypothesis": "A specific database choice framed around access patterns and exit costs will earn more useful replies than broad interview-oriented contrarian advice.",
+  "pivots": 75,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T10:01:11.674393+00:00",
-      "pillar": "smart",
-      "hook_sig": "code coverage targets are actively harmful. teams optimize",
-      "ids": [
-        "18019142621937038",
-        "17972109384174637",
-        "18118166513096448",
-        "18116732861003298",
-        "18055456913654007",
-        "17963135859223169"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-10T11:01:10.925109+00:00",
       "pillar": "smart",
@@ -1122,6 +1108,31 @@
         "18340818847279564"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T22:30:58.616603+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to become a senior engineer",
+      "texts": [
+        "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:",
+        "Own outcomes, not tickets.\n\nJuniors close tasks. Seniors move metrics. Ask what number your work changes.",
+        "Write the doc nobody wants to write.\n\nDesign docs, runbooks, postmortems. Visibility compounds faster than commits.",
+        "Delete code on purpose.\n\nEvery quarter, kill something: a flag, a service, dead code. Simplifiers get promoted.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific database choice framed around access patterns and exit costs will earn more useful replies than broad interview-oriented contrarian advice.",
+      "breakout": "none",
+      "followers": 262,
+      "views_total": 11276,
+      "ids": [
+        "18116894228094389",
+        "18123396601720721",
+        "18059205662793299",
+        "18121189975943087",
+        "18343609885251753"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1131,5 +1142,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 262,
-  "last_views": 11073
+  "last_views": 11276
 }
