@@ -1,23 +1,8 @@
 {
-  "hypothesis": "A reproducible test turns an AI-coding failure into a useful artifact that earns more saves and follows than a general debugging lesson.",
+  "hypothesis": "A specific, rerunnable test that exposes an AI coding failure earns more saves and follows than general debugging advice; end with a follow CTA.",
   "pivots": 50,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-09T08:56:15.811661+00:00",
-      "pillar": "smart",
-      "hook_sig": "i watched a principal engineer delete 80 percent",
-      "ids": [
-        "18109831922183516",
-        "18200095996381802",
-        "18252061819308669",
-        "18107277428337203",
-        "18115571272818082",
-        "18271577839305348",
-        "18098181002536763"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-09T10:01:15.121198+00:00",
       "pillar": "smart",
@@ -847,6 +832,31 @@
         "18118254089471631"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-11T10:01:08.735691+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want behavioral rounds to remember you,",
+      "texts": [
+        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
+        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
+        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
+        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific, rerunnable test that exposes an AI coding failure earns more saves and follows than general debugging advice; end with a follow CTA.",
+      "breakout": "none",
+      "followers": 259,
+      "views_total": 7071,
+      "ids": [
+        "17874398556593836",
+        "18247842802312463",
+        "18640200013052901",
+        "18634030948026551",
+        "18131224030823371"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -856,5 +866,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 259,
-  "last_views": 6867
+  "last_views": 7071
 }
