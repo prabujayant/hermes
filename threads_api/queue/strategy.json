@@ -1,23 +1,8 @@
 {
-  "hypothesis": "A concrete test readers can adapt will earn more saves and specific replies than another general lesson about verifying AI fixes.",
-  "pivots": 63,
+  "hypothesis": "A specific concurrency test readers can adapt will earn more saves and useful replies than another general lesson about verifying AI fixes.",
+  "pivots": 64,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-09T23:01:06.126186+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want faster shipping stop writing unit",
-      "ids": [
-        "18172760365455456",
-        "17909272977505672",
-        "18094014137462053",
-        "17910491721306997",
-        "17912722755283272",
-        "18339039898283734",
-        "18113230133115629"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-10T00:01:11.424148+00:00",
       "pillar": "smart",
@@ -1002,6 +987,31 @@
         "18201824386327059"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T17:01:10.750028+00:00",
+      "pillar": "smart",
+      "hook_sig": "i let an ai agent \"fix\" a read-modify-write",
+      "texts": [
+        "I let an AI agent \"fix\" a read-modify-write race on a credit balance endpoint. The diff looked clean, row locking, correct isolation. Unit tests passed. Load tests passed. Then I wrote a test that forced two threads to hit the same row at the exact same microsecond. The bug was still there.",
+        "The test shape that caught it: spin up two connections, open transactions, both read balance, both compute new balance, both write. Use a barrier so they execute the write statement at the same instant. Assert final balance equals initial minus sum of spends. Run it in a loop until it fails or hits your confidence threshold.",
+        "No mocks, no sleeps, real database, real isolation level. The barrier is the key. In Postgres use pg_advisory_lock to synchronize the write moment. In MySQL use GET_LOCK. In SQL Server use sp_getapplock. The test fails without the fix, passes with it. Remove the fix, watch it fail again. That is the only proof that matters.",
+        "General verification advice is noise. An executable test shape you can drop into any balance, inventory, or seat reservation endpoint is signal. What invariant would you force two threads to collide on in your system?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific concurrency test readers can adapt will earn more saves and useful replies than another general lesson about verifying AI fixes.",
+      "breakout": "none",
+      "followers": 261,
+      "views_total": 9438,
+      "ids": [
+        "18111331805588022",
+        "18096403949401459",
+        "18180477595437078",
+        "18030709400898197",
+        "18371361553211570"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1011,5 +1021,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 261,
-  "last_views": 9300
+  "last_views": 9438
 }
