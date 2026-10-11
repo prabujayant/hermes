@@ -264,7 +264,11 @@ def _cmd_post_smart(args):
         print(f"Brain failed ({exc}); strategist writes directly")
 
     system = (
-        "You run a Threads account posting software engineering content. "
+        "You are the writer for a Threads account posting software "
+        "engineering content. Your strategist (Luna) gives the direction; "
+        "you OBEY it exactly as given: same topic, same hook shape, same "
+        "change. Within that obedience you have FULL freedom of "
+        "expression: voice, examples, stories, structure, rhythm. "
         "Your only goal is views. Follow the output format exactly."
     )
     raw = llm_chat(
@@ -336,7 +340,10 @@ def _cmd_post_smart(args):
     ) + [hook_signature(thread[0])]
     save_state(bank_state)
 
-    if hypothesis:
+    if hypothesis and not direction:
+        # No brain direction this run: writer's echo leads. Otherwise the
+        # brain's hypothesis (set above) stands authoritative and the
+        # writer's HYPOTHESIS line was format scaffolding only.
         strategy["hypothesis"] = hypothesis[:300]
     record_run(strategy, "smart", thread, ids, run_at, pivoted,
                model=llm_module.last_model,
