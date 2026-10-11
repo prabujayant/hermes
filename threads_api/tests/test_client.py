@@ -151,6 +151,63 @@ class TestPublishing:
         client.create_image_container = lambda text, url: {"id": "c1"}
         client.publish_image("text", "https://example.com/a.jpg", wait_seconds=30)
 
+    def test_thread_rollback_deletes_prefix_on_failure(self, client, monkeypatch):
+        calls = {"publishes": 0}
+        deleted = []
+
+        def fake_post(url, data):
+            if url.endswith("threads_publish"):
+                calls["publishes"] += 1
+                if calls["publishes"] == 1:
+                    return _response({"id": "hook_live_id"})
+                return _response(
+                    {"error": {"message": "gone", "code": 24, "type": ""}},
+                    status_code=400,
+                )
+            return _response({"id": "container_x"})
+
+        monkeypatch.setattr(client.session, "post", fake_post)
+        monkeypatch.setattr(
+            client.session,
+            "get",
+            lambda url, params: _response({"status": "FINISHED"}),
+        )
+        monkeypatch.setattr(
+            client.session,
+            "delete",
+            lambda url, params: deleted.append(url) or _response({"ok": True}),
+        )
+        with pytest.raises(ThreadsAPIError):
+            client.publish_thread(["hook", "reply"])
+
+        assert any("hook_live_id" in url for url in deleted)
+
+    def test_thread_rollback_survives_delete_errors(self, client, monkeypatch):
+        calls = {"publishes": 0}
+
+        def fake_post(url, data):
+            if url.endswith("threads_publish"):
+                calls["publishes"] += 1
+                if calls["publishes"] == 1:
+                    return _response({"id": "hook_live_id"})
+                raise ThreadsAPIError("boom (code 24)")
+            return _response({"id": "container_x"})
+
+        monkeypatch.setattr(client.session, "post", fake_post)
+        monkeypatch.setattr(
+            client.session,
+            "get",
+            lambda url, params: _response({"status": "FINISHED"}),
+        )
+        monkeypatch.setattr(
+            client.session,
+            "delete",
+            lambda url, params: (_ for _ in ()).throw(
+                ThreadsAPIError("delete down (code 1)")),
+        )
+        with pytest.raises(ThreadsAPIError, match="boom"):
+            client.publish_thread(["hook", "reply"])
+
 
 class TestProfile:
     def test_get_profile_uses_me_endpoint(self, client, monkeypatch):

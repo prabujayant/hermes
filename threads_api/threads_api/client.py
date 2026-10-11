@@ -213,6 +213,18 @@ class ThreadsClient:
         self.wait_for_container(container["id"])
         return self.publish_container(container["id"])
 
+    def _rollback(self, post_ids):
+        """Best-effort delete of already-published posts after a mid-thread
+        failure. Makes publish_thread/publish_replies atomic-ish: a failed
+        thread leaves no orphan hook behind, so retries and fallbacks can
+        run clean. Delete errors are swallowed (original error propagates).
+        """
+        for post_id in post_ids:
+            try:
+                self.delete_post(post_id)
+            except Exception:
+                pass
+
     def publish_thread(self, texts, reply_wait_seconds=60):
         """Publish a hook + chained replies. Returns list of post ids.
 
@@ -220,33 +232,47 @@ class ThreadsClient:
         post replies to the previous published post id. Every container
         is polled until FINISHED before publishing — instant publishes
         race server-side replication and fail with code 24.
+        Atomic-ish: a mid-thread failure deletes the published prefix
+        before raising, so callers can retry or fall back cleanly.
         """
         if not texts:
             raise ValueError("Thread needs at least 1 post")
         ids = []
         reply_to = None
-        for text in texts:
-            container = self.create_text_container(text, reply_to_id=reply_to)
-            self.wait_for_container(container["id"], timeout=reply_wait_seconds)
-            result = self.publish_container(container["id"])
-            post_id = result.get("id")
-            ids.append(post_id)
-            reply_to = post_id
+        try:
+            for text in texts:
+                container = self.create_text_container(text, reply_to_id=reply_to)
+                self.wait_for_container(container["id"], timeout=reply_wait_seconds)
+                result = self.publish_container(container["id"])
+                post_id = result.get("id")
+                ids.append(post_id)
+                reply_to = post_id
+        except Exception:
+            self._rollback(ids)
+            raise
         return ids
 
     def publish_replies(self, texts, root_post_id, reply_wait_seconds=60):
-        """Publish replies chained under an existing post. Returns post ids."""
+        """Publish replies chained under an existing post. Returns post ids.
+
+        Same atomic-ish guarantee as publish_thread: failures roll back
+        the published prefix.
+        """
         if not texts:
             raise ValueError("Need at least 1 reply")
         ids = []
         reply_to = root_post_id
-        for text in texts:
-            container = self.create_text_container(text, reply_to_id=reply_to)
-            self.wait_for_container(container["id"], timeout=reply_wait_seconds)
-            result = self.publish_container(container["id"])
-            post_id = result.get("id")
-            ids.append(post_id)
-            reply_to = post_id
+        try:
+            for text in texts:
+                container = self.create_text_container(text, reply_to_id=reply_to)
+                self.wait_for_container(container["id"], timeout=reply_wait_seconds)
+                result = self.publish_container(container["id"])
+                post_id = result.get("id")
+                ids.append(post_id)
+                reply_to = post_id
+        except Exception:
+            self._rollback(ids)
+            raise
         return ids
 
     def publish_image(self, text, image_url, wait_seconds=90):
