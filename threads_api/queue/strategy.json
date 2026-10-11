@@ -1,21 +1,8 @@
 {
-  "hypothesis": "A deterministic, reusable test for falsifying AI coding fixes will earn more saves and follows than broad debugging advice.",
-  "pivots": 52,
+  "hypothesis": "A practical falsification test for AI coding fixes will earn more saves and follows than broad debugging advice",
+  "pivots": 53,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-09T12:01:15.341924+00:00",
-      "pillar": "smart",
-      "hook_sig": "threads, my most viral engineering posts all follow",
-      "ids": [
-        "18638586625006099",
-        "18126843911487282",
-        "18097215320453546",
-        "18052432538807312",
-        "18144123490574431"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-09T13:01:11.936822+00:00",
       "pillar": "smart",
@@ -877,6 +864,31 @@
         "18032686181890077"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T11:31:00.549287+00:00",
+      "pillar": "smart",
+      "hook_sig": "falsification test: if your test still passes when",
+      "texts": [
+        "falsification test: if your test still passes when the fix is removed, it never proved the AI fixed the bug\n\nyou ask the agent to fix a race condition. it returns a diff. the tests pass. you ship. two days later production shows two users spent the same credit. the test never caught it because the test was written after the fix, not before the failure",
+        "the method is simple: reproduce the failure first, write a test that fails only when the bug exists, then apply the fix and watch the test pass. now remove the fix. if the test still passes, your test is theater. it validates the code shape, not the bug behavior",
+        "concrete pattern for a double-spend bug: spin up two threads that read the same balance, both decide they can spend, both write. assert the final balance equals initial minus one spend. run it a thousand times. the bug appears as a flaky failure. now you have a test that actually falsifies the fix",
+        "apply the fix. run the test until it passes consistently. revert the fix. run again. the test must fail every time. if it passes even once without the fix, the test is coupled to implementation details, not the bug. rewrite until removal guarantees failure",
+        "what is the smallest reproduction you have shipped that caught an AI hallucination? Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A practical falsification test for AI coding fixes will earn more saves and follows than broad debugging advice",
+      "breakout": "none",
+      "followers": 259,
+      "views_total": 7929,
+      "ids": [
+        "17909617452544014",
+        "18147943021489358",
+        "18122900836935444",
+        "17936672187379683",
+        "18123238979301943"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -886,5 +898,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 259,
-  "last_views": 7808
+  "last_views": 7929
 }
