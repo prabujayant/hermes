@@ -1,21 +1,8 @@
 {
-  "hypothesis": "A specific, rerunnable test that exposes an AI coding failure earns more saves and follows than general debugging advice; end with a follow CTA.",
-  "pivots": 50,
+  "hypothesis": "A concrete, rerunnable test that falsifies an AI coding fix will earn more saves and follows than broad debugging advice; end with a follow CTA.",
+  "pivots": 51,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-09T10:01:15.121198+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want behavioral rounds to remember you,",
-      "ids": [
-        "18172237690457166",
-        "18145090900597613",
-        "18113066537155862",
-        "17961775446241993",
-        "17965050446983080"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-09T11:01:19.478925+00:00",
       "pillar": "smart",
@@ -857,6 +844,27 @@
         "18131224030823371"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-11T10:31:00.159987+00:00",
+      "pillar": "smart",
+      "hook_sig": "reproducible failure: the agent says the race is",
+      "texts": [
+        "reproducible failure: the agent says the race is fixed; one controlled test proves it is not\n\nmost concurrency tests are theater. they mock the database, sleep randomly, and claim coverage. the agent shows you a diff with a lock, the tests pass, you ship. then production logs show two users spent the same credit. only one should have.",
+        "the race: two threads read balance=100, both check sufficient, both deduct 50, both write 50. the agent adds a mutex around the check-and-deduct. looks correct in the diff. but the lock scope is wrong, it releases before the write commits.",
+        "the deterministic barrier test: spawn two threads. each hits a barrier before the read. release both simultaneously. no sleeps, no mocks, real database,\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete, rerunnable test that falsifies an AI coding fix will earn more saves and follows than broad debugging advice; end with a follow CTA.",
+      "breakout": "none",
+      "followers": 259,
+      "views_total": 7532,
+      "ids": [
+        "17986921122077955",
+        "17910648492470866",
+        "18206633413371463"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -866,5 +874,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 259,
-  "last_views": 7071
+  "last_views": 7532
 }
