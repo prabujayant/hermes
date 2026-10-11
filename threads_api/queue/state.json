@@ -100,7 +100,8 @@
     "i spent three hours debugging a credit-transfer endpoint.",
     "i let an ai agent \"fix\" a read-modify-write",
     "i spent two days watching an ai agent",
-    "i added redis to fix a slow dashboard"
+    "i added redis to fix a slow dashboard",
+    "most storage-model advice in system-design interviews is outdated."
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

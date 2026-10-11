@@ -1,21 +1,8 @@
 {
-  "hypothesis": "Sahil Bloom ICO hook with a concrete production failure story will outperform recent race-condition threads by opening a relatable pain loop and delaying the payoff to post 4, earning saves and profile clicks from engineers who have lived this.",
-  "pivots": 66,
+  "hypothesis": "A concrete decision framework will earn more saves and specific interview examples in replies than another race-condition post.",
+  "pivots": 67,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T02:01:14.170215+00:00",
-      "pillar": "smart",
-      "hook_sig": "code reviews catch almost zero real bugs. they",
-      "ids": [
-        "17949640335302244",
-        "18111190082131390",
-        "18112585676170678",
-        "18114765818102197",
-        "18623720011043766"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-10T03:01:14.314376+00:00",
       "pillar": "smart",
@@ -1035,6 +1022,31 @@
         "18140322274612372"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T18:31:02.108168+00:00",
+      "pillar": "smart",
+      "hook_sig": "most storage-model advice in system-design interviews is outdated.",
+      "texts": [
+        "Most storage-model advice in system-design interviews is outdated. Candidates still memorize CAP theorem definitions and recite database feature lists. Interviewers stopped caring about that five years ago. They want to hear the tradeoff your design must survive.",
+        "The only three tradeoffs that decide a storage model: consistency latency vs availability during partition, write amplification vs read amplification at your scale, operational burden vs team expertise. Every technology choice maps to one of these. Name the tradeoff first, the technology second.",
+        "Example: you need to store user sessions with sub-millisecond reads, 99.99% availability, and the team has zero ops bandwidth. The tradeoff is read amplification vs operational burden. Redis Cluster wins not because it is popular, but because it shifts burden to the managed provider and keeps read amplification near zero.",
+        "Same workload, different constraint: the team has strong ops skills but zero budget for managed services. Now the tradeoff flips to operational burden vs consistency latency. PostgreSQL with synchronous replication and connection pooling survives the partition, costs nothing, and your team can debug it at 3am.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete decision framework will earn more saves and specific interview examples in replies than another race-condition post.",
+      "breakout": "none",
+      "followers": 261,
+      "views_total": 9774,
+      "ids": [
+        "18147069574565912",
+        "17967039195196516",
+        "17951380440277144",
+        "17885693859623713",
+        "18192857977401438"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1044,5 +1056,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 261,
-  "last_views": 9678
+  "last_views": 9774
 }
