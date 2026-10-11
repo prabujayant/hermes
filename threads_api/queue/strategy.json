@@ -1,22 +1,8 @@
 {
-  "hypothesis": "Leading with the concrete agent failure and making the copy-pasteable barrier test the centerpiece (per P16/P17 evidence) will outperform general debugging threads by converting saves into follows.",
+  "hypothesis": "A reproducible test turns an AI-coding failure into a useful artifact that earns more saves and follows than a general debugging lesson.",
   "pivots": 50,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-09T08:01:16.091235+00:00",
-      "pillar": "smart",
-      "hook_sig": "the production debugging checklist that cut my mttr",
-      "ids": [
-        "18080392706341009",
-        "18106435589223614",
-        "18119214491066917",
-        "18263089096307656",
-        "18011234963970373",
-        "18095249006138226"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-09T08:56:15.811661+00:00",
       "pillar": "smart",
@@ -836,6 +822,31 @@
         "18115661590821558"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-11T09:30:59.978638+00:00",
+      "pillar": "smart",
+      "hook_sig": "things ai coding assistants can't tell you (so",
+      "texts": [
+        "THINGS AI CODING ASSISTANTS CAN'T TELL YOU (SO VERIFY THEM YOURSELF):",
+        "Whether the code actually runs.\n\nIt completes patterns, it doesn't execute. Run everything before trusting anything.",
+        "Whether the dependencies exist.\n\nHallucinated imports and phantom APIs are the number one AI bug. Check every import.",
+        "Whether it fits your codebase.\n\nGenerated code ignores your conventions. Adapt it to your style or it rots on contact.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A reproducible test turns an AI-coding failure into a useful artifact that earns more saves and follows than a general debugging lesson.",
+      "breakout": "none",
+      "followers": 259,
+      "views_total": 6867,
+      "ids": [
+        "17983888974093614",
+        "17901696150375961",
+        "18078275492407512",
+        "18625669525048793",
+        "18118254089471631"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -845,5 +856,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 259,
-  "last_views": 6797
+  "last_views": 6867
 }
