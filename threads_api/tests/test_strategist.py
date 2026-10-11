@@ -396,6 +396,61 @@ def test_follower_stall_needs_two_points():
     assert follower_stall({}) is False
 
 
+def test_pillar_table_ranks_pillars_by_live_velocity(tmp_path):
+    import json
+
+    from threads_api.strategist import pillar_table
+
+    receipts = tmp_path / "posted.jsonl"
+    receipts.write_text(
+        json.dumps({"pillar": "sql", "ids": ["a1", "a2"]}) + "\n"
+        + json.dumps({"pillar": "backend", "ids": ["b1", "b2"]}) + "\n",
+        encoding="utf-8")
+    posts = [_post("x", 100, 5), _post("y", 200, 5), _post("z", 10, 5)]
+    for p, pid in zip(posts, ["a1", "a2", "b1"]):
+        p["id"] = pid
+    table = pillar_table(
+        posts,
+        pillar_map={"a1": "sql", "a2": "sql", "b1": "backend"})
+    assert set(table) == {"sql"}
+    assert table["sql"]["n"] == 2
+
+    table2 = pillar_table(posts)
+    assert isinstance(table2, dict)
+
+
+def test_follower_trail_returns_recent_snapshots():
+    from threads_api.strategist import follower_trail
+
+    state = {"history": [
+        {"followers": 250}, {"nope": 1}, {"followers": 255},
+        {"followers": 259}]}
+    assert follower_trail(state) == [250, 255, 259]
+
+
+def test_prompt_includes_pillar_table_and_trail(tmp_path):
+    posts = [_post("winner sql", 500, 5), _post("winner sql 2", 400, 6),
+             _post("flop be", 5, 7)]
+    for p, pid in zip(posts, ["a1", "a2", "b1"]):
+        p["id"] = pid
+    pmap = {"a1": "sql", "a2": "sql", "b1": "backend"}
+    from threads_api.strategist import pillar_table
+    import threads_api.strategist as st
+
+    real_table = st.pillar_table
+    st.pillar_table = lambda ps, pillar_map=None: real_table(ps, pmap)
+    try:
+        state = {"hypothesis": "x", "history": [
+            {"followers": 255}, {"followers": 259}]}
+        prompt = build_prompt(evaluate(posts), state, posts=posts)
+        assert "PILLAR TABLE" in prompt
+        assert "sql" in prompt
+        assert "Follower trail" in prompt
+        assert "255, 259" in prompt
+    finally:
+        st.pillar_table = real_table
+
+
 def test_record_run_saves_texts_model_hypothesis(tmp_path):
     from threads_api.strategist import load_strategy, record_run
 

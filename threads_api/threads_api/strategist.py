@@ -319,6 +319,59 @@ def ascii_clean(text):
     return re.sub(r"[—–‐‑]", "-", text)
 
 
+def read_pillar_map(path=None):
+    """Map published post id -> pillar from posted.jsonl receipts."""
+    receipts = path or Config.ROOT / "queue" / "posted.jsonl"
+    id_to_pillar = {}
+    try:
+        with open(receipts, encoding="utf-8") as handle:
+            for line in handle:
+                try:
+                    receipt = json.loads(line)
+                except ValueError:
+                    continue
+                for pid in receipt.get("ids", []):
+                    id_to_pillar[pid] = receipt.get("pillar", "?")
+    except OSError:
+        pass
+    return id_to_pillar
+
+
+def pillar_table(posts, pillar_map=None):
+    """Median velocity per pillar from live numbers. Posts with no
+    matching receipt (too old) group under '?'. Pillars with <2
+    measured posts are omitted (noise)."""
+    import statistics
+
+    if pillar_map is None:
+        pillar_map = read_pillar_map()
+    buckets = {}
+    now = datetime.datetime.now(datetime.timezone.utc)
+    for post in posts:
+        metrics = post.get("metrics") or {}
+        if metrics.get("views") is None:
+            continue
+        age = _age_hours(post, now)
+        if age < JUDGE_AFTER_HOURS:
+            continue
+        pillar = pillar_map.get(post.get("id"), "?")
+        buckets.setdefault(pillar, []).append(
+            views_of(post) / max(age, 0.1))
+    table = {}
+    for pillar, speeds in buckets.items():
+        if len(speeds) >= 2:
+            table[pillar] = {"n": len(speeds),
+                             "med_vph": round(statistics.median(speeds), 1)}
+    return table
+
+
+def follower_trail(strategy, points=7):
+    """Recent follower snapshots from run history, oldest first."""
+    trail = [h.get("followers") for h in strategy.get("history", [])
+             if isinstance(h, dict) and h.get("followers") is not None]
+    return trail[-points:]
+
+
 def analytics_digest(scorecard):
     """Compact account-analytics block: daily view trajectory plus the
     best and worst judged posts with full numbers."""
@@ -350,7 +403,7 @@ def analytics_digest(scorecard):
     return "\n".join(lines)
 
 
-def build_prompt(scorecard, strategy, progress=None):
+def build_prompt(scorecard, strategy, progress=None, posts=None):
     """Strategist prompt: scorecard in, thread + hypothesis out."""
     lines = [
         f"MISSION: reach {VIEWS_GOAL:,} views and {FOLLOWERS_GOAL:,} "
@@ -411,6 +464,24 @@ def build_prompt(scorecard, strategy, progress=None):
     digest = analytics_digest(scorecard)
     if digest:
         lines.append(digest)
+    if posts is not None:
+        table = pillar_table(posts)
+        if table:
+            cells = ", ".join(
+                f"{pillar}: {info['n']} posts med {info['med_vph']}/h"
+                for pillar, info in sorted(
+                    table.items(), key=lambda kv: -kv[1]["med_vph"]))
+            lines.append(
+                "PILLAR TABLE (live median velocity per pillar — "
+                f"favor winners, starve losers): {cells}."
+            )
+    trail = follower_trail(strategy)
+    if len(trail) >= 2:
+        lines.append(
+            "Follower trail (recent runs, oldest first): "
+            + ", ".join(str(v) for v in trail) + ". Growing means the "
+            "current mix converts; flat means reach is not converting."
+        )
     history = [h for h in strategy.get("history", []) if isinstance(h, dict)]
     if history:
         lines.append("Your recent decisions and what they were:")

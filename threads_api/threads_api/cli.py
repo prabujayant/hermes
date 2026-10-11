@@ -208,7 +208,7 @@ def _cmd_post_smart(args):
         f"hypothesis: {strategy['hypothesis'][:80]}"
     )
 
-    prompt = build_prompt(scorecard, strategy, progress)
+    prompt = build_prompt(scorecard, strategy, progress, posts)
     if args.dry_run:
         print("DRY-RUN: scorecard above, no LLM call, nothing published")
         return 0
