@@ -110,7 +110,8 @@
     "most teams pick databases by resume-driven development or",
     "database choice matters less than the access patterns",
     "if you want to become a senior engineer",
-    "decision test: name the query that could force"
+    "decision test: name the query that could force",
+    "costly mistake: we picked postgres for a time-series"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

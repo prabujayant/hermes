@@ -1,21 +1,8 @@
 {
-  "hypothesis": "A practical database choice test with a named migration trigger will earn more specific replies than broad interview advice.",
-  "pivots": 76,
+  "hypothesis": "A database choice framed around a real workload and explicit migration trigger will earn more specific replies than broad selection advice.",
+  "pivots": 77,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T12:01:10.330447+00:00",
-      "pillar": "smart",
-      "hook_sig": "code coverage targets are the biggest lie in",
-      "ids": [
-        "18106729328578834",
-        "18068445320786871",
-        "18115088467957159",
-        "18179993491428810",
-        "18130142749702684"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-10T13:01:10.528865+00:00",
       "pillar": "smart",
@@ -1143,6 +1130,31 @@
         "18157778257510683"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T23:31:00.655001+00:00",
+      "pillar": "smart",
+      "hook_sig": "costly mistake: we picked postgres for a time-series",
+      "texts": [
+        "costly mistake: we picked postgres for a time-series metrics pipeline because the team knew it. the workload was append-heavy, 50k inserts per second, retention 30 days, rollups every minute. we ignored the access pattern and paid for it in vacuum churn and autovacuum blockers.",
+        "the signal we should have defined upfront: when insert latency p99 crosses 200ms for three consecutive rollup windows, we migrate to timescaledb. that single metric would have caught the vacuum debt two weeks before the incident. instead we waited for alerts to page us at 2am.",
+        "the migration trigger is not \"when it feels slow.\" it is a concrete, observable threshold tied to the workload's SLI. for this pipeline it was insert p99. for a payment ledger it might be serializable abort rate. for a search index it might be p99 latency on the 95th percentile query.",
+        "most teams pick the database and hope. the senior move is picking the database and writing the migration runbook before the first deploy. name the workload, name the SLI, name the threshold, name the target. if you cannot name all four, you are guessing.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A database choice framed around a real workload and explicit migration trigger will earn more specific replies than broad selection advice.",
+      "breakout": "none",
+      "followers": 262,
+      "views_total": 11731,
+      "ids": [
+        "18106403765261495",
+        "17914242567493384",
+        "17894477511427127",
+        "18124750123748768",
+        "18412234426086616"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1152,5 +1164,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 262,
-  "last_views": 11444
+  "last_views": 11731
 }
