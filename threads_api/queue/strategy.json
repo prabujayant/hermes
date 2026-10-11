@@ -1,21 +1,8 @@
 {
-  "hypothesis": "A concrete, copy-pasteable deterministic race test with a barrier will earn more saves and follows than general AI debugging advice because it gives readers an immediate verification tool they can run today.",
+  "hypothesis": "A copy-pasteable barrier test that exposes an AI-generated race-condition fix will earn more saves and follows than general debugging advice; end with a relevant follow CTA.",
   "pivots": 50,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-09T06:01:10.820592+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to become a senior engineer",
-      "ids": [
-        "18123822004899715",
-        "18103187195010664",
-        "18177558859382759",
-        "18118430069277898",
-        "18636798790052404"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-09T07:01:17.953697+00:00",
       "pillar": "smart",
@@ -818,6 +805,29 @@
         "18107574251266538"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-11T08:01:09.429691+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want ai to write code you",
+      "texts": [
+        "IF YOU WANT AI TO WRITE CODE YOU CAN SHIP, STOP PASTING BLINDLY.\n\nMEMORIZE THESE 5 RULES:",
+        "Give the model your constraints first.\n\nStack, versions, style rules, what done looks like. Vague prompts get vague code.",
+        "Review every diff like a junior wrote it.\n\nAI code looks confident and fails quietly. Read it line by line before it touches main.",
+        "Keep humans on architecture.\n\nLet AI fill functions, never design systems. You own the boundaries, it fills the boxes.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A copy-pasteable barrier test that exposes an AI-generated race-condition fix will earn more saves and follows than general debugging advice; end with a relevant follow CTA.",
+      "breakout": "none",
+      "ids": [
+        "18133258888680872",
+        "18078658373394620",
+        "18105727051984760",
+        "18016296269747019",
+        "17953256187256721"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -827,5 +837,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 259,
-  "last_views": 5938
+  "last_views": 6162
 }
