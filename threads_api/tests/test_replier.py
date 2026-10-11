@@ -79,3 +79,48 @@ def test_prompt_lists_every_comment():
     ])
     assert "[c1]" in prompt and "[c2]" in prompt
     assert "280" in prompt
+
+
+def _stamp(hours_ago):
+    born = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(
+        hours=hours_ago)
+    return born.strftime("%Y-%m-%dT%H:%M:%S+0000")
+
+
+def test_already_answered_live_detects_own_newer_reply():
+    from threads_api.replier import already_answered_live
+
+    class FakeClient:
+        def _get(self, endpoint, params):
+            return {"data": [
+                {"username": "fan", "timestamp": _stamp(5)},
+                {"username": "owlsky17", "timestamp": _stamp(4)},
+            ]}
+
+    comment = {"id": "c1", "root": "p1", "timestamp": _stamp(5)}
+    assert already_answered_live(FakeClient(), "owlsky17", comment) is True
+
+
+def test_already_answered_live_false_without_own_reply():
+    from threads_api.replier import already_answered_live
+
+    class FakeClient:
+        def _get(self, endpoint, params):
+            return {"data": [
+                {"username": "fan", "timestamp": _stamp(5)},
+                {"username": "owlsky17", "timestamp": _stamp(6)},
+            ]}
+
+    comment = {"id": "c1", "root": "p1", "timestamp": _stamp(5)}
+    assert already_answered_live(FakeClient(), "owlsky17", comment) is False
+
+
+def test_already_answered_live_fails_open():
+    from threads_api.replier import already_answered_live
+
+    class BrokenClient:
+        def _get(self, endpoint, params):
+            raise RuntimeError("down")
+
+    comment = {"id": "c1", "root": "p1", "timestamp": _stamp(5)}
+    assert already_answered_live(BrokenClient(), "owlsky17", comment) is False

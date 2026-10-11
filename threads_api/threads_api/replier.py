@@ -87,6 +87,7 @@ def collect_pending(client, own_username, max_threads=10,
                 "id": cid,
                 "author": comment.get("username", "?"),
                 "text": (comment.get("text") or "")[:300],
+                "timestamp": comment.get("timestamp", ""),
                 "root": post["id"],
             })
     pending.sort(key=lambda c: c["id"])
@@ -130,6 +131,37 @@ def parse_replies(raw, wanted_ids):
     if not found:
         raise ValueError("no usable replies parsed")
     return found
+
+
+def already_answered_live(client, own_username, comment):
+    """True when one of our posts in the thread is newer than the comment.
+
+    Catches overlapping runs: run A published a reply seconds ago while
+    run B holds a stale answered-list. Conservative by design (may skip
+    a legit second reply in a busy thread). API errors fail open.
+    """
+    try:
+        conv = client._get(comment["root"] + "/conversation",
+                           {"fields": "username,timestamp", "limit": 50})
+    except Exception:
+        return False
+    try:
+        born = datetime.datetime.strptime(
+            comment.get("timestamp", ""), "%Y-%m-%dT%H:%M:%S%z")
+    except ValueError:
+        return False
+    for post in conv.get("data", []):
+        if (post.get("username", "") or "").lower() != \
+                (own_username or "").lower():
+            continue
+        try:
+            moment = datetime.datetime.strptime(
+                post.get("timestamp", ""), "%Y-%m-%dT%H:%M:%S%z")
+        except ValueError:
+            continue
+        if moment > born:
+            return True
+    return False
 
 
 def validate_reply(text):
@@ -187,6 +219,10 @@ def answer_pending(client, llm_chat, models, max_replies=MAX_REPLIES_PER_RUN,
         problems = validate_reply(text)
         if problems:
             skipped.append(f"{comment['id']}: {'; '.join(problems)}")
+            continue
+        if already_answered_live(client, me, comment):
+            skipped.append(f"{comment['id']}: answered live already")
+            answered.add(comment["id"])
             continue
         try:
             container = client.create_text_container(
