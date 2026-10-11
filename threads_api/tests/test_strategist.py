@@ -359,6 +359,35 @@ def test_judged_items_carry_full_metrics_and_ids():
         assert key in first
 
 
+def test_follower_stall_fires_on_flat_week():
+    import datetime
+
+    from threads_api.strategist import follower_stall
+
+    now = datetime.datetime.now(datetime.timezone.utc)
+    hist = [{"run_at": (now - datetime.timedelta(days=d)).isoformat(),
+             "followers": 259} for d in range(6)]
+    assert follower_stall({"history": hist}, now=now) is True
+
+
+def test_follower_stall_quiet_on_growth():
+    import datetime
+
+    from threads_api.strategist import follower_stall
+
+    now = datetime.datetime.now(datetime.timezone.utc)
+    hist = [{"run_at": (now - datetime.timedelta(days=d)).isoformat(),
+             "followers": 259 + (5 - d) * 3} for d in range(6)]
+    assert follower_stall({"history": hist}, now=now) is False
+
+
+def test_follower_stall_needs_two_points():
+    from threads_api.strategist import follower_stall
+
+    assert follower_stall({"history": []}) is False
+    assert follower_stall({}) is False
+
+
 def test_record_run_saves_texts_model_hypothesis(tmp_path):
     from threads_api.strategist import load_strategy, record_run
 

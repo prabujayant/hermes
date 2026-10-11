@@ -666,8 +666,34 @@ def soft_validate(posts):
     return problems
 
 
+def follower_stall(state, now=None, days=7, min_gain=5):
+    """True when follower growth is flat over the trailing window.
+
+    Luna's prescribed second trigger: views can pass the floor while the
+    account itself stalls. Reads follower snapshots from run history.
+    """
+    now = now or datetime.datetime.now(datetime.timezone.utc)
+    cutoff = now - datetime.timedelta(days=days)
+    points = []
+    for entry in state.get("history", []):
+        if not isinstance(entry, dict):
+            continue
+        followers = entry.get("followers")
+        stamp = entry.get("run_at", "")
+        try:
+            moment = datetime.datetime.fromisoformat(stamp)
+        except ValueError:
+            continue
+        if followers is not None and moment >= cutoff:
+            points.append(followers)
+    if len(points) < 2:
+        return False
+    return max(points) - min(points) < min_gain
+
+
 def record_run(state, pillar, posts, ids, run_at, pivoted, model=None,
-               breakout="", path=STRATEGY_PATH):
+               breakout="", followers=None, views_total=None,
+               path=STRATEGY_PATH):
     """Save draft + outcome accountability: full texts, model, hypothesis.
 
     Later runs re-fetch live metrics for these IDs, so each entry links
@@ -684,6 +710,8 @@ def record_run(state, pillar, posts, ids, run_at, pivoted, model=None,
         "model": model,
         "hypothesis": (state.get("hypothesis") or "")[:300],
         "breakout": (breakout or "")[:300],
+        "followers": followers,
+        "views_total": views_total,
         "ids": ids,
         "pivoted": pivoted,
     }

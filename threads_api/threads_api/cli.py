@@ -187,7 +187,12 @@ def _cmd_post_smart(args):
     posts = fetch_posts(client, max_posts=40, max_workers=20)
     scorecard = evaluate(posts, now=now)
     strategy = load_strategy()
-    pivoted = scorecard["pivot"]
+    from .strategist import follower_stall
+
+    stalled = follower_stall(strategy, now=now)
+    pivoted = scorecard["pivot"] or stalled
+    if stalled:
+        print("Follower growth flat 7d: forcing pivot")
     from .insights import extract_account_totals
 
     try:
@@ -334,7 +339,9 @@ def _cmd_post_smart(args):
         strategy["hypothesis"] = hypothesis[:300]
     record_run(strategy, "smart", thread, ids, run_at, pivoted,
                model=llm_module.last_model,
-               breakout=(direction or {}).get("breakout", ""))
+               breakout=(direction or {}).get("breakout", ""),
+               followers=progress["followers"],
+               views_total=progress["views_total"])
     save_strategy(strategy)
     print(f"Posted smart thread ({len(ids)}): {ids[0]}")
 
