@@ -1,21 +1,8 @@
 {
-  "hypothesis": "A specific concurrency test readers can adapt will earn more saves and useful replies than another general lesson about verifying AI fixes.",
-  "pivots": 64,
+  "hypothesis": "A deterministic, stack-adaptable race test with a clear invariant will earn more saves and useful replies than another general lesson about AI fixes.",
+  "pivots": 65,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T00:01:11.424148+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to crack coding interviews, stop",
-      "ids": [
-        "18127416610860439",
-        "18030352868904031",
-        "18380470822230957",
-        "18106795676255105",
-        "18149613787540957"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-10T01:01:07.295939+00:00",
       "pillar": "smart",
@@ -1012,6 +999,31 @@
         "18371361553211570"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T17:31:02.277018+00:00",
+      "pillar": "smart",
+      "hook_sig": "i spent two days watching an ai agent",
+      "texts": [
+        "I spent two days watching an AI agent \"fix\" a read-modify-write race on a credit balance endpoint. The diff looked perfect, row locking, serializable isolation, compare-and-swap loop. Every unit test passed. Load tests passed. Then two real users spent the same credit at the exact same millisecond and the balance went negative.",
+        "The problem is not the fix. The problem is the test. Ordinary tests run sequentially. Even \"concurrent\" tests usually spawn threads and hope for a collision. Hope is not a strategy. You need to force the exact interleaving: both threads read the same balance, both compute the new balance, both write. Only then do you know if the invariant holds.",
+        "Here is the copyable recipe. Use a barrier to pause both threads after the read, before the write. Release them simultaneously. Assert the final balance equals initial minus sum of spends. If the test passes, remove the fix and run it again. If it still passes, your test never caught the bug in the first place.",
+        "Pseudo-code: start two threads, each reads balance at barrier A, barrier waits for both, release, each writes new balance, join, assert invariant. For the removal check, comment out the locking or CAS logic, rerun. The test must fail. If it does not, add more precise timing or a second barrier after the write to catch lost updates.",
+        "What stack are you on? Postgres advisory locks, Redis Lua, Java synchronized, Go mutex, C# lock? Reply with your stack and I will post a tailored adaptation next. Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A deterministic, stack-adaptable race test with a clear invariant will earn more saves and useful replies than another general lesson about AI fixes.",
+      "breakout": "none",
+      "followers": 261,
+      "views_total": 9553,
+      "ids": [
+        "18139752826628416",
+        "18130772216493974",
+        "17893039449615189",
+        "18128910613866136",
+        "17877298914565964"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1021,5 +1033,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 261,
-  "last_views": 9438
+  "last_views": 9553
 }
