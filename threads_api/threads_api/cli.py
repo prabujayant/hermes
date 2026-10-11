@@ -555,15 +555,29 @@ def _pick_fresh_thread(exclude_live=True):
 def _publish_resilient(client, thread):
     """Publish with Meta-flake tolerance. Returns post ids.
 
-    Retries network errors 3x with backoff. On API errors (code 24
-    during replication-lag windows, observed lasting over an hour)
-    retries the SAME thread at 60s and 180s before giving up — caller
-    falls back to a different thread only after all attempts fail.
+    Checks the hook is not already live before EVERY attempt (catches
+    overlapping runs, retries after ambiguous failures, and replays
+    after lost receipts). Retries network errors 3x with backoff. On
+    API errors (code 24 during replication-lag windows, observed
+    lasting over an hour) retries the SAME thread at 60s and 180s
+    before giving up — caller falls back to a different thread only
+    after all attempts fail.
     """
     import time
 
+    from .client import DuplicatePostError
+    from .strategist import hook_is_live
+
+    def _guard_live():
+        if hook_is_live(client, thread[0]):
+            raise DuplicatePostError(
+                f"hook already live, refusing to duplicate: "
+                f"{thread[0][:80]}"
+            )
+
     backoff = 10
     for attempt in range(3):
+        _guard_live()
         try:
             return client.publish_thread(thread, reply_wait_seconds=60)
         except requests.RequestException as exc:
@@ -586,6 +600,7 @@ def _publish_resilient(client, thread):
             )
             time.sleep(wait)
             try:
+                _guard_live()
                 return client.publish_thread(thread, reply_wait_seconds=60)
             except (ThreadsAPIError, requests.RequestException) as exc2:
                 if attempt == len(waits) - 1:

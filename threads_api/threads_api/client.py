@@ -17,6 +17,14 @@ class ThreadsAPIError(Exception):
     """Raised when the Threads API returns an error payload."""
 
 
+class DuplicatePostError(ThreadsAPIError):
+    """Raised when the hook is already live: publishing would duplicate.
+
+    Subclasses ThreadsAPIError so existing retry/fallback handlers treat
+    it as a content rejection (pick a different thread), and main()
+    prints it cleanly instead of a traceback."""
+
+
 class ThreadsClient:
     """Minimal client for the Threads Graph API (graph.threads.net)."""
 

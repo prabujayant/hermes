@@ -288,6 +288,25 @@ def evaluate(posts, now=None):
     }
 
 
+def hook_is_live(client, hook_text, limit=10):
+    """True when a post with the same hook signature is already live.
+
+    Catches every duplication path: overlapping runs with stale state,
+    retries after ambiguous failures, and bank replays after lost
+    receipts. Network errors return False (fail open: a missed duplicate
+    beats a skipped hour).
+    """
+    try:
+        page = client.list_posts(limit=limit)
+    except Exception:
+        return False
+    sig = hook_signature(hook_text or "")
+    for post in page.get("data", []):
+        if hook_signature(post.get("text") or "") == sig and sig:
+            return True
+    return False
+
+
 def ascii_clean(text):
     """Replace em/en dashes and fancy hyphens so the model never sees
     (and copies) them in scorecards, hypotheses, or examples."""

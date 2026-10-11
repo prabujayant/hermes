@@ -1,7 +1,45 @@
 import pytest
 
 from threads_api.cli import _publish_resilient
-from threads_api.client import ThreadsAPIError
+from threads_api.client import DuplicatePostError, ThreadsAPIError
+
+
+def test_refuses_when_hook_already_live(monkeypatch):
+    from threads_api.strategist import hook_is_live
+
+    monkeypatch.setattr("time.sleep", lambda s: None)
+
+    class FakeClient:
+        def list_posts(self, limit=10):
+            return {"data": [{"text": "MARKET CRASH holdings here now"}]}
+
+        def publish_thread(self, thread, reply_wait_seconds=60):
+            raise AssertionError("must not publish a duplicate")
+
+    with pytest.raises(DuplicatePostError, match="already live"):
+        _publish_resilient(FakeClient(), ["MARKET CRASH holdings here now"])
+    assert issubclass(DuplicatePostError, ThreadsAPIError)
+
+
+def test_hook_is_live_matches_signatures():
+    from threads_api.strategist import hook_is_live
+
+    class FakeClient:
+        def list_posts(self, limit=10):
+            return {"data": [{"text": "AN AGENT told me the race was fixed today"}]}
+
+    assert hook_is_live(FakeClient(), "AN AGENT told me the race was fixed today") is True
+    assert hook_is_live(FakeClient(), "Something entirely different here") is False
+
+
+def test_hook_is_live_fails_open_on_errors():
+    from threads_api.strategist import hook_is_live
+
+    class BrokenClient:
+        def list_posts(self, limit=10):
+            raise ThreadsAPIError("down (code 1)")
+
+    assert hook_is_live(BrokenClient(), "anything at all") is False
 
 
 def test_retries_same_thread_after_api_error(monkeypatch):
