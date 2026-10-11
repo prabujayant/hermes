@@ -347,6 +347,14 @@ def test_no_pivot_without_minimum_sample():
     assert score["pivot"] is False
 
 
+def test_scorecard_reports_24h_post_count():
+    posts = [_post("a", 100, 5), _post("b", 100, 30), _post("c", 100, 2)]
+    score = evaluate(posts)
+    assert score["posts_24h"] == 2
+    prompt = build_prompt(score, {"hypothesis": "x"})
+    assert "Posting cadence:" in prompt
+
+
 def test_judged_items_carry_full_metrics_and_ids():
     posts = [_post("winner", 500, 7), _post("flop", 5, 6),
              _post("mid", 100, 5)]

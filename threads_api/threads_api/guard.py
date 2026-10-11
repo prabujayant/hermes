@@ -1,4 +1,4 @@
-"""Stdlib-only schedule guard for the hourly worker.
+"""Stdlib-only schedule guard for the auto-poster worker.
 
 Single source of truth for the skip policy, shared by cli.py and the
 GitHub workflow (which runs this *before* pip install so no-op hours

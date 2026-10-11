@@ -1,6 +1,7 @@
 """Autonomous strategist: measure views, decide the next thread, pivot.
 
-Closed loop (runs hourly, free models only — never paid in auto mode):
+Closed loop (runs on schedule, currently ~every 30 min; Luna base
+decides, Nemotron writes, free fallbacks behind both):
   1. MEASURE: fetch recent posts + insights, score posts old enough to
      judge (>= 3h), compare against the rolling median.
   2. DECIDE: one LLM call gets the scorecard + current hypothesis and
@@ -141,7 +142,7 @@ def sprint_status(today=None, followers=None, views=None):
 JUDGE_AFTER_HOURS = 3
 UNDERPERFORM_RATIO = 0.5
 PIVOT_STREAK = 2
-LOOKBACK_POSTS = 20
+LOOKBACK_POSTS = 30
 # No pivot without at least this many measured posts (small samples lie).
 MIN_JUDGED = 3
 # Velocity floor (views/hour) so dead-quiet accounts still get signal.
@@ -276,12 +277,14 @@ def evaluate(posts, now=None):
         else:
             break
 
+    posts_24h = sum(1 for p in posts if _age_hours(p, now) <= 24)
     ready = len(judged) >= MIN_JUDGED
     return {
         "median_vph": round(median_vph, 1),
         "floor_vph": round(floor_vph, 1),
         "judged": judged,
         "sample_size": len(judged),
+        "posts_24h": posts_24h,
         "streak": streak,
         "ready": ready,
         "pivot": ready and streak >= PIVOT_STREAK,
@@ -387,6 +390,9 @@ def build_prompt(scorecard, strategy, progress=None):
         f"(need {MIN_JUDGED} for strategy changes). "
         f"Median velocity: {scorecard['median_vph']} views/h, "
         f"underperform line: {scorecard['floor_vph']} views/h. "
+        f"Posting cadence: {scorecard.get('posts_24h', '?')} threads in "
+        "the last 24h — pace your experiments to it (more posts means "
+        "faster learning, each post must still earn its slot). "
         "Reach decides; engagement rate only breaks ties.",
         f"Underperform streak: {scorecard['streak']} "
         f"(pivot at {PIVOT_STREAK}).",

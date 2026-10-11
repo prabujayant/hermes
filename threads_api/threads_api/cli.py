@@ -204,6 +204,7 @@ def _cmd_post_smart(args):
         f"n={scorecard['sample_size']} median {scorecard['median_vph']}/h, "
         f"floor {scorecard['floor_vph']}/h, streak {scorecard['streak']}, "
         f"pivot={pivoted}, followers={progress['followers']}, "
+        f"posts24h={scorecard['posts_24h']}, "
         f"hypothesis: {strategy['hypothesis'][:80]}"
     )
 
