@@ -1,22 +1,8 @@
 {
-  "hypothesis": "A deterministic, stack-adaptable race test with a clear invariant will earn more saves and useful replies than another general lesson about AI fixes.",
-  "pivots": 65,
+  "hypothesis": "Sahil Bloom ICO hook with a concrete production failure story will outperform recent race-condition threads by opening a relatable pain loop and delaying the payoff to post 4, earning saves and profile clicks from engineers who have lived this.",
+  "pivots": 66,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T01:01:07.295939+00:00",
-      "pillar": "smart",
-      "hook_sig": "a senior engineer once told me the best",
-      "ids": [
-        "18094389221169585",
-        "18477124837117793",
-        "18145490218567952",
-        "18146243614520096",
-        "18129389875892562",
-        "17983932981095288"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-10T02:01:14.170215+00:00",
       "pillar": "smart",
@@ -1024,6 +1010,31 @@
         "17877298914565964"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T18:01:15.393496+00:00",
+      "pillar": "smart",
+      "hook_sig": "i added redis to fix a slow dashboard",
+      "texts": [
+        "I added Redis to fix a slow dashboard query. The query dropped from 800ms to 12ms. Two weeks later the dashboard showed stale data during a flash sale. Customers saw sold-out items as available. Orders failed. Support exploded. The cache was the problem, not the solution.",
+        "The query joined orders, inventory, and pricing tables. It scanned 50k rows. Indexes helped but not enough. So I cached the full JSON response with a 60 second TTL. Simple. Clean. The latency graph looked beautiful. Then the sale started.",
+        "Cache invalidation on write seems obvious. Invalidate the key when inventory changes. But the pricing service updates via async event. The inventory service updates via direct write. The order service writes too. Three writers. One cache key. The race window was 400ms. Enough for 200 stale reads.",
+        "The fix was not better invalidation. It was removing the cache for that endpoint. The query now runs in 45ms with a covering index. No stale data. No invalidation logic. No distributed cache complexity. Sometimes the fastest cache is no cache at all.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Sahil Bloom ICO hook with a concrete production failure story will outperform recent race-condition threads by opening a relatable pain loop and delaying the payoff to post 4, earning saves and profile clicks from engineers who have lived this.",
+      "breakout": "",
+      "followers": 261,
+      "views_total": 9678,
+      "ids": [
+        "17888260503478454",
+        "18081768965386918",
+        "18112201667123792",
+        "18124978381799238",
+        "18140322274612372"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1033,5 +1044,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 261,
-  "last_views": 9553
+  "last_views": 9678
 }
