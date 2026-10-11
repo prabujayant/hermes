@@ -76,7 +76,8 @@
     "if you want to pass system design interviews,",
     "most ai agent debugging advice you read is",
     "an agent just told me the race condition",
-    "if you want to become a senior engineer"
+    "if you want to become a senior engineer",
+    "most concurrency tests are theater. they mock the"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
