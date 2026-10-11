@@ -1,22 +1,8 @@
 {
-  "hypothesis": "A compact selection framework grounded in a worked example will earn more saves and specific replies than another race-condition post.",
-  "pivots": 69,
+  "hypothesis": "A worked storage-choice example with clear tradeoffs will earn more saves and specific replies than generic interview advice.",
+  "pivots": 70,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T05:01:10.632146+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent three days hunting a bug that",
-      "ids": [
-        "18137301301653019",
-        "18060188816635676",
-        "18138765580715273",
-        "18113092982149138",
-        "17919329610241308",
-        "18369334423244830"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-10T06:01:10.810937+00:00",
       "pillar": "smart",
@@ -1069,6 +1055,31 @@
         "17988312957078401"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T20:01:10.434307+00:00",
+      "pillar": "smart",
+      "hook_sig": "i'm picking a database for a payment-ledger service",
+      "texts": [
+        "I'm picking a database for a payment-ledger service that does 5k writes/sec, needs strict serializability, and must survive a region outage without manual failover. No hype, just the constraints that ruled things out.",
+        "Postgres with synchronous replication gave us the consistency but the failover latency blew past our RTO. CockroachDB handled the geo spread but the contention on hot account rows killed throughput. Spanner was the technical fit but the vendor lock-in cost was a non-starter for this org.",
+        "The framework that actually worked: write down your three non-negotiables first. For us it was linearizable writes, automatic multi-region failover under 30 seconds, and zero cold-start penalty on read replicas. Every database that failed one got crossed off before we looked at benchmarks.",
+        "We landed on FoundationDB with a thin transaction layer. It forces you to model data as key ranges, which feels wrong at first, but the conflict-free replication and deterministic recovery meant our chaos tests passed on the first try. The operational burden is real though, no managed offering yet.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A worked storage-choice example with clear tradeoffs will earn more saves and specific replies than generic interview advice.",
+      "breakout": "none",
+      "followers": 262,
+      "views_total": 10330,
+      "ids": [
+        "18118714810748927",
+        "18430751407145960",
+        "18631982368037592",
+        "18128376712871844",
+        "18134669959709937"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1077,6 +1088,6 @@
     "mandate": "200000 views in 30 days by 2026-11-10",
     "since": "2026-10-10"
   },
-  "last_followers": 261,
-  "last_views": 10131
+  "last_followers": 262,
+  "last_views": 10330
 }
