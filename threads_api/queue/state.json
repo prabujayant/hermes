@@ -85,7 +85,8 @@
     "an agent told me the race condition was",
     "things ai coding assistants can't tell you (so",
     "if you want behavioral rounds to remember you,",
-    "reproducible failure: the agent says the race is"
+    "reproducible failure: the agent says the race is",
+    "your agent says the race condition is fixed."
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
