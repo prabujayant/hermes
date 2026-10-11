@@ -1,21 +1,8 @@
 {
-  "hypothesis": "A single reproducible concurrency stress test with a clear pass/fail assertion will outperform broad verification checklists because it gives developers an immediate copy-pasteable quality gate they can run today.",
+  "hypothesis": "A concrete concurrency test developers can run immediately will earn more saves and follows than general advice about verifying code.",
   "pivots": 50,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-09T01:01:08.521331+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to debug faster, stop reading",
-      "ids": [
-        "18341551483285459",
-        "18069950609765077",
-        "18097737524346202",
-        "18116523380075428",
-        "18135883054642565"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-09T02:01:07.797697+00:00",
       "pillar": "smart",
@@ -769,6 +756,29 @@
         "18100402151567835"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-11T03:01:14.255921+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to become a senior engineer",
+      "texts": [
+        "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:",
+        "Own outcomes, not tickets.\n\nJuniors close tasks. Seniors move metrics. Ask what number your work changes.",
+        "Write the doc nobody wants to write.\n\nDesign docs, runbooks, postmortems. Visibility compounds faster than commits.",
+        "Delete code on purpose.\n\nEvery quarter, kill something: a flag, a service, dead code. Simplifiers get promoted.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete concurrency test developers can run immediately will earn more saves and follows than general advice about verifying code.",
+      "breakout": "none",
+      "ids": [
+        "18088706270249455",
+        "18136896139729733",
+        "18030856376888439",
+        "18345956239253665",
+        "18448362442192369"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -778,5 +788,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 259,
-  "last_views": 4752
+  "last_views": 4972
 }
