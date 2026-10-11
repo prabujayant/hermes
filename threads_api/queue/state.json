@@ -89,7 +89,8 @@
     "your agent says the race condition is fixed.",
     "falsification test: if your test still passes when",
     "most debugging advice tells you how to verify",
-    "i let an ai agent fix a read-modify-write"
+    "i let an ai agent fix a read-modify-write",
+    "most race condition fixes that pass your test"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
