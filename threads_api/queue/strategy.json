@@ -1,23 +1,8 @@
 {
-  "hypothesis": "A worked storage decision tied to access patterns and explicit tradeoffs will earn more saves and specific replies than generic interview advice.",
-  "pivots": 72,
+  "hypothesis": "A debate-format hot take on database selection with concrete migration numbers and explicit access-pattern criteria will drive higher reply velocity than listicle advice, testing whether contrarian storage opinions beat interview frameworks for reach.",
+  "pivots": 73,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T08:01:10.352054+00:00",
-      "pillar": "smart",
-      "hook_sig": "we spent 18 months migrating to microservices. three",
-      "ids": [
-        "18409836646083669",
-        "18050233598815370",
-        "18631284487061051",
-        "18205534372372489",
-        "18121242059288313",
-        "17994585752844354",
-        "18494430169100785"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-10T09:01:08.925246+00:00",
       "pillar": "smart",
@@ -1102,6 +1087,31 @@
         "18195429457389115"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T21:31:04.356803+00:00",
+      "pillar": "smart",
+      "hook_sig": "most teams pick databases by resume-driven development or",
+      "texts": [
+        "Most teams pick databases by resume-driven development or cloud vendor defaults. The correct answer is almost always boring Postgres until your access pattern proves otherwise. Change my mind.",
+        "I watched a team add Redis, Cassandra, and Elasticsearch to a payments service that did 500 writes per second. Postgres handled the load at 2ms p99. The extra systems added 18 months of operational debt and zero business value.",
+        "Access pattern dictates storage. Write-heavy append-only ledger? Postgres with partitioning. Point lookups at 100k rps with sub-millisecond SLA? Add Redis. Full-text search on audit logs? Elasticsearch. Each addition must earn its keep with a load test, not a diagram.",
+        "We migrated a 2TB analytics workload from Snowflake to ClickHouse. Query latency dropped from 45s to 800ms. Cost dropped 70%. The migration took two weeks because we matched the engine to the scan pattern, not the org chart.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A debate-format hot take on database selection with concrete migration numbers and explicit access-pattern criteria will drive higher reply velocity than listicle advice, testing whether contrarian storage opinions beat interview frameworks for reach.",
+      "breakout": "",
+      "followers": 262,
+      "views_total": 10805,
+      "ids": [
+        "18024574943923331",
+        "18127212775853575",
+        "18014320478951383",
+        "18102416849639079",
+        "18091290251682521"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1111,5 +1121,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 262,
-  "last_views": 10639
+  "last_views": 10805
 }
