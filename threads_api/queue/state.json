@@ -90,7 +90,8 @@
     "falsification test: if your test still passes when",
     "most debugging advice tells you how to verify",
     "i let an ai agent fix a read-modify-write",
-    "most race condition fixes that pass your test"
+    "most race condition fixes that pass your test",
+    "i shipped a credit-spend endpoint. an ai agent"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

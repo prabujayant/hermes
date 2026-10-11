@@ -1,21 +1,8 @@
 {
-  "hypothesis": "A concrete, repeatable test exposing a plausible AI-generated fix will earn more saves and follows than general verification advice",
-  "pivots": 56,
+  "hypothesis": "A specific forced-interleaving test will",
+  "pivots": 57,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-09T16:01:15.630606+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "ids": [
-        "18144806392597916",
-        "18060226811796543",
-        "18117778340059051",
-        "18059464169717274",
-        "17996046594010904"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-09T17:01:10.224322+00:00",
       "pillar": "smart",
@@ -918,6 +905,31 @@
         "17985382992119333"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T13:31:01.468558+00:00",
+      "pillar": "smart",
+      "hook_sig": "i shipped a credit-spend endpoint. an ai agent",
+      "texts": [
+        "I shipped a credit-spend endpoint. An AI agent \"fixed\" the read-modify-write race with a compare-and-swap loop. Unit tests passed. Load tests passed. Two users still spent the same credit in production. The fix only worked when requests arrived sequentially.",
+        "The agent gave me clean diff, green CI, and a confident summary. I believed it because the logic looked right: check version, update if unchanged, retry on conflict. But the test harness never made two threads hit the database at the exact same millisecond. It just ran them fast, one after another.",
+        "I wrote a deterministic barrier test. Two threads, one CountDownLatch, one CyclicBarrier. Both acquire the row lock, both hit the barrier, both release together. The database sees two concurrent updates with the same version. One succeeds, one retries -- except the retry reads stale data because the first commit hasn't propagated. The bug reproduces every run.",
+        "The pattern: spin up N threads, synchronize them at the critical line with a barrier, assert the invariant after all complete. No sleeps, no flaky timing, no \"run 1000 times and hope.\" Works for any read-modify-write: inventory decrement, seat reservation, idempotency keys. Paste into a test, run once, see the race or prove it's gone.",
+        "What race in your codebase would you hit with a barrier test first? Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific forced-interleaving test will",
+      "breakout": "none",
+      "followers": 259,
+      "views_total": 8445,
+      "ids": [
+        "17965374557978880",
+        "18077560148544194",
+        "18087178970300561",
+        "18091310639234001",
+        "18029742080884287"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -927,5 +939,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 259,
-  "last_views": 8297
+  "last_views": 8445
 }
