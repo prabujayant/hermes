@@ -94,7 +94,8 @@
     "i shipped a credit-spend endpoint. an ai agent",
     "reproducible proof: a race can pass ordinary tests;",
     "the agent swore the race was fixed. the",
-    "if you want to pass system design interviews,"
+    "if you want to pass system design interviews,",
+    "falsification test: if removing the ai's fix leaves"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
