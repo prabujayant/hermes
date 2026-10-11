@@ -4,19 +4,6 @@
   "streak": 0,
   "history": [
     {
-      "run_at": "2026-10-08T23:01:06.472455+00:00",
-      "pillar": "smart",
-      "hook_sig": "we spend weeks designing perfect abstractions. the code",
-      "ids": [
-        "18012049772970483",
-        "18142480885613324",
-        "18086095265313529",
-        "18638896636060509",
-        "18139265821617588"
-      ],
-      "pivoted": true
-    },
-    {
       "run_at": "2026-10-09T00:01:23.534724+00:00",
       "pillar": "smart",
       "hook_sig": "most engineers treat code reviews as quality gates.",
@@ -755,6 +742,23 @@
         "18080684375706377"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-11T01:01:13.062394+00:00",
+      "pillar": "smart",
+      "hook_sig": "most ai agent debugging advice you read is",
+      "texts": [
+        "Most AI agent debugging advice you read is outdated. The models changed, context windows exploded, and the failure modes shifted entirely. Here are three hard lessons from production that contradict the tutorials.",
+        "Lesson 1: Agents hallucinate function signatures when context exceeds 8k tokens. Fix:\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete, testable AI-agent lesson will earn more attention and trust than broad claims about agent advice.",
+      "breakout": "",
+      "ids": [
+        "17932248171411906",
+        "18105115994366479"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -764,5 +768,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 259,
-  "last_views": 4119
+  "last_views": 4463
 }
