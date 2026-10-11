@@ -1,21 +1,8 @@
 {
-  "hypothesis": "A minimal test that visibly fails without the fix will earn more saves and specific replies than a general checklist.",
-  "pivots": 61,
+  "hypothesis": "A forced-interleaving test for an AI-generated concurrency fix will earn more saves and concrete replies than a test that only removes the fix.",
+  "pivots": 62,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-09T21:01:11.317385+00:00",
-      "pillar": "smart",
-      "hook_sig": "stop writing unit tests for every function. most",
-      "ids": [
-        "17949189081322036",
-        "18194864503398456",
-        "18106851982950564",
-        "18056487596572636",
-        "18120370922064956"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-09T22:01:13.253733+00:00",
       "pillar": "smart",
@@ -979,6 +966,31 @@
         "18224640964338426"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T16:01:14.085453+00:00",
+      "pillar": "smart",
+      "hook_sig": "i shipped a credit-transfer endpoint. the ai agent",
+      "texts": [
+        "I shipped a credit-transfer endpoint. The AI agent added row-level locking, SELECT FOR UPDATE, proper isolation. Every unit test passed. The integration suite passed. We deployed.\n\nTwo hours later the alerts fired. Two users spent the same credit. Only one should have.",
+        "The tests were theater. They ran sequentially. The lock worked because the second request arrived after the first committed. In production both requests hit the database at the same millisecond. Both read the old balance. Both wrote the new balance. The lock only serialized the writes, not the reads.",
+        "I built a deterministic barrier test. Two threads. Both pause at a barrier after the SELECT, before the UPDATE. Release them together. The test fails without the fix. It passes with a compare-and-swap UPDATE or a version column. The race is visible, repeatable, on my laptop.",
+        "Most concurrency tests mock the database or add random sleeps. They pass by luck. A barrier test forces the interleaving that breaks production. It turns a heisenbug into a regression test you can run in CI every commit.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A forced-interleaving test for an AI-generated concurrency fix will earn more saves and concrete replies than a test that only removes the fix.",
+      "breakout": "none",
+      "followers": 261,
+      "views_total": 9143,
+      "ids": [
+        "17952649608269169",
+        "18186491092416258",
+        "18111814301035155",
+        "18149056708557369",
+        "18111207920467093"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -988,5 +1000,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 261,
-  "last_views": 8871
+  "last_views": 9143
 }
