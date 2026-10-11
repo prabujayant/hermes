@@ -791,8 +791,8 @@ def build_parser():
     hourly.add_argument(
         "--max-per-day",
         type=int,
-        default=24,
-        help="Daily post cap (default 24)",
+        default=40,
+        help="Daily post cap (default 40; API allows 250 posts/day)",
     )
     hourly.add_argument(
         "--force",
@@ -817,8 +817,8 @@ def build_parser():
     smart.add_argument(
         "--max-per-day",
         type=int,
-        default=24,
-        help="Daily post cap (default 24)",
+        default=40,
+        help="Daily post cap (default 40; API allows 250 posts/day)",
     )
     smart.set_defaults(func=_cmd_post_smart)
 

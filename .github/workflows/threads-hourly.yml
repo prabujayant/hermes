@@ -3,10 +3,10 @@ name: Threads hourly post
 
 on:
   schedule:
-    # Hourly. (Tried 3x/hour: GitHub deprioritises high-frequency
-    # schedules and fired zero runs in 9h. The 50-min guard keeps
-    # overlapping attempts from double-posting.)
+    # Twice hourly as backup (primary trigger is the external pinger).
+    # The 25-min guard keeps overlapping attempts from double-posting.
     - cron: "7 * * * *"
+    - cron: "37 * * * *"
   workflow_dispatch:
     inputs:
       force:

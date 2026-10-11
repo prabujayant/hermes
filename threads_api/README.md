@@ -119,7 +119,7 @@ python -m threads_api.cli post-hourly --dry-run   # pick + validate only
 python -m threads_api.cli post-hourly             # publish (5 posts, ~2.5 min)
 ```
 
-Guardrails: skips if the last post is <50 min old, caps at 24/day,
+Guardrails: skips if the last post is <25 min old, caps at 40/day,
 rotates pillars, never repeats a hook from the last 30 posts, retries
 API errors 3x with backoff. State lives in `queue/state.json` and
 `queue/posted.jsonl` (both committed).

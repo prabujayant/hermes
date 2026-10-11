@@ -12,8 +12,8 @@ import json
 import sys
 from pathlib import Path
 
-MIN_GAP_MINUTES = 50
-MAX_PER_DAY = 24
+MIN_GAP_MINUTES = 25
+MAX_PER_DAY = 40
 
 
 def should_run(posted_log, now=None,

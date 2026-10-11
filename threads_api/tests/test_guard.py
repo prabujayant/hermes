@@ -62,4 +62,4 @@ def test_main_exit_codes(tmp_path):
     now = datetime.datetime.now(datetime.timezone.utc)
     write_log(log, [now.isoformat()])
     assert main([str(log)]) == 2
-    assert MIN_GAP_MINUTES == 50
+    assert MIN_GAP_MINUTES == 25
