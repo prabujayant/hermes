@@ -101,7 +101,8 @@
     "i let an ai agent \"fix\" a read-modify-write",
     "i spent two days watching an ai agent",
     "i added redis to fix a slow dashboard",
-    "most storage-model advice in system-design interviews is outdated."
+    "most storage-model advice in system-design interviews is outdated.",
+    "decision framework: before naming a database, answer these"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

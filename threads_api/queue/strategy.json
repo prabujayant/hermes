@@ -1,22 +1,8 @@
 {
-  "hypothesis": "A concrete decision framework will earn more saves and specific interview examples in replies than another race-condition post.",
-  "pivots": 67,
+  "hypothesis": "A compact database-selection framework with a worked example will earn more saves and specific replies than another race-condition post.",
+  "pivots": 68,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T03:01:14.314376+00:00",
-      "pillar": "smart",
-      "hook_sig": "we shipped a feature flag system to replace",
-      "ids": [
-        "18392894302160449",
-        "17905231512578076",
-        "18012673280765356",
-        "17943861771348616",
-        "18165641584485104",
-        "18105282961973605"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-10T04:01:11.345360+00:00",
       "pillar": "smart",
@@ -1047,6 +1033,31 @@
         "18192857977401438"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T19:01:10.324113+00:00",
+      "pillar": "smart",
+      "hook_sig": "decision framework: before naming a database, answer these",
+      "texts": [
+        "decision framework: before naming a database, answer these three questions about your workload\n\nmost engineers pick postgres because it's familiar, or mongodb because it's flexible, or redis because it's fast. then they wonder why the query patterns fight the storage engine.\n\ni learned this the hard way on a billing system that melted under write contention.",
+        "question one: what is the read-to-write ratio, and does it shift by time of day?\n\nquestion two: what is the access pattern, point lookups by id, range scans by timestamp, full-text search, graph traversals, time-series aggregations?\n\nquestion three: what are the consistency requirements, can a stale read lose money, break invariants, or just annoy a user?",
+        "worked example: a credit-ledger service. 95 percent writes, 5 percent reads. access pattern: append-only inserts, point lookups by transaction id, range scans by account and date. consistency: zero tolerance for lost writes or double spends.\n\nanswer: postgres with advisory locks for the hot accounts, partitioned by account_id. not mongodb, not cassandra, not a queue.",
+        "the framework stops the default-choice reflex. match the engine to the workload, not the resume.\n\ndrop your workload in a reply, read/write ratio, access patterns, consistency needs, and i'll name the database i'd choose and why.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A compact database-selection framework with a worked example will earn more saves and specific replies than another race-condition post.",
+      "breakout": "none",
+      "followers": 261,
+      "views_total": 9960,
+      "ids": [
+        "18117905260772204",
+        "17904594795353648",
+        "18115767148822301",
+        "18100011620404347",
+        "18030764891911638"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1056,5 +1067,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 261,
-  "last_views": 9774
+  "last_views": 9960
 }
