@@ -107,7 +107,8 @@
     "i'm picking a database for a payment-ledger service",
     "i spent two weeks arguing with my team",
     "if you want behavioral rounds to remember you,",
-    "most teams pick databases by resume-driven development or"
+    "most teams pick databases by resume-driven development or",
+    "database choice matters less than the access patterns"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

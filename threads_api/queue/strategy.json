@@ -1,23 +1,8 @@
 {
-  "hypothesis": "A debate-format hot take on database selection with concrete migration numbers and explicit access-pattern criteria will drive higher reply velocity than listicle advice, testing whether contrarian storage opinions beat interview frameworks for reach.",
-  "pivots": 73,
+  "hypothesis": "A contrarian database-selection post grounded in migration tradeoffs and clear access patterns will earn more specific replies than generic interview advice",
+  "pivots": 74,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T09:01:08.925246+00:00",
-      "pillar": "smart",
-      "hook_sig": "i used to think senior engineers wrote better",
-      "ids": [
-        "18103808978194846",
-        "17902730400667231",
-        "18126343454484406",
-        "18093594380164095",
-        "18058189739563359",
-        "17962013061230271",
-        "18126344776879718"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-10T10:01:11.674393+00:00",
       "pillar": "smart",
@@ -1112,6 +1097,31 @@
         "18091290251682521"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T22:01:09.880648+00:00",
+      "pillar": "smart",
+      "hook_sig": "database choice matters less than the access patterns",
+      "texts": [
+        "database choice matters less than the access patterns you can name and the migration cost you can defend. teams fight over postgres vs mongodb while their query patterns are \"select star where user_id\" and \"give me everything.\" the database won't save you from undefined access patterns.",
+        "imagine migrating a 2tb orders table from postgres to dynamodb. your access patterns: get order by id, list orders by customer with pagination, aggregate revenue by day. in postgres that's three indexes. in dynamodb it's a global secondary index per pattern plus a streaming job for the aggregation. the migration cost isn't the database. it's the six weeks of dual-write validation and the rollback plan nobody wrote.",
+        "name your patterns before you pick the engine. write them as concrete queries: point lookup by pk, range scan by tenant and timestamp, top-k by score with cursor pagination, async aggregation with eventual consistency tolerance. each pattern maps to an index strategy, a partition key, a consistency model. if you can't write the query, you don't have a pattern. you have a wish.",
+        "migration cost has three numbers: data volume, write throughput during cutover, and acceptable inconsistency window. a 50gb table with 1k writes/sec and zero tolerance for stale reads is a different migration than 5tb at 100k writes/sec with five-minute eventual consistency. most teams pick the database first and discover these numbers during the outage.",
+        "what's the last access pattern you documented before choosing a database? Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A contrarian database-selection post grounded in migration tradeoffs and clear access patterns will earn more specific replies than generic interview advice",
+      "breakout": "none",
+      "followers": 262,
+      "views_total": 11073,
+      "ids": [
+        "18132162940780793",
+        "18361233049300263",
+        "18105951356196034",
+        "18128957824882425",
+        "18340818847279564"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1121,5 +1131,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 262,
-  "last_views": 10805
+  "last_views": 11073
 }
