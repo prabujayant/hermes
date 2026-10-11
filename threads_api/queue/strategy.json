@@ -1,21 +1,8 @@
 {
-  "hypothesis": "Contrarian lessons format (Notion co-founder style) on AI agent verification loops will exceed 400 views by combining the proven 516k-view niche-leader mechanic with our highest-variance topic (AI agents), matching P15's caps-listicle velocity while tapping P17's contrarian surface.",
+  "hypothesis": "A concrete, testable AI-agent lesson will earn more attention and trust than broad claims about agent advice.",
   "pivots": 50,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-08T22:01:09.646357+00:00",
-      "pillar": "smart",
-      "hook_sig": "we spent six months optimizing a database query",
-      "ids": [
-        "18356016859174302",
-        "18070213082764334",
-        "18348151474268741",
-        "17921574288444647",
-        "18117116692786074"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-08T23:01:06.472455+00:00",
       "pillar": "smart",
@@ -745,6 +732,29 @@
         "18120063101283555"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-11T00:01:16.493670+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to pass system design interviews,",
+      "texts": [
+        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
+        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
+        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
+        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete, testable AI-agent lesson will earn more attention and trust than broad claims about agent advice.",
+      "breakout": "none",
+      "ids": [
+        "18492921718106433",
+        "17951005638289293",
+        "18088930016242502",
+        "18022286852868655",
+        "18080684375706377"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -754,5 +764,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 259,
-  "last_views": 3948
+  "last_views": 4119
 }
