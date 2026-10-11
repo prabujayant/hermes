@@ -1,22 +1,8 @@
 {
   "hypothesis": "A worked storage decision tied to access patterns and explicit tradeoffs will earn more saves and specific replies than generic interview advice.",
-  "pivots": 71,
+  "pivots": 72,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T07:01:12.698461+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent six months debugging a distributed transaction",
-      "ids": [
-        "18107424788228443",
-        "17986122780103846",
-        "18420354124159066",
-        "18095907674447181",
-        "18114476837015037",
-        "18019680839948983"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-10T08:01:10.352054+00:00",
       "pillar": "smart",
@@ -1091,6 +1077,31 @@
         "18187107673413708"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T21:01:15.024143+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want behavioral rounds to remember you,",
+      "texts": [
+        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
+        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
+        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
+        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A worked storage decision tied to access patterns and explicit tradeoffs will earn more saves and specific replies than generic interview advice.",
+      "breakout": "",
+      "followers": 262,
+      "views_total": 10639,
+      "ids": [
+        "18153993616480684",
+        "18104832833576244",
+        "18019886021944455",
+        "18127949821870655",
+        "18195429457389115"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1100,5 +1111,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 262,
-  "last_views": 10479
+  "last_views": 10639
 }
