@@ -1,22 +1,8 @@
 {
-  "hypothesis": "A compact database-selection framework with a worked example will earn more saves and specific replies than another race-condition post.",
-  "pivots": 68,
+  "hypothesis": "A compact selection framework grounded in a worked example will earn more saves and specific replies than another race-condition post.",
+  "pivots": 69,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T04:01:11.345360+00:00",
-      "pillar": "smart",
-      "hook_sig": "i found a bug that only appeared when",
-      "ids": [
-        "17894971674674140",
-        "18109763924336732",
-        "18310189195305195",
-        "18134612122734600",
-        "18092615900268374",
-        "17909004543550850"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-10T05:01:10.632146+00:00",
       "pillar": "smart",
@@ -1058,6 +1044,31 @@
         "18030764891911638"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T19:31:00.186463+00:00",
+      "pillar": "smart",
+      "hook_sig": "things hiring managers can't tell from your resume",
+      "texts": [
+        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
+        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
+        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
+        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A compact selection framework grounded in a worked example will earn more saves and specific replies than another race-condition post.",
+      "breakout": "none",
+      "followers": 261,
+      "views_total": 10131,
+      "ids": [
+        "18109020269336095",
+        "18446375611126731",
+        "18109607585339004",
+        "18159042331513414",
+        "17988312957078401"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1067,5 +1078,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 261,
-  "last_views": 9960
+  "last_views": 10131
 }
