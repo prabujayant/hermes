@@ -1,21 +1,8 @@
 {
-  "hypothesis": "A runnable deterministic concurrency test will earn more saves and follows than general debugging advice because developers can immediately verify the race and the fix in their own stack.",
+  "hypothesis": "A deterministic, runnable backend test that exposes a double-spend race will earn more saves and follows than general debugging advice",
   "pivots": 50,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-09T03:01:12.889423+00:00",
-      "pillar": "smart",
-      "hook_sig": "stop chasing clean code. the best engineers i",
-      "ids": [
-        "18106597627960408",
-        "18100022705378998",
-        "18097436798439893",
-        "18069098489500892",
-        "18112191557607616"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-09T04:01:09.375940+00:00",
       "pillar": "smart",
@@ -789,6 +776,29 @@
         "17987407956115524"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-11T05:01:10.994472+00:00",
+      "pillar": "smart",
+      "hook_sig": "things that quietly kill engineering careers:",
+      "texts": [
+        "THINGS THAT QUIETLY KILL ENGINEERING CAREERS:",
+        "Never asking questions.\n\nSilent confusion ships bugs. The fastest engineers ask the dumb question on day one.",
+        "Avoiding code review feedback.\n\nDefensiveness freezes growth. Treat every comment as free mentoring.",
+        "Staying comfortable one level too long.\n\nIf you are the expert in every room, you are in the wrong rooms.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A deterministic, runnable backend test that exposes a double-spend race will earn more saves and follows than general debugging advice",
+      "breakout": "none",
+      "ids": [
+        "18125063905908059",
+        "18150326698558239",
+        "18158387995501972",
+        "18114545837029907",
+        "17883069951525081"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -798,5 +808,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 259,
-  "last_views": 5218
+  "last_views": 5384
 }
