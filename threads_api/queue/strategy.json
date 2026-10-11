@@ -1,22 +1,8 @@
 {
-  "hypothesis": "A specific test that exposes plausible-but-false AI fixes will earn more saves and follows than general AI coding advice",
-  "pivots": 54,
+  "hypothesis": "Specific, reproducible tests that expose plausible AI race-condition fixes will earn more saves and follows than broad AI coding advice.",
+  "pivots": 55,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-09T14:01:13.457933+00:00",
-      "pillar": "smart",
-      "hook_sig": "i shipped a config change on a friday.",
-      "ids": [
-        "17992335624066544",
-        "18117761918282247",
-        "18125503804930752",
-        "18096452852536132",
-        "18106090232342209",
-        "18443728504130127"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-09T15:01:13.628059+00:00",
       "pillar": "smart",
@@ -901,6 +887,27 @@
         "17892556290682198"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T12:31:02.096695+00:00",
+      "pillar": "smart",
+      "hook_sig": "i let an ai agent fix a read-modify-write",
+      "texts": [
+        "I let an AI agent fix a read-modify-write race on a credit balance endpoint. The diff looked clean, proper row locking, correct transaction isolation. The unit tests passed. The integration tests passed. I approved the PR and walked away. Two hours later the on-call alert fired: two users spent the same credit.",
+        "The agent had wrapped the balance check and decrement in a SELECT FOR UPDATE. Textbook. The tests ran sequentially so the lock never contended. In production two requests hit the same row within milliseconds. The database serialized them but the application logic still read stale state because the balance check happened outside the locked section. The fix looked right on paper. It was wrong in practice.",
+        "I wrote\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific, reproducible tests that expose plausible AI race-condition fixes will earn more saves and follows than broad AI coding advice.",
+      "breakout": "none",
+      "followers": 259,
+      "views_total": 8184,
+      "ids": [
+        "18057122777589614",
+        "18090446453218325",
+        "18071170064774034"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -910,5 +917,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 259,
-  "last_views": 8074
+  "last_views": 8184
 }
