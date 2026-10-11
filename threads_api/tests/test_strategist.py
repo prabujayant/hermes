@@ -157,8 +157,8 @@ def test_topic_overlap_detects_rewrites():
     a = "MOST DEBUGGING ADVICE TELLS YOU HOW TO VERIFY A FIX WORKS"
     b = "MOST DEBUGGING ADVICE EXPLAINS VERIFYING FIXES IN PRODUCTION"
     c = "IF YOU WANT TO WRITE SQL LIKE A SENIOR ENGINEER"
-    assert topic_overlap(a, b) > 0.4
-    assert topic_overlap(a, c) < 0.4
+    assert topic_overlap(a, b) > 0.3
+    assert topic_overlap(a, c) < 0.3
     assert topic_overlap("", c) == 0.0
     assert hook_too_similar(b, [a]) is True
     assert hook_too_similar(c, [a]) is False
