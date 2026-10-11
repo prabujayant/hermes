@@ -1,22 +1,8 @@
 {
-  "hypothesis": "A specific forced-interleaving test will",
-  "pivots": 57,
+  "hypothesis": "A concrete forced-interleaving test will earn more saves and specific replies than general advice to verify agent-written fixes.",
+  "pivots": 58,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-09T17:01:10.224322+00:00",
-      "pillar": "smart",
-      "hook_sig": "a memory leak crashed our payments service every",
-      "ids": [
-        "18632890906021944",
-        "18105772462980959",
-        "18089488361691192",
-        "18092969798676844",
-        "18030814832850842",
-        "17947680534326491"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-09T18:01:11.805812+00:00",
       "pillar": "smart",
@@ -930,6 +916,31 @@
         "18029742080884287"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-11T14:01:10.460364+00:00",
+      "pillar": "smart",
+      "hook_sig": "reproducible proof: a race can pass ordinary tests;",
+      "texts": [
+        "reproducible proof: a race can pass ordinary tests; force the exact interleaving and watch the bug return\n\nan agent told me the credit-spend race was fixed. the diff looked clean. unit tests passed. i shipped. two users spent the same credit in production. only one should have.",
+        "most concurrency tests are theater. they mock the database, sleep randomly, hope the scheduler hits the bad interleaving. it won't. the scheduler is fair-ish, not adversarial. you need to force the exact order: read A, read B, write A, write B.",
+        "the pattern: deterministic barrier test. spin two goroutines. each hits a barrier before the read, after the read, before the write. release them in the exact sequence that causes the race. no sleeps, no flakes, pure scheduling control.",
+        "setup: shared credit row, two workers, four barriers. worker 1 reads, signals barrier 1, waits barrier 2. worker 2 reads, signals barrier 3, waits barrier 4. main releases 2 then 4 then 1 then 3. if the fix works, the second write fails with a version conflict. if it passes, the bug is still there.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete forced-interleaving test will earn more saves and specific replies than general advice to verify agent-written fixes.",
+      "breakout": "none",
+      "followers": 259,
+      "views_total": 8536,
+      "ids": [
+        "18128324407887012",
+        "18118082960051180",
+        "17994613137020838",
+        "18092447294481482",
+        "18127100752851859"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -939,5 +950,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 259,
-  "last_views": 8445
+  "last_views": 8536
 }

@@ -91,7 +91,8 @@
     "most debugging advice tells you how to verify",
     "i let an ai agent fix a read-modify-write",
     "most race condition fixes that pass your test",
-    "i shipped a credit-spend endpoint. an ai agent"
+    "i shipped a credit-spend endpoint. an ai agent",
+    "reproducible proof: a race can pass ordinary tests;"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
