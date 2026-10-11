@@ -3,7 +3,7 @@
 
 # 1. Your bio, exactly as on your profile (or how you want positioning):
 BIO:
-- Paste bio here.
+- Backend Engineering & System Design. Daily high-signal insights to help you level up. Grab the Top 1% Engineer Guide (faang.gumroad.com).
 
 # 2. Target audience in one line (who must follow you):
 AUDIENCE:
@@ -11,7 +11,7 @@ AUDIENCE:
 
 # 3. Personal assets the bot may use (stories, credentials, wins, failures):
 ASSETS:
-- None listed yet.
+- Sells "Top 1% Engineer Guide" at faang.gumroad.com (linked in bio).
 
 # 4. Cross-promotion channels and collaborators (newsletters, friends'
 #    accounts, communities that may reshare):
