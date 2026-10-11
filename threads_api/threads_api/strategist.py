@@ -291,6 +291,41 @@ def evaluate(posts, now=None):
     }
 
 
+def _stem(word):
+    """Naive suffix strip so fix/fixes and verify/verifying match."""
+    for suffix in ("ing", "ed", "es", "ly", "s"):
+        if word.endswith(suffix) and len(word) - len(suffix) > 3:
+            return word[: -len(suffix)]
+    return word
+
+
+def _content_words(text):
+    """Lowercase stemmed content words for topic comparison."""
+    import re
+
+    from .insights import STOPWORDS
+
+    words = re.findall(r"[a-z][a-z']{2,}", (text or "").lower())
+    return {_stem(w) for w in words if w not in STOPWORDS}
+
+
+def topic_overlap(hook_a, hook_b):
+    """Jaccard similarity of content words (0..1). Catches same-topic
+    rewrites that exact-signature dedup misses."""
+    set_a, set_b = _content_words(hook_a), _content_words(hook_b)
+    if not set_a or not set_b:
+        return 0.0
+    return len(set_a & set_b) / len(set_a | set_b)
+
+
+def hook_too_similar(hook, recent_hooks, threshold=0.3):
+    """True when the hook shares too much topic with recent hooks."""
+    for other in recent_hooks:
+        if topic_overlap(hook, other) >= threshold:
+            return True
+    return False
+
+
 def hook_is_live(client, hook_text, limit=10):
     """True when a post with the same hook signature is already live.
 
@@ -669,6 +704,15 @@ def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
             f"{ascii_clean(item['text'][:120])}"
         )
     lines.append(f"Current hypothesis: {ascii_clean(strategy['hypothesis'])}")
+    if scorecard.get("pivot"):
+        recent = [ascii_clean(i["text"][:70]) for i in judged[-3:]]
+        lines.append(
+            "PIVOT MODE CONFIRMED. Your last directions kept the same "
+            "topic family: " + " | ".join(recent) + ". "
+            "This run is BANNED from caps-listicle hooks and from these "
+            "topics. Use a story, question, debate, or confession format "
+            "on a DIFFERENT topic family."
+        )
     lines.append(
         "Reply with ONLY these lines, no extra text:\n"
         "POST: <YES post this hour, or NO skip with one-line reason, e.g. "

@@ -151,6 +151,42 @@ def test_decide_prompt_carries_takeover_orders():
     assert "TAKEOVER ORDERS" in seen["prompt"]
 
 
+def test_topic_overlap_detects_rewrites():
+    from threads_api.strategist import hook_too_similar, topic_overlap
+
+    a = "MOST DEBUGGING ADVICE TELLS YOU HOW TO VERIFY A FIX WORKS"
+    b = "MOST DEBUGGING ADVICE EXPLAINS VERIFYING FIXES IN PRODUCTION"
+    c = "IF YOU WANT TO WRITE SQL LIKE A SENIOR ENGINEER"
+    assert topic_overlap(a, b) > 0.4
+    assert topic_overlap(a, c) < 0.4
+    assert topic_overlap("", c) == 0.0
+    assert hook_too_similar(b, [a]) is True
+    assert hook_too_similar(c, [a]) is False
+    assert hook_too_similar(c, []) is False
+
+
+def test_decide_prompt_bans_last_format_on_pivot():
+    from threads_api.strategist import decide_direction
+
+    seen = {}
+
+    def fake_chat(messages, max_tokens=400, temperature=0.7, model=None):
+        seen["prompt"] = messages[-1]["content"]
+        return ("POST: YES go\nTOPIC: backend caching\n"
+                "HOOK: story format\nCHANGE: new format\n"
+                "HYPOTHESIS: stories win")
+
+    scorecard = {"sample_size": 5, "median_vph": 5.0, "streak": 3,
+                 "pivot": True,
+                 "judged": [
+                     {"text": "race condition thread here", "views": 5,
+                      "vph": 1.0, "engagement": 0, "age_h": 5.0,
+                      "under": True},
+                 ]}
+    decide_direction(fake_chat, ["m"], scorecard, {"hypothesis": "x"})
+    assert "BANNED from caps-listicle" in seen["prompt"]
+
+
 def test_niche_posts_sorted_views_desc_nulls_last(tmp_path):
     import json
 

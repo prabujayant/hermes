@@ -263,6 +263,13 @@ def _cmd_post_smart(args):
     except Exception as exc:  # noqa: BLE001 - brain optional, writer covers
         print(f"Brain failed ({exc}); strategist writes directly")
 
+    if pivoted:
+        prompt += (
+            "\nPIVOT RUN: the last threads stayed in one topic family. "
+            "Do NOT write another caps-listicle hook on the same theme. "
+            "Use a story, question, debate, or confession format."
+        )
+
     system = (
         "You are the writer for a Threads account posting software "
         "engineering content. Your strategist (Luna) gives the direction; "
@@ -281,12 +288,23 @@ def _cmd_post_smart(args):
     print(f"Strategist model: {llm_module.last_model}")
     taken_sigs = {hook_signature(p.get("text") or "") for p in posts}
     taken_sigs |= set(load_state().get("recent_hooks", []))
+    recent_hooks = [
+        h.get("hook_sig", "") for h in strategy.get("history", [])
+        if isinstance(h, dict) and h.get("hook_sig")
+    ][-3:]
 
     def _attempt(raw_text):
+        from .strategist import hook_too_similar
+
         thread, hypothesis = finalize_thread(raw_text)
         if hook_signature(thread[0]) in taken_sigs:
             raise ValueError(
                 f"hook too similar to a recent post: {thread[0][:60]}"
+            )
+        if hook_too_similar(thread[0], recent_hooks):
+            raise ValueError(
+                "hook stays in the same topic family as recent threads; "
+                f"recent: {recent_hooks[0][:60] if recent_hooks else '?'}"
             )
         return thread, hypothesis
 
