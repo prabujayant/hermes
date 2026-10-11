@@ -1,21 +1,8 @@
 {
-  "hypothesis": "A deterministic test that reliably exposes a double-spend race will earn more saves and follows than general AI-debugging advice; follow CTA last.",
+  "hypothesis": "A concrete, copy-pasteable deterministic race test with a barrier will earn more saves and follows than general AI debugging advice because it gives readers an immediate verification tool they can run today.",
   "pivots": 50,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-09T05:01:10.067736+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to pass system design interviews,",
-      "ids": [
-        "18125821148490351",
-        "17941048611403577",
-        "18130842037753492",
-        "18106618418254541",
-        "17979879552120969"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-09T06:01:10.820592+00:00",
       "pillar": "smart",
@@ -808,6 +795,29 @@
         "18108264629622148"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-11T07:01:14.142244+00:00",
+      "pillar": "smart",
+      "hook_sig": "your agent says the fix works. you run",
+      "texts": [
+        "YOUR AGENT SAYS THE FIX WORKS. YOU RUN THE TESTS. THEY PASS. YOU SHIP. THEN PRODUCTION LOGS SHOW TWO USERS SPENT THE SAME CREDIT. ONLY ONE SHOULD HAVE. THE TESTS PASSED BECAUSE THEY NEVER FORCED THE RACE. THIS IS HOW YOU CATCH IT.",
+        "THE BUG IS A CLASSIC LOST UPDATE. TWO REQUESTS READ BALANCE 100. BOTH CHECK IF 100 >= 50. BOTH WRITE 50. DATABASE COMMITS BOTH. FINAL BALANCE 50 INSTEAD OF 0. YOUR UNIT TESTS RUN SEQUENTIALLY SO THEY NEVER SEE IT. INTEGRATION TESTS MOCK THE DB. YOU NEED A TEST THAT MAKES THEM COLLIDE.",
+        "HERE IS THE DETERMINISTIC TEST. USE A BARRIER TO HOLD BOTH THREADS AT THE READ LINE. RELEASE THEM TOGETHER. ASSERT FINAL BALANCE IS ZERO. PYTHON EXAMPLE WITH THREADING BARRIER AND SQLITE IN MEMORY. NO MOCKS. REAL ROW LOCKS. REAL COMMITS. RUN IT TEN TIMES. IT FAILS EVERY TIME WITHOUT THE FIX.",
+        "ADD SELECT FOR UPDATE OR AN OPTIMISTIC VERSION COLUMN. RUN THE SAME TEST. NOW IT PASSES. THE BARRIER TEST BECOMES YOUR REGRESSION GUARD. COMMIT IT NEXT TO THE CODE. WHEN SOMEONE REFACTORS THE WALLET LOGIC THE TEST WILL SCREAM IF THEY REINTRODUCE THE RACE. THIS IS THE ONLY TEST THAT MATTERS FOR CONCURRENCY BUGS.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete, copy-pasteable deterministic race test with a barrier will earn more saves and follows than general AI debugging advice because it gives readers an immediate verification tool they can run today.",
+      "breakout": "none",
+      "ids": [
+        "18116759084281485",
+        "18108984506227830",
+        "18117879781951664",
+        "18169495753465242",
+        "18107574251266538"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -817,5 +827,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 259,
-  "last_views": 5793
+  "last_views": 5938
 }
