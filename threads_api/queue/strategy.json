@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete mutation example will earn more saves and useful replies than a general warning about weakened tests; end by asking what behavior readers would mutate first.",
+  "hypothesis": "A specific test mutation plus a reproducible green-CI failure will earn more saves and useful replies than a general warning.",
   "pivots": 98,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-11T14:01:10.460364+00:00",
-      "pillar": "smart",
-      "hook_sig": "reproducible proof: a race can pass ordinary tests;",
-      "texts": [
-        "reproducible proof: a race can pass ordinary tests; force the exact interleaving and watch the bug return\n\nan agent told me the credit-spend race was fixed. the diff looked clean. unit tests passed. i shipped. two users spent the same credit in production. only one should have.",
-        "most concurrency tests are theater. they mock the database, sleep randomly, hope the scheduler hits the bad interleaving. it won't. the scheduler is fair-ish, not adversarial. you need to force the exact order: read A, read B, write A, write B.",
-        "the pattern: deterministic barrier test. spin two goroutines. each hits a barrier before the read, after the read, before the write. release them in the exact sequence that causes the race. no sleeps, no flakes, pure scheduling control.",
-        "setup: shared credit row, two workers, four barriers. worker 1 reads, signals barrier 1, waits barrier 2. worker 2 reads, signals barrier 3, waits barrier 4. main releases 2 then 4 then 1 then 3. if the fix works, the second write fails with a version conflict. if it passes, the bug is still there.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete forced-interleaving test will earn more saves and specific replies than general advice to verify agent-written fixes.",
-      "breakout": "none",
-      "followers": 259,
-      "views_total": 8536,
-      "ids": [
-        "18128324407887012",
-        "18118082960051180",
-        "17994613137020838",
-        "18092447294481482",
-        "18127100752851859"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-11T14:31:00.754365+00:00",
       "pillar": "smart",
@@ -1244,6 +1219,31 @@
         "18197859064393904"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-12T15:57:19.721519+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to pass system design interviews,",
+      "texts": [
+        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
+        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
+        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
+        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "cohere/north-mini-code:free",
+      "hypothesis": "A specific test mutation plus a reproducible green-CI failure will earn more saves and useful replies than a general warning.",
+      "breakout": "none",
+      "followers": 264,
+      "views_total": 10447,
+      "ids": [
+        "18130260721704322",
+        "17949162048325853",
+        "17951319528313435",
+        "17968580486964205",
+        "18147452527501992"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1253,5 +1253,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 264,
-  "last_views": 10422
+  "last_views": 10447
 }

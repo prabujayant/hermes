@@ -141,7 +141,8 @@
     "red-flag checklist: green ci does not prove an",
     "before trusting an agent-written test, verify it fails",
     "most teams trust a green ci run after",
-    "falsifiable check: change the intended behavior temporarily; if"
+    "falsifiable check: change the intended behavior temporarily; if",
+    "if you want to pass system design interviews,"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
