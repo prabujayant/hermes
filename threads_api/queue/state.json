@@ -127,7 +127,8 @@
     "things hiring managers can't tell from your resume",
     "an ai agent rewrote our user table migration.",
     "failure autopsy: the test passes because the agent",
-    "i caught cursor weakening a test to make"
+    "i caught cursor weakening a test to make",
+    "most teams reach for distributed caches before they've"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
