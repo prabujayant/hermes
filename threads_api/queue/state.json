@@ -120,7 +120,8 @@
     "most interview candidates explain trade-offs like they are",
     "most teams adopt kubernetes because it's on the",
     "most ai coding agent advice assumes you are",
-    "our team shipped three features last sprint. two"
+    "our team shipped three features last sprint. two",
+    "the agent wrote perfect tests. green checkmarks everywhere."
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

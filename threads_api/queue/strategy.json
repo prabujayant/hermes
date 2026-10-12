@@ -1,31 +1,8 @@
 {
-  "hypothesis": "Specific production pain points about AI coding agents will earn more saves and thoughtful comments than generic productivity claims; end with a follow CTA.",
-  "pivots": 86,
+  "hypothesis": "Specific agent failure modes paired with actionable safeguards will earn more saves and thoughtful comments than broad productivity claims.",
+  "pivots": 87,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T22:01:17.237165+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want ai agents to ship production",
-      "texts": [
-        "IF YOU WANT AI AGENTS TO SHIP PRODUCTION CODE, STOP TRUSTING THEIR FIRST OUTPUT. MEMORIZE THESE 3 VERIFICATION LOOPS:\n\nMost devs treat agents like senior engineers who just need direction. They are not. They are overconfident juniors with infinite typing speed and zero accountability. The bug is not in the prompt. The bug is in the missing verification layer.",
-        "Loop 1: SYNTAX AND TYPE GATE. Run the agent output through the compiler and type checker before you even read it. If it does not compile, reject the patch and feed the error back. Do not fix it yourself. Force the agent to eat its own compiler errors until clean. This alone catches 40 percent of hallucinated APIs and phantom imports.",
-        "Loop 2: CONTRACT TEST GENERATION. Ask the agent to write the contract tests for the code it just produced. Not unit tests. Contract tests: input-output pairs that define the exact behavior at the boundary. If the agent cannot write the contract test, the spec was underspecified. Send it back with the missing constraints. This catches the silent contract drift that breaks consumers.",
-        "Loop 3: ADVERSARIAL EDGE CASE SWEEP. Prompt: \"List five inputs that would break this implementation in production. Include concurrency, nullability, partial failure, and resource exhaustion scenarios.\" Then make the agent harden the code against each. Ship the hardened version with the edge cases documented as regression tests. This is where the 3am pages live.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Caps-listicle hook on AI agent verification loops (hot topic, contrarian \"don't trust first output\" angle) will exceed 300 views by matching P18/P19 format mechanics while tapping higher-variance AI debate surface.",
-      "breakout": "",
-      "ids": [
-        "18096876302200688",
-        "18090300854218617",
-        "18101948402566172",
-        "18130569418814923",
-        "18111911207137520"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-10T23:01:12.757814+00:00",
       "pillar": "smart",
@@ -1208,6 +1185,31 @@
         "17987501877076512"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-12T04:31:01.167126+00:00",
+      "pillar": "smart",
+      "hook_sig": "the agent wrote perfect tests. green checkmarks everywhere.",
+      "texts": [
+        "The agent wrote perfect tests. Green checkmarks everywhere. The feature shipped. Two weeks later, a $50k bug hit production because every test validated the wrong assumption: that the external API would never return null for a required field. The tests mocked the happy path. The mocks became the spec.",
+        "The dangerous agent bug is not broken code. It is a passing test that encodes a flawed assumption. The model sees your existing test patterns, mimics them, and reinforces the same blind spots. It does not know the business rule. It only knows the shape of your mocks.",
+        "Production failure mode: the agent generates integration tests against a mocked service. The mock returns clean JSON. The real service returns 500s, partial payloads, and latency spikes. The tests pass. The circuit breaker never triggers. The retry logic never exercises. The outage lasts 40 minutes.",
+        "Review checklist before merging agent-generated tests: 1. Does this test fail when the dependency misbehaves? 2. Are error paths exercised, not just happy paths? 3. Are contract boundaries tested against real schemas, not hand-rolled mocks? 4. Can you delete the implementation and have the test catch the regression? 5. What assumption does this test bake in that the business never agreed to?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific agent failure modes paired with actionable safeguards will earn more saves and thoughtful comments than broad productivity claims.",
+      "breakout": "none",
+      "followers": 263,
+      "views_total": 13838,
+      "ids": [
+        "18215326786359514",
+        "18112127153609832",
+        "17885657043687864",
+        "18016067993747134",
+        "18186954778417213"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1217,5 +1219,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 263,
-  "last_views": 13609
+  "last_views": 13838
 }
