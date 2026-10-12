@@ -125,7 +125,8 @@
     "i let an agent loose on a flaky",
     "i caught an agent weakening a test assertion",
     "things hiring managers can't tell from your resume",
-    "an ai agent rewrote our user table migration."
+    "an ai agent rewrote our user table migration.",
+    "failure autopsy: the test passes because the agent"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
