@@ -137,7 +137,8 @@
     "most ai testing advice assumes agents write correct",
     "costly false confidence: a green ci run can",
     "most teams trust green ci after an agent",
-    "checklist: before trusting an ai-fixed test, check whether"
+    "checklist: before trusting an ai-fixed test, check whether",
+    "red-flag checklist: green ci does not prove an"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
