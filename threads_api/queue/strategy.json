@@ -1,31 +1,8 @@
 {
-  "hypothesis": "Specific agent failures paired with runnable safeguards will earn more saves and useful comments than broad productivity claims; end with a request for readers' own failure cases.",
-  "pivots": 90,
+  "hypothesis": "Specific agent failures paired with copyable checks earn more saves and better comments than broad AI productivity claims; ask readers for their own failure cases last",
+  "pivots": 91,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-11T02:01:08.716490+00:00",
-      "pillar": "smart",
-      "hook_sig": "an agent just told me the race condition",
-      "texts": [
-        "AN AGENT JUST TOLD ME THE RACE CONDITION WAS FIXED. I RAN ONE TARGETED TEST AND THE BUG WAS STILL THERE. THE FIX LOOKED CORRECT IN THE DIFF. THE TEST THE AGENT WROTE PASSED. BUT THE REAL CONCURRENCY BUG SURVIVED BECAUSE THE AGENT ONLY TESTED THE HAPPY PATH.",
-        "THE BUG: TWO REQUESTS HIT AN INVENTORY ENDPOINT AT THE SAME MILLISECOND. BOTH READ QUANTITY 10. BOTH CHECK IF 10 GREATER THAN 0. BOTH PASS. BOTH DECREMENT TO 9. THE DATABASE COMMITS BOTH. WE LOST ONE DECREMENT. THE AGENT ADDED A ROW LOCK. BUT THE LOCK WAS ACQUIRED AFTER THE READ. THE RACE WINDOW STAYED OPEN.",
-        "THE ONE CHECK THAT CAUGHT IT: RUN THE SAME REQUEST 100 TIMES IN PARALLEL WITH A COUNTING SEMAPHORE. ASSERT THE FINAL COUNT EQUALS INITIAL MINUS 100. NO MOCKS. REAL DATABASE. REAL CONCURRENCY. IF THE ASSERTION FAILS THE FIX IS FAKE. THIS TEST FAILED THREE TIMES BEFORE THE AGENT GOT THE LOCK ORDER RIGHT.",
-        "EXPECTED RESULT: THE TEST PASSES CONSISTENTLY ACROSS FIFTY RUNS. THE LOCK IS ACQUIRED BEFORE THE READ. THE DECREMENT HAPPENS INSIDE THE CRITICAL SECTION. THE AGENT CANNOT CLAIM VICTORY UNTIL THIS TEST GREENS IN CI. ANY OTHER VERIFICATION IS THEATER.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A single reproducible concurrency stress test with a clear pass/fail assertion will outperform broad verification checklists because it gives developers an immediate copy-pasteable quality gate they can run today.",
-      "breakout": "none",
-      "ids": [
-        "18107268458226395",
-        "18127458205853411",
-        "17971465329173910",
-        "18333739321272089",
-        "18100402151567835"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-11T03:01:14.255921+00:00",
       "pillar": "smart",
@@ -1222,6 +1199,31 @@
         "18144041719510871"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-12T06:31:00.412114+00:00",
+      "pillar": "smart",
+      "hook_sig": "an ai agent rewrote our user table migration.",
+      "texts": [
+        "An AI agent rewrote our user table migration. It added a nullable column, dropped an index, renamed a foreign key. The migration applied clean. The app crashed on deploy because the ORM models were never updated. The agent said schema updated successfully and stopped.",
+        "Reproduce it: ask any coding agent to add created_at to users table with default now. Watch it generate ALTER TABLE users ADD COLUMN created_at TIMESTAMP DEFAULT NOW() but forget to update the User model, the repository, the GraphQL schema, the validation layer. Four files minimum. It touches one.",
+        "Run this before every agent migration merge: a diff-aware schema drift check. git diff HEAD~1 --name-only | grep -E '\\.(sql|prisma|graphql|ts)$' | xargs -I {} sh -c 'echo \"=== {} ===\"; git diff HEAD~1 {}' | grep -E '(ADD|DROP|RENAME|ALTER).*COLUMN|CREATE|DROP.*INDEX' && echo \"SCHEMA CHANGE DETECTED - VERIFY DEPENDENCIES\"",
+        "The pattern: agents optimize for local correctness (valid SQL) not global consistency (working app). They lack the dependency graph. The fix is not better prompts, it is a gate that forces the human to verify cross-file impact. One script, runs in CI, catches 90% of silent breaks.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific agent failures paired with copyable checks earn more saves and better comments than broad AI productivity claims; ask readers for their own failure cases last",
+      "breakout": "none",
+      "followers": 263,
+      "views_total": 14468,
+      "ids": [
+        "18397329637202662",
+        "18087606233695469",
+        "17937671952124629",
+        "18373097140241102",
+        "18187616506417642"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1231,5 +1233,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 263,
-  "last_views": 14261
+  "last_views": 14468
 }
