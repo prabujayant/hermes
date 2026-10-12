@@ -1,21 +1,8 @@
 {
-  "hypothesis": "A database choice framed around a real workload and explicit migration trigger will earn more specific replies than broad selection advice.",
-  "pivots": 77,
+  "hypothesis": "A specific, falsifiable migration trigger will draw more expert replies than workload framing alone.",
+  "pivots": 78,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T13:01:10.528865+00:00",
-      "pillar": "smart",
-      "hook_sig": "most testing advice assumes you control both sides",
-      "ids": [
-        "18209530309367897",
-        "18105983351620458",
-        "17907875697563922",
-        "18641564728009537",
-        "18084319976327192"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-10T14:01:08.919901+00:00",
       "pillar": "smart",
@@ -1155,6 +1142,31 @@
         "18412234426086616"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-12T00:01:15.694750+00:00",
+      "pillar": "smart",
+      "hook_sig": "we picked postgres for the payment ledger. 5k",
+      "texts": [
+        "We picked Postgres for the payment ledger. 5k writes/sec, strict serializability, region failover without manual steps. It held. Then the audit team asked for immutable row history with cryptographic proofs on every write. Postgres triggers added 40ms p99. The compliance deadline did not move.",
+        "The migration trigger was not scale. It was not availability. It was a regulatory requirement that turned our storage model into a liability. We moved the ledger to an append-only log with Merkle proofs. Write latency dropped to 3ms. The audit passed. Postgres still runs the reporting replicas.",
+        "Most teams define migration triggers as \"when Postgres hits X QPS\" or \"when we need Y feature.\" The real trigger is the first requirement that forces you to hack the storage engine into something it was not built for. That hack becomes your technical debt ceiling.",
+        "Name the concrete failure that would make you leave Postgres for your current workload. Not \"it gets slow.\" The exact requirement, the exact constraint, the exact moment you realize the abstraction is fighting you.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific, falsifiable migration trigger will draw more expert replies than workload framing alone.",
+      "breakout": "none",
+      "followers": 262,
+      "views_total": 11898,
+      "ids": [
+        "18116453159079837",
+        "18091549628206610",
+        "18124477444899407",
+        "17914698954466999",
+        "17937793245392423"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1164,5 +1176,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 262,
-  "last_views": 11731
+  "last_views": 11898
 }
