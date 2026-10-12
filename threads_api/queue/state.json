@@ -134,7 +134,8 @@
     "i added redis to a payment service handling",
     "decision rule: cache only when reads repeat, recomputation",
     "most ai testing advice assumes you are reviewing",
-    "most ai testing advice assumes agents write correct"
+    "most ai testing advice assumes agents write correct",
+    "costly false confidence: a green ci run can"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
