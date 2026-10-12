@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete mutation example will earn more saves and specific replies than another general warning about green CI",
-  "pivots": 102,
+  "hypothesis": "Specific system-design decision advice will outperform another general AI-coding warning and invite candidates to share their toughest bottleneck.",
+  "pivots": 103,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-11T17:31:02.277018+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent two days watching an ai agent",
-      "texts": [
-        "I spent two days watching an AI agent \"fix\" a read-modify-write race on a credit balance endpoint. The diff looked perfect, row locking, serializable isolation, compare-and-swap loop. Every unit test passed. Load tests passed. Then two real users spent the same credit at the exact same millisecond and the balance went negative.",
-        "The problem is not the fix. The problem is the test. Ordinary tests run sequentially. Even \"concurrent\" tests usually spawn threads and hope for a collision. Hope is not a strategy. You need to force the exact interleaving: both threads read the same balance, both compute the new balance, both write. Only then do you know if the invariant holds.",
-        "Here is the copyable recipe. Use a barrier to pause both threads after the read, before the write. Release them simultaneously. Assert the final balance equals initial minus sum of spends. If the test passes, remove the fix and run it again. If it still passes, your test never caught the bug in the first place.",
-        "Pseudo-code: start two threads, each reads balance at barrier A, barrier waits for both, release, each writes new balance, join, assert invariant. For the removal check, comment out the locking or CAS logic, rerun. The test must fail. If it does not, add more precise timing or a second barrier after the write to catch lost updates.",
-        "What stack are you on? Postgres advisory locks, Redis Lua, Java synchronized, Go mutex, C# lock? Reply with your stack and I will post a tailored adaptation next. Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A deterministic, stack-adaptable race test with a clear invariant will earn more saves and useful replies than another general lesson about AI fixes.",
-      "breakout": "none",
-      "followers": 261,
-      "views_total": 9553,
-      "ids": [
-        "18139752826628416",
-        "18130772216493974",
-        "17893039449615189",
-        "18128910613866136",
-        "17877298914565964"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-11T18:01:15.393496+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18095893340442502"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-12T19:31:00.898243+00:00",
+      "pillar": "smart",
+      "hook_sig": "most candidates walk into system design interviews and",
+      "texts": [
+        "Most candidates walk into system design interviews and recite a tech stack. Kafka, Redis, Kubernetes, done. The interviewer stops listening. Naming technologies is not a system design answer. Tracing the bottleneck is. Change my mind.",
+        "I watched a senior engineer spend twenty minutes describing a microservices mesh for a URL shortener. The interviewer asked: where does this break at 100x traffic? Silence. The answer was never the stack. It was the single-write database they forgot to shard.",
+        "The decision rule: identify the write path that cannot scale horizontally, prove you know how to partition it, then name the tool that does the job. Not the other way around. Bottleneck first, technology second, every time.",
+        "Last week a candidate drew a read-heavy analytics pipeline, correctly identified the ingestion hotspot, proposed a log-structured merge tree with time-windowed compaction, and named ClickHouse as the fit. Got the offer. The stack was the footnote, not the headline.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific system-design decision advice will outperform another general AI-coding warning and invite candidates to share their toughest bottleneck.",
+      "breakout": "none",
+      "followers": 265,
+      "views_total": 11540,
+      "ids": [
+        "18166593937421561",
+        "18447201757130859",
+        "18409504597092112",
+        "18111901598178724",
+        "18630688750046879"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 265,
-  "last_views": 11299
+  "last_views": 11540
 }
