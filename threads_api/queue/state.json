@@ -139,7 +139,8 @@
     "most teams trust green ci after an agent",
     "checklist: before trusting an ai-fixed test, check whether",
     "red-flag checklist: green ci does not prove an",
-    "before trusting an agent-written test, verify it fails"
+    "before trusting an agent-written test, verify it fails",
+    "most teams trust a green ci run after"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
