@@ -1,30 +1,8 @@
 {
-  "hypothesis": "Concrete interview advice with a reusable proof structure will outperform a broad architecture debate and invite specific comments.",
-  "pivots": 80,
+  "hypothesis": "Specific interview frameworks with a concrete proof standard will outperform broad advice and invite people to share their hardest story to explain",
+  "pivots": 81,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T15:18:05.311835+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want better code reviews, stop nitpicking",
-      "texts": [
-        "IF YOU WANT BETTER CODE REVIEWS, STOP NITPICKING STYLE. MEMORIZE THESE 3 MOVES:",
-        "Move 1: Ask \"what could break here\" instead of \"does this follow the guide.\" The best reviewers hunt for failure modes, not formatting.",
-        "Move 2: Approve with questions, not demands. \"Have you considered X\" ships faster than \"Change this to Y\" and teaches more.",
-        "Move 3: Time-box the review. If you cannot finish in 20 minutes, the PR is too big. Split it and review the slices.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Caps-listicle hook on code review (new topic) replicates the 29-47 views/h velocity of P16 P17 P18 by keeping the proven IF YOU WANT X STOP Y format.",
-      "ids": [
-        "17994352211840754",
-        "17975069052148809",
-        "17961074888999550",
-        "18127641637838736",
-        "18102892322226926"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-10T17:01:14.239058+00:00",
       "pillar": "smart",
@@ -1191,6 +1169,31 @@
         "18095943089679361"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-12T01:31:01.095530+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to pass system design interviews,",
+      "texts": [
+        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
+        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
+        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
+        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific interview frameworks with a concrete proof standard will outperform broad advice and invite people to share their hardest story to explain",
+      "breakout": "none",
+      "followers": 262,
+      "views_total": 12525,
+      "ids": [
+        "18128437187491866",
+        "18111465698596639",
+        "18033103181908838",
+        "18109496563919426",
+        "18394770250202632"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1200,5 +1203,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 262,
-  "last_views": 12409
+  "last_views": 12525
 }

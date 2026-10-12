@@ -114,7 +114,8 @@
     "costly mistake: we picked postgres for a time-series",
     "we picked postgres for the payment ledger. 5k",
     "most startups don't need microservices. a modular monolith",
-    "most candidates think \"i led the migration\" proves"
+    "most candidates think \"i led the migration\" proves",
+    "if you want to pass system design interviews,"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
