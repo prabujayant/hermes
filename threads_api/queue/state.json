@@ -112,7 +112,8 @@
     "if you want to become a senior engineer",
     "decision test: name the query that could force",
     "costly mistake: we picked postgres for a time-series",
-    "we picked postgres for the payment ledger. 5k"
+    "we picked postgres for the payment ledger. 5k",
+    "most startups don't need microservices. a modular monolith"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

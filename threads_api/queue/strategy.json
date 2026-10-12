@@ -1,20 +1,8 @@
 {
-  "hypothesis": "A specific, falsifiable migration trigger will draw more expert replies than workload framing alone.",
-  "pivots": 78,
+  "hypothesis": "A blunt monolith-vs-microservices hot take will spark expert replies and beat the caps-listicle baseline (cf. P30).",
+  "pivots": 79,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T14:01:08.919901+00:00",
-      "pillar": "smart",
-      "hook_sig": "code reviews catch maybe 10 percent of real",
-      "ids": [
-        "18168098578481482",
-        "17982487869153295",
-        "18026455574873242",
-        "18016955519933296"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-10T14:15:56.336132+00:00",
       "pillar": "smart",
@@ -1167,6 +1155,31 @@
         "17937793245392423"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-12T00:31:01.913010+00:00",
+      "pillar": "smart",
+      "hook_sig": "most startups don't need microservices. a modular monolith",
+      "texts": [
+        "Most startups don't need microservices. A modular monolith on Postgres handles 10M users and saves you months of ops pain.",
+        "I built a payment service at 5k writes/sec on a single Postgres cluster. Zero distributed transactions, zero service mesh. Latency p99 < 30ms.",
+        "When we added a new feature, we just added a table and a function. No new deploy pipeline, no version skew. Deploy time stayed under 5 minutes.",
+        "Yes, if you have multiple teams deploying independently at massive scale, microservices make sense. But that's <1% of companies. Show me a pre-Series-B company that truly needed microservices to hit product-market fit. I'll wait.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A blunt monolith-vs-microservices hot take will spark expert replies and beat the caps-listicle baseline (cf. P30).",
+      "breakout": "",
+      "followers": 262,
+      "views_total": 12065,
+      "ids": [
+        "18125138549313696",
+        "18634112971052555",
+        "18139848130715710",
+        "18483717013105972",
+        "18216206785349134"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1176,5 +1189,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 262,
-  "last_views": 11898
+  "last_views": 12065
 }
