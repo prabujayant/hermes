@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Specific system-design decision advice will outperform another general AI-coding warning and invite candidates to share their toughest bottleneck.",
-  "pivots": 103,
+  "hypothesis": "Concrete system-design tradeoffs will earn more saves and useful replies than broad interview advice, while inviting candidates to share their toughest bottleneck.",
+  "pivots": 104,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-11T18:01:15.393496+00:00",
-      "pillar": "smart",
-      "hook_sig": "i added redis to fix a slow dashboard",
-      "texts": [
-        "I added Redis to fix a slow dashboard query. The query dropped from 800ms to 12ms. Two weeks later the dashboard showed stale data during a flash sale. Customers saw sold-out items as available. Orders failed. Support exploded. The cache was the problem, not the solution.",
-        "The query joined orders, inventory, and pricing tables. It scanned 50k rows. Indexes helped but not enough. So I cached the full JSON response with a 60 second TTL. Simple. Clean. The latency graph looked beautiful. Then the sale started.",
-        "Cache invalidation on write seems obvious. Invalidate the key when inventory changes. But the pricing service updates via async event. The inventory service updates via direct write. The order service writes too. Three writers. One cache key. The race window was 400ms. Enough for 200 stale reads.",
-        "The fix was not better invalidation. It was removing the cache for that endpoint. The query now runs in 45ms with a covering index. No stale data. No invalidation logic. No distributed cache complexity. Sometimes the fastest cache is no cache at all.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Sahil Bloom ICO hook with a concrete production failure story will outperform recent race-condition threads by opening a relatable pain loop and delaying the payoff to post 4, earning saves and profile clicks from engineers who have lived this.",
-      "breakout": "",
-      "followers": 261,
-      "views_total": 9678,
-      "ids": [
-        "17888260503478454",
-        "18081768965386918",
-        "18112201667123792",
-        "18124978381799238",
-        "18140322274612372"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-11T18:31:02.108168+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18630688750046879"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-12T20:01:10.212071+00:00",
+      "pillar": "smart",
+      "hook_sig": "most teams optimize the wrong bottleneck first because",
+      "texts": [
+        "most teams optimize the wrong bottleneck first because they skip diagnosis entirely\n\na payments service i worked on had p99 latency at 2.3s, cloud bill growing 40% quarter over quarter, and failover tests failing silently. leadership wanted kubernetes, caching, and a new message queue all at once\n\nthe actual constraint was a single synchronous http call to a fraud provider that blocked the critical path. fixing that one call dropped p99 to 400ms, cut compute 30%, and made retries safe",
+        "the pattern repeats: teams reach for horizontal scaling when the hot path is serial, add caching when the real cost is idle connections, build circuit breakers when the dependency contract is undefined\n\ndiagnosis is not a phase. it is the only lever that tells you which fix pays",
+        "concrete rule: before any optimization, produce one number that proves which constraint owns the pain\n\nlatency: p99 breakdown by hop with timestamps\ncost: cost per request by component with utilization\nreliability: failure injection results showing blast radius\n\nno numbers, no work",
+        "the hardest part is not the fix. it is admitting that two of the three goals must wait while you prove which one is burning the house down\n\nwhich bottleneck do you find hardest to isolate in practice: latency, cost, or reliability",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Concrete system-design tradeoffs will earn more saves and useful replies than broad interview advice, while inviting candidates to share their toughest bottleneck.",
+      "breakout": "none",
+      "followers": 265,
+      "views_total": 11693,
+      "ids": [
+        "18211797907362737",
+        "18110661800164610",
+        "18192077779392372",
+        "18124331242851522",
+        "17899925319672435"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 265,
-  "last_views": 11540
+  "last_views": 11693
 }
