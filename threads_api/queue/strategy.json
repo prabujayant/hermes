@@ -1,30 +1,8 @@
 {
-  "hypothesis": "Specific interview frameworks with a concrete proof standard will outperform broad advice and invite people to share their hardest story to explain",
-  "pivots": 81,
+  "hypothesis": "Interview advice will earn more saves and specific replies when it gives candidates a concrete proof standard for explaining technical trade-offs and changed minds.",
+  "pivots": 82,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T17:01:14.239058+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "texts": [
-        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
-        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
-        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
-        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Caps-listicle hook on code review (new topic) replicates the 29-47 views/h velocity of P16 P17 P18 by keeping the proven IF YOU WANT X STOP Y format.",
-      "ids": [
-        "18252235015308156",
-        "18129449195479853",
-        "18119002246952097",
-        "18213793975359521",
-        "18132117916707199"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-10T18:01:07.920830+00:00",
       "pillar": "smart",
@@ -1194,6 +1172,27 @@
         "18394770250202632"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-12T02:01:09.764319+00:00",
+      "pillar": "smart",
+      "hook_sig": "most candidates tell disagreement stories about who convinced",
+      "texts": [
+        "Most candidates tell disagreement stories about who convinced whom. Interviewers forget those stories in five minutes. The stories that stick prove what evidence forced the decision, not who won the argument. Here is the proof-standard framework I use with every senior candidate.",
+        "The framework has three checkpoints. First, name the observable signal that shifted the room, a latency spike, a cost anomaly, a failed chaos test, a customer quote. Second, show the trade-off table you built: options, metrics, risks, the row that made you switch. Third, state the decision and the measurable outcome that followed. No hero narrative, just the evidence chain.",
+        "Real example from\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Interview advice will earn more saves and specific replies when it gives candidates a concrete proof standard for explaining technical trade-offs and changed minds.",
+      "breakout": "none",
+      "followers": 262,
+      "views_total": 12740,
+      "ids": [
+        "18125709518302993",
+        "17920687179442901",
+        "18025578074928530"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1203,5 +1202,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 262,
-  "last_views": 12525
+  "last_views": 12740
 }
