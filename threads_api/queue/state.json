@@ -130,7 +130,8 @@
     "i caught cursor weakening a test to make",
     "most teams reach for distributed caches before they've",
     "your caching layer is the first thing to",
-    "debate hot take: if you cannot name the"
+    "debate hot take: if you cannot name the",
+    "i added redis to a payment service handling"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

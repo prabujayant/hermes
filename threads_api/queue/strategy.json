@@ -1,31 +1,8 @@
 {
-  "hypothesis": "A measured, actionable challenge to premature caching will draw backend engineers to share where caching helped or hurt them.",
-  "pivots": 96,
+  "hypothesis": "A specific cache-or-not decision rule will earn backend engineers' attention and prompt concrete examples of where caching helped or hurt.",
+  "pivots": 97,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-11T08:01:09.429691+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want ai to write code you",
-      "texts": [
-        "IF YOU WANT AI TO WRITE CODE YOU CAN SHIP, STOP PASTING BLINDLY.\n\nMEMORIZE THESE 5 RULES:",
-        "Give the model your constraints first.\n\nStack, versions, style rules, what done looks like. Vague prompts get vague code.",
-        "Review every diff like a junior wrote it.\n\nAI code looks confident and fails quietly. Read it line by line before it touches main.",
-        "Keep humans on architecture.\n\nLet AI fill functions, never design systems. You own the boundaries, it fills the boxes.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A copy-pasteable barrier test that exposes an AI-generated race-condition fix will earn more saves and follows than general debugging advice; end with a relevant follow CTA.",
-      "breakout": "none",
-      "ids": [
-        "18133258888680872",
-        "18078658373394620",
-        "18105727051984760",
-        "18016296269747019",
-        "17953256187256721"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-11T09:01:10.482678+00:00",
       "pillar": "smart",
@@ -1234,6 +1211,31 @@
         "17991477227859031"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-12T09:31:03.928216+00:00",
+      "pillar": "smart",
+      "hook_sig": "i added redis to a payment service handling",
+      "texts": [
+        "I added Redis to a payment service handling 40 requests per second. The query was slow, 800ms p99, so I cached the user balance lookup. Two weeks later a $12k reconciliation error slipped through because the cache served stale data during a partial DB failover. The original query was only slow because of a missing index.",
+        "The fix took ten minutes. The cache cleanup took three days and a production incident. I had measured the latency but not the change rate. Balance updates happened on every transaction, invalidation was eventual, and the retry logic masked the drift. The cache added more failure modes than it removed latency.",
+        "Now I run a three-question test before any cache layer. First, what is the actual bottleneck? Profile with real traffic, not assumptions. Second, how fast does the underlying data change relative to read volume? If writes exceed one percent of reads, invalidation cost usually dominates. Third, what happens when the cache lies? If the answer is silent corruption, the cache stays out.",
+        "Last month a teammate wanted to cache an analytics rollup. The test showed 200 reads per second, writes once per minute, and a staleness window of five seconds was acceptable. We added a TTL cache with a background refresh. Latency dropped from 400ms to 12ms, zero incidents. The test told us yes, and it told us exactly how.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific cache-or-not decision rule will earn backend engineers' attention and prompt concrete examples of where caching helped or hurt.",
+      "breakout": "none",
+      "followers": 263,
+      "views_total": 9591,
+      "ids": [
+        "18046259816818192",
+        "18017560571955221",
+        "18134615278646928",
+        "18090786788230007",
+        "18091943846276497"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1243,5 +1245,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 263,
-  "last_views": 9454
+  "last_views": 9591
 }
