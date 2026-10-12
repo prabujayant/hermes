@@ -1,25 +1,8 @@
 {
-  "hypothesis": "A concrete agent failure paired with a safeguard you can verify will earn more saves and specific comments than broad AI productivity claims.",
-  "pivots": 89,
+  "hypothesis": "Specific agent failures paired with runnable safeguards will earn more saves and useful comments than broad productivity claims; end with a request for readers' own failure cases.",
+  "pivots": 90,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-11T01:01:13.062394+00:00",
-      "pillar": "smart",
-      "hook_sig": "most ai agent debugging advice you read is",
-      "texts": [
-        "Most AI agent debugging advice you read is outdated. The models changed, context windows exploded, and the failure modes shifted entirely. Here are three hard lessons from production that contradict the tutorials.",
-        "Lesson 1: Agents hallucinate function signatures when context exceeds 8k tokens. Fix:\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete, testable AI-agent lesson will earn more attention and trust than broad claims about agent advice.",
-      "breakout": "",
-      "ids": [
-        "17932248171411906",
-        "18105115994366479"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-11T02:01:08.716490+00:00",
       "pillar": "smart",
@@ -1214,6 +1197,31 @@
         "18113088593144626"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-12T06:01:15.451659+00:00",
+      "pillar": "smart",
+      "hook_sig": "things hiring managers can't tell from your resume",
+      "texts": [
+        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
+        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
+        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
+        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific agent failures paired with runnable safeguards will earn more saves and useful comments than broad productivity claims; end with a request for readers' own failure cases.",
+      "breakout": "none",
+      "followers": 263,
+      "views_total": 14261,
+      "ids": [
+        "18356197162172699",
+        "17952957036277736",
+        "18075477530725137",
+        "18051376673807150",
+        "18144041719510871"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1223,5 +1231,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 263,
-  "last_views": 14128
+  "last_views": 14261
 }
