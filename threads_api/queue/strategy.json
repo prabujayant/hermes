@@ -1,31 +1,8 @@
 {
-  "hypothesis": "Contrarian lessons format (Notion co-founder style) on AI coding agents \u2014 fresh pillar, proven 516k-view mechanics, numbered production pain lessons, zero theory, ends with follow CTA. Pivots hard from database/interview/K8s topic family.",
-  "pivots": 85,
+  "hypothesis": "Specific production pain points about AI coding agents will earn more saves and thoughtful comments than generic productivity claims; end with a follow CTA.",
+  "pivots": 86,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T21:01:10.090902+00:00",
-      "pillar": "smart",
-      "hook_sig": "bug autopsy: a cache update that looks safe",
-      "texts": [
-        "BUG AUTOPSY: A CACHE UPDATE THAT LOOKS SAFE BUT ISNT\n\nTwo requests hit the same key. Both read the value, both increment, both write back. One increment vanishes. No locks, no transactions, just a plain Redis SET. The code review passed because it looked atomic.",
-        "THE VULNERABLE PATTERN\n\nasync function increment(key) {\n  const current = await redis.get(key)\n  const next = (current || 0) + 1\n  await redis.set(key, next)\n  return next\n}\n\nReads are fast. Writes are fast. The gap between them is where the bug lives. Under load that gap widens.",
-        "THE MINIMAL INTERLEAVING\n\nRequest A: GET key -> 5\nRequest B: GET key -> 5\nRequest A: SET key 6\nRequest B: SET key 6\n\nExpected final value: 7. Actual final value: 6. One request paid the latency cost for nothing. The counter drifts low under contention.",
-        "THE FIX: COMPARE AND SET LOOP\n\nasync function increment(key) {\n  while (true) {\n    const current = await redis.get(key)\n    const next = (current || 0) + 1\n    const ok = await redis.set(key, next, 'NX', 'XX')\n    if (ok) return next\n  }\n}\n\nRedis SET with NX XX acts as compare and set. If the value changed since our GET the SET fails and we retry. No external locks, single key, linearizable.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Concrete race-condition walkthrough with minimal interleaving and before/after fix drives higher dwell time and replies from engineers who recognize the pattern, beating generic advice threads.",
-      "breakout": "none",
-      "ids": [
-        "18110198693270443",
-        "18105714746213199",
-        "18151894117536610",
-        "17931099651165557",
-        "18012209693969921"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-10T22:01:17.237165+00:00",
       "pillar": "smart",
@@ -1206,6 +1183,31 @@
         "18020516828728329"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-12T04:01:11.366477+00:00",
+      "pillar": "smart",
+      "hook_sig": "our team shipped three features last sprint. two",
+      "texts": [
+        "Our team shipped three features last sprint. Two were written by Cursor, one by a human. The human one deployed Friday. The AI ones are still in review because every PR looks like a stranger wrote it at 3am. The bottleneck is not writing code. It is reading code you did not write.",
+        "The first failure mode: hallucinated abstractions. The agent invented a `RetryableTransaction` wrapper that does not exist in our codebase. Tests pass because it mocked itself. Reviewer spends forty minutes tracing imports before realizing the class is fiction. Safeguard: require `grep -r ClassName` in CI before review starts.",
+        "Second failure mode: correct logic wrong layer. Agent puts business validation in the HTTP handler because the spec said \"validate input.\" Our architecture puts it in the service layer. Reviewer catches it but now the PR has three rounds of \"move this file.\" Safeguard: add a `CODEOWNERS` rule that forces architecture review on net-new files.",
+        "Third failure mode: the silent contract change. Agent updates a DTO field from `userId` to `user_id` to match the database. Downstream consumers break in staging. No test fails because the contract tests were generated from the old schema. Safeguard: schema diff check in CI that fails on breaking changes without a migration plan.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific production pain points about AI coding agents will earn more saves and thoughtful comments than generic productivity claims; end with a follow CTA.",
+      "breakout": "none",
+      "followers": 263,
+      "views_total": 13609,
+      "ids": [
+        "18146641477498826",
+        "17961668079218771",
+        "18108565166222442",
+        "18094117031659651",
+        "17987501877076512"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1215,5 +1217,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 263,
-  "last_views": 13422
+  "last_views": 13609
 }
