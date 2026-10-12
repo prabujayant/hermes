@@ -1,26 +1,8 @@
 {
-  "hypothesis": "Interview advice will earn more saves and specific replies when it gives candidates a concrete proof standard for explaining technical trade-offs and changed minds.",
-  "pivots": 82,
+  "hypothesis": "Interview advice earns more specific replies when it gives candidates a falsifiable way to defend\u2014and revisit\u2014a technical choice.",
+  "pivots": 83,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-10T18:01:07.920830+00:00",
-      "pillar": "smart",
-      "hook_sig": "most ai coding agent advice from six months",
-      "texts": [
-        "Most AI coding agent advice from six months ago is actively harmful now. The models changed, the context windows exploded, and the failure modes shifted entirely. Here are four hard lessons from shipping agents to production that contradict the current narrative.",
-        "Lesson one: Context stuffing beats prompt engineering every time. Stop crafting clever prompts. Feed the model your entire codebase, your schema, your error logs, your failing tests. A mediocre prompt with full context outperforms a perfect prompt with a curated snippet. We measured this across twelve repositories. The gap was forty percent success rate versus eighty percent.",
-        "Lesson two: Agents\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Controversial technical takes plus visual debugging threads, tested at high frequency. Nemotron Ultra chief strategist plan.",
-      "ids": [
-        "18146808547602652",
-        "18124155928700043",
-        "18125703410486826"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-10T19:01:10.575893+00:00",
       "pillar": "smart",
@@ -1193,6 +1175,29 @@
         "18025578074928530"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-12T02:31:00.225232+00:00",
+      "pillar": "smart",
+      "hook_sig": "most interview candidates explain trade-offs like they are",
+      "texts": [
+        "Most interview candidates explain trade-offs like they are reading a textbook. The senior signal is not knowing both sides, it is naming the one metric that would flip your decision tomorrow.",
+        "I watched a candidate ace the system design round. They chose Kafka over RabbitMQ, listed throughput, durability, ordering guarantees. Textbook perfect. Then the interviewer asked: what production signal would make you migrate back? Silence.",
+        "That silence cost them the level. A reversal trigger is not a weakness, it is proof you have operated the system. If p99 latency exceeds 200ms at 10k msg/sec, we move to Pulsar. If replay volume hits 5TB/day, we add a tiered storage layer. Specific. Measurable. Defensible.",
+        "Next interview, do not just defend your choice. Put a stake in the ground: I would reverse this if [metric] crosses [threshold] in [timeframe]. Watch the interviewer lean forward.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Interview advice earns more specific replies when it gives candidates a falsifiable way to defend\u2014and revisit\u2014a technical choice.",
+      "breakout": "none",
+      "followers": 262,
+      "views_total": 12924,
+      "ids": [
+        "18166211212470161",
+        "17879504997554036",
+        "17885464740688836",
+        "18134904079741642"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1202,5 +1207,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 262,
-  "last_views": 12740
+  "last_views": 12924
 }
