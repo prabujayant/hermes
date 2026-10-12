@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A compact, reproducible mutation example will earn more useful replies and saves than another general warning about agent-written tests.",
+  "hypothesis": "A concrete test readers can reproduce will earn more saves and specific replies than another general warning about agent-written tests.",
   "pivots": 98,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-11T15:01:11.710561+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to pass system design interviews,",
-      "texts": [
-        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
-        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
-        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
-        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A compact, inspectable test will earn more saves and specific replies than a general verification checklist.",
-      "breakout": "none",
-      "followers": 259,
-      "views_total": 8668,
-      "ids": [
-        "18133035724673920",
-        "18131261938664587",
-        "17917638645482218",
-        "18112601078466601",
-        "17908147794578221"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-11T15:30:58.898572+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "17973460080161132"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-12T17:01:21.013054+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to become a senior engineer",
+      "texts": [
+        "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:",
+        "Own outcomes, not tickets.\n\nJuniors close tasks. Seniors move metrics. Ask what number your work changes.",
+        "Write the doc nobody wants to write.\n\nDesign docs, runbooks, postmortems. Visibility compounds faster than commits.",
+        "Delete code on purpose.\n\nEvery quarter, kill something: a flag, a service, dead code. Simplifiers get promoted.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete test readers can reproduce will earn more saves and specific replies than another general warning about agent-written tests.",
+      "breakout": "none",
+      "followers": 264,
+      "views_total": 10834,
+      "ids": [
+        "17964893307239737",
+        "17959937067247839",
+        "18375044650241439",
+        "18463791082138017",
+        "18113665697033711"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 264,
-  "last_views": 10734
+  "last_views": 10834
 }
