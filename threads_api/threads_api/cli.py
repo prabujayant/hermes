@@ -184,7 +184,7 @@ def _cmd_post_smart(args):
     from .llm import chat as llm_chat
 
     client = ThreadsClient()
-    posts = fetch_posts(client, max_posts=40, max_workers=20)
+    posts = fetch_posts(client, max_posts=150, max_workers=20)
     scorecard = evaluate(posts, now=now)
     strategy = load_strategy()
     from .strategist import follower_stall

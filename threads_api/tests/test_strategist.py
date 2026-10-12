@@ -187,6 +187,30 @@ def test_decide_prompt_bans_last_format_on_pivot():
     assert "BANNED from caps-listicle" in seen["prompt"]
 
 
+def test_all_time_winners_rank_by_views_and_label_types():
+    from threads_api.strategist import all_time_winners, classify_hook_type
+
+    assert classify_hook_type("ALL CAPS HOOK HERE NOW") == "caps-listicle"
+    assert classify_hook_type("Is monolith better?") == "question/debate"
+    assert classify_hook_type("I debugged this for weeks") == "story"
+    assert classify_hook_type("Postgres handles millions") == "statement"
+
+    posts = [_post("old hit", 900, 100), _post("mid hit", 300, 50),
+             _post("fresh legs", 50, 5), _post("too young", 9999, 1)]
+    winners = all_time_winners(posts)
+    assert [w["views"] for w in winners] == [900, 300, 50]
+    assert all("type" in w and "text" in w for w in winners)
+
+
+def test_prompt_orders_winning_types_only():
+    posts = [_post("OLD HIT HERE", 900, 100), _post("flop", 5, 6),
+             _post("mid", 100, 7)]
+    prompt = build_prompt(evaluate(posts), {"hypothesis": "x"})
+    assert "ALL-TIME WINNERS" in prompt
+    assert "must match" in prompt
+    assert "900" in prompt
+
+
 def test_niche_posts_sorted_views_desc_nulls_last(tmp_path):
     import json
 

@@ -283,12 +283,49 @@ def evaluate(posts, now=None):
         "median_vph": round(median_vph, 1),
         "floor_vph": round(floor_vph, 1),
         "judged": judged,
+        "all_time": all_time_winners(posts, now=now),
         "sample_size": len(judged),
         "posts_24h": posts_24h,
         "streak": streak,
         "ready": ready,
         "pivot": ready and streak >= PIVOT_STREAK,
     }
+
+
+def classify_hook_type(text):
+    """Crude but stable format label: caps-listicle, question/debate,
+    story, or statement. Drives the follow-winning-types rule."""
+    text = text or ""
+    letters = [c for c in text if c.isalpha()]
+    if letters and sum(c.isupper() for c in letters) / len(letters) > 0.7:
+        return "caps-listicle"
+    if "?" in text:
+        return "question/debate"
+    first = text.strip().split()
+    if first and first[0].lower() in ("i", "my", "we", "our"):
+        return "story"
+    return "statement"
+
+
+def all_time_winners(posts, now=None, limit=6):
+    """Top posts by raw views across everything fetched, any age over
+    3h. These are the proven types the loop must imitate."""
+    now = now or datetime.datetime.now(datetime.timezone.utc)
+    ranked = []
+    for post in posts:
+        metrics = post.get("metrics") or {}
+        if metrics.get("views") is None:
+            continue
+        if _age_hours(post, now) < JUDGE_AFTER_HOURS:
+            continue
+        text = (post.get("text") or "")[:140].replace("\n", " ")
+        ranked.append({
+            "views": views_of(post),
+            "type": classify_hook_type(post.get("text") or ""),
+            "text": text,
+        })
+    ranked.sort(key=lambda item: -item["views"])
+    return ranked[:limit]
 
 
 def _stem(word):
@@ -486,6 +523,18 @@ def build_prompt(scorecard, strategy, progress=None, posts=None):
         f"(pivot at {PIVOT_STREAK}).",
         "Recent judged posts, oldest first (cite IDs like P3):",
     ]
+    all_time = scorecard.get("all_time", [])
+    if all_time:
+        lines.append(
+            "ALL-TIME WINNERS (your proven types — new threads must match "
+            "one of these types; name which in CHANGE. On PIVOT runs the "
+            "format ban above still governs hook shape):"
+        )
+        for winner in all_time:
+            lines.append(
+                f"- {winner['views']:,} views [{winner['type']}]: "
+                f"{ascii_clean(winner['text'])}"
+            )
     for item in scorecard["judged"][-8:]:
         flag = "UNDER" if item["under"] else "ok"
         lines.append(
