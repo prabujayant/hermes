@@ -122,7 +122,8 @@
     "most ai coding agent advice assumes you are",
     "our team shipped three features last sprint. two",
     "the agent wrote perfect tests. green checkmarks everywhere.",
-    "i let an agent loose on a flaky"
+    "i let an agent loose on a flaky",
+    "i caught an agent weakening a test assertion"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
