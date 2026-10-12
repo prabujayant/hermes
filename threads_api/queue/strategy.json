@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Concrete system-design tradeoffs will earn more saves and useful replies than broad interview advice, while inviting candidates to share their toughest bottleneck.",
-  "pivots": 104,
+  "hypothesis": "Specific system-design decisions with a practical diagnostic will earn more saves and useful replies than broad interview advice.",
+  "pivots": 105,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-11T18:31:02.108168+00:00",
-      "pillar": "smart",
-      "hook_sig": "most storage-model advice in system-design interviews is outdated.",
-      "texts": [
-        "Most storage-model advice in system-design interviews is outdated. Candidates still memorize CAP theorem definitions and recite database feature lists. Interviewers stopped caring about that five years ago. They want to hear the tradeoff your design must survive.",
-        "The only three tradeoffs that decide a storage model: consistency latency vs availability during partition, write amplification vs read amplification at your scale, operational burden vs team expertise. Every technology choice maps to one of these. Name the tradeoff first, the technology second.",
-        "Example: you need to store user sessions with sub-millisecond reads, 99.99% availability, and the team has zero ops bandwidth. The tradeoff is read amplification vs operational burden. Redis Cluster wins not because it is popular, but because it shifts burden to the managed provider and keeps read amplification near zero.",
-        "Same workload, different constraint: the team has strong ops skills but zero budget for managed services. Now the tradeoff flips to operational burden vs consistency latency. PostgreSQL with synchronous replication and connection pooling survives the partition, costs nothing, and your team can debug it at 3am.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete decision framework will earn more saves and specific interview examples in replies than another race-condition post.",
-      "breakout": "none",
-      "followers": 261,
-      "views_total": 9774,
-      "ids": [
-        "18147069574565912",
-        "17967039195196516",
-        "17951380440277144",
-        "17885693859623713",
-        "18192857977401438"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-11T19:01:10.324113+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "17899925319672435"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-12T20:31:06.554221+00:00",
+      "pillar": "smart",
+      "hook_sig": "decision rule: before adding a cache, check whether",
+      "texts": [
+        "decision rule: before adding a cache, check whether one slow query explains the latency\n\nmost teams reach for redis the moment p99 spikes. the real fix is often a missing index, a n+1 loop, or a query plan that fell off a cliff after a schema change. caching without diagnosing first just hides the symptom and adds invalidation nightmares.",
+        "i watched a team spend two sprints adding a distributed cache layer for a dashboard endpoint. the actual problem? a single unindexed join on a 50-million-row table. adding the index dropped p99 from 2.3s to 40ms. the cache code got deleted before it hit prod.",
+        "run this diagnostic before you write any caching code: capture the slow query log for the problematic endpoint, run explain analyze on the top offender, check whether rows scanned matches rows returned. if the ratio is above 10:1, fix the query first. cache only if the optimized query still breaches your SLO.",
+        "a reusable checklist for interviews and design docs: 1) identify the exact query causing tail latency, 2) prove an index or rewrite fixes it, 3) only then ask whether read volume justifies a cache. what is the hardest latency bottleneck you have chased down?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific system-design decisions with a practical diagnostic will earn more saves and useful replies than broad interview advice.",
+      "breakout": "none",
+      "followers": 265,
+      "views_total": 11827,
+      "ids": [
+        "18144327559588446",
+        "17962590228079737",
+        "17863326183694909",
+        "18347685025268946",
+        "18413962321087664"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 265,
-  "last_views": 11693
+  "last_views": 11827
 }

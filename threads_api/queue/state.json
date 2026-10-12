@@ -150,7 +150,8 @@
     "things hiring managers can't tell from your resume",
     "falsifiable demo: i watched cursor rewrite a migration",
     "most candidates walk into system design interviews and",
-    "most teams optimize the wrong bottleneck first because"
+    "most teams optimize the wrong bottleneck first because",
+    "decision rule: before adding a cache, check whether"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
