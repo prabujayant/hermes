@@ -1,33 +1,8 @@
 {
   "hypothesis": "A specific mutation test will earn more saves and useful replies than another broad warning about green CI.",
-  "pivots": 100,
+  "pivots": 101,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-11T16:31:05.408214+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent three hours debugging a credit-transfer endpoint.",
-      "texts": [
-        "I spent three hours debugging a credit-transfer endpoint. The AI agent swore the race condition was fixed. Row locks, proper isolation, clean diff. Tests passed. Production proved otherwise. Two users spent the same credit. Only one should have.",
-        "The unit test mocked the database. It verified the lock statement existed. It never forced two threads to hit the read at the same microsecond. Most concurrency tests are theater. They check syntax, not collision.",
-        "Here is the minimal forced-interleaving test that catches the bug. Spin up two goroutines. Pause both at the SELECT FOR UPDATE with a barrier. Release simultaneously. Assert the final balance equals the sum of both transfers. No mocks. Real DB. Deterministic collision.",
-        "The pattern works for any read-modify-write: inventory decrements, seat reservations, counter increments. Replace the barrier with a channel or latch in your language. The fix is not the lock. The fix is proving the lock actually serializes under contention.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete test readers can adapt will earn more saves and specific replies than another general lesson about verifying AI fixes.",
-      "breakout": "none",
-      "followers": 261,
-      "views_total": 9300,
-      "ids": [
-        "18129058306831022",
-        "18104682263574625",
-        "18061477268793798",
-        "18094484090657438",
-        "18201824386327059"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-11T17:01:10.750028+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18129652021835976"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-12T18:30:58.978789+00:00",
+      "pillar": "smart",
+      "hook_sig": "things hiring managers can't tell from your resume",
+      "texts": [
+        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
+        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
+        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
+        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific mutation test will earn more saves and useful replies than another broad warning about green CI.",
+      "breakout": "",
+      "followers": 265,
+      "views_total": 11191,
+      "ids": [
+        "18220509691350740",
+        "18120592942977873",
+        "17911284201500371",
+        "17909322366556128",
+        "17982547811901274"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 265,
-  "last_views": 11058
+  "last_views": 11191
 }
