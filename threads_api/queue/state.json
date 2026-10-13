@@ -156,7 +156,8 @@
     "most ai coding advice says \"write tests first,",
     "failure-mode teardown: three checks before accepting an ai-generated",
     "i watched cursor rewrite a migration test and",
-    "copyable checklist: before accepting an ai-written test, check"
+    "copyable checklist: before accepting an ai-written test, check",
+    "if you want behavioral rounds to remember you,"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

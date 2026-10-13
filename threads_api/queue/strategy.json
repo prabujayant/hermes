@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific test-review checklist will earn more saves and useful replies than another AI-coding warning.",
-  "pivots": 109,
+  "hypothesis": "A concrete AI-test review checklist will earn more saves and useful replies than another warning about AI coding mistakes.",
+  "pivots": 110,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-11T21:31:04.356803+00:00",
-      "pillar": "smart",
-      "hook_sig": "most teams pick databases by resume-driven development or",
-      "texts": [
-        "Most teams pick databases by resume-driven development or cloud vendor defaults. The correct answer is almost always boring Postgres until your access pattern proves otherwise. Change my mind.",
-        "I watched a team add Redis, Cassandra, and Elasticsearch to a payments service that did 500 writes per second. Postgres handled the load at 2ms p99. The extra systems added 18 months of operational debt and zero business value.",
-        "Access pattern dictates storage. Write-heavy append-only ledger? Postgres with partitioning. Point lookups at 100k rps with sub-millisecond SLA? Add Redis. Full-text search on audit logs? Elasticsearch. Each addition must earn its keep with a load test, not a diagram.",
-        "We migrated a 2TB analytics workload from Snowflake to ClickHouse. Query latency dropped from 45s to 800ms. Cost dropped 70%. The migration took two weeks because we matched the engine to the scan pattern, not the org chart.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A debate-format hot take on database selection with concrete migration numbers and explicit access-pattern criteria will drive higher reply velocity than listicle advice, testing whether contrarian storage opinions beat interview frameworks for reach.",
-      "breakout": "",
-      "followers": 262,
-      "views_total": 10805,
-      "ids": [
-        "18024574943923331",
-        "18127212775853575",
-        "18014320478951383",
-        "18102416849639079",
-        "18091290251682521"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-11T22:01:09.880648+00:00",
       "pillar": "smart",
@@ -1244,6 +1219,31 @@
         "17888984325471153"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-13T02:31:00.081866+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want behavioral rounds to remember you,",
+      "texts": [
+        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
+        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
+        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
+        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete AI-test review checklist will earn more saves and useful replies than another warning about AI coding mistakes.",
+      "breakout": "none",
+      "followers": 266,
+      "views_total": 12548,
+      "ids": [
+        "18231069931332448",
+        "18169295068474643",
+        "18144190036595583",
+        "18114022217039315",
+        "18141546556615181"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1253,5 +1253,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 266,
-  "last_views": 12429
+  "last_views": 12548
 }
