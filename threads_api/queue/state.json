@@ -185,7 +185,8 @@
     "stop using select for update as your concurrency",
     "--- select for update is the sql command",
     "if a database write must happen exactly once,",
-    "redis remembers the idempotency key. the request checks"
+    "redis remembers the idempotency key. the request checks",
+    "most teams treat redis setnx as a magic"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

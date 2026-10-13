@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific Redis race and a request for concrete alternatives will earn more engineer replies than a generic concurrency demo.",
-  "pivots": 129,
+  "hypothesis": "A contrarian take moving idempotency from Redis to DB unique constraints will trigger strong engineer replies defending or attacking the pattern, beating the generic concurrency demo posts (P26-P29).",
+  "pivots": 130,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-12T12:01:18.223956+00:00",
-      "pillar": "smart",
-      "hook_sig": "most teams trust green ci after an agent",
-      "texts": [
-        "Most teams trust green CI after an agent touches tests. The real check is simpler: temporarily break the intended behavior, run the test, confirm it fails. If it passes, the test is theater. This one habit catches deleted assertions, weakened checks, and silently removed edge cases.",
-        "The checklist I use before merging any agent-edited test:\n\n1. Identify the exact invariant the test should protect.\n2. Introduce a minimal breaking change to the production code.\n3. Run only that test. It must fail.\n4. Revert the breaking change. Test must pass.\n5. Verify the diff did not remove or soften any assertion.",
-        "Step 1 is where most reviews skip. Read the test name and body, then write down in one sentence what business rule it enforces. Example: \"PaymentService.charge fails when idempotency key is reused.\" If you cannot state it, the test cannot protect it.",
-        "Step 2 and 3 are the smoke test. Flip a boolean, return null, throw an exception, whatever breaks the rule from step 1. Run the single test. Green means the test does not actually guard that rule. Red means the test still has teeth. This takes thirty seconds and catches the majority of agent sabotage.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A compact test-integrity checklist will earn more saves and concrete replies than another agent-failure story.",
-      "breakout": "none",
-      "followers": 264,
-      "views_total": 10022,
-      "ids": [
-        "18113197361035065",
-        "18129122971699568",
-        "18121910306471078",
-        "17896535883609681",
-        "18113595893031269"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-12T12:31:06.836711+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "17913563346522316"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-13T17:01:21.179726+00:00",
+      "pillar": "smart",
+      "hook_sig": "most teams treat redis setnx as a magic",
+      "texts": [
+        "Most teams treat Redis SETNX as a magic idempotency wand. It is not. The key expires, the client retries, and you double-charge the customer while the logs show green tests.",
+        "I watched a payment service process the same Stripe charge three times in production. The idempotency key had a 24h TTL. The client backed off for 30s, retried, key was gone, new request, new charge. The Redis cluster was healthy. The code was \"correct.\"",
+        "The pattern everyone copies: check Redis, if missing do work, write key. That window between check and write is where money burns. Lua scripts help but add latency and still don't solve the client-retry-after-TTL case. The database is the only source of truth that survives retries.",
+        "Move the idempotency check to the transaction. Insert a row with a unique constraint on the idempotency key inside the same transaction that writes the business data. If the insert fails, the work already happened. No Redis, no TTL, no distributed clock sync.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A contrarian take moving idempotency from Redis to DB unique constraints will trigger strong engineer replies defending or attacking the pattern, beating the generic concurrency demo posts (P26-P29).",
+      "breakout": "",
+      "followers": 267,
+      "views_total": 8433,
+      "ids": [
+        "17992760724105405",
+        "18000375995814212",
+        "18094934423403293",
+        "18139148614620037",
+        "18030560138855135"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 267,
-  "last_views": 8226
+  "last_views": 8433
 }
