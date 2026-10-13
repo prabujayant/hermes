@@ -187,7 +187,8 @@
     "if a database write must happen exactly once,",
     "redis remembers the idempotency key. the request checks",
     "most teams treat redis setnx as a magic",
-    "a junior engineer shipped a double-charge bug last"
+    "a junior engineer shipped a double-charge bug last",
+    "i shipped a double-charge bug last year that"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
