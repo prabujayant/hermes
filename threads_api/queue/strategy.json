@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A compact runnable backend bug hunt",
-  "pivots": 122,
+  "hypothesis": "A tiny runnable concurrency failure will earn more saves and targeted replies than another AI-test teardown.",
+  "pivots": 123,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-12T04:01:11.366477+00:00",
-      "pillar": "smart",
-      "hook_sig": "our team shipped three features last sprint. two",
-      "texts": [
-        "Our team shipped three features last sprint. Two were written by Cursor, one by a human. The human one deployed Friday. The AI ones are still in review because every PR looks like a stranger wrote it at 3am. The bottleneck is not writing code. It is reading code you did not write.",
-        "The first failure mode: hallucinated abstractions. The agent invented a `RetryableTransaction` wrapper that does not exist in our codebase. Tests pass because it mocked itself. Reviewer spends forty minutes tracing imports before realizing the class is fiction. Safeguard: require `grep -r ClassName` in CI before review starts.",
-        "Second failure mode: correct logic wrong layer. Agent puts business validation in the HTTP handler because the spec said \"validate input.\" Our architecture puts it in the service layer. Reviewer catches it but now the PR has three rounds of \"move this file.\" Safeguard: add a `CODEOWNERS` rule that forces architecture review on net-new files.",
-        "Third failure mode: the silent contract change. Agent updates a DTO field from `userId` to `user_id` to match the database. Downstream consumers break in staging. No test fails because the contract tests were generated from the old schema. Safeguard: schema diff check in CI that fails on breaking changes without a migration plan.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Specific production pain points about AI coding agents will earn more saves and thoughtful comments than generic productivity claims; end with a follow CTA.",
-      "breakout": "none",
-      "followers": 263,
-      "views_total": 13609,
-      "ids": [
-        "18146641477498826",
-        "17961668079218771",
-        "18108565166222442",
-        "18094117031659651",
-        "17987501877076512"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-12T04:31:01.167126+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18118538239974291"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-13T09:01:16.624964+00:00",
+      "pillar": "smart",
+      "hook_sig": "executable bug hunt: a retry passes every sequential",
+      "texts": [
+        "executable bug hunt: a retry passes every sequential test, but two simultaneous requests create two charges\n\nthe handler looks correct at first glance\nit checks for existing charge, returns early if found, otherwise creates new charge and returns it\nsequential tests all pass green",
+        "the sequential test\npost /charge with idempotency key \"abc\"\nassert 201 created\npost /charge with same key \"abc\"\nassert 200 ok same charge id\ntest passes every time",
+        "the concurrent reality\ntwo threads post /charge with key \"abc\" at the exact same millisecond\nboth threads pass the existence check before either writes\nboth threads create a charge\nyou now have two charges for one key\nthe test suite never caught it because it never ran concurrent",
+        "the minimal fix\nadd a unique constraint on idempotency key at the database level\ncatch the constraint violation and return the existing charge\nthe race window closes at the storage layer where it belongs\nsequential tests still pass, concurrent tests now pass too",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A tiny runnable concurrency failure will earn more saves and targeted replies than another AI-test teardown.",
+      "breakout": "none",
+      "followers": 267,
+      "views_total": 5133,
+      "ids": [
+        "18034079111893673",
+        "18593153083071219",
+        "17971668786148727",
+        "18117631256326350",
+        "17979972006129441"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1258,6 +1258,6 @@
     "mandate": "200000 views in 30 days by 2026-11-10",
     "since": "2026-10-10"
   },
-  "last_followers": 266,
-  "last_views": 5059
+  "last_followers": 267,
+  "last_views": 5133
 }
