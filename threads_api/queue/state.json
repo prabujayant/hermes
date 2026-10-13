@@ -186,7 +186,8 @@
     "--- select for update is the sql command",
     "if a database write must happen exactly once,",
     "redis remembers the idempotency key. the request checks",
-    "most teams treat redis setnx as a magic"
+    "most teams treat redis setnx as a magic",
+    "a junior engineer shipped a double-charge bug last"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
