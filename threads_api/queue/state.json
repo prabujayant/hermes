@@ -161,7 +161,8 @@
     "i caught an ai test pass with flying",
     "falsifiable demo: an agent \"fixed\" a flaky idempotency",
     "i asked cursor to fix a flaky migration",
-    "before-and-after teardown: an ai fix makes the test"
+    "before-and-after teardown: an ai fix makes the test",
+    "failure-mode teardown: compare the test's original claim with"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
