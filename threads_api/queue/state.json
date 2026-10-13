@@ -189,7 +189,8 @@
     "most teams treat redis setnx as a magic",
     "a junior engineer shipped a double-charge bug last",
     "i shipped a double-charge bug last year that",
-    "i used to treat redis setnx as a"
+    "i used to treat redis setnx as a",
+    "a payment worker picks up order 402, acquires"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
