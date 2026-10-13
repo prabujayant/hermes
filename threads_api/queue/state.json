@@ -168,7 +168,8 @@
     "review challenge: show how a passing ai-written test",
     "i let an ai write a test for",
     "i caught an ai \"fix\" a transfer test",
-    "i pushed a transfer test to ci. it"
+    "i pushed a transfer test to ci. it",
+    "green-test trap: a tiny idempotency handler passes its"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

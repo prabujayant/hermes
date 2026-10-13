@@ -1,35 +1,8 @@
 {
-  "hypothesis": "A runnable backend challenge with one identifiable surviving bug will prompt more specific replies and follows than a general AI-test warning",
-  "pivots": 121,
+  "hypothesis": "A compact runnable backend bug hunt",
+  "pivots": 122,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-12T03:30:55.965566+00:00",
-      "pillar": "smart",
-      "hook_sig": "most ai coding agent advice assumes you are",
-      "texts": [
-        "most AI coding agent advice assumes you are babysitting a junior dev. the reality shifted when context windows hit 200k and tool use became reliable. you are not reviewing PRs anymore. you are directing a parallel workforce that never sleeps.",
-        "lesson 1: stop pasting errors into chat. give the agent read access to your repo, test suite, and CI logs. it fixes the root cause in one loop instead of five back-and-forths. the token cost is lower than your context-switching tax.",
-        "lesson 2: write SPEC.md files before you prompt. agents hallucinate requirements less when the contract lives in the repo. treat specs like API contracts, version them, review them, enforce them in CI. your prompt becomes \"implement SPEC.md v3.2\".",
-        "lesson 3: parallelize by directory, not by feature. spin up three agents on three bounded contexts with separate git worktrees. merge conflicts are cheaper than sequential bottlenecks. your review queue becomes a merge queue.",
-        "lesson 4: the new senior metric is not lines reviewed. it is spec clarity, boundary design, and eval harnesses that catch agent drift before prod. the code writes itself. the architecture still needs you.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Contrarian lessons format (Notion co-founder style) on AI coding agents \u2014 fresh pillar, proven 516k-view mechanics, numbered production pain lessons, zero theory, ends with follow CTA. Pivots hard from database/interview/K8s topic family.",
-      "breakout": "",
-      "followers": 263,
-      "views_total": 13422,
-      "ids": [
-        "18102928478367471",
-        "18096468404391811",
-        "18336474844260155",
-        "17918536449450412",
-        "17985902606886359",
-        "18020516828728329"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-12T04:01:11.366477+00:00",
       "pillar": "smart",
@@ -1252,6 +1225,31 @@
         "18128354797839409"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-13T08:31:08.229905+00:00",
+      "pillar": "smart",
+      "hook_sig": "green-test trap: a tiny idempotency handler passes its",
+      "texts": [
+        "green-test trap: a tiny idempotency handler passes its test, but one duplicate side-effect slips through. spot the bug.\n\n```python\n# handler.py\nfrom dataclasses import dataclass\n\n@dataclass\nclass Transfer:\n    idempotency_key: str\n    amount_cents: int\n    status: str = \"pending\"\n\ntransfers = {}\n\ndef handle_transfer(key: str, amount: int) -> Transfer:\n    if key in transfers:\n        return transfers[key]\n    t = Transfer(key, amount, \"completed\")\n    transfers[key] = t\n    return t\n```",
+        "the test passes, CI is green, but the bug is real:\n\n```python\n# test_handler.py\ndef test_idempotent_transfer():\n    t1 = handle_transfer(\"key-1\", 1000)\n    t2 = handle_transfer(\"key-1\", 2000)  # different amount!\n    assert t1 is t2\n    assert t1.amount_cents == 1000\n    assert t2.amount_cents == 1000\n```\n\nrun it. green. now ask: what happens in production when the second request carries a different amount?",
+        "the handler returns the *original* transfer object, so the test sees same object, same amount. but the second caller *sent* 2000 and got back a Transfer saying 1000. the side-effect (charging 2000) never happened, but the caller thinks it did. silent data corruption.",
+        "your turn: write the failing scenario in 3 lines or less. what input exposes the mismatch between what the caller requested and what the handler confirmed?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A compact runnable backend bug hunt",
+      "breakout": "none",
+      "followers": 266,
+      "views_total": 5059,
+      "ids": [
+        "18010901120992436",
+        "18151479277541515",
+        "18101201066382510",
+        "18235202131323810",
+        "18118538239974291"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 266,
-  "last_views": 4955
+  "last_views": 5059
 }
