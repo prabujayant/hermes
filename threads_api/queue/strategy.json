@@ -1,29 +1,8 @@
 {
-  "hypothesis": "A reproducible test-review challenge with a specific failure mode will earn more useful replies than general warnings about AI-generated tests.",
-  "pivots": 118,
+  "hypothesis": "A minimal reproducible test-review challenge that exposes one surviving bug will earn more useful replies and follows than a general AI-test warning",
+  "pivots": 119,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-12T02:01:09.764319+00:00",
-      "pillar": "smart",
-      "hook_sig": "most candidates tell disagreement stories about who convinced",
-      "texts": [
-        "Most candidates tell disagreement stories about who convinced whom. Interviewers forget those stories in five minutes. The stories that stick prove what evidence forced the decision, not who won the argument. Here is the proof-standard framework I use with every senior candidate.",
-        "The framework has three checkpoints. First, name the observable signal that shifted the room, a latency spike, a cost anomaly, a failed chaos test, a customer quote. Second, show the trade-off table you built: options, metrics, risks, the row that made you switch. Third, state the decision and the measurable outcome that followed. No hero narrative, just the evidence chain.",
-        "Real example from\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Interview advice will earn more saves and specific replies when it gives candidates a concrete proof standard for explaining technical trade-offs and changed minds.",
-      "breakout": "none",
-      "followers": 262,
-      "views_total": 12740,
-      "ids": [
-        "18125709518302993",
-        "17920687179442901",
-        "18025578074928530"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-12T02:31:00.225232+00:00",
       "pillar": "smart",
@@ -1246,6 +1225,31 @@
         "17906610852665047"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-13T07:01:15.018180+00:00",
+      "pillar": "smart",
+      "hook_sig": "i let an ai write a test for",
+      "texts": [
+        "I let an AI write a test for a subtle idempotency bug in our payment service. The test passed green. The duplicate charge still hit production. Here is the minimal reproduction.",
+        "The bug: a race condition where two identical requests slip through the idempotency key check between SELECT and INSERT. The fix: a unique constraint on the idempotency key column. The AI test: it mocked the database layer and asserted the service returns an error on duplicate keys.",
+        "The test passed because the mock threw on the second call. But the real database only throws if the unique constraint exists. The migration adding that constraint was in a separate PR that had not merged yet. The test validated the mock, not the behavior.",
+        "What mutation would you make to the test so it fails without the constraint and passes with it, without changing the service code? Reply with the exact assertion change.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A minimal reproducible test-review challenge that exposes one surviving bug will earn more useful replies and follows than a general AI-test warning",
+      "breakout": "none",
+      "followers": 266,
+      "views_total": 4690,
+      "ids": [
+        "18073393577736019",
+        "18020373887938888",
+        "18344092006254777",
+        "17991383901107516",
+        "17965003671215779"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 266,
-  "last_views": 13433
+  "last_views": 4690
 }
