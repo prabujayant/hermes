@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Specific, reproducible AI-coding failure modes outperform broad advice; end with a focused question inviting readers' examples.",
-  "pivots": 115,
+  "hypothesis": "Debate hot take on AI code review harming junior growth (Format 5) will drive higher reply velocity than failure-mode teardowns; cites P27 (40.4/h) as proof AI-coding contrarian angles work, pivots format to direct challenge to maximize replies/reach.",
+  "pivots": 116,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-12T00:31:01.913010+00:00",
-      "pillar": "smart",
-      "hook_sig": "most startups don't need microservices. a modular monolith",
-      "texts": [
-        "Most startups don't need microservices. A modular monolith on Postgres handles 10M users and saves you months of ops pain.",
-        "I built a payment service at 5k writes/sec on a single Postgres cluster. Zero distributed transactions, zero service mesh. Latency p99 < 30ms.",
-        "When we added a new feature, we just added a table and a function. No new deploy pipeline, no version skew. Deploy time stayed under 5 minutes.",
-        "Yes, if you have multiple teams deploying independently at massive scale, microservices make sense. But that's <1% of companies. Show me a pre-Series-B company that truly needed microservices to hit product-market fit. I'll wait.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A blunt monolith-vs-microservices hot take will spark expert replies and beat the caps-listicle baseline (cf. P30).",
-      "breakout": "",
-      "followers": 262,
-      "views_total": 12065,
-      "ids": [
-        "18125138549313696",
-        "18634112971052555",
-        "18139848130715710",
-        "18483717013105972",
-        "18216206785349134"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-12T01:01:13.172370+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "18091463036208355"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-13T05:30:59.413840+00:00",
+      "pillar": "smart",
+      "hook_sig": "ai code review tools are making junior engineers",
+      "texts": [
+        "AI code review tools are making junior engineers worse, not better. The model flags style nits, misses the race condition, and the junior merges because \"CI passed.\" I've seen three production incidents this month traced to exactly this pattern.",
+        "The tool catches missing semicolons and suggests variable renames. It does not catch the missing idempotency key on the payment endpoint. It does not catch the N+1 query the ORM generated. It does not catch the timeout default that kills the batch job at 2am.",
+        "Juniors learn by reasoning through *why* a change is risky. When the tool hands them a green checkmark, they stop reasoning. They outsource judgment to a model that optimizes for \"looks correct\" not \"is correct.\" The review becomes a ritual, not a gate.",
+        "Senior engineers use AI review as a second pair of eyes for boilerplate. Juniors use it as a first pair of brains. That inversion is the career killer. If you cannot explain the failure mode your change introduces, you are not ready to merge it. The tool will not save you.",
+        "What's the worst thing an AI review missed on your team? Reply with the bug. Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Debate hot take on AI code review harming junior growth (Format 5) will drive higher reply velocity than failure-mode teardowns; cites P27 (40.4/h) as proof AI-coding contrarian angles work, pivots format to direct challenge to maximize replies/reach.",
+      "breakout": "",
+      "followers": 266,
+      "views_total": 13174,
+      "ids": [
+        "18127796821642048",
+        "17918112414451784",
+        "18032760626898292",
+        "18132349999705927",
+        "18218239834355473"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 266,
-  "last_views": 13116
+  "last_views": 13174
 }
