@@ -178,7 +178,8 @@
     "two requests hit the idempotency endpoint at the",
     "failure-demo: two concurrent requests both pass the balance",
     "concurrency bug hunt: two requests hit the same",
-    "race condition timeline: two requests hit the same"
+    "race condition timeline: two requests hit the same",
+    "if you want to build scalable apis, stop"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
