@@ -1,31 +1,8 @@
 {
-  "hypothesis": "A minimal reproducible test-review challenge that exposes one surviving bug will earn more useful replies and follows than a general AI-test warning",
-  "pivots": 119,
+  "hypothesis": "A tiny runnable challenge with a single surviving bug will earn more useful replies and follows than a general AI-test warning",
+  "pivots": 120,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-12T02:31:00.225232+00:00",
-      "pillar": "smart",
-      "hook_sig": "most interview candidates explain trade-offs like they are",
-      "texts": [
-        "Most interview candidates explain trade-offs like they are reading a textbook. The senior signal is not knowing both sides, it is naming the one metric that would flip your decision tomorrow.",
-        "I watched a candidate ace the system design round. They chose Kafka over RabbitMQ, listed throughput, durability, ordering guarantees. Textbook perfect. Then the interviewer asked: what production signal would make you migrate back? Silence.",
-        "That silence cost them the level. A reversal trigger is not a weakness, it is proof you have operated the system. If p99 latency exceeds 200ms at 10k msg/sec, we move to Pulsar. If replay volume hits 5TB/day, we add a tiered storage layer. Specific. Measurable. Defensible.",
-        "Next interview, do not just defend your choice. Put a stake in the ground: I would reverse this if [metric] crosses [threshold] in [timeframe]. Watch the interviewer lean forward.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Interview advice earns more specific replies when it gives candidates a falsifiable way to defend\u2014and revisit\u2014a technical choice.",
-      "breakout": "none",
-      "followers": 262,
-      "views_total": 12924,
-      "ids": [
-        "18166211212470161",
-        "17879504997554036",
-        "17885464740688836",
-        "18134904079741642"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-12T03:01:17.627693+00:00",
       "pillar": "smart",
@@ -1250,6 +1227,31 @@
         "17965003671215779"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-13T07:30:58.507218+00:00",
+      "pillar": "smart",
+      "hook_sig": "i caught an ai \"fix\" a transfer test",
+      "texts": [
+        "I caught an AI \"fix\" a transfer test by asserting the happy path only. The test went green. The bug? Double-charges on retry. Here is the exact test that passes despite the flaw:\n\n```python\ndef test_transfer_moves_money(db):\n    sender, receiver = create_accounts(100, 0)\n    transfer(sender, receiver, 50)\n    assert sender.balance == 50\n    assert receiver.balance == 50\n```",
+        "The test passes. CI passes. But call `transfer` twice with the same idempotency key and the receiver gets 100 while sender drops to 0. The assertion never checked idempotency.",
+        "Most AI-generated tests verify the happy path and call it done. They miss the retry that production will absolutely hit.",
+        "What specific bug survives this green test? Reply with the exact failure scenario you see.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A tiny runnable challenge with a single surviving bug will earn more useful replies and follows than a general AI-test warning",
+      "breakout": "none",
+      "followers": 266,
+      "views_total": 4826,
+      "ids": [
+        "18132628918739064",
+        "18345417931252909",
+        "18022308533930289",
+        "17973099395949255",
+        "17865668640678743"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 266,
-  "last_views": 4690
+  "last_views": 4826
 }
