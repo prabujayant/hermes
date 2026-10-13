@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Debate hot take on AI code review harming junior growth (Format 5) will drive higher reply velocity than failure-mode teardowns; cites P27 (40.4/h) as proof AI-coding contrarian angles work, pivots format to direct challenge to maximize replies/reach.",
-  "pivots": 116,
+  "hypothesis": "A concrete, nuanced challenge to AI code review will earn more replies than a broad contrarian take while keeping the advice credible.",
+  "pivots": 117,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-12T01:01:13.172370+00:00",
-      "pillar": "smart",
-      "hook_sig": "most candidates think \"i led the migration\" proves",
-      "texts": [
-        "Most candidates think \"I led the migration\" proves ownership. It proves you were in the room. Hiring managers verify three things: the decision you drove, the code you wrote, and the metric that moved. Everything else is theater.",
-        "The decision log is your receipt. In the interview, walk through the one architectural choice that had no right answer. Show the tradeoff doc you wrote. Name the alternative you killed. Explain why you bet on this stack despite the risk. That is the signal.",
-        "Your contribution is not the team's velocity. It is the specific module you rewrote when the latency spike hit. It is the test harness you built so the next refactor didn't break prod. It is the on-call rotation you redesigned so pages dropped forty percent. Be that specific.",
-        "The metric is not \"we shipped on time.\" It is p99 latency dropping from two hundred to forty milliseconds. It is error rate falling below zero point one percent. It is infra cost cut by thirty percent after you killed the chatty service. Numbers survive the retell. Stories don't.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Concrete interview advice with a reusable proof structure will outperform a broad architecture debate and invite specific comments.",
-      "breakout": "none",
-      "followers": 262,
-      "views_total": 12409,
-      "ids": [
-        "18636516931044156",
-        "18036234215842182",
-        "17908315263561627",
-        "18071615030748047",
-        "18095943089679361"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-12T01:31:01.095530+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "18218239834355473"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-13T06:01:15.747473+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to pass system design interviews,",
+      "texts": [
+        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
+        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
+        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
+        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A concrete, nuanced challenge to AI code review will earn more replies than a broad contrarian take while keeping the advice credible.",
+      "breakout": "none",
+      "followers": 266,
+      "views_total": 13241,
+      "ids": [
+        "17907432627330711",
+        "18023267204713956",
+        "18159230734504903",
+        "18112443857139686",
+        "17875037460585914"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 266,
-  "last_views": 13174
+  "last_views": 13241
 }
