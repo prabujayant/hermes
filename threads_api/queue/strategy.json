@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A reproducible race and minimal atomic fix will earn more saves and specific backend replies than another AI-test teardown.",
+  "hypothesis": "A reproducible backend race plus an atomic fix will earn more saves and specific engineering replies than another AI-test critique.",
   "pivots": 125,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-12T06:31:00.412114+00:00",
-      "pillar": "smart",
-      "hook_sig": "an ai agent rewrote our user table migration.",
-      "texts": [
-        "An AI agent rewrote our user table migration. It added a nullable column, dropped an index, renamed a foreign key. The migration applied clean. The app crashed on deploy because the ORM models were never updated. The agent said schema updated successfully and stopped.",
-        "Reproduce it: ask any coding agent to add created_at to users table with default now. Watch it generate ALTER TABLE users ADD COLUMN created_at TIMESTAMP DEFAULT NOW() but forget to update the User model, the repository, the GraphQL schema, the validation layer. Four files minimum. It touches one.",
-        "Run this before every agent migration merge: a diff-aware schema drift check. git diff HEAD~1 --name-only | grep -E '\\.(sql|prisma|graphql|ts)$' | xargs -I {} sh -c 'echo \"=== {} ===\"; git diff HEAD~1 {}' | grep -E '(ADD|DROP|RENAME|ALTER).*COLUMN|CREATE|DROP.*INDEX' && echo \"SCHEMA CHANGE DETECTED - VERIFY DEPENDENCIES\"",
-        "The pattern: agents optimize for local correctness (valid SQL) not global consistency (working app). They lack the dependency graph. The fix is not better prompts, it is a gate that forces the human to verify cross-file impact. One script, runs in CI, catches 90% of silent breaks.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Specific agent failures paired with copyable checks earn more saves and better comments than broad AI productivity claims; ask readers for their own failure cases last",
-      "breakout": "none",
-      "followers": 263,
-      "views_total": 14468,
-      "ids": [
-        "18397329637202662",
-        "18087606233695469",
-        "17937671952124629",
-        "18373097140241102",
-        "18187616506417642"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-12T07:01:13.909272+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18153156148533729"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-13T11:31:03.265843+00:00",
+      "pillar": "smart",
+      "hook_sig": "two requests hit the idempotency endpoint at the",
+      "texts": [
+        "Two requests hit the idempotency endpoint at the same millisecond. Both read \"key not found\" from Redis. Both proceed to charge the card. The customer sees two identical transactions. The idempotency key was meant to prevent exactly this.",
+        "Request A: GET idempotency:order-123 -> nil. Request B: GET idempotency:order-123 -> nil. Both see green light. Request A: SET idempotency:order-123 processing. Request B: SET idempotency:order-123 processing. Both write \"processing\" because the check and the set were separate round trips. The race window is the network latency between them.",
+        "Request A calls the payment gateway. Request B calls the payment gateway. Both return success. Both write \"completed\" to the key. The database now has two payment rows for order-123. The idempotency key did not prevent double charging. It only serialized the writes after the damage was done.",
+        "The fix is one atomic operation: SET idempotency:order-123 processing NX EX 300. NX means \"only if not exists.\" EX sets a TTL so stuck requests expire. If SET returns OK you own the slot. If it returns nil another request won. You skip the payment call entirely. No Lua script. No distributed lock service. One Redis command replaces the check-then-act pair.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A reproducible backend race plus an atomic fix will earn more saves and specific engineering replies than another AI-test critique.",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 6234,
+      "ids": [
+        "18096844868414412",
+        "17910448047304689",
+        "18118892110748863",
+        "18070358441501163",
+        "18008239139782803"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 5948
+  "last_views": 6234
 }

@@ -174,7 +174,8 @@
     "things hiring managers can't tell from your resume",
     "if you want to become a senior engineer",
     "things that quietly kill engineering careers:",
-    "if you want your side project to survive,"
+    "if you want your side project to survive,",
+    "two requests hit the idempotency endpoint at the"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
