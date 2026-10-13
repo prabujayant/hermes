@@ -181,7 +181,8 @@
     "race condition timeline: two requests hit the same",
     "if you want to build scalable apis, stop",
     "things senior backend engineers check before shipping a",
-    "practical checklist: the backend tradeoffs that reveal senior"
+    "practical checklist: the backend tradeoffs that reveal senior",
+    "stop using select for update as your concurrency"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
