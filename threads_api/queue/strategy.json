@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Caps-listicle hook with backend-specific principles will match the 400+ view velocity of P29/P30 while inviting \"what about X\" replies that boost 6h reply window.",
+  "hypothesis": "Practical backend checklists framed around senior-level judgment can retain the career-listicle reach while drawing specific engineering replies.",
   "pivots": 125,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-12T09:01:16.057574+00:00",
-      "pillar": "smart",
-      "hook_sig": "debate hot take: if you cannot name the",
-      "texts": [
-        "debate hot take: if you cannot name the measured bottleneck, caching is probably adding risk, not speed",
-        "Most teams reach for Redis or Memcached before they have a single latency number. The cache layer introduces stale reads, invalidation bugs, and extra operational surface. If the real problem is a slow query, the cache hides it instead of fixing it.",
-        "Concrete test: run a load profile, capture the 95th percentile latency, break it down by component. Only when a specific call (e.g., a 200ms DB query) dominates do you add a cache for that call. Measure again, verify the percentile drops, then ship.",
-        "Challenge: show me a production service where a blind cache improved tail latency without a prior measurement. Reply with the metric you used to prove it.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A measured, actionable challenge to premature caching will draw backend engineers to share where caching helped or hurt them.",
-      "breakout": "none",
-      "followers": 263,
-      "views_total": 9454,
-      "ids": [
-        "18492976501107898",
-        "18133611667739498",
-        "17871415833643702",
-        "18057703106589309",
-        "17991477227859031"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-12T09:31:03.928216+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18412076386092653"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-13T14:01:20.120786+00:00",
+      "pillar": "smart",
+      "hook_sig": "things senior backend engineers check before shipping a",
+      "texts": [
+        "THINGS SENIOR BACKEND ENGINEERS CHECK BEFORE SHIPPING A CHANGE:",
+        "1. Run the migration on a copy of prod data, not just test fixtures.\n2. Confirm every new query has an EXPLAIN with cost under 50ms.\n3. Verify the rollback path actually works, not just the forward path.\n4. Check that retries are idempotent, not just the happy path.\n5. Validate error budgets and SLOs are still met after the change.",
+        "6. Confirm circuit breakers trip at the right latency, not just in docs.\n7. Ensure logs have enough context to debug without reproducing locally.\n8. Check that caching keys won't collide under concurrent requests.",
+        "9. Verify rate limits match real traffic patterns, not just test loads.\n10. Confirm alerting fires on the new failure modes you just introduced.\n11. Run a canary for at least one full business cycle, not just 30 minutes.",
+        "Missed a critical pre-ship check that saved your bacon? Name it below.\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Practical backend checklists framed around senior-level judgment can retain the career-listicle reach while drawing specific engineering replies.",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 7237,
+      "ids": [
+        "18142066690592297",
+        "18129479657306901",
+        "18133848613708880",
+        "18037558835891646",
+        "18096833681232633"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 7104
+  "last_views": 7237
 }
