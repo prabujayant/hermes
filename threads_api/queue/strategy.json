@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Practical backend checklists framed around senior-level judgment can retain the career-listicle reach while drawing specific engineering replies.",
+  "hypothesis": "Career framing earns reach, while specific backend judgment creates more useful replies and a path to a follow-up series.",
   "pivots": 125,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-12T09:31:03.928216+00:00",
-      "pillar": "smart",
-      "hook_sig": "i added redis to a payment service handling",
-      "texts": [
-        "I added Redis to a payment service handling 40 requests per second. The query was slow, 800ms p99, so I cached the user balance lookup. Two weeks later a $12k reconciliation error slipped through because the cache served stale data during a partial DB failover. The original query was only slow because of a missing index.",
-        "The fix took ten minutes. The cache cleanup took three days and a production incident. I had measured the latency but not the change rate. Balance updates happened on every transaction, invalidation was eventual, and the retry logic masked the drift. The cache added more failure modes than it removed latency.",
-        "Now I run a three-question test before any cache layer. First, what is the actual bottleneck? Profile with real traffic, not assumptions. Second, how fast does the underlying data change relative to read volume? If writes exceed one percent of reads, invalidation cost usually dominates. Third, what happens when the cache lies? If the answer is silent corruption, the cache stays out.",
-        "Last month a teammate wanted to cache an analytics rollup. The test showed 200 reads per second, writes once per minute, and a staleness window of five seconds was acceptable. We added a TTL cache with a background refresh. Latency dropped from 400ms to 12ms, zero incidents. The test told us yes, and it told us exactly how.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific cache-or-not decision rule will earn backend engineers' attention and prompt concrete examples of where caching helped or hurt.",
-      "breakout": "none",
-      "followers": 263,
-      "views_total": 9591,
-      "ids": [
-        "18046259816818192",
-        "18017560571955221",
-        "18134615278646928",
-        "18090786788230007",
-        "18091943846276497"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-12T10:01:17.114908+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,33 @@
         "18096833681232633"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-13T14:31:05.955734+00:00",
+      "pillar": "smart",
+      "hook_sig": "practical checklist: the backend tradeoffs that reveal senior",
+      "texts": [
+        "PRACTICAL CHECKLIST: THE BACKEND TRADEOFFS THAT REVEAL SENIOR JUDGMENT\n\nMost engineers optimize for throughput. Seniors optimize for the right failure modes. Here are three decisions that separate the two.",
+        "DECISION 1: IDEMPOTENCY KEYS VS. DISTRIBUTED LOCKS\nLocks serialize. Keys let you retry safely. Senior choice: generate a client UUID at the edge, store it with a unique constraint, return 409 on collision. No coordination, no deadlocks, works across regions. The tradeoff: storage for every mutation. Worth it when duplicate charges cost more than disk.",
+        "DECISION 2: SYNCHRONOUS VALIDATION VS. ASYNC RECONCILIATION\nValidating upstream feels safe. It couples latency and availability. Senior choice: accept fast, reconcile slow. Write a compensation job that fixes drift nightly. The tradeoff: temporary inconsistency visible to users. Acceptable when the alternative is cascading timeouts during a dependency outage.",
+        "DECISION 3: FEATURE FLAGS VS. BRANCH DEPLOYS\nBranches isolate code. Flags isolate risk. Senior choice: wrap every behavior change in a flag, deploy to prod dark, flip for 1% then 100%. The tradeoff: flag debt accumulates. Clean it with a scheduled removal ticket the same day you add it. If you can't name the removal date, don't add the flag.",
+        "Which of these three tradeoffs bit you hardest in production? Reply with the decision number and the incident.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Career framing earns reach, while specific backend judgment creates more useful replies and a path to a follow-up series.",
+      "breakout": "none",
+      "followers": 267,
+      "views_total": 7521,
+      "ids": [
+        "18116744473956103",
+        "18107238353260940",
+        "17909470101490247",
+        "18100665176561415",
+        "17906692509591474",
+        "17996637693001333"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1256,6 +1258,6 @@
     "mandate": "200000 views in 30 days by 2026-11-10",
     "since": "2026-10-10"
   },
-  "last_followers": 268,
-  "last_views": 7237
+  "last_followers": 267,
+  "last_views": 7521
 }
