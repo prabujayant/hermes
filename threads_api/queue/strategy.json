@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Contrarian lesson format on AI agent test weakening (hot topic from P23-P27) will outperform median velocity by matching Notion co-founder's 516k-view mechanic for AI-era topics.",
-  "pivots": 106,
+  "hypothesis": "A concrete AI-code-review checklist will earn more saves and specific replies than another cautionary anecdote.",
+  "pivots": 107,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-11T20:01:10.434307+00:00",
-      "pillar": "smart",
-      "hook_sig": "i'm picking a database for a payment-ledger service",
-      "texts": [
-        "I'm picking a database for a payment-ledger service that does 5k writes/sec, needs strict serializability, and must survive a region outage without manual failover. No hype, just the constraints that ruled things out.",
-        "Postgres with synchronous replication gave us the consistency but the failover latency blew past our RTO. CockroachDB handled the geo spread but the contention on hot account rows killed throughput. Spanner was the technical fit but the vendor lock-in cost was a non-starter for this org.",
-        "The framework that actually worked: write down your three non-negotiables first. For us it was linearizable writes, automatic multi-region failover under 30 seconds, and zero cold-start penalty on read replicas. Every database that failed one got crossed off before we looked at benchmarks.",
-        "We landed on FoundationDB with a thin transaction layer. It forces you to model data as key ranges, which feels wrong at first, but the conflict-free replication and deterministic recovery meant our chaos tests passed on the first try. The operational burden is real though, no managed offering yet.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A worked storage-choice example with clear tradeoffs will earn more saves and specific replies than generic interview advice.",
-      "breakout": "none",
-      "followers": 262,
-      "views_total": 10330,
-      "ids": [
-        "18118714810748927",
-        "18430751407145960",
-        "18631982368037592",
-        "18128376712871844",
-        "18134669959709937"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-11T20:30:37.163567+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18464148691188835"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-13T01:01:15.824438+00:00",
+      "pillar": "smart",
+      "hook_sig": "failure-mode teardown: three checks before accepting an ai-generated",
+      "texts": [
+        "failure-mode teardown: three checks before accepting an AI-generated test fix\n\nthe pattern is always the same, the test goes green, CI passes, and production breaks weeks later because the assertion got weaker while the test name stayed the same",
+        "check 1: assertion specificity\nread the diff, not the test name. did the assertion change from \"raises IntegrityError on duplicate email\" to \"raises Exception\"? from \"returns 409 Conflict\" to \"returns error response\"? generic assertions are the smell. the fix must name the exact failure mode the test exists to catch",
+        "check 2: behavior preservation\nrun the test against the broken code *before* the fix. if it passes against known-bad behavior, the test never protected what you think it did. this catches the \"test passes but validates nothing\" class of weakenings that look correct in isolation",
+        "check 3: mutation survival\ndrop a mutation in the production code that should break the test, remove the unique constraint, delete the validation, return success on failure. if the test still passes, the assertion doesn't actually guard the behavior. this is the only check that proves the test has teeth",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete AI-code-review checklist will earn more saves and specific replies than another cautionary anecdote.",
+      "breakout": "none",
+      "followers": 266,
+      "views_total": 12226,
+      "ids": [
+        "18143389048538194",
+        "18018660848951674",
+        "17900095044671948",
+        "18467319472138028",
+        "18123482689918225"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 266,
-  "last_views": 12171
+  "last_views": 12226
 }
