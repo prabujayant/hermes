@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Specific system-design decisions with a practical diagnostic will earn more saves and useful replies than broad interview advice.",
-  "pivots": 105,
+  "hypothesis": "Concrete bottleneck checks with a clear next action will earn more saves and",
+  "pivots": 106,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-11T19:01:10.324113+00:00",
-      "pillar": "smart",
-      "hook_sig": "decision framework: before naming a database, answer these",
-      "texts": [
-        "decision framework: before naming a database, answer these three questions about your workload\n\nmost engineers pick postgres because it's familiar, or mongodb because it's flexible, or redis because it's fast. then they wonder why the query patterns fight the storage engine.\n\ni learned this the hard way on a billing system that melted under write contention.",
-        "question one: what is the read-to-write ratio, and does it shift by time of day?\n\nquestion two: what is the access pattern, point lookups by id, range scans by timestamp, full-text search, graph traversals, time-series aggregations?\n\nquestion three: what are the consistency requirements, can a stale read lose money, break invariants, or just annoy a user?",
-        "worked example: a credit-ledger service. 95 percent writes, 5 percent reads. access pattern: append-only inserts, point lookups by transaction id, range scans by account and date. consistency: zero tolerance for lost writes or double spends.\n\nanswer: postgres with advisory locks for the hot accounts, partitioned by account_id. not mongodb, not cassandra, not a queue.",
-        "the framework stops the default-choice reflex. match the engine to the workload, not the resume.\n\ndrop your workload in a reply, read/write ratio, access patterns, consistency needs, and i'll name the database i'd choose and why.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A compact database-selection framework with a worked example will earn more saves and specific replies than another race-condition post.",
-      "breakout": "none",
-      "followers": 261,
-      "views_total": 9960,
-      "ids": [
-        "18117905260772204",
-        "17904594795353648",
-        "18115767148822301",
-        "18100011620404347",
-        "18030764891911638"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-11T19:31:00.186463+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18413962321087664"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-13T00:01:13.892648+00:00",
+      "pillar": "smart",
+      "hook_sig": "diagnostic fork: if requests are slow, check whether",
+      "texts": [
+        "diagnostic fork: if requests are slow, check whether the pool is waiting for connections before blaming the database\n\nmost teams see p99 spike and reach for redis or read replicas. the real bottleneck is often simpler: your app threads are parked waiting for a free connection while the database sits idle.",
+        "how to spot it: compare application wait time (time spent acquiring a connection) against database active time. if wait time dominates, the pool is the constraint. postgres: pg_stat_activity shows idle in transaction. mysql: performance_schema.events_waits_summary_global_by_event_name for wait/synch/cond/sql/MYSQL_COND_wait.",
+        "decision rule: before adding cache or replicas, instrument pool wait latency. if p99 wait > 50ms and cpu on db is low, grow the pool or fix the leak. if p99 wait is low but query latency is high, then optimize queries or add cache. wrong diagnosis wastes weeks.",
+        "real case: payments service, p99 2.3s. team added redis, no change. pool wait was 1.8s of that. a stuck migration held connections open. fix: statement timeout, pool sizing, leak detection. latency dropped to 120ms. what is the longest pool wait you have seen in production?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Concrete bottleneck checks with a clear next action will earn more saves and",
+      "breakout": "none",
+      "followers": 266,
+      "views_total": 12140,
+      "ids": [
+        "18397455652164112",
+        "17954946054033296",
+        "18136600699643983",
+        "17910780141491269",
+        "18355196338169326"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1256,6 +1256,6 @@
     "mandate": "200000 views in 30 days by 2026-11-10",
     "since": "2026-10-10"
   },
-  "last_followers": 265,
-  "last_views": 11827
+  "last_followers": 266,
+  "last_views": 12140
 }
