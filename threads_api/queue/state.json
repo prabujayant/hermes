@@ -177,7 +177,8 @@
     "if you want your side project to survive,",
     "two requests hit the idempotency endpoint at the",
     "failure-demo: two concurrent requests both pass the balance",
-    "concurrency bug hunt: two requests hit the same"
+    "concurrency bug hunt: two requests hit the same",
+    "race condition timeline: two requests hit the same"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
