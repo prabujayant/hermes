@@ -158,7 +158,8 @@
     "i watched cursor rewrite a migration test and",
     "copyable checklist: before accepting an ai-written test, check",
     "if you want behavioral rounds to remember you,",
-    "i caught an ai test pass with flying"
+    "i caught an ai test pass with flying",
+    "falsifiable demo: an agent \"fixed\" a flaky idempotency"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
