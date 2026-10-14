@@ -192,7 +192,8 @@
     "i used to treat redis setnx as a",
     "a payment worker picks up order 402, acquires",
     "a payment worker picks up order 402, reads",
-    "i shipped a stale-write bug that survived staging"
+    "i shipped a stale-write bug that survived staging",
+    "most teams running kafka could replace it with"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
