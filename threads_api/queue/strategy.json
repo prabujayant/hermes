@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Sahil Bloom ICO format (intriguing statement + context + delayed payoff) on the \"visibility vs politics\" career blind spot will drive saves and profile clicks; the concrete packet comparison in post 3 creates reply bait about readers' own promo experiences.",
-  "pivots": 147,
+  "hypothesis": "A useful, concrete visibility tactic will earn more saves and thoughtful replies than a broad take about visibility versus politics.",
+  "pivots": 148,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T01:01:15.824438+00:00",
-      "pillar": "smart",
-      "hook_sig": "failure-mode teardown: three checks before accepting an ai-generated",
-      "texts": [
-        "failure-mode teardown: three checks before accepting an AI-generated test fix\n\nthe pattern is always the same, the test goes green, CI passes, and production breaks weeks later because the assertion got weaker while the test name stayed the same",
-        "check 1: assertion specificity\nread the diff, not the test name. did the assertion change from \"raises IntegrityError on duplicate email\" to \"raises Exception\"? from \"returns 409 Conflict\" to \"returns error response\"? generic assertions are the smell. the fix must name the exact failure mode the test exists to catch",
-        "check 2: behavior preservation\nrun the test against the broken code *before* the fix. if it passes against known-bad behavior, the test never protected what you think it did. this catches the \"test passes but validates nothing\" class of weakenings that look correct in isolation",
-        "check 3: mutation survival\ndrop a mutation in the production code that should break the test, remove the unique constraint, delete the validation, return success on failure. if the test still passes, the assertion doesn't actually guard the behavior. this is the only check that proves the test has teeth",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete AI-code-review checklist will earn more saves and specific replies than another cautionary anecdote.",
-      "breakout": "none",
-      "followers": 266,
-      "views_total": 12226,
-      "ids": [
-        "18143389048538194",
-        "18018660848951674",
-        "17900095044671948",
-        "18467319472138028",
-        "18123482689918225"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-13T01:30:58.484830+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18025991222879079"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T06:01:17.916468+00:00",
+      "pillar": "smart",
+      "hook_sig": "strong work does not make promotion easy to",
+      "texts": [
+        "Strong work does not make promotion easy to approve.  \nOne missing artifact often does.  \nMost engineers learn this the hard way.",
+        "I watched a staff engineer get passed over twice.  \nTheir code was cleaner than anyone on the team.  \nTheir designs prevented two major outages.  \nThe promo packet had zero quotes from stakeholders.  \nZero metrics tied to business outcomes.  \nZero evidence anyone outside engineering noticed.",
+        "The artifact that changes everything: a living impact log.  \nNot a brag sheet. A two-column table updated weekly.  \nLeft column: what you shipped or fixed.  \nRight column: who it helped and what they measured.  \nProduct manager says checkout latency dropped 40 percent.  \nSupport lead says ticket volume fell 200 per week.  \nSecurity reviewer says the auth rewrite closed three CVEs.",
+        "When promo season arrives you hand the log to your manager.  \nThey copy rows into the packet. No translation needed.  \nNo politics needed. The evidence speaks for itself.  \nThe engineers who get promoted fast do not work harder.  \nThey document impact in the language of the people who approve.",
+        "What is the one piece of evidence that made your work visible to decision makers?  \nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A useful, concrete visibility tactic will earn more saves and thoughtful replies than a broad take about visibility versus politics.",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 10921,
+      "ids": [
+        "18090273578690753",
+        "18069840281780432",
+        "18498347521103074",
+        "18634872511037404",
+        "18091540352694206"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 10813
+  "last_views": 10921
 }
