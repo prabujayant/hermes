@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Career advice paired with a copyable promotion-evidence artifact will outperform generic senior-engineer advice",
-  "pivots": 169,
+  "hypothesis": "Career advice paired with a practical, reusable promotion-evidence template will earn more saves, specific replies, and follows than generic senior-engineer advice.",
+  "pivots": 170,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T12:01:21.260627+00:00",
-      "pillar": "smart",
-      "hook_sig": "failure-demo: two concurrent requests both pass the balance",
-      "texts": [
-        "failure-demo: two concurrent requests both pass the balance check; show the interleaving, then replace it with one atomic conditional update\n\nThread A reads balance: 100\nThread B reads balance: 100\nThread A checks: 100 >= 50, proceeds\nThread B checks: 100 >= 50, proceeds\nThread A writes: balance = 50\nThread B writes: balance = 50\n\nFinal balance: 50. Expected: 0. The check passed twice but the money only left once. Classic read-modify-write race.",
-        "The fix: one atomic conditional update. No locks, no retries, no application-level coordination.\n\nUPDATE accounts\nSET balance = balance - 50\nWHERE id = 123 AND balance >= 50\nRETURNING balance;\n\nIf the row returns, the withdrawal succeeded. If zero rows, insufficient funds. The database guarantees the check and write happen as one indivisible operation.",
-        "Why this beats SELECT then UPDATE in a transaction: even REPEATABLE READ allows write skew in Postgres. The conditional UPDATE uses the row lock taken by the WHERE clause, the same lock that prevents concurrent writers from clobbering each other. One statement, serializable semantics.",
-        "Production checklist: index the WHERE column, handle zero-rows in your error layer, log the failure for audit. Works on Postgres, MySQL, SQL Server. Same pattern solves idempotency keys, inventory reservation, rate limiting, any \"check then act\" race.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A minimal interleaving plus an atomic fix will earn more saves and specific engineering replies than another AI-test critique.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 6492,
-      "ids": [
-        "18075744395746839",
-        "18104299184356098",
-        "18016051613950477",
-        "18077894672417236",
-        "18100975829280502"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-13T12:31:04.912737+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18109794497081415"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T17:31:04.226017+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to pass system design interviews,",
+      "texts": [
+        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
+        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
+        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
+        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Career advice paired with a practical, reusable promotion-evidence template will earn more saves, specific replies, and follows than generic senior-engineer advice.",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 10380,
+      "ids": [
+        "18117343829064899",
+        "17995443054046016",
+        "18140439481620100",
+        "18124637738313242",
+        "18102838499333900"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 10328
+  "last_views": 10380
 }
