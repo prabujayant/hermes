@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A reproducible N+1 example with SQL, query counts, and a caveat will earn more saves and specific replies than generic ORM advice.",
-  "pivots": 159,
+  "hypothesis": "A concrete N+1 reproduction with SQL, query counts, and a caveat will earn more saves and specific replies than generic ORM advice.",
+  "pivots": 160,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T07:01:15.018180+00:00",
-      "pillar": "smart",
-      "hook_sig": "i let an ai write a test for",
-      "texts": [
-        "I let an AI write a test for a subtle idempotency bug in our payment service. The test passed green. The duplicate charge still hit production. Here is the minimal reproduction.",
-        "The bug: a race condition where two identical requests slip through the idempotency key check between SELECT and INSERT. The fix: a unique constraint on the idempotency key column. The AI test: it mocked the database layer and asserted the service returns an error on duplicate keys.",
-        "The test passed because the mock threw on the second call. But the real database only throws if the unique constraint exists. The migration adding that constraint was in a separate PR that had not merged yet. The test validated the mock, not the behavior.",
-        "What mutation would you make to the test so it fails without the constraint and passes with it, without changing the service code? Reply with the exact assertion change.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A minimal reproducible test-review challenge that exposes one surviving bug will earn more useful replies and follows than a general AI-test warning",
-      "breakout": "none",
-      "followers": 266,
-      "views_total": 4690,
-      "ids": [
-        "18073393577736019",
-        "18020373887938888",
-        "18344092006254777",
-        "17991383901107516",
-        "17965003671215779"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-13T07:30:58.507218+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18152528200544959"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T12:01:33.909853+00:00",
+      "pillar": "smart",
+      "hook_sig": "costly surprise: an orm loop quietly turns one",
+      "texts": [
+        "costly surprise: an ORM loop quietly turns one page load into a query per item\n\ni shipped a dashboard last quarter. clean code, eager loading everywhere i thought mattered. the page loaded in 200ms locally. production hit 4 seconds the first week. the culprit was a single partial that rendered a list of teams with their member counts.",
+        "the view looked innocent. `@teams.each do |team|` then `team.members.count` inside the loop. the association was `has_many :members`. no `includes`, no `joins`, no counter cache. rails executed one query for the teams, then one `COUNT(*)` per team. fifty teams meant fifty-one queries. the log showed the pattern clear as day: `SELECT COUNT(*) FROM members WHERE team_id = 1`, then `team_id = 2`, all the way to 50.",
+        "i added `includes(:members)` to the controller. the count still fired per row because `count` on a loaded association reloads. the fix was `team.members.size` which uses the loaded array, or a counter cache column `members_count` with `counter_cache: true` on the belongs_to. counter cache dropped the page to 120ms. `includes` plus `size` got it to 180ms. the query count went from 51 to 2.",
+        "caveat: counter caches add write overhead on every member create or destroy. if your team membership changes hundreds of times per minute, the lock contention on the teams table can hurt more than the N+1 read. measure your write-to-read ratio before you commit. the safest default is `includes` plus `size` unless you prove the cache wins.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete N+1 reproduction with SQL, query counts, and a caveat will earn more saves and specific replies than generic ORM advice.",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 8511,
+      "ids": [
+        "18117382567792191",
+        "17894783742612200",
+        "18472470502113824",
+        "18132840187680058",
+        "18112233674152168"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 8315
+  "last_views": 8511
 }
