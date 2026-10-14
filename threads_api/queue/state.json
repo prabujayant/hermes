@@ -201,7 +201,8 @@
     "a user edited a record at 10:00:01. another",
     "i spent years reaching for redis locks every",
     "i spent two years debugging lost updates that",
-    "i spent two years retrying failed writes and"
+    "i spent two years retrying failed writes and",
+    "if you want behavioral rounds to remember you,"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
