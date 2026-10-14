@@ -1,35 +1,8 @@
 {
-  "hypothesis": "A compact evidence template tied to a real engineering decision will earn more saves and useful examples in replies.",
-  "pivots": 174,
+  "hypothesis": "A compact decision-to-outcome example will earn more saves and specific replies than general promotion advice.",
+  "pivots": 175,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T14:31:05.955734+00:00",
-      "pillar": "smart",
-      "hook_sig": "practical checklist: the backend tradeoffs that reveal senior",
-      "texts": [
-        "PRACTICAL CHECKLIST: THE BACKEND TRADEOFFS THAT REVEAL SENIOR JUDGMENT\n\nMost engineers optimize for throughput. Seniors optimize for the right failure modes. Here are three decisions that separate the two.",
-        "DECISION 1: IDEMPOTENCY KEYS VS. DISTRIBUTED LOCKS\nLocks serialize. Keys let you retry safely. Senior choice: generate a client UUID at the edge, store it with a unique constraint, return 409 on collision. No coordination, no deadlocks, works across regions. The tradeoff: storage for every mutation. Worth it when duplicate charges cost more than disk.",
-        "DECISION 2: SYNCHRONOUS VALIDATION VS. ASYNC RECONCILIATION\nValidating upstream feels safe. It couples latency and availability. Senior choice: accept fast, reconcile slow. Write a compensation job that fixes drift nightly. The tradeoff: temporary inconsistency visible to users. Acceptable when the alternative is cascading timeouts during a dependency outage.",
-        "DECISION 3: FEATURE FLAGS VS. BRANCH DEPLOYS\nBranches isolate code. Flags isolate risk. Senior choice: wrap every behavior change in a flag, deploy to prod dark, flip for 1% then 100%. The tradeoff: flag debt accumulates. Clean it with a scheduled removal ticket the same day you add it. If you can't name the removal date, don't add the flag.",
-        "Which of these three tradeoffs bit you hardest in production? Reply with the decision number and the incident.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Career framing earns reach, while specific backend judgment creates more useful replies and a path to a follow-up series.",
-      "breakout": "none",
-      "followers": 267,
-      "views_total": 7521,
-      "ids": [
-        "18116744473956103",
-        "18107238353260940",
-        "17909470101490247",
-        "18100665176561415",
-        "17906692509591474",
-        "17996637693001333"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-13T15:01:22.098825+00:00",
       "pillar": "smart",
@@ -1252,6 +1225,31 @@
         "18108739142348970"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T20:01:14.235525+00:00",
+      "pillar": "smart",
+      "hook_sig": "your promo packet is not a diary. it",
+      "texts": [
+        "Your promo packet is not a diary. It is a risk ledger. I learned this when a single architectural choice prevented $2M in duplicate charges. Here is the before/after proof most engineers never include.",
+        "Six months before promo season I owned the payments write path. Every retry on a failed charge risked double-billing the customer. The team treated it as an accepted edge case. We had alerts. We had manual refunds. We did not have a fix.",
+        "The decision: require idempotency keys on every mutating payment call, enforce them at the gateway layer, and reject any request missing or reusing a key. No config flags. No fallback. The PR was 200 lines. The review took three days because I forced the team to prove the failure modes could not happen.",
+        "Eighteen months later: zero duplicate charges across 14M transactions. P99 latency dropped 40 percent because retries became safe and fast. The on-call pager for payment duplicates went silent. My promo packet had one row for this: risk eliminated, dollars saved, pager quiet.",
+        "What is the one engineering decision you made that turned a recurring risk into a non-event? Reply with the decision and the metric that proved it. Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A compact decision-to-outcome example will earn more saves and specific replies than general promotion advice.",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 11093,
+      "ids": [
+        "18098029745423519",
+        "18020550734927690",
+        "17960724078218944",
+        "17915562525496275",
+        "18346141945271308"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 11044
+  "last_views": 11093
 }
