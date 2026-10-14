@@ -221,7 +221,8 @@
     "costly surprise: one page render, 101 queries; here",
     "you ship a feature. load looks fine. then",
     "i shipped a feature that looked clean in",
-    "most developers using ai coding assistants are shipping"
+    "most developers using ai coding assistants are shipping",
+    "counterintuitive career advice: senior engineers are judged less"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

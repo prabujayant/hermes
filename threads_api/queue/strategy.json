@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Debate hot take on AI coding assistants (high-variance topic) will beat",
-  "pivots": 165,
+  "hypothesis": "Specific, actionable career advice will outperform speculative AI debate and attract relevant followers.",
+  "pivots": 166,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T10:01:20.854665+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to become a senior engineer",
-      "texts": [
-        "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:",
-        "Own outcomes, not tickets.\n\nJuniors close tasks. Seniors move metrics. Ask what number your work changes.",
-        "Write the doc nobody wants to write.\n\nDesign docs, runbooks, postmortems. Visibility compounds faster than commits.",
-        "Delete code on purpose.\n\nEvery quarter, kill something: a flag, a service, dead code. Simplifiers get promoted.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A minimal deterministic race repro plus before-and-after fix will earn more saves and specific engineering replies than another AI-test teardown; put the follow CTA last.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 5422,
-      "ids": [
-        "18356489785217657",
-        "17955955530256509",
-        "17954292780277749",
-        "18138159226631007",
-        "18104501042578087"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-13T10:31:03.430723+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18347980513254509"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T15:31:10.966030+00:00",
+      "pillar": "smart",
+      "hook_sig": "counterintuitive career advice: senior engineers are judged less",
+      "texts": [
+        "counterintuitive career advice: senior engineers are judged less by the complexity they build than by the risk they prevent\n\ni learned this the hard way. my first \"senior\" project was a distributed cache layer with custom sharding, consistent hashing, the works. technically impressive. six months later a single config typo brought down payments for two hours. nobody remembered the clever sharding. they remembered the outage.",
+        "the framework i use now for every technical decision: what fails first, how loud is the blast radius, and can we recover before the customer notices\n\nstart with the failure modes, not the happy path. list the three ways this breaks in production. if you cannot name them, you have not designed it yet. this shifts reviews from \"looks good\" to \"what happens when the network partitions\"",
+        "second, make the blast radius visible. draw the dependency graph. highlight the single points of failure. if a downstream service goes slow, does your caller retry until it OOMs? does the queue back up and crash the producer? explicit contracts beat implicit assumptions every time",
+        "third, bake in observability before the first deploy. not logs. not metrics alone. structured events with correlation IDs that let you trace a request from edge to database in thirty seconds. the senior move is not fixing the bug fast. it is knowing exactly where to look when the pager fires at 3am",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific, actionable career advice will outperform speculative AI debate and attract relevant followers.",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 9995,
+      "ids": [
+        "17919414762245296",
+        "18118720252979330",
+        "18145446463505097",
+        "18110135588211743",
+        "17912935008549658"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 9538
+  "last_views": 9995
 }
