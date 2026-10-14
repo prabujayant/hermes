@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A compact, verifiable N+1 reproduction plus its tradeoff will earn more saves and specific replies than broad ORM criticism; end by asking readers to share their hardest-to-spot N+1.",
-  "pivots": 162,
+  "hypothesis": "A query-count proof plus an honest tradeoff will earn more saves and specific replies than another general ORM take.",
+  "pivots": 163,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T08:31:08.229905+00:00",
-      "pillar": "smart",
-      "hook_sig": "green-test trap: a tiny idempotency handler passes its",
-      "texts": [
-        "green-test trap: a tiny idempotency handler passes its test, but one duplicate side-effect slips through. spot the bug.\n\n```python\n# handler.py\nfrom dataclasses import dataclass\n\n@dataclass\nclass Transfer:\n    idempotency_key: str\n    amount_cents: int\n    status: str = \"pending\"\n\ntransfers = {}\n\ndef handle_transfer(key: str, amount: int) -> Transfer:\n    if key in transfers:\n        return transfers[key]\n    t = Transfer(key, amount, \"completed\")\n    transfers[key] = t\n    return t\n```",
-        "the test passes, CI is green, but the bug is real:\n\n```python\n# test_handler.py\ndef test_idempotent_transfer():\n    t1 = handle_transfer(\"key-1\", 1000)\n    t2 = handle_transfer(\"key-1\", 2000)  # different amount!\n    assert t1 is t2\n    assert t1.amount_cents == 1000\n    assert t2.amount_cents == 1000\n```\n\nrun it. green. now ask: what happens in production when the second request carries a different amount?",
-        "the handler returns the *original* transfer object, so the test sees same object, same amount. but the second caller *sent* 2000 and got back a Transfer saying 1000. the side-effect (charging 2000) never happened, but the caller thinks it did. silent data corruption.",
-        "your turn: write the failing scenario in 3 lines or less. what input exposes the mismatch between what the caller requested and what the handler confirmed?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A compact runnable backend bug hunt",
-      "breakout": "none",
-      "followers": 266,
-      "views_total": 5059,
-      "ids": [
-        "18010901120992436",
-        "18151479277541515",
-        "18101201066382510",
-        "18235202131323810",
-        "18118538239974291"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-13T09:01:16.624964+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18097126289655413"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T13:31:03.033803+00:00",
+      "pillar": "smart",
+      "hook_sig": "you ship a feature. load looks fine. then",
+      "texts": [
+        "You ship a feature. Load looks fine. Then a user reports a slow page. You check logs and see one request firing 101 queries. The culprit: a harmless-looking loop over an ORM relationship.",
+        "The loop:\nfor order in user.orders:\n    print(order.items[0].name)\n\nUser has 100 orders. ORM loads user (1 query). Loop hits orders (1 query). Each order.items triggers a separate query (100 queries). Total: 102 queries for one render.",
+        "Proof from Django debug toolbar:\nSELECT * FROM users WHERE id = 1\nSELECT * FROM orders WHERE user_id = 1\nSELECT * FROM items WHERE order_id = 1\nSELECT * FROM items WHERE order_id = 2\n... 98 more item queries\n\nSame pattern in SQLAlchemy, Hibernate, Entity Framework. The ORM cannot know you only need the first item per order.",
+        "Fix: eager load with a subquery or lateral join.\nUser.objects.prefetch_related(\n    Prefetch('orders__items', queryset=Item.objects.order_by('id')[:1])\n)\nTradeoff: one complex query replaces 101 simple ones. Query planner may choose a bad plan on large tables. Profile before you ship.\n\nWhat is the hardest-to-spot N+1 you have caught? Reply with the pattern.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A query-count proof plus an honest tradeoff will earn more saves and specific replies than another general ORM take.",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 9208,
+      "ids": [
+        "18130346149704636",
+        "17896348581610344",
+        "18128264239848692",
+        "18012328280963797",
+        "17927745240184069"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 8988
+  "last_views": 9208
 }

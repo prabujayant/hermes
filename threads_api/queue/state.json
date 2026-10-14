@@ -218,7 +218,8 @@
     "if you want to become a senior engineer",
     "costly surprise: an orm loop quietly turns one",
     "you add one line to fetch the user's",
-    "costly surprise: one page render, 101 queries; here"
+    "costly surprise: one page render, 101 queries; here",
+    "you ship a feature. load looks fine. then"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
