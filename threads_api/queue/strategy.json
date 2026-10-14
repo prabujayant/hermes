@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete promotion-evidence template will earn more saves, specific replies, and follows than generic senior-engineer advice.",
-  "pivots": 171,
+  "hypothesis": "A focused, copyable evidence-to-impact template will earn more saves, specific replies, and follows than generic promotion advice.",
+  "pivots": 172,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T13:01:18.977452+00:00",
-      "pillar": "smart",
-      "hook_sig": "race condition timeline: two requests hit the same",
-      "texts": [
-        "RACE CONDITION TIMELINE: two requests hit the same idempotency endpoint. Both see \"key missing.\" Both insert charge. Both tests pass green. Production gets duplicate charges. Here is the exact interleaving:",
-        "Request A reads idempotency_keys WHERE key = 'pay_123' \u2192 empty\nRequest B reads idempotency_keys WHERE key = 'pay_123' \u2192 empty\nRequest A inserts charge row, amount $50\nRequest B inserts charge row, amount $50\nRequest A inserts into idempotency_keys (key, charge_id) VALUES ('pay_123', 'chg_A')\nRequest B inserts into idempotency_keys (key, charge_id) VALUES ('pay_123', 'chg_B')\nBoth commit. Two charges. Zero test failures.",
-        "Your sequential test passes because it runs:\n1. POST /charge {idempotency_key: 'pay_123'} \u2192 201\n2. POST /charge {idempotency_key: 'pay_123'} \u2192 409 conflict\nBut concurrency removes the happens-before edge. The check and insert are not atomic.",
-        "Fix: make the check-and-insert a single atomic operation.\nINSERT INTO idempotency_keys (key, charge_id) VALUES ('pay_123', 'chg_new')\nON CONFLICT (key) DO NOTHING\nRETURNING charge_id;\nIf row returned \u2192 you own the charge. If NULL \u2192 fetch existing charge_id. Where would you put the atomic boundary?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A minimal interleaving paired with a precise atomic fix will earn more saves and specific backend replies than a broad concurrency explanation.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 6958,
-      "ids": [
-        "18177082066441241",
-        "18106956983623815",
-        "17914044324472301",
-        "17952147396273097",
-        "18054435041805836"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-13T13:31:03.438594+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "17954536122038981"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T18:31:04.240485+00:00",
+      "pillar": "smart",
+      "hook_sig": "i wrote my promo packet the way everyone",
+      "texts": [
+        "I wrote my promo packet the way everyone does. List of features shipped. Lines of code. Tickets closed. The committee read it and asked \"so what?\" That question cost me six months.",
+        "The problem is not the work. The problem is the language. \"I shipped the payment refactor\" tells them you did a task. \"I changed the payment retry logic, which cut failed transactions by 23 percent and recovered $180k in monthly revenue\" tells them you moved the business. Same project. Different evidence.",
+        "Here is the template I now use for every project. One project, three rows.\n\nProject: Payment retry refactor\nBefore: 12 percent failure rate, manual retries, $180k monthly loss\nAfter: 0.9 percent failure rate, automated exponential backoff, zero manual intervention\nEvidence: Changed retry policy and idempotency keys, which improved success rate by 11.1 points and recovered $180k per month",
+        "Copy the table. Fill it for your last project. Strip every verb that describes effort. Keep only the change, the metric, and the business outcome. If you cannot fill the \"which improved Z\" column, the project is not promo-ready yet. That clarity is the signal.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A focused, copyable evidence-to-impact template will earn more saves, specific replies, and follows than generic promotion advice.",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 10817,
+      "ids": [
+        "18357763585222563",
+        "18093358970446507",
+        "17983171557091388",
+        "18627523114006203",
+        "18071029046771768"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 10635
+  "last_views": 10817
 }
