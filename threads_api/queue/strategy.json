@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A crisp versioning rule plus implementation and migration guidance will earn more saves and specific replies than another concurrency incident story.",
-  "pivots": 140,
+  "hypothesis": "A copyable version-check pattern plus rollout guidance will earn more saves and concrete implementation questions than another concurrency story",
+  "pivots": 141,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-12T18:30:58.978789+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "texts": [
-        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
-        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
-        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
-        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific mutation test will earn more saves and useful replies than another broad warning about green CI.",
-      "breakout": "",
-      "followers": 265,
-      "views_total": 11191,
-      "ids": [
-        "18220509691350740",
-        "18120592942977873",
-        "17911284201500371",
-        "17909322366556128",
-        "17982547811901274"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-12T18:59:53.418641+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18077299463726138"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T02:31:04.632264+00:00",
+      "pillar": "smart",
+      "hook_sig": "a senior engineer on my team lost a",
+      "texts": [
+        "A senior engineer on my team lost a weekend debugging a lost-update bug. Two admins edited the same billing record. The second save silently overwrote the first. No error, no warning, just wrong data in production. The fix was five lines of SQL.",
+        "Optimistic concurrency is not a framework feature. It is a discipline. Add a version column to every mutable table. Every update must include the expected version in the WHERE clause. If the row changed underneath you, the update affects zero rows. You retry or surface a conflict.",
+        "UPDATE accounts\nSET balance = balance - 100, version = version + 1\nWHERE id = 42 AND version = 7;\n\nThat single statement replaces the read-modify-write race. The database guarantees atomicity. No application locks, no Redis coordination, no distributed transactions. The version check is the contract.",
+        "Rolling this out to existing tables takes three steps. One, add the version column with a default of 1. Two, backfill a unique version per row using ROW_NUMBER over a stable key. Three, deploy the conditional writes behind a feature flag. Zero downtime, zero data risk.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A copyable version-check pattern plus rollout guidance will earn more saves and concrete implementation questions than another concurrency story",
+      "breakout": "none",
+      "followers": 267,
+      "views_total": 9900,
+      "ids": [
+        "18118693859086070",
+        "17898272034397542",
+        "18211886737354891",
+        "18117098777098909",
+        "18024183710862585"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 267,
-  "last_views": 9784
+  "last_views": 9900
 }
