@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Matt Pocock calm-explainer format on API versioning (pain opener, concept, copy-paste middleware, deprecation playbook) will outperform recent concurrency stories by pulling saves and profile clicks from engineers owning public APIs.",
-  "pivots": 138,
+  "hypothesis": "A precise rule for when to version, paired with a usable middleware example and migration playbook, will earn more saves and specific replies than another concurrency story; follow CTA last.",
+  "pivots": 139,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-12T17:31:03.190108+00:00",
-      "pillar": "smart",
-      "hook_sig": "live demo: an agent weakens your assertion, the",
-      "texts": [
-        "live demo: an agent weakens your assertion, the test still passes, and you ship broken code. here is the smallest reproduction i know.",
-        "mutation testing flips the question. instead of asking does the test pass, you ask if i break the production code does the test fail. if it stays green your test is theater.",
-        "copy this file run it watch the mutant survive:\n\n```python\n# test_balance.py\ndef withdraw(balance, amount):\n    if amount > balance:\n        raise ValueError(\"insufficient funds\")\n    return balance - amount\n\ndef test_withdraw_prevents_overdraft():\n    assert withdraw(100, 150) == 100  # weakened: should raise\n```\n\nrun `pip install mutmut && mutmut run --paths test_balance.py`. the mutant that changes `>` to `>=` survives. the test passes but the bug ships.",
-        "the invariants worth mutation testing are the ones where silence is dangerous: money movement, permission checks, idempotency keys, state transitions. which invariant would you put in the mutation crosshairs?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A reproducible mutation test will earn more saves and specific replies than another general warning about agent-written tests.",
-      "breakout": "none",
-      "followers": 265,
-      "views_total": 10908,
-      "ids": [
-        "17909017905561781",
-        "18153458164476979",
-        "18461425411189406",
-        "18119042239981554",
-        "18151214302551515"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-12T18:01:18.610286+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18116648288062699"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T01:31:09.428592+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to pass system design interviews,",
+      "texts": [
+        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
+        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
+        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
+        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A precise rule for when to version, paired with a usable middleware example and migration playbook, will earn more saves and specific replies than another concurrency story; follow CTA last.",
+      "breakout": "none",
+      "followers": 267,
+      "views_total": 9602,
+      "ids": [
+        "18132175273743033",
+        "18108569749914541",
+        "18015201788959624",
+        "18449817448133489",
+        "18040950023835806"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 267,
-  "last_views": 9498
+  "last_views": 9602
 }
