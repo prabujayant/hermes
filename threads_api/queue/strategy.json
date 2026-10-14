@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A blunt \"you don't need Kafka\" debate hook with a concrete Postgres alternative will pull higher reply velocity than the recent concurrency story threads, testing the debate-hot-take format against the proven caps-listicle baseline.",
-  "pivots": 137,
+  "hypothesis": "Matt Pocock calm-explainer format on API versioning (pain opener, concept, copy-paste middleware, deprecation playbook) will outperform recent concurrency stories by pulling saves and profile clicks from engineers owning public APIs.",
+  "pivots": 138,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-12T17:01:21.013054+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to become a senior engineer",
-      "texts": [
-        "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:",
-        "Own outcomes, not tickets.\n\nJuniors close tasks. Seniors move metrics. Ask what number your work changes.",
-        "Write the doc nobody wants to write.\n\nDesign docs, runbooks, postmortems. Visibility compounds faster than commits.",
-        "Delete code on purpose.\n\nEvery quarter, kill something: a flag, a service, dead code. Simplifiers get promoted.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete test readers can reproduce will earn more saves and specific replies than another general warning about agent-written tests.",
-      "breakout": "none",
-      "followers": 264,
-      "views_total": 10834,
-      "ids": [
-        "17964893307239737",
-        "17959937067247839",
-        "18375044650241439",
-        "18463791082138017",
-        "18113665697033711"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-12T17:31:03.190108+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18130530739847043"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T01:01:15.829784+00:00",
+      "pillar": "smart",
+      "hook_sig": "your api breaks clients every deploy. the fix",
+      "texts": [
+        "Your API breaks clients every deploy. The fix is not more tests. It is a versioning strategy that makes breaking changes impossible to ship by accident.",
+        "Most teams pick URL versioning because it looks clean. Then they ship v2 and forget v1 exists. Header versioning forces the client to declare intent. The server rejects requests without an Accept-Version header. No silent breaks. No mystery 500s.",
+        "Copy this middleware. It reads Accept-Version, validates against a registry, and attaches the version to req.apiVersion. Your handlers switch on that value. Old versions stay in a versions/ folder. New versions live in routes/. Deploy both. Delete v1 when analytics hit zero.",
+        "Deprecation is where teams fail. Set a Sunset header with a date. Log every request to deprecated versions. Alert when usage spikes. Give clients 90 days. Then remove the version from the registry. The middleware returns 406. The client breaks loudly. You fix it before users notice.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Matt Pocock calm-explainer format on API versioning (pain opener, concept, copy-paste middleware, deprecation playbook) will outperform recent concurrency stories by pulling saves and profile clicks from engineers owning public APIs.",
+      "breakout": "",
+      "followers": 267,
+      "views_total": 9498,
+      "ids": [
+        "17987156391065494",
+        "18051723824813444",
+        "18631083469008359",
+        "18099892862640691",
+        "18116648288062699"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 267,
-  "last_views": 9464
+  "last_views": 9498
 }
