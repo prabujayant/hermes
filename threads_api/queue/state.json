@@ -195,7 +195,8 @@
     "i shipped a stale-write bug that survived staging",
     "most teams running kafka could replace it with",
     "your api breaks clients every deploy. the fix",
-    "if you want to pass system design interviews,"
+    "if you want to pass system design interviews,",
+    "a payment endpoint double-charged a customer last month"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
