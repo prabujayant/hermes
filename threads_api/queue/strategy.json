@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A copyable version-check pattern plus staged rollout guidance will earn more saves and concrete implementation questions than another concurrency story",
-  "pivots": 142,
+  "hypothesis": "A copyable version-check pattern with rollout caveats will earn more saves and implementation questions than another concurrency anecdote.",
+  "pivots": 143,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-12T19:31:00.898243+00:00",
-      "pillar": "smart",
-      "hook_sig": "most candidates walk into system design interviews and",
-      "texts": [
-        "Most candidates walk into system design interviews and recite a tech stack. Kafka, Redis, Kubernetes, done. The interviewer stops listening. Naming technologies is not a system design answer. Tracing the bottleneck is. Change my mind.",
-        "I watched a senior engineer spend twenty minutes describing a microservices mesh for a URL shortener. The interviewer asked: where does this break at 100x traffic? Silence. The answer was never the stack. It was the single-write database they forgot to shard.",
-        "The decision rule: identify the write path that cannot scale horizontally, prove you know how to partition it, then name the tool that does the job. Not the other way around. Bottleneck first, technology second, every time.",
-        "Last week a candidate drew a read-heavy analytics pipeline, correctly identified the ingestion hotspot, proposed a log-structured merge tree with time-windowed compaction, and named ClickHouse as the fit. Got the offer. The stack was the footnote, not the headline.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Specific system-design decision advice will outperform another general AI-coding warning and invite candidates to share their toughest bottleneck.",
-      "breakout": "none",
-      "followers": 265,
-      "views_total": 11540,
-      "ids": [
-        "18166593937421561",
-        "18447201757130859",
-        "18409504597092112",
-        "18111901598178724",
-        "18630688750046879"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-12T20:01:10.212071+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18476569846114964"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T03:31:02.748969+00:00",
+      "pillar": "smart",
+      "hook_sig": "i spent years reaching for redis locks every",
+      "texts": [
+        "I spent years reaching for Redis locks every time I saw a race condition. Then a senior engineer showed me a version column and a single UPDATE statement. No external lock service, no TTL tuning, no double-charge bugs. Here is the pattern and how to roll it out without breaking existing writers.",
+        "The core is one UPDATE that increments the version only if it matches the expected value:\n\nUPDATE accounts\nSET balance = balance - 100,\n    version = version + 1\nWHERE id = 42\n  AND version = 5;\n\nIf the row changed since you read it, the WHERE clause matches zero rows. Zero rows affected means conflict. Retry or abort. No locks held, no deadlocks.",
+        "When the UPDATE returns zero rows, you have two choices:\n1. Retry: re-read the row, re-apply your logic, attempt again. Works for high-contention hot paths.\n2. Abort: return a 409 Conflict to the client. Let the user decide. Simpler, safer for financial writes.\nPick one per endpoint. Do not mix silently.",
+        "You cannot flip a switch if old writers still run. Deploy in three stages:\nStage 1: New writers send the version check. Old writers keep writing without it. Add a trigger or application logic to increment version on every write so the column stays fresh.\nStage 2: Verify zero conflicts in logs for a full cycle. Then enable the version check for all writers.\nStage 3: Drop the legacy path. Now every write is optimistic.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A copyable version-check pattern with rollout caveats will earn more saves and implementation questions than another concurrency anecdote.",
+      "breakout": "none",
+      "followers": 267,
+      "views_total": 10171,
+      "ids": [
+        "18012431198992971",
+        "17932330686420305",
+        "17993947247845504",
+        "18135581830649090",
+        "18056693189564745"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 267,
-  "last_views": 10035
+  "last_views": 10171
 }
