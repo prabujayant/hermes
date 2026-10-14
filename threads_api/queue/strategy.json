@@ -1,31 +1,8 @@
 {
-  "hypothesis": "A focused, copyable evidence-to-impact template will earn more saves, specific replies, and follows than generic promotion advice.",
-  "pivots": 172,
+  "hypothesis": "A concrete, reusable template that connects engineering decisions to measurable impact will earn more saves and specific replies than abstract career advice.",
+  "pivots": 173,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T13:31:03.438594+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to build scalable apis, stop",
-      "texts": [
-        "IF YOU WANT TO BUILD SCALABLE APIs, STOP OVER-ENGINEERING. MEMORIZE THESE 5 PRINCIPLES:\n\nMost teams add complexity before they have scale. They reach for Kafka, Redis clusters, and microservices when a monolith with Postgres handles 10x their load. The best architects remove, they don't add.",
-        "Principle 1: Design for the 99th percentile, not the theoretical maximum. Your p99 latency matters more than throughput benchmarks. A simple synchronous call with a 200ms p99 beats an async pipeline with a 5s p99 tail. Measure what users feel.\n\nPrinciple 2: Idempotency keys are cheaper than distributed transactions. Every mutation endpoint should accept a client-generated key. Store it with a unique constraint. Retries become free. No saga orchestrators, no two-phase commit, no sleepless nights.",
-        "Principle 3: Pagination beats infinite scroll for API health. Cursor-based pagination with a stable sort order lets you add indexes, change storage, or shard without breaking clients. Offset pagination dies at 100k rows. Keyset pagination survives millions.\n\nPrinciple 4: Version in the URL, not the header. `/v1/users` is visible, debuggable, and cacheable. Header-based versioning hides breaking changes from logs and CDNs. When v2 ships, v1 keeps running. No migration weekends.",
-        "Principle 5: Observability is not optional. Every endpoint logs request ID, latency, and error code. Structured JSON. No printf debugging in production. If you can't answer \"why did this 500 happen\" in 30 seconds, you don't own the system yet.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Caps-listicle hook with backend-specific principles will match the 400+ view velocity of P29/P30 while inviting \"what about X\" replies that boost 6h reply window.",
-      "breakout": "",
-      "followers": 268,
-      "views_total": 7104,
-      "ids": [
-        "18341225734258345",
-        "17909067342591410",
-        "17890815249616435",
-        "18412076386092653"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-13T14:01:20.120786+00:00",
       "pillar": "smart",
@@ -1250,6 +1227,31 @@
         "18071029046771768"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T19:01:18.703916+00:00",
+      "pillar": "smart",
+      "hook_sig": "you ship a backend feature. the promo packet",
+      "texts": [
+        "You ship a backend feature. The promo packet asks for impact. You write \"built the payments integration.\" The committee sees a task shipped. They do not see the risk you prevented, the scale you enabled, or the decision that saved six months. That gap costs you the promo.",
+        "The fix is a five-field template you fill before you write a single bullet. Context: what the system looked like before. Constraint: the hard limit you could not ignore. Choice: the specific architectural decision you made and why the alternative failed. Result: the measurable change in latency, cost, or reliability. Signal: the metric a reviewer can verify without reading code.",
+        "Real example from a payments rewrite. Context: monolithic checkout, 2.3s p99, tight coupling to a legacy gateway. Constraint: zero-downtime migration, PCI scope freeze, two-engineer team. Choice: strangler fig with idempotency keys and a shadow traffic mirror, rejected event sourcing as overkill, rejected big bang as too risky. Result: p99 dropped to 380ms, rollback window under 60s, PCI scope reduced by 40%. Signal: dashboards showing error rate flat at 0.01% during cutover.",
+        "Copy the template, fill it for your last shipped feature, paste one filled row in the comments. I will reply with the one tweak that makes it review-proof.\n\nContext: ____\nConstraint: ____\nChoice: ____\nResult: ____\nSignal: ____",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete, reusable template that connects engineering decisions to measurable impact will earn more saves and specific replies than abstract career advice.",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 10887,
+      "ids": [
+        "17949004329345644",
+        "17907892149664500",
+        "17994766662111588",
+        "18109992374269304",
+        "18233382643325360"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 10817
+  "last_views": 10887
 }
