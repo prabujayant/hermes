@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A compact ORM example that reveals query shape and proves the fix will earn more qualified replies and shares than generic ORM-versus-SQL advice.",
-  "pivots": 157,
+  "hypothesis": "A concrete N+1 case with visible SQL and a verified fix will earn more saves and specific replies than generic ORM-versus-SQL advice",
+  "pivots": 158,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T06:01:15.747473+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to pass system design interviews,",
-      "texts": [
-        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
-        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
-        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
-        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A concrete, nuanced challenge to AI code review will earn more replies than a broad contrarian take while keeping the advice credible.",
-      "breakout": "none",
-      "followers": 266,
-      "views_total": 13241,
-      "ids": [
-        "17907432627330711",
-        "18023267204713956",
-        "18159230734504903",
-        "18112443857139686",
-        "17875037460585914"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-13T06:31:05.440850+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18637658539022615"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T11:01:14.662033+00:00",
+      "pillar": "smart",
+      "hook_sig": "your orm endpoint looks clean in code. one",
+      "texts": [
+        "Your ORM endpoint looks clean in code. One line fetches the orders. The logs show 500 queries executed. You just shipped an N+1 and the ORM hid it in plain sight.",
+        "The endpoint: GET /api/users/123/orders with items.  \nCode reads: user.orders.map(o => o.items).  \nLooks like one traversal. The ORM sees a relationship and lazy-loads items for each order. One query for orders, then one query per order for its items. Fifty orders means fifty-one round trips.",
+        "Generated SQL before the fix:  \nSELECT * FROM orders WHERE user_id = 123;  \nThen fifty times: SELECT * FROM items WHERE order_id = ?;  \nThe database does the work. The network pays the latency. The ORM logs show nothing suspicious unless you filter by query count.",
+        "Fix: eager load the items in the same query.  \nuser.orders.with_items.map(o => o.items).  \nGenerated SQL after:  \nSELECT o.*, i.* FROM orders o LEFT JOIN items i ON i.order_id = o.id WHERE o.user_id = 123;  \nOne round trip. Same result. The ORM still owns the mapping. You just told it the shape up front.",
+        "Which ORM hides this pattern most aggressively in your stack?  \nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete N+1 case with visible SQL and a verified fix will earn more saves and specific replies than generic ORM-versus-SQL advice",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 8204,
+      "ids": [
+        "17955414474257955",
+        "18016105394752853",
+        "18129614557837573",
+        "17966798226192911",
+        "18057021851568601"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 8083
+  "last_views": 8204
 }
