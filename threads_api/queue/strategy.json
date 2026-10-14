@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete, reusable template that connects engineering decisions to measurable impact will earn more saves and specific replies than abstract career advice.",
-  "pivots": 173,
+  "hypothesis": "A compact evidence template tied to a real engineering decision will earn more saves and useful examples in replies.",
+  "pivots": 174,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T14:01:20.120786+00:00",
-      "pillar": "smart",
-      "hook_sig": "things senior backend engineers check before shipping a",
-      "texts": [
-        "THINGS SENIOR BACKEND ENGINEERS CHECK BEFORE SHIPPING A CHANGE:",
-        "1. Run the migration on a copy of prod data, not just test fixtures.\n2. Confirm every new query has an EXPLAIN with cost under 50ms.\n3. Verify the rollback path actually works, not just the forward path.\n4. Check that retries are idempotent, not just the happy path.\n5. Validate error budgets and SLOs are still met after the change.",
-        "6. Confirm circuit breakers trip at the right latency, not just in docs.\n7. Ensure logs have enough context to debug without reproducing locally.\n8. Check that caching keys won't collide under concurrent requests.",
-        "9. Verify rate limits match real traffic patterns, not just test loads.\n10. Confirm alerting fires on the new failure modes you just introduced.\n11. Run a canary for at least one full business cycle, not just 30 minutes.",
-        "Missed a critical pre-ship check that saved your bacon? Name it below.\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Practical backend checklists framed around senior-level judgment can retain the career-listicle reach while drawing specific engineering replies.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 7237,
-      "ids": [
-        "18142066690592297",
-        "18129479657306901",
-        "18133848613708880",
-        "18037558835891646",
-        "18096833681232633"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-13T14:31:05.955734+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "18233382643325360"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T19:31:02.234838+00:00",
+      "pillar": "smart",
+      "hook_sig": "i spent three promo cycles writing \"shipped x",
+      "texts": [
+        "I spent three promo cycles writing \"shipped X feature\" bullets. Committee feedback was always the same: so what? No baseline, no user metric, no tradeoff call. The template that finally worked fits on a sticky note.",
+        "Baseline: what the metric was before. User impact: what the human experienced after. Tradeoff: what you deliberately didn't do. Proof: the link or log line that makes it auditable. Four fields. Zero fluff.",
+        "Copy this into your next promo doc or design review:\n\n**Baseline**: [metric, value, date]  \n**User impact**: [user story, metric delta, date]  \n**Tradeoff**: [what you deferred, why it was correct]  \n**Proof**: [dashboard link, query log, incident ID]",
+        "Real example from my last packet:  \nBaseline: p95 latency 1.2s on /orders, 2024-03-01  \nUser impact: p95 180ms, checkout drop-off -12%, 2024-03-15  \nTradeoff: deferred Redis cache invalidation rewrite, accepted stale reads <5s  \nProof: datadog dashboard #order-latency, PR #3442",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A compact evidence template tied to a real engineering decision will earn more saves and useful examples in replies.",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 11044,
+      "ids": [
+        "17902328406667874",
+        "17927310660424296",
+        "17911858734512807",
+        "17927764785425987",
+        "18108739142348970"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 10887
+  "last_views": 11044
 }
