@@ -1,33 +1,8 @@
 {
-  "hypothesis": "An evidence-led impact-log template will earn more saves and specific replies than broad career advice.",
-  "pivots": 150,
+  "hypothesis": "A concrete impact-log template with a worked example will earn more saves and specific replies than broad career advice.",
+  "pivots": 151,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T02:31:00.081866+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want behavioral rounds to remember you,",
-      "texts": [
-        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
-        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
-        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
-        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete AI-test review checklist will earn more saves and useful replies than another warning about AI coding mistakes.",
-      "breakout": "none",
-      "followers": 266,
-      "views_total": 12548,
-      "ids": [
-        "18231069931332448",
-        "18169295068474643",
-        "18144190036595583",
-        "18114022217039315",
-        "18141546556615181"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-13T03:01:17.328961+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18487688566110819"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T07:30:54.066766+00:00",
+      "pillar": "smart",
+      "hook_sig": "most engineers write impact logs like diary entries.",
+      "texts": [
+        "Most engineers write impact logs like diary entries. \"Refactored the payment service, improved latency.\" That tells a promo committee nothing. They need proof, not prose.",
+        "The template that actually works: Problem, Action, Evidence, Impact. One line each. No fluff. Problem: what broke or what was missing. Action: what you did specifically. Evidence: the metric, log, or artifact. Impact: the business result.",
+        "Before: \"Optimized database queries, made things faster.\" After: \"Problem: P95 latency hit 12s on checkout. Action: Added composite index on (user_id, created_at) and rewrote the N+1 query in OrderService. Evidence: Datadog screenshot showing P95 drop from 12s to 180ms. Impact: Recovered $230k/mo in abandoned carts.\"",
+        "Your turn. What is the one piece of evidence you always capture but most engineers skip? Drop it below.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete impact-log template with a worked example will earn more saves and specific replies than broad career advice.",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 6611,
+      "ids": [
+        "18049379558817799",
+        "18012502682981739",
+        "18005781548791945",
+        "18025617293927099",
+        "17916878655262213"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 6494
+  "last_views": 6611
 }
