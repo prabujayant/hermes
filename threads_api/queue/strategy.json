@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Specific, actionable career advice will outperform speculative AI debate and attract relevant followers.",
-  "pivots": 166,
+  "hypothesis": "Specific career advice tied to a usable work artifact will earn",
+  "pivots": 167,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T10:31:03.430723+00:00",
-      "pillar": "smart",
-      "hook_sig": "things that quietly kill engineering careers:",
-      "texts": [
-        "THINGS THAT QUIETLY KILL ENGINEERING CAREERS:",
-        "Never asking questions.\n\nSilent confusion ships bugs. The fastest engineers ask the dumb question on day one.",
-        "Avoiding code review feedback.\n\nDefensiveness freezes growth. Treat every comment as free mentoring.",
-        "Staying comfortable one level too long.\n\nIf you are the expert in every room, you are in the wrong rooms.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A reproducible race and minimal atomic fix will earn more saves and specific backend replies than another AI-test teardown.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 5622,
-      "ids": [
-        "18225523213338548",
-        "18078750497712798",
-        "18118706033052599",
-        "17951326854314723",
-        "17943659016357755"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-13T11:01:14.946400+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "17912935008549658"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T16:01:24.887793+00:00",
+      "pillar": "smart",
+      "hook_sig": "your promotion case is not a diary of",
+      "texts": [
+        "Your promotion case is not a diary of effort. It is evidence of how your work changed outcomes. Most engineers fill packets with shipped tickets, lines of code, and hours logged. Promo committees read those packets and see activity. They do not see leverage.",
+        "I reviewed a packet last cycle that listed: \"Refactored payment service, 40 files changed, 2000 lines, zero bugs.\" Impressive activity. The committee asked: so what? Revenue impact? Latency drop? Incident reduction? The engineer had no answers. Packet denied.",
+        "Same engineer rewrote it as a before/after record. Before: payment p99 latency 1.2s, 3 incidents/month, $12k/month infra. After: p99 180ms, zero incidents in 90 days, $4k/month infra. One page. Two columns. Same work. Packet approved at staff level.",
+        "The artifact is a single table: metric, before, after, your role, verification method. Five rows max. Revenue, latency, reliability, cost, team velocity. If you cannot fill a row, the work was not promo-worthy. Stop writing diaries. Start building evidence. What metric would your current project move?",
+        "Follow @owlsky17 so you don't miss the next one.\nHYPOTHES"
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific career advice tied to a usable work artifact will earn",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 10088,
+      "ids": [
+        "17916863151264831",
+        "18120301280056063",
+        "17916742080259800",
+        "18128294890877662",
+        "18044956940827746"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 9995
+  "last_views": 10088
 }
