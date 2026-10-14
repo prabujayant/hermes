@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A copyable version-check pattern with rollout caveats will earn more saves and implementation questions than another concurrency anecdote.",
-  "pivots": 143,
+  "hypothesis": "A copyable version-check pattern with honest rollout caveats will earn more saves and implementation questions than another concurrency anecdote. End by asking readers where they handle conflicts: retry, reject, or merge.",
+  "pivots": 144,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-12T20:01:10.212071+00:00",
-      "pillar": "smart",
-      "hook_sig": "most teams optimize the wrong bottleneck first because",
-      "texts": [
-        "most teams optimize the wrong bottleneck first because they skip diagnosis entirely\n\na payments service i worked on had p99 latency at 2.3s, cloud bill growing 40% quarter over quarter, and failover tests failing silently. leadership wanted kubernetes, caching, and a new message queue all at once\n\nthe actual constraint was a single synchronous http call to a fraud provider that blocked the critical path. fixing that one call dropped p99 to 400ms, cut compute 30%, and made retries safe",
-        "the pattern repeats: teams reach for horizontal scaling when the hot path is serial, add caching when the real cost is idle connections, build circuit breakers when the dependency contract is undefined\n\ndiagnosis is not a phase. it is the only lever that tells you which fix pays",
-        "concrete rule: before any optimization, produce one number that proves which constraint owns the pain\n\nlatency: p99 breakdown by hop with timestamps\ncost: cost per request by component with utilization\nreliability: failure injection results showing blast radius\n\nno numbers, no work",
-        "the hardest part is not the fix. it is admitting that two of the three goals must wait while you prove which one is burning the house down\n\nwhich bottleneck do you find hardest to isolate in practice: latency, cost, or reliability",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Concrete system-design tradeoffs will earn more saves and useful replies than broad interview advice, while inviting candidates to share their toughest bottleneck.",
-      "breakout": "none",
-      "followers": 265,
-      "views_total": 11693,
-      "ids": [
-        "18211797907362737",
-        "18110661800164610",
-        "18192077779392372",
-        "18124331242851522",
-        "17899925319672435"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-12T20:31:06.554221+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18056693189564745"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T04:01:14.861566+00:00",
+      "pillar": "smart",
+      "hook_sig": "i spent two years debugging lost updates that",
+      "texts": [
+        "I spent two years debugging lost updates that only showed up in production. Staging never caught them because the race window needed real latency. The fix wasn't a lock. It was a single integer column and a WHERE clause that returns zero rows when something else moved first.",
+        "The pattern: add a version column (integer, default 1). Every update increments it conditionally.\n\nUPDATE orders\nSET status = 'shipped', version = version + 1\nWHERE id = 402 AND version = 3;\n\nIf zero rows changed, another request won. Read the fresh row, re-apply your logic, retry. No locks held. No deadlocks.",
+        "Migration caveat: backfill version = 1 on existing rows in batches. Add a NOT NULL constraint after. Put a unique index on (id, version) if your ORM supports it, some don't. Test the retry loop under load before you ship. The first conflict spike looks like errors in your logs.",
+        "Retry strategy: exponential backoff with jitter, max 3 attempts. On final failure, surface a conflict error to the caller, don't silently overwrite. For high-contention hot rows (inventory, seat maps), switch to pessimistic locking just for those tables. One pattern does not fit every hot path.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A copyable version-check pattern with honest rollout caveats will earn more saves and implementation questions than another concurrency anecdote. End by asking readers where they handle conflicts: retry, reject, or merge.",
+      "breakout": "none",
+      "followers": 267,
+      "views_total": 10294,
+      "ids": [
+        "17991610671070988",
+        "18283134622292957",
+        "17992081092050881",
+        "18092043311195180",
+        "18135583777641414"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 267,
-  "last_views": 10171
+  "last_views": 10294
 }
