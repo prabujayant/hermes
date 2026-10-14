@@ -220,7 +220,8 @@
     "you add one line to fetch the user's",
     "costly surprise: one page render, 101 queries; here",
     "you ship a feature. load looks fine. then",
-    "i shipped a feature that looked clean in"
+    "i shipped a feature that looked clean in",
+    "most developers using ai coding assistants are shipping"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

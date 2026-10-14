@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A reproducible query-count proof with a clear tradeoff will earn more saves and specific replies than a general ORM warning",
-  "pivots": 164,
+  "hypothesis": "Debate hot take on AI coding assistants (high-variance topic) will beat",
+  "pivots": 165,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T09:31:04.020310+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "texts": [
-        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
-        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
-        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
-        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A tiny runnable race with a deterministic repro and fix will earn more saves and targeted replies than another AI-test teardown.",
-      "breakout": "none",
-      "followers": 267,
-      "views_total": 5174,
-      "ids": [
-        "18055777100802554",
-        "17915107599531999",
-        "18088162145283296",
-        "18117010310327623",
-        "18167150959489698"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-13T10:01:20.854665+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18098486762544283"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T14:31:05.727637+00:00",
+      "pillar": "smart",
+      "hook_sig": "most developers using ai coding assistants are shipping",
+      "texts": [
+        "Most developers using AI coding assistants are shipping slower not faster. The autocomplete feels like speed but the review burden eats the gains. Change my mind.",
+        "I measured this across three teams last quarter. PR cycle time went up 23 percent when Copilot was enabled. The diffs were larger the reviews took longer and the revert rate doubled.",
+        "The pattern is always the same. The model writes plausible code that passes tests but misses the architectural constraint. A human catches it in review or production catches it later.",
+        "The teams that actually sped up did one thing different. They banned autocomplete for net new logic. They only used it for boilerplate tests and migration scripts. The rest stayed human.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Debate hot take on AI coding assistants (high-variance topic) will beat",
+      "breakout": "",
+      "followers": 268,
+      "views_total": 9538,
+      "ids": [
+        "18137254615632006",
+        "18141795193608780",
+        "18636740452011807",
+        "18139895878628121",
+        "18347980513254509"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 9430
+  "last_views": 9538
 }
