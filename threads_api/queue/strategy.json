@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Specific career advice tied to a usable work artifact will earn",
-  "pivots": 167,
+  "hypothesis": "Career advice paired with a specific, reusable work artifact will outperform generic senior-engineer advice.",
+  "pivots": 168,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T11:01:14.946400+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want your side project to survive,",
-      "texts": [
-        "IF YOU WANT YOUR SIDE PROJECT TO SURVIVE, STOP ADDING FEATURES.\n\nMEMORIZE THESE 5 RULES:",
-        "Ship to one user first.\n\nYourself counts. Real usage teaches more than ten planned features.",
-        "Boring tech wins weekends.\n\nMonolith, Postgres, one host. Excitement is for work hours.",
-        "Log progress in public.\n\nWeekly demos beat yearly launches. Accountability ships products.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A reproducible race and minimal atomic fix will earn more saves and specific backend replies than another AI-test teardown.",
-      "breakout": "",
-      "followers": 268,
-      "views_total": 5948,
-      "ids": [
-        "18107871974227185",
-        "17974003680006009",
-        "18100824941275408",
-        "17873896881596994",
-        "18153156148533729"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-13T11:31:03.265843+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18044956940827746"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T16:31:02.203544+00:00",
+      "pillar": "smart",
+      "hook_sig": "six months before my promo packet was due",
+      "texts": [
+        "Six months before my promo packet was due I had a folder of screenshots, a messy Notion page, and zero narrative. Every time I tried to write the impact section I stared at a blank screen. The work was there but the evidence was not legible.",
+        "The problem was not the work. The problem was the format. Promo committees do not read diaries. They scan for three signals: business impact, scope of ownership, and a verifiable link to proof. If your doc does not surface those in seconds it gets skipped.",
+        "I built a one-page table with three columns. Column one: Impact, a single metric the business cares about. Column two: Scope, who depended on this, what systems touched, what risk you carried. Column three: Proof, a link to the PR, the dashboard, the incident review, the design doc. Nothing else.",
+        "Example row. Impact: reduced p99 latency 40 percent saving $200k per year in compute. Scope: owned the payment ingestion pipeline, five services, on-call for Black Friday. Proof: github.com/org/repo/pull/3421, datadog dashboard link, incident retro doc. One row. Thirty seconds to scan.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Career advice paired with a specific, reusable work artifact will outperform generic senior-engineer advice.",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 10228,
+      "ids": [
+        "18020089001731370",
+        "18062293628531237",
+        "18095583245356512",
+        "18112558223111237",
+        "18104754323357013"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 10088
+  "last_views": 10228
 }
