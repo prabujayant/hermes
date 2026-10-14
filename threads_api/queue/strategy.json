@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Career advice paired with a practical, reusable promotion-evidence template will earn more saves, specific replies, and follows than generic senior-engineer advice.",
-  "pivots": 170,
+  "hypothesis": "A concrete promotion-evidence template will earn more saves, specific replies, and follows than generic senior-engineer advice.",
+  "pivots": 171,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T12:31:04.912737+00:00",
-      "pillar": "smart",
-      "hook_sig": "concurrency bug hunt: two requests hit the same",
-      "texts": [
-        "concurrency bug hunt: two requests hit the same idempotency check before either writes. both pass. both charge the customer. the test suite is green. production bleeds money. here is the minimal interleaving that breaks it.",
-        "request A reads key \"order-42\" -> not found\nrequest B reads key \"order-42\" -> not found\nrequest A writes \"order-42\" -> charged $50\nrequest B writes \"order-42\" -> charged $50\nthe check and the write are separate steps. the database sees two independent transactions. the idempotency key is created twice.",
-        "the handler looks correct at first glance\n```python\nif not db.exists(key):\n    db.set(key, value)\n    charge_customer()\n```\nbut exists and set are not atomic. the window between them is the race. no lock, no constraint, no transaction wraps both. the test runs sequentially so it never catches this.",
-        "the fix is one line: add a unique constraint on the idempotency key column and catch the duplicate error.\n```python\ntry:\n    db.execute(\"INSERT INTO idempotency_keys (key) VALUES (?)\", key)\n    charge_customer()\nexcept UniqueViolation:\n    return existing_response()\n```\nthe database serializes the writers. only the first commit wins. the second gets a clean error it can handle.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A minimal interleaving plus an atomic fix will earn more saves and specific engineering replies than a broad concurrency explanation.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 6697,
-      "ids": [
-        "18115552880335763",
-        "18115324187008600",
-        "18337433086272027",
-        "18194192386401785",
-        "18393769315226867"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-13T13:01:18.977452+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18102838499333900"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T18:01:14.774814+00:00",
+      "pillar": "smart",
+      "hook_sig": "six months before my promo packet was due,",
+      "texts": [
+        "Six months before my promo packet was due, I realized my impact was buried in commit messages and Jira tickets. Here is the template I now use to turn any shipped project into promotion-grade evidence.",
+        "Project: [Feature Name]\nAction: Led [team size] engineers to deliver [what shipped]\nScope: [users affected / systems touched]\nImpact: Reduced [metric] by [X]% or saved [Y] hours/week\n\nExample:\nProject: Customer billing dashboard\nAction: Led 3 engineers to ship a unified billing view\nScope: 250+ enterprise customers, integrated with Stripe and NetSuite\nImpact: Cut support tickets by 40% and saved 15 hours/week in manual reconciliation",
+        "Question for you: which part of this template would you tweak for your last shipped feature? Drop your fill-in below.",
+        "Most engineers write impact statements that sound like task lists. The difference between a \"shipped this\" and a \"moved the needle\" line is scope and metric. The template above forces both. Use it for your next promo packet, performance review, or resume.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A concrete promotion-evidence template will earn more saves, specific replies, and follows than generic senior-engineer advice.",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 10635,
+      "ids": [
+        "18115502381033296",
+        "17950026756313264",
+        "17907833712565075",
+        "18117263053972143",
+        "17954536122038981"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 10380
+  "last_views": 10635
 }
