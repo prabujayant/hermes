@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A practical ORM example that reveals hidden query shape and verifies the fix will earn more qualified replies and shares than generic ORM-versus-SQL advice.",
-  "pivots": 156,
+  "hypothesis": "A compact ORM example that reveals query shape and proves the fix will earn more qualified replies and shares than generic ORM-versus-SQL advice.",
+  "pivots": 157,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T05:30:59.413840+00:00",
-      "pillar": "smart",
-      "hook_sig": "ai code review tools are making junior engineers",
-      "texts": [
-        "AI code review tools are making junior engineers worse, not better. The model flags style nits, misses the race condition, and the junior merges because \"CI passed.\" I've seen three production incidents this month traced to exactly this pattern.",
-        "The tool catches missing semicolons and suggests variable renames. It does not catch the missing idempotency key on the payment endpoint. It does not catch the N+1 query the ORM generated. It does not catch the timeout default that kills the batch job at 2am.",
-        "Juniors learn by reasoning through *why* a change is risky. When the tool hands them a green checkmark, they stop reasoning. They outsource judgment to a model that optimizes for \"looks correct\" not \"is correct.\" The review becomes a ritual, not a gate.",
-        "Senior engineers use AI review as a second pair of eyes for boilerplate. Juniors use it as a first pair of brains. That inversion is the career killer. If you cannot explain the failure mode your change introduces, you are not ready to merge it. The tool will not save you.",
-        "What's the worst thing an AI review missed on your team? Reply with the bug. Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Debate hot take on AI code review harming junior growth (Format 5) will drive higher reply velocity than failure-mode teardowns; cites P27 (40.4/h) as proof AI-coding contrarian angles work, pivots format to direct challenge to maximize replies/reach.",
-      "breakout": "",
-      "followers": 266,
-      "views_total": 13174,
-      "ids": [
-        "18127796821642048",
-        "17918112414451784",
-        "18032760626898292",
-        "18132349999705927",
-        "18218239834355473"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-13T06:01:15.747473+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18184743484423818"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-14T10:31:01.490963+00:00",
+      "pillar": "smart",
+      "hook_sig": "i spent six months watching a single orm",
+      "texts": [
+        "I spent six months watching a single ORM line melt our database. One lazy-loaded relationship inside a loop. One hundred and one queries for twenty rows. The ORM hid it behind clean syntax. The slow query log did not.",
+        "The code looked innocent. `for order in orders: print(order.customer.name)` Twenty orders. One query to fetch orders. Twenty more to fetch each customer. Then eighty more because the template accessed `customer.address.city` inside the loop. One hundred and one round trips. All from three lines of Python.",
+        "The generated SQL before the fix:\n```\nSELECT * FROM orders WHERE user_id = 42 LIMIT 20;\nSELECT * FROM customers WHERE id = 101;\nSELECT * FROM addresses WHERE customer_id = 101;\n-- repeated 20 times\n```\nThe ORM executed each `SELECT` separately. No joins. No batching. Just silent N+1 death by a thousand cuts.",
+        "The fix took two lines. `orders = Order.query.options(joinedload(Order.customer).joinedload(Customer.address)).filter_by(user_id=42).all()` The generated SQL after:\n```\nSELECT orders.*, customers.*, addresses.*\nFROM orders\nJOIN customers ON orders.customer_id = customers.id\nJOIN addresses ON customers.address_id = addresses.id\nWHERE orders.user_id = 42 LIMIT 20;\n```\nOne query. Same data. Ninety-nine fewer round trips.",
+        "Query count dropped from 101 to 1. P99 latency fell from 420ms to 18ms. The ORM did not warn us. The test suite did not catch it. Only `EXPLAIN ANALYZE` and a query counter in CI made it visible. What is the sneakiest N+1 your ORM has hidden from you?\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A compact ORM example that reveals query shape and proves the fix will earn more qualified replies and shares than generic ORM-versus-SQL advice.",
+      "breakout": "none",
+      "followers": 268,
+      "views_total": 8083,
+      "ids": [
+        "17904588591351491",
+        "18110815766168791",
+        "18133296721782270",
+        "18119903635944603",
+        "18637658539022615"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 268,
-  "last_views": 7947
+  "last_views": 8083
 }
