@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific before/after example with evidence a reviewer can verify will earn more saves and detailed replies than a standalone checklist",
-  "pivots": 182,
+  "hypothesis": "A concrete bullet paired with its verifiable evidence source will earn more saves and substantive replies than a standalone checklist or claim rewrite.",
+  "pivots": 183,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T18:31:07.612841+00:00",
-      "pillar": "smart",
-      "hook_sig": "i used to treat redis setnx as a",
-      "texts": [
-        "I used to treat Redis SETNX as a correctness guarantee. It is not. It is a coordination hint. Last year a slow payment gateway taught me the difference when a lock expired mid-request and a second worker charged the same customer twice. #backend",
-        "Timeline of the failure. Worker A acquires `lock:order_402` with a 10 second TTL. The payment provider hits a 3DS challenge and hangs at 8 seconds. Redis evicts the key at 10 seconds. Worker B grabs the lock immediately. Worker A recovers at 12 seconds and commits. Worker B commits at 13 seconds. Two charges, one order. #systemdesign",
-        "The fix was not a longer TTL. Longer TTLs just increase the window where a crashed worker blocks everyone else. The fix was a unique constraint on `idempotency_key` inside the database transaction. `INSERT INTO charges ... ON CONFLICT DO NOTHING`. The database is the invariant. Redis is just the queue optimizer. #distributedsystems",
-        "Boundary rule. Redis guarantees attempt ordering on a best effort basis. The database guarantees state integrity with absolute authority. Never let a lock expiry mutate data. Use the lock to reduce contention on the hot path. Use the constraint to enforce correctness on the commit path. #softwareengineering",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific lock-expiry failure plus a clear database-enforced boundary will earn more informed replies than another race-condition timeline.",
-      "breakout": "none",
-      "followers": 267,
-      "views_total": 8901,
-      "ids": [
-        "18130615873696204",
-        "17990357910059426",
-        "17875454622585420",
-        "18187140808416144",
-        "18002177669806504"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-13T19:01:17.418378+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "17886947184496403"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-15T03:31:03.441479+00:00",
+      "pillar": "smart",
+      "hook_sig": "i spent two promo cycles writing \"optimized database",
+      "texts": [
+        "I spent two promo cycles writing \"optimized database queries\" and watching committees shrug. They couldn't verify it. No baseline, no query plan, no production metric tied to user pain. Just a verb and a noun.",
+        "The bullet that finally landed: \"Cut p99 latency on the checkout write path from 1.2s to 180ms by rewriting the payment idempotency key lookup to use a covering index, verified against 30 days of prod traces and correlated to a 0.4% conversion lift.\"",
+        "Here is the proof trail the committee could check without asking me a single follow-up: the PR with the index definition, the Datadog dashboard link frozen to the deploy timestamp, the BigQuery query that joins latency percentiles to the conversion funnel, the incident review where the old path caused a retry storm.",
+        "The pattern: every claim in that bullet maps to an artifact a stranger can open. Index DDL in git. Dashboard URL in the PR description. SQL query in a shared folder. Incident doc linked from the postmortem. The bullet is just the index into the evidence.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete bullet paired with its verifiable evidence source will earn more saves and substantive replies than a standalone checklist or claim rewrite.",
+      "breakout": "none",
+      "followers": 269,
+      "views_total": 12037,
+      "ids": [
+        "18130860649765787",
+        "17970736040960836",
+        "17916782742464300",
+        "18125155676486645",
+        "18107282584955904"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 269,
-  "last_views": 11779
+  "last_views": 12037
 }
