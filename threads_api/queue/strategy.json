@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete, testable backend diagnosis with a specific comment prompt will outperform broad config claims without",
+  "hypothesis": "A specific, actionable production diagnosis with a focused comment prompt will outperform broad backend claims and attract relevant followers",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T09:01:22.155740+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "texts": [
-        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
-        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
-        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
-        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A useful, specific ORM decision rule will earn more qualified replies and shares than a generic stack hot take.",
-      "breakout": "",
-      "followers": 268,
-      "views_total": 7355,
-      "ids": [
-        "18194099362393118",
-        "18006488645859842",
-        "18097237709540114",
-        "18081127604349256",
-        "18115389686083337"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T09:31:03.492861+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,33 @@
         "18598034983067809"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-15T14:01:17.313386+00:00",
+      "pillar": "smart",
+      "hook_sig": "most engineers reach for new indexes when a",
+      "texts": [
+        "Most engineers reach for new indexes when a query is slow. The counterintuitive move: run EXPLAIN ANALYZE first and compare estimated rows versus actual rows. A 100x gap means the planner is hallucinating. Fix the statistics, not the schema.",
+        "I watched a payments query scan 2 million rows to return 12. The plan estimated 50 rows. The culprit was a stale pg_statistic entry on a correlated column. ANALYZE fixed it in 400ms. The index would have taken 4 hours to build and changed nothing.",
+        "Run this on your slow query:\nEXPLAIN (ANALYZE, BUFFERS, FORMAT TEXT)\nSELECT ...\nLook at the rows= estimate versus actual rows= in each node. If actual exceeds estimate by more than 10x, the planner chose the wrong join order or scan type because it misunderstood the data distribution.",
+        "Common causes of estimation drift: correlated columns without extended statistics, skewed values without histograms, recent bulk loads without ANALYZE, and partition pruning failures. Each leaves a distinct fingerprint in the plan. Learn the fingerprints and you stop guessing.",
+        "What query symptom should I diagnose next? Reply with the plan shape that haunts you: nested loop explosion, hash join spill, sequential scan on a large table, or something else.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific, actionable production diagnosis with a focused comment prompt will outperform broad backend claims and attract relevant followers",
+      "breakout": "none",
+      "followers": 275,
+      "views_total": 12708,
+      "ids": [
+        "18177959194403096",
+        "17955833787260955",
+        "17938337811383358",
+        "18387649351234264",
+        "18012268250984839",
+        "17910995172552859"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1264,6 +1266,6 @@
     "mandate": "200000 views in 30 days by 2026-11-10",
     "since": "2026-10-10"
   },
-  "last_followers": 274,
-  "last_views": 12200
+  "last_followers": 275,
+  "last_views": 12708
 }
