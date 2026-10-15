@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific metric plus a practical first check and a focused closing question will earn more useful replies than a broad performance claim.",
+  "hypothesis": "Contrarian lesson format (Notion co-founder style) with a specific metric (rows ratio > 10x), a practical first",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T13:01:18.531229+00:00",
-      "pillar": "smart",
-      "hook_sig": "costly surprise: one page render, 101 queries; here",
-      "texts": [
-        "costly surprise: one page render, 101 queries; here is the tiny ORM example and the query-count fix",
-        "the dashboard showed a user with their last 100 orders. clean ORM code, looked fine in review. production metrics told a different story: 101 queries per render. one for the user, one hundred for the orders. the loop was silent in the template.",
-        "minimal reproduction in Django ORM:\n\nclass User(models.Model):\n    name = models.CharField(max_length=100)\n\nclass Order(models.Model):\n    user = models.ForeignKey(User, on_delete=models.CASCADE)\n    total = models.DecimalField(max_digits=10, decimal_places=2)\n\n# view\nuser = User.objects.get(pk=1)\norders = user.order_set.all()[:100]  # triggers 100 separate queries in template",
-        "query log before fix:\nSELECT * FROM users WHERE id = 1\nSELECT * FROM orders WHERE user_id = 1 LIMIT 1\nSELECT * FROM orders WHERE user_id = 1 LIMIT 1\n... repeated 100 times\n\ntotal: 101 queries, 45ms database time\n\nafter adding select_related or prefetch_related:\nSELECT * FROM users WHERE id = 1\nSELECT * FROM orders WHERE user_id = 1 LIMIT 100\n\ntotal: 2 queries, 3ms database time",
-        "caveat: eager loading backfires when the related set is huge or you only need a subset. prefetching 10,000 orders to show 5 kills memory. in those cases, paginate at the database level or use a subquery annotation. measure first, fix second.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A compact, verifiable N+1 reproduction plus its tradeoff will earn more saves and specific replies than broad ORM criticism; end by asking readers to share their hardest-to-spot N+1.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 8988,
-      "ids": [
-        "18102440552369222",
-        "17925606636204766",
-        "18012409289781828",
-        "18107746481352916",
-        "18097126289655413"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T13:31:03.033803+00:00",
       "pillar": "smart",
@@ -1262,6 +1237,33 @@
         "18112750277157479"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-15T18:01:21.320628+00:00",
+      "pillar": "smart",
+      "hook_sig": "most engineers still treat explain analyze like a",
+      "texts": [
+        "Most engineers still treat EXPLAIN ANALYZE like a checkbox. They look at the plan shape, nod, and move on. The real signal isnt the plan shape. It is the gap between estimated rows and actual rows. That gap tells you exactly why the optimizer picked a bad path.",
+        "Postgres defaults statistics target to 100. On a column with 10 million distinct values that captures 0.001 percent of the distribution. The optimizer sees a flat line and assumes uniform distribution. Your query asks for a hot key. The plan expects 50 rows. Reality returns 500,000. Nested loops melt the CPU.",
+        "First check: run EXPLAIN ANALYZE on the slow query. Find the node with the widest estimated vs actual rows ratio. Ignore cost numbers. A ratio above 10x on any join or filter node means your statistics are lying to the planner. That is the smoking gun.",
+        "Fix: raise statistics target on the skewed column to 1000 or create extended statistics on the correlated columns. ANALYZE afterward. Re run EXPLAIN ANALYZE. The ratio collapses. The planner switches to a hash join or bitmap scan. Latency drops 10x without a single index change.",
+        "What is the widest estimated vs actual rows ratio you have seen in production? Reply with the number and the column type.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Contrarian lesson format (Notion co-founder style) with a specific metric (rows ratio > 10x), a practical first",
+      "breakout": "",
+      "followers": 277,
+      "views_total": 17313,
+      "ids": [
+        "17906215596340796",
+        "18145108885585445",
+        "18052727465803748",
+        "18448924039125994",
+        "18127692640848554",
+        "17952238101297383"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1270,6 +1272,6 @@
     "mandate": "200000 views in 30 days by 2026-11-10",
     "since": "2026-10-10"
   },
-  "last_followers": 276,
-  "last_views": 16740
+  "last_followers": 277,
+  "last_views": 17313
 }
