@@ -254,7 +254,8 @@
     "if you want to pass system design interviews,",
     "if you want to become a senior engineer",
     "postgres on a single node handles 100k writes",
-    "benchmark challenge: how far can one postgres instance"
+    "benchmark challenge: how far can one postgres instance",
+    "benchmark reveal: same workload, same machine, disclose the"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
