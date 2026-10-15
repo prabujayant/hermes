@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A testable EXPLAIN ANALYZE diagnostic with a verified production example",
+  "hypothesis": "Specific, reproducible SQL diagnostics earn more useful comments and follows than broad database advice",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T14:31:05.727637+00:00",
-      "pillar": "smart",
-      "hook_sig": "most developers using ai coding assistants are shipping",
-      "texts": [
-        "Most developers using AI coding assistants are shipping slower not faster. The autocomplete feels like speed but the review burden eats the gains. Change my mind.",
-        "I measured this across three teams last quarter. PR cycle time went up 23 percent when Copilot was enabled. The diffs were larger the reviews took longer and the revert rate doubled.",
-        "The pattern is always the same. The model writes plausible code that passes tests but misses the architectural constraint. A human catches it in review or production catches it later.",
-        "The teams that actually sped up did one thing different. They banned autocomplete for net new logic. They only used it for boilerplate tests and migration scripts. The rest stayed human.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Debate hot take on AI coding assistants (high-variance topic) will beat",
-      "breakout": "",
-      "followers": 268,
-      "views_total": 9538,
-      "ids": [
-        "18137254615632006",
-        "18141795193608780",
-        "18636740452011807",
-        "18139895878628121",
-        "18347980513254509"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T15:31:10.966030+00:00",
       "pillar": "smart",
@@ -1266,6 +1241,31 @@
         "18114283532125591"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-15T19:31:01.095514+00:00",
+      "pillar": "smart",
+      "hook_sig": "before you add another index, run this explain",
+      "texts": [
+        "Before you add another index, run this EXPLAIN ANALYZE check. Most slow queries are not missing indexes. They are missing accurate statistics, and the planner is guessing wrong.",
+        "The trap: you see a slow query, you add an index, nothing changes. The real problem is usually a join order chosen on bad row estimates, a filter the planner thinks returns 10 rows but returns 10000, or stale stats after a bulk load.",
+        "The diagnostic: run EXPLAIN ANALYZE and compare estimated rows versus actual rows on every node. A 10x gap means the planner is flying blind. A 100x gap means the plan is actively lying to you. Focus on the node with the widest gap.",
+        "Reproducible test you can run today:\n\nCREATE TABLE t (id serial, grp int, val text);\nINSERT INTO t (grp, val) SELECT g, md5(random()::text) FROM generate_series(1, 100000) g, generate_series(1, 10);\nANALYZE t;\n\nEXPLAIN ANALYZE SELECT * FROM t WHERE grp = 50000;\n\nCheck the Seq Scan node. Estimated rows versus actual rows. What plan node surprised you? Reply with the numbers.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific, reproducible SQL diagnostics earn more useful comments and follows than broad database advice",
+      "breakout": "none",
+      "followers": 278,
+      "views_total": 18458,
+      "ids": [
+        "18463610983142528",
+        "17872264764637365",
+        "18114874814024352",
+        "18008981636779820",
+        "18566263111079068"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1275,5 +1275,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 18163
+  "last_views": 18458
 }

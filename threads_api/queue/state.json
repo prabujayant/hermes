@@ -270,7 +270,8 @@
     "if you want your side project to survive,",
     "most engineers still treat explain analyze like a",
     "here's the thread that failed last time, fixed",
-    "most engineers run explain analyze and glance at"
+    "most engineers run explain analyze and glance at",
+    "before you add another index, run this explain"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
