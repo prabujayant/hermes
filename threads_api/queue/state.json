@@ -249,7 +249,8 @@
     "constrained decision: given a user-facing workflow with strict",
     "we shipped a checkout service with a hard",
     "stop using uuids as primary keys. they destroy",
-    "stop using uuids as primary keys in high-write"
+    "stop using uuids as primary keys in high-write",
+    "i used uuidv4 for every primary key on"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

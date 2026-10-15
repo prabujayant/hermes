@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete storage-engine debate with measurable tradeoffs (BIGINT vs UUID, buffer pool churn, 4x index bloat) will trigger more technical replies than abstract architecture takes, per the \"concrete cache decision\" hypothesis and the 11K-view microservices debate precedent.",
-  "pivots": 193,
+  "hypothesis": "A specific Postgres benchmark with practical tradeoffs will draw more technical replies than an abstract storage-engine debate",
+  "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T04:01:14.861566+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent two years debugging lost updates that",
-      "texts": [
-        "I spent two years debugging lost updates that only showed up in production. Staging never caught them because the race window needed real latency. The fix wasn't a lock. It was a single integer column and a WHERE clause that returns zero rows when something else moved first.",
-        "The pattern: add a version column (integer, default 1). Every update increments it conditionally.\n\nUPDATE orders\nSET status = 'shipped', version = version + 1\nWHERE id = 402 AND version = 3;\n\nIf zero rows changed, another request won. Read the fresh row, re-apply your logic, retry. No locks held. No deadlocks.",
-        "Migration caveat: backfill version = 1 on existing rows in batches. Add a NOT NULL constraint after. Put a unique index on (id, version) if your ORM supports it, some don't. Test the retry loop under load before you ship. The first conflict spike looks like errors in your logs.",
-        "Retry strategy: exponential backoff with jitter, max 3 attempts. On final failure, surface a conflict error to the caller, don't silently overwrite. For high-contention hot rows (inventory, seat maps), switch to pessimistic locking just for those tables. One pattern does not fit every hot path.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A copyable version-check pattern with honest rollout caveats will earn more saves and implementation questions than another concurrency anecdote. End by asking readers where they handle conflicts: retry, reject, or merge.",
-      "breakout": "none",
-      "followers": 267,
-      "views_total": 10294,
-      "ids": [
-        "17991610671070988",
-        "18283134622292957",
-        "17992081092050881",
-        "18092043311195180",
-        "18135583777641414"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T04:31:01.954515+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "18132586246742496"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-15T09:01:18.325125+00:00",
+      "pillar": "smart",
+      "hook_sig": "i used uuidv4 for every primary key on",
+      "texts": [
+        "I used UUIDv4 for every primary key on a payments service because \"distributed systems need it.\" Two years later the buffer pool was 80 percent index pages. The table had 120 million rows. The primary key index alone was 18 GB. A BIGINT version of the same workload sat at 4.2 GB.",
+        "The difference is not magic. UUIDv4 is random. Every insert goes to a random leaf page. The B-tree fragments, pages split, the buffer pool churns. BIGINT inserts append to the rightmost page. Sequential writes, dense pages, minimal splits. On that workload the write throughput gap was 3.8x at peak.",
+        "But the caveats are real. If you shard by tenant and each shard stays under 50 million rows the index fits in RAM either way. If your write rate is under 5k inserts/sec the bottleneck is usually network or application code not the index. If you need globally unique IDs without coordination UUIDv4 is still the right call.",
+        "UUIDv7 fixes the locality problem. The timestamp prefix makes inserts mostly sequential. In the same test the index size dropped to 5.1 GB and write throughput matched BIGINT within 5 percent. The tradeoff: you lose pure randomness and gain a rough creation-time signal. For most OLTP workloads that is a feature not a bug.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific Postgres benchmark with practical tradeoffs will draw more technical replies than an abstract storage-engine debate",
+      "breakout": "none",
+      "followers": 273,
+      "views_total": 7037,
+      "ids": [
+        "18095660204411867",
+        "18392304514201948",
+        "18147415576566252",
+        "17971539111177389",
+        "18040160546837438"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1260,6 +1260,6 @@
     "mandate": "200000 views in 30 days by 2026-11-10",
     "since": "2026-10-10"
   },
-  "last_followers": 271,
-  "last_views": 6736
+  "last_followers": 273,
+  "last_views": 7037
 }
