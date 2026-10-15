@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A practical production diagnosis with clear signals and a focused question will earn more relevant engagement than a broad performance claim",
+  "hypothesis": "A concrete production symptom, a verifiable diagnostic signal, and a focused question will earn more",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T10:31:01.490963+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent six months watching a single orm",
-      "texts": [
-        "I spent six months watching a single ORM line melt our database. One lazy-loaded relationship inside a loop. One hundred and one queries for twenty rows. The ORM hid it behind clean syntax. The slow query log did not.",
-        "The code looked innocent. `for order in orders: print(order.customer.name)` Twenty orders. One query to fetch orders. Twenty more to fetch each customer. Then eighty more because the template accessed `customer.address.city` inside the loop. One hundred and one round trips. All from three lines of Python.",
-        "The generated SQL before the fix:\n```\nSELECT * FROM orders WHERE user_id = 42 LIMIT 20;\nSELECT * FROM customers WHERE id = 101;\nSELECT * FROM addresses WHERE customer_id = 101;\n-- repeated 20 times\n```\nThe ORM executed each `SELECT` separately. No joins. No batching. Just silent N+1 death by a thousand cuts.",
-        "The fix took two lines. `orders = Order.query.options(joinedload(Order.customer).joinedload(Customer.address)).filter_by(user_id=42).all()` The generated SQL after:\n```\nSELECT orders.*, customers.*, addresses.*\nFROM orders\nJOIN customers ON orders.customer_id = customers.id\nJOIN addresses ON customers.address_id = addresses.id\nWHERE orders.user_id = 42 LIMIT 20;\n```\nOne query. Same data. Ninety-nine fewer round trips.",
-        "Query count dropped from 101 to 1. P99 latency fell from 420ms to 18ms. The ORM did not warn us. The test suite did not catch it. Only `EXPLAIN ANALYZE` and a query counter in CI made it visible. What is the sneakiest N+1 your ORM has hidden from you?\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A compact ORM example that reveals query shape and proves the fix will earn more qualified replies and shares than generic ORM-versus-SQL advice.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 8083,
-      "ids": [
-        "17904588591351491",
-        "18110815766168791",
-        "18133296721782270",
-        "18119903635944603",
-        "18637658539022615"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T11:01:14.662033+00:00",
       "pillar": "smart",
@@ -1258,6 +1233,33 @@
         "18119772145976641"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-15T15:31:08.365520+00:00",
+      "pillar": "smart",
+      "hook_sig": "high p99 latency does not mean your queries",
+      "texts": [
+        "High p99 latency does not mean your queries are slow. It means sessions are stuck waiting for something, and most teams waste weeks chasing the wrong bottleneck. Here is how to tell the difference in 3 minutes.",
+        "Check pg_stat_activity where state = 'active'. If you see a swarm of sessions all running the same query but p99 is sky-high, the queries are likely slow. But if active sessions are few and p99 is still bad, the bottleneck is upstream: connection-pool exhaustion or lock contention.",
+        "Run this query: select wait_event_type, wait_event, count(*) from pg_stat_activity where wait_event is not null group by wait_event_type, wait_event order by count desc. If you see a flood of 'Lock', 'LWLock', or 'BufferPin' waits, your queries are slow. If you see 'Client', 'Socket', or 'Timeout' waits dominating, your connection pool is exhausted.",
+        "The tell: connection-pool exhaustion shows up as sessions sitting idle in transaction or waiting on Client/Socket events. Slow queries show up as long-running active states with heavy CPU or I/O wait events. One is a resource-starvation problem, the other is a query-efficiency problem. Fix the wrong one and you will stay stuck.",
+        "Which wait event shows up most in your production pg_stat_activity dumps? Drop the exact wait_event_type and wait_event you are seeing. If you are unsure, run the query above and paste your top three rows.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A concrete production symptom, a verifiable diagnostic signal, and a focused question will earn more",
+      "breakout": "none",
+      "followers": 275,
+      "views_total": 14414,
+      "ids": [
+        "17911045122552374",
+        "18124843327822723",
+        "18079508513393402",
+        "17941029801365256",
+        "18011521154965942",
+        "18117340723977354"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1267,5 +1269,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 275,
-  "last_views": 13848
+  "last_views": 14414
 }
