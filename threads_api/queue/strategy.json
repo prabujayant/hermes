@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Contrarian lesson format with a specific metric (rows ratio > 10x) and a concrete production example will outperform the underperforming connection-pool posts by forcing readers to test the ratio themselves.",
+  "hypothesis": "A testable EXPLAIN ANALYZE diagnostic with a verified production example",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T13:57:56.824671+00:00",
-      "pillar": "smart",
-      "hook_sig": "i shipped a feature that looked clean in",
-      "texts": [
-        "I shipped a feature that looked clean in the ORM. One loop over orders, each accessing customer and items. Local load test: 20 orders, 200ms. Production: 500 orders, 12 seconds. The profiler showed 1,501 queries. One for orders, 500 for customers, 1,000 for items. The ORM hid it behind clean property access.",
-        "The fix was two lines: eager load customer and items. Query count dropped to three. One for orders with joins, one for customers, one for items. Same 500 orders, 180ms. The latency cliff vanished. But the repository method grew from five lines to fifteen. Three join clauses, a distinct selector, a custom DTO mapper. Type safety got fuzzy at the edges.",
-        "The tradeoff is not free. The eager load pulls columns you may not need. Wide tables mean more I/O. The DTO mapper couples the repository to a specific view shape. Next feature needs a slightly different slice, now you have two mappers or one bloated one. Testing the join query requires a real database. The simple loop tested against an in-memory fake.",
-        "We kept the eager load for the order index. It serves 80% of traffic and the query stays stable. For the admin dashboard with twenty optional filters, we reverted to the loop and added a per-request query budget. If it exceeds fifty queries, the request logs a warning and we optimize that path. Where would you draw the line between query count and code complexity?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A reproducible query-count proof with a clear tradeoff will earn more saves and specific replies than a general ORM warning",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 9430,
-      "ids": [
-        "18109959215208460",
-        "18112070021463073",
-        "18110401325605706",
-        "17974418981944218",
-        "18098486762544283"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T14:31:05.727637+00:00",
       "pillar": "smart",
@@ -1266,6 +1241,31 @@
         "18109914887523997"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-15T19:01:17.469538+00:00",
+      "pillar": "smart",
+      "hook_sig": "most engineers run explain analyze and glance at",
+      "texts": [
+        "Most engineers run EXPLAIN ANALYZE and glance at the plan. They miss the number that actually matters: estimated rows versus actual rows. A ratio above 10x means the planner is guessing, and every index you add after that is a shot in the dark.",
+        "Last month a reporting query on our orders table hit 12 seconds. EXPLAIN ANALYZE showed a nested loop join with estimated rows 1, actual rows 47,000. Ratio 47,000x. The planner thought a customer filter would return one row. It returned forty-seven thousand because statistics were stale after a bulk insert.",
+        "The fix was not a new index. It was ANALYZE orders; then the same query ran in 40 milliseconds. The planner switched to a hash join because it finally knew the true cardinality. No schema change, no code deploy, two seconds of maintenance work.",
+        "Next time a query is slow, run EXPLAIN ANALYZE and divide actual rows by estimated rows for the driving table. If the ratio exceeds 10, stop adding indexes. Run ANALYZE on the underlying tables first. The planner cannot optimize what it cannot measure.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A testable EXPLAIN ANALYZE diagnostic with a verified production example",
+      "breakout": "none",
+      "followers": 278,
+      "views_total": 18163,
+      "ids": [
+        "17951178966295265",
+        "18032959484887294",
+        "18079309649534937",
+        "18113532482136850",
+        "18114283532125591"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1274,6 +1274,6 @@
     "mandate": "200000 views in 30 days by 2026-11-10",
     "since": "2026-10-10"
   },
-  "last_followers": 277,
-  "last_views": 17792
+  "last_followers": 278,
+  "last_views": 18163
 }
