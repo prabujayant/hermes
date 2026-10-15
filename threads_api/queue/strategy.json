@@ -4,31 +4,6 @@
   "streak": 0,
   "history": [
     {
-      "run_at": "2026-10-14T09:31:03.492861+00:00",
-      "pillar": "smart",
-      "hook_sig": "i used to put everything in the orm.",
-      "texts": [
-        "I used to put everything in the ORM. Complex joins, window functions, recursive CTEs. The model files grew to hundreds of lines. Debugging meant reading generated SQL I didn't write.",
-        "The breaking point was a reporting query. Forty-five seconds in the ORM. Eight hundred milliseconds in raw SQL. Same indexes. Same data. The ORM wasn't wrong. It just couldn't express the shape efficiently.",
-        "The rule we extracted: keep the ORM for ordinary CRUD. Switch to explicit SQL when the query's shape or measured performance is hard to express clearly.",
-        "Concrete test: if you're calling .raw() or .execute() inside a repository, or the ORM query spans thirty-plus lines, that's the signal. Write both. Benchmark both. Choose the one a maintainer can read in ten seconds.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A practical ORM-to-SQL boundary, grounded in query clarity and measured performance, will earn more qualified replies and shares than generic stack hot takes.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 7620,
-      "ids": [
-        "18228197911335610",
-        "18144204505599990",
-        "18076184591452260",
-        "18100184114408204",
-        "18346818466282305"
-      ],
-      "pivoted": true
-    },
-    {
       "run_at": "2026-10-14T10:01:18.237955+00:00",
       "pillar": "smart",
       "hook_sig": "the orm is not automatically slow. the query",
@@ -1258,6 +1233,31 @@
         "17910995172552859"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-15T14:31:08.186868+00:00",
+      "pillar": "smart",
+      "hook_sig": "things hiring managers can't tell from your resume",
+      "texts": [
+        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
+        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
+        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
+        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A specific, actionable production diagnosis with a focused comment prompt will outperform broad backend claims and attract relevant followers",
+      "breakout": "",
+      "followers": 275,
+      "views_total": 13129,
+      "ids": [
+        "17992081263114645",
+        "17993685060023114",
+        "18011503418993683",
+        "17929948443415205",
+        "17977075905179341"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1267,5 +1267,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 275,
-  "last_views": 12708
+  "last_views": 13129
 }
