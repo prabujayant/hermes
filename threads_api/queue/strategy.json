@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete production symptom, a verifiable diagnostic signal, and a focused question will earn more",
+  "hypothesis": "A production symptom paired with a specific metric and a focused closing question will earn more useful replies than a broad performance claim.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T11:01:14.662033+00:00",
-      "pillar": "smart",
-      "hook_sig": "your orm endpoint looks clean in code. one",
-      "texts": [
-        "Your ORM endpoint looks clean in code. One line fetches the orders. The logs show 500 queries executed. You just shipped an N+1 and the ORM hid it in plain sight.",
-        "The endpoint: GET /api/users/123/orders with items.  \nCode reads: user.orders.map(o => o.items).  \nLooks like one traversal. The ORM sees a relationship and lazy-loads items for each order. One query for orders, then one query per order for its items. Fifty orders means fifty-one round trips.",
-        "Generated SQL before the fix:  \nSELECT * FROM orders WHERE user_id = 123;  \nThen fifty times: SELECT * FROM items WHERE order_id = ?;  \nThe database does the work. The network pays the latency. The ORM logs show nothing suspicious unless you filter by query count.",
-        "Fix: eager load the items in the same query.  \nuser.orders.with_items.map(o => o.items).  \nGenerated SQL after:  \nSELECT o.*, i.* FROM orders o LEFT JOIN items i ON i.order_id = o.id WHERE o.user_id = 123;  \nOne round trip. Same result. The ORM still owns the mapping. You just told it the shape up front.",
-        "Which ORM hides this pattern most aggressively in your stack?  \nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete N+1 case with visible SQL and a verified fix will earn more saves and specific replies than generic ORM-versus-SQL advice",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 8204,
-      "ids": [
-        "17955414474257955",
-        "18016105394752853",
-        "18129614557837573",
-        "17966798226192911",
-        "18057021851568601"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T11:31:05.144054+00:00",
       "pillar": "smart",
@@ -1260,6 +1235,33 @@
         "18117340723977354"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-15T16:01:17.802015+00:00",
+      "pillar": "smart",
+      "hook_sig": "if api p99 is rising while postgres cpu",
+      "texts": [
+        "If API p99 is rising while Postgres CPU stays low, check pool wait time before adding database capacity. Most teams scale the wrong layer.",
+        "The symptom looks like a database problem. Latency climbs, errors spike, on-call gets paged. But `pg_stat_activity` shows idle connections, CPU is at 15 percent, and query plans look fine. The real bottleneck is invisible in standard dashboards.",
+        "Your application spends milliseconds waiting for a free connection from the pool. That wait time adds directly to p99 but never shows up in `EXPLAIN ANALYZE`. The database executes fast. The queue to reach it does not.",
+        "Measure it: instrument your pool library to record `wait_time_ms` per request. In HikariCP enable `poolStatsLogInterval`. In Go `database/sql` wrap `Conn()` with timing. Plot p99 wait time alongside p99 query time. They diverge when the pool is undersized.",
+        "Fix it: raise `maximumPoolSize` until wait-time p99 drops below 1ms. Then tune `minimumIdle` to absorb bursts without new connection overhead. One config change, measurable result, no new hardware.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A production symptom paired with a specific metric and a focused closing question will earn more useful replies than a broad performance claim.",
+      "breakout": "none",
+      "followers": 276,
+      "views_total": 14934,
+      "ids": [
+        "17940652383385518",
+        "18396102826166875",
+        "18108211388213819",
+        "18227694139329391",
+        "17911176198509729",
+        "18638925517015278"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1268,6 +1270,6 @@
     "mandate": "200000 views in 30 days by 2026-11-10",
     "since": "2026-10-10"
   },
-  "last_followers": 275,
-  "last_views": 14414
+  "last_followers": 276,
+  "last_views": 14934
 }
