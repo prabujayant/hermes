@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific, config-level contrarian claim with a concrete before/after number will outperform general advice posts by triggering \"what is your setting\" replies, citing P30's velocity (328.9/h) and P28's reply rate (4 replies in 4.4h).",
+  "hypothesis": "Contrarian config claim with concrete before/after numbers (pool 100->15, p99 380->95ms, CPU -40%) matches P29's statement format velocity (321/h) and triggers \"what is your setting\" replies like P28/P30.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T07:30:54.066766+00:00",
-      "pillar": "smart",
-      "hook_sig": "most engineers write impact logs like diary entries.",
-      "texts": [
-        "Most engineers write impact logs like diary entries. \"Refactored the payment service, improved latency.\" That tells a promo committee nothing. They need proof, not prose.",
-        "The template that actually works: Problem, Action, Evidence, Impact. One line each. No fluff. Problem: what broke or what was missing. Action: what you did specifically. Evidence: the metric, log, or artifact. Impact: the business result.",
-        "Before: \"Optimized database queries, made things faster.\" After: \"Problem: P95 latency hit 12s on checkout. Action: Added composite index on (user_id, created_at) and rewrote the N+1 query in OrderService. Evidence: Datadog screenshot showing P95 drop from 12s to 180ms. Impact: Recovered $230k/mo in abandoned carts.\"",
-        "Your turn. What is the one piece of evidence you always capture but most engineers skip? Drop it below.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete impact-log template with a worked example will earn more saves and specific replies than broad career advice.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 6611,
-      "ids": [
-        "18049379558817799",
-        "18012502682981739",
-        "18005781548791945",
-        "18025617293927099",
-        "17916878655262213"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T07:56:55.723042+00:00",
       "pillar": "smart",
@@ -1254,6 +1229,33 @@
         "18231485353324603"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-15T12:31:07.226026+00:00",
+      "pillar": "smart",
+      "hook_sig": "your orm's default connection pool of 100 is",
+      "texts": [
+        "Your ORM's default connection pool of 100 is silently killing your database. Most apps need 10-20 connections max. The rest sit idle holding locks, bloating memory, and forcing checkpoint storms that spike p99 latency 3x.",
+        "We cut a payment service from 100 to 15 connections. p99 dropped from 380ms to 95ms. CPU utilization fell 40 percent. The database stopped OOMing during traffic spikes. Zero code changes, one config line.",
+        "The formula: (core_count * 2) + effective_spindle_count. For a 16-core RDS instance with gp3 storage, that is 32-36. Not 100. Not 200. Every extra connection past that is negative ROI.",
+        "Your ORM lied to you. The default assumes you run one app server. You run twelve. Each keeps 100 open. That is 1,200 connections fighting for the same buffer pool. The fix takes five minutes.",
+        "What is your pool size and what happened when you cut it in half?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Contrarian config claim with concrete before/after numbers (pool 100->15, p99 380->95ms, CPU -40%) matches P29's statement format velocity (321/h) and triggers \"what is your setting\" replies like P28/P30.",
+      "breakout": "",
+      "followers": 274,
+      "views_total": 10987,
+      "ids": [
+        "17933885451147110",
+        "18226210972336953",
+        "18144185434599969",
+        "18207750808325838",
+        "18116402471036394",
+        "17929096065421904"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1263,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 274,
-  "last_views": 10464
+  "last_views": 10987
 }
