@@ -247,7 +247,8 @@
     "most teams under ten engineers should not run",
     "i chose cassandra for the write path because",
     "constrained decision: given a user-facing workflow with strict",
-    "we shipped a checkout service with a hard"
+    "we shipped a checkout service with a hard",
+    "stop using uuids as primary keys. they destroy"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
