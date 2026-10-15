@@ -266,7 +266,8 @@
     "high p99 latency does not mean your queries",
     "if api p99 is rising while postgres cpu",
     "production symptom: requests are slow but database cpu",
-    "things that quietly kill engineering careers:"
+    "things that quietly kill engineering careers:",
+    "if you want your side project to survive,"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

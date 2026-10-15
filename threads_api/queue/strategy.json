@@ -4,31 +4,6 @@
   "streak": 0,
   "history": [
     {
-      "run_at": "2026-10-14T12:31:07.606015+00:00",
-      "pillar": "smart",
-      "hook_sig": "you add one line to fetch the user's",
-      "texts": [
-        "You add one line to fetch the user's orders. The ORM logs show one query. You ship it. Production melts down because that one line ran 10,000 queries in a loop.",
-        "The code looks innocent:\n\n```python\nusers = session.query(User).limit(100).all()\nfor user in users:\n    print(user.orders[0].total)  # lazy load\n```\n\nNo JOIN. No eager load. Just a dot access inside a loop.",
-        "The query log tells the truth:\n\n```\nSELECT * FROM users LIMIT 100;\nSELECT * FROM orders WHERE user_id = 1;\nSELECT * FROM orders WHERE user_id = 2;\nSELECT * FROM orders WHERE user_id = 3;\n-- 97 more identical queries\n```\n\nOne hundred users. One hundred one queries. The N+1 is not a theory. It is in your logs right now.",
-        "The caveat: `joinedload` fixes the count but widens the row. Wide rows kill throughput on wide tables. The real fix is a separate indexed query for `user_id IN (...)` with a dict merge in Python. Two round trips. Predictable latency. No surprise wide scans.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A minimal N+1 reproduction with SQL logs, query counts, and a caveat will earn more saves and specific replies than generic ORM advice.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 8823,
-      "ids": [
-        "17950517859292255",
-        "18088653062266808",
-        "17962033137216766",
-        "18105015032637064",
-        "18108895411914747"
-      ],
-      "pivoted": true
-    },
-    {
       "run_at": "2026-10-14T13:01:18.531229+00:00",
       "pillar": "smart",
       "hook_sig": "costly surprise: one page render, 101 queries; here",
@@ -1262,6 +1237,31 @@
         "18076371977442412"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-15T17:31:07.439702+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want your side project to survive,",
+      "texts": [
+        "IF YOU WANT YOUR SIDE PROJECT TO SURVIVE, STOP ADDING FEATURES.\n\nMEMORIZE THESE 5 RULES:",
+        "Ship to one user first.\n\nYourself counts. Real usage teaches more than ten planned features.",
+        "Boring tech wins weekends.\n\nMonolith, Postgres, one host. Excitement is for work hours.",
+        "Log progress in public.\n\nWeekly demos beat yearly launches. Accountability ships products.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A specific metric plus a practical first check and a focused closing question will earn more useful replies than a broad performance claim.",
+      "breakout": "",
+      "followers": 276,
+      "views_total": 16740,
+      "ids": [
+        "18133113043707337",
+        "18106150091364918",
+        "18097518431112803",
+        "17931361500162171",
+        "18112750277157479"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1271,5 +1271,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 276,
-  "last_views": 16111
+  "last_views": 16740
 }
