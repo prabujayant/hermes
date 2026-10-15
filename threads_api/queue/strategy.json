@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific outcome plus a checkable evidence source will earn more saves and substantive replies than a standalone rewrite or checklist.",
-  "pivots": 184,
+  "hypothesis": "A specific outcome paired with a checkable source will earn more saves and substantive replies than general interview advice.",
+  "pivots": 185,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T19:28:34.128748+00:00",
-      "pillar": "smart",
-      "hook_sig": "a payment worker picks up order 402, reads",
-      "texts": [
-        "a payment worker picks up order 402, reads the status as pending, processes the charge, then writes status = completed. meanwhile a refund worker reads the same row, sees pending, processes the refund, writes status = refunded. the charge wins the race. the customer gets charged and refunded. the ledger shows both. the account balance is wrong.",
-        "the bug is not missing locks. the bug is writing state you did not verify. the worker read pending at T1. by T2 the row might be anything. SELECT FOR UPDATE serializes but kills throughput and still lets the second transaction overwrite if the first commits fast. the row version changed. your write assumption is stale.",
-        "the fix is a conditional update that fails if the row moved. UPDATE orders SET status = 'completed', version = version + 1 WHERE id = 402 AND status = 'pending' AND version = 12; check rows affected. zero means someone else changed it. reload, decide, retry. no locks held. no deadlocks. the database enforces the invariant.",
-        "this pattern works for inventory decrements, balance transfers, idempotency keys, any write that depends on current state. the WHERE clause is your contract. if the contract breaks the write aborts. you handle the conflict in application code where you have context. locks push complexity to the database. conditions push it to you.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete stale-writer failure and conditional update will earn more informed replies than generic locking advice.",
-      "breakout": "none",
-      "followers": 267,
-      "views_total": 9134,
-      "ids": [
-        "18109286228578627",
-        "18355363879222588",
-        "18287449201292878",
-        "18014332976983592",
-        "18021032474923851"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T00:01:19.566362+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,29 @@
         "17912941983494622"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-15T04:31:03.632725+00:00",
+      "pillar": "smart",
+      "hook_sig": "your behavioral story fails because you name the",
+      "texts": [
+        "Your behavioral story fails because you name the result but not the receipt.\nInterviewers hear \"I reduced latency by 40 percent.\" They think: compared to what baseline, measured how, verified by whom.\nThe fix takes one extra clause. I will show you.",
+        "Last cycle I wrote \"cut p99 latency 40 percent.\" The committee asked for the dashboard link. I had none. Same packet next cycle: \"cut p99 latency 40 percent, verified in Datadog dashboard db-latency-prod, baseline from the week before launch.\" No follow-up questions.",
+        "Name the artifact that would let a stranger verify the claim. A dashboard URL. A ticket number. A design doc section. A git commit range. A postmortem link. The clause is \"verifiable in [source].\" It turns a boast into a checkable fact.",
+        "Works for every\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific outcome paired with a checkable source will earn more saves and substantive replies than general interview advice.",
+      "breakout": "none",
+      "followers": 269,
+      "views_total": 12231,
+      "ids": [
+        "18062644502549159",
+        "18410391667091403",
+        "18123668326952808",
+        "18630316951047941"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 269,
-  "last_views": 12104
+  "last_views": 12231
 }
