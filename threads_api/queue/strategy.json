@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete, transparent rewrite with evidence and a named tradeoff will prompt more saves and specific replies than generic promo advice.",
-  "pivots": 179,
+  "hypothesis": "A transparent before/after rewrite with evidence and a named tradeoff will earn more saves and specific replies than generic promo advice.",
+  "pivots": 180,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T17:01:21.179726+00:00",
-      "pillar": "smart",
-      "hook_sig": "most teams treat redis setnx as a magic",
-      "texts": [
-        "Most teams treat Redis SETNX as a magic idempotency wand. It is not. The key expires, the client retries, and you double-charge the customer while the logs show green tests.",
-        "I watched a payment service process the same Stripe charge three times in production. The idempotency key had a 24h TTL. The client backed off for 30s, retried, key was gone, new request, new charge. The Redis cluster was healthy. The code was \"correct.\"",
-        "The pattern everyone copies: check Redis, if missing do work, write key. That window between check and write is where money burns. Lua scripts help but add latency and still don't solve the client-retry-after-TTL case. The database is the only source of truth that survives retries.",
-        "Move the idempotency check to the transaction. Insert a row with a unique constraint on the idempotency key inside the same transaction that writes the business data. If the insert fails, the work already happened. No Redis, no TTL, no distributed clock sync.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A contrarian take moving idempotency from Redis to DB unique constraints will trigger strong engineer replies defending or attacking the pattern, beating the generic concurrency demo posts (P26-P29).",
-      "breakout": "",
-      "followers": 267,
-      "views_total": 8433,
-      "ids": [
-        "17992760724105405",
-        "18000375995814212",
-        "18094934423403293",
-        "18139148614620037",
-        "18030560138855135"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-13T17:31:02.143826+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18341034115277316"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-15T02:01:11.386280+00:00",
+      "pillar": "smart",
+      "hook_sig": "i spent three promo cycles writing bullets like",
+      "texts": [
+        "I spent three promo cycles writing bullets like \"shipped the payments integration\" and watching committees shrug. They do not care what you shipped. They care what changed because you shipped it.",
+        "The bullet that got rejected: \"Built the payments integration for checkout.\" Zero baseline. Zero user metric. Zero tradeoff call. It reads like a task list. Committees see a feature delivered. They do not see risk reduced or revenue protected.",
+        "The rewrite that passed: \"Redesigned the payments fallback path after the Stripe outage cost us $180k in lost orders. Cut retry latency from 12s to 2s by introducing idempotency keys and a local queue. Tradeoff: added 200 lines of state machine code we now own forever. Result: zero lost orders during the next two provider incidents.\"",
+        "The pattern: name the incident that forced the work, show the before metric, show the after metric, name the thing you accepted to get it. Committees verify evidence. They cannot verify \"built feature X.\"",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A transparent before/after rewrite with evidence and a named tradeoff will earn more saves and specific replies than generic promo advice.",
+      "breakout": "none",
+      "followers": 269,
+      "views_total": 11622,
+      "ids": [
+        "18123939823898980",
+        "17921758158445059",
+        "17975386320128666",
+        "18342418840249879",
+        "18635231539051364"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 269,
-  "last_views": 11414
+  "last_views": 11622
 }
