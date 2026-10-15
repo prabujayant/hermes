@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete bullet paired with its verifiable evidence source will earn more saves and substantive replies than a standalone checklist or claim rewrite.",
-  "pivots": 183,
+  "hypothesis": "A specific outcome plus a checkable evidence source will earn more saves and substantive replies than a standalone rewrite or checklist.",
+  "pivots": 184,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T19:01:17.418378+00:00",
-      "pillar": "smart",
-      "hook_sig": "a payment worker picks up order 402, acquires",
-      "texts": [
-        "A payment worker picks up order 402, acquires a Redis lock with a 10-second TTL, starts charging the card. The gateway hangs. Ten seconds pass. The lock expires. A retry worker picks up order 402, gets a fresh lock, charges the card successfully. The first worker wakes up, gets a 200 from the gateway, writes \"charged\" to the database. The customer is billed twice. The lock did its job. It expired. The worker kept running.",
-        "The fix is not a longer TTL. The fix is a fence. Add a monotonically increasing token column to the orders table. When the first worker acquires the lock, it reads the current token, say 7. It writes the charge only if the token is still 7. The retry worker increments the token to 8 when it takes over. The first worker's update hits the WHERE clause, token = 7, matches zero rows. The stale write dies at the database.",
-        "No application retry logic catches this. No circuit breaker helps. The race lives between lock expiry and the database commit. The fence moves the authority to the only place that serializes correctly: the storage engine. Redis is a signal. Postgres is the truth.",
-        "Schema change: ALTER TABLE orders ADD COLUMN fence_token BIGINT DEFAULT 0; Application code: BEGIN; SELECT fence_token FROM orders WHERE id = 402 FOR UPDATE; -- returns 7 UPDATE orders SET status = 'charged', fence_token = fence_token + 1 WHERE id = 402 AND fence_token = 7; COMMIT; If zero rows updated, abort. The stale worker aborts. The new worker owns the token.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A precise stale-writer example plus a conditional database write will earn more informed replies than generic lock advice.",
-      "breakout": "none",
-      "followers": 267,
-      "views_total": 8988,
-      "ids": [
-        "17943608337090995",
-        "18466514173189661",
-        "17889327906621467",
-        "18098810537098493",
-        "17886895845495263"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-13T19:28:34.128748+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18107282584955904"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-15T04:01:14.616313+00:00",
+      "pillar": "smart",
+      "hook_sig": "i spent three promo cycles writing \"shipped the",
+      "texts": [
+        "I spent three promo cycles writing \"shipped the payments integration\" bullets. Every committee came back with the same note: so what? No baseline, no user metric, no tradeoff call. I thought shipping features was the job. Turns out the job is proving the choice mattered.",
+        "The bullet that got rejected: \"Built the payments integration for checkout flow.\" Sounds complete. The committee saw a task shipped. They did not see the architectural choice that prevented two million dollars in duplicate charges during the Black Friday spike. They saw a line item. I saw a near miss.",
+        "The question that changed it: a senior engineer asked \"what would have happened if you used retries instead of idempotency keys?\" I had the incident report. I had the dashboard showing zero double charges. I had the load test comparing both approaches. I just never put them in the packet.",
+        "The bullet that got approved: \"Chose idempotency keys over retries for the payments integration. Prevented an estimated $2M in duplicate charges during Black Friday peak. Evidence: incident report INC-2024-11-03, Stripe dashboard idempotency key success rate 99.99%, load test results in Notion link.\" Same feature. Verifiable trail.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific outcome plus a checkable evidence source will earn more saves and substantive replies than a standalone rewrite or checklist.",
+      "breakout": "none",
+      "followers": 269,
+      "views_total": 12104,
+      "ids": [
+        "18009836826003636",
+        "18136245508744093",
+        "17876592270635052",
+        "17916473931462802",
+        "17912941983494622"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 269,
-  "last_views": 12037
+  "last_views": 12104
 }
