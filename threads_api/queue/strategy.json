@@ -4,31 +4,6 @@
   "streak": 0,
   "history": [
     {
-      "run_at": "2026-10-14T07:56:55.723042+00:00",
-      "pillar": "smart",
-      "hook_sig": "your orm is making you a worse engineer.",
-      "texts": [
-        "Your ORM is making you a worse engineer. Not because it's bad, because it hides the queries you need to understand. Every senior who skipped SQL to \"move fast\" hits a wall when the explain plan looks alien and the index they needed was obvious in raw SQL.",
-        "I watched a team spend three weeks tuning a query their ORM generated. The fix was a single composite index they couldn't see because the ORM split the logic across five repository methods. They didn't know the table scan existed until production melted.",
-        "Yes, ORMs prevent injection. Yes, migrations are easier. But the mental model they encourage, objects over sets, iteration over joins, is exactly what kills performance at scale. You don't learn to think in sets by hiding them.",
-        "If you've never written the raw query your ORM produces for your slowest endpoint, you don't own that code. Turn off the ORM for one service this sprint. Write the SQL by hand. Tell me what you found.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Debate hot take on ORM vs raw SQL will drive high reply velocity from engineers defending their stack, beating the 2.1 views/h median by targeting a daily pain point with a direct challenge.",
-      "breakout": "",
-      "followers": 268,
-      "views_total": 6664,
-      "ids": [
-        "18107609576362799",
-        "18112222091175004",
-        "18099114107420494",
-        "17905047012597979",
-        "18080244104707448"
-      ],
-      "pivoted": true
-    },
-    {
       "run_at": "2026-10-14T08:31:03.780415+00:00",
       "pillar": "smart",
       "hook_sig": "the orm-versus-sql debate misses the real question: which",
@@ -1256,6 +1231,31 @@
         "17929096065421904"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-15T13:01:17.103952+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want behavioral rounds to remember you,",
+      "texts": [
+        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
+        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
+        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
+        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Contrarian config claim with concrete before/after numbers (pool 100->15, p99 380->95ms, CPU -40%) matches P29's statement format velocity (321/h) and triggers \"what is your setting\" replies like P28/P30.",
+      "breakout": "",
+      "followers": 274,
+      "views_total": 11654,
+      "ids": [
+        "18131037199702002",
+        "17895474897674798",
+        "17877142539573089",
+        "18131990099509353",
+        "18116902954791440"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 274,
-  "last_views": 10987
+  "last_views": 11654
 }
