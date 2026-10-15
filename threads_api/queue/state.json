@@ -232,7 +232,8 @@
     "you ship a backend feature. the promo packet",
     "i spent three promo cycles writing \"shipped x",
     "your promo packet is not a diary. it",
-    "i wrote \"added retries to the payment service\""
+    "i wrote \"added retries to the payment service\"",
+    "i wrote \"built the payments integration\" in my"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
