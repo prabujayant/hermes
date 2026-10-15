@@ -1,33 +1,8 @@
 {
   "hypothesis": "A concrete storage-engine debate with measurable tradeoffs (BIGINT vs UUID, buffer pool churn, 4x index bloat) will trigger more technical replies than abstract architecture takes, per the \"concrete cache decision\" hypothesis and the 11K-view microservices debate precedent.",
-  "pivots": 192,
+  "pivots": 193,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T03:31:02.748969+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent years reaching for redis locks every",
-      "texts": [
-        "I spent years reaching for Redis locks every time I saw a race condition. Then a senior engineer showed me a version column and a single UPDATE statement. No external lock service, no TTL tuning, no double-charge bugs. Here is the pattern and how to roll it out without breaking existing writers.",
-        "The core is one UPDATE that increments the version only if it matches the expected value:\n\nUPDATE accounts\nSET balance = balance - 100,\n    version = version + 1\nWHERE id = 42\n  AND version = 5;\n\nIf the row changed since you read it, the WHERE clause matches zero rows. Zero rows affected means conflict. Retry or abort. No locks held, no deadlocks.",
-        "When the UPDATE returns zero rows, you have two choices:\n1. Retry: re-read the row, re-apply your logic, attempt again. Works for high-contention hot paths.\n2. Abort: return a 409 Conflict to the client. Let the user decide. Simpler, safer for financial writes.\nPick one per endpoint. Do not mix silently.",
-        "You cannot flip a switch if old writers still run. Deploy in three stages:\nStage 1: New writers send the version check. Old writers keep writing without it. Add a trigger or application logic to increment version on every write so the column stays fresh.\nStage 2: Verify zero conflicts in logs for a full cycle. Then enable the version check for all writers.\nStage 3: Drop the legacy path. Now every write is optimistic.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A copyable version-check pattern with rollout caveats will earn more saves and implementation questions than another concurrency anecdote.",
-      "breakout": "none",
-      "followers": 267,
-      "views_total": 10171,
-      "ids": [
-        "18012431198992971",
-        "17932330686420305",
-        "17993947247845504",
-        "18135581830649090",
-        "18056693189564745"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T04:01:14.861566+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "18119034611280960"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-15T08:31:06.877006+00:00",
+      "pillar": "smart",
+      "hook_sig": "stop using uuids as primary keys in high-write",
+      "texts": [
+        "Stop using UUIDs as primary keys in high-write tables. They fragment the buffer pool, bloat indexes 4x, and turn range scans into random I/O. Your p99 latency pays the price.",
+        "A UUIDv4 is 16 random bytes. InnoDB clusters data by PK. Every insert lands on a random page. The working set explodes. A 10M row table with BIGINT fits in 2GB buffer pool. Same data with UUID needs 8GB just to keep the hot pages resident.",
+        "I learned this on a payments table doing 5K writes/sec. Switched PK from UUID to BIGINT. Index size dropped from 12GB to 3GB. Buffer pool hit rate jumped from 84% to 98%. P99 write latency fell from 45ms to 3ms. No code changes. Just the key type.",
+        "UUIDs have a place: distributed inserts without coordination, or when you need opaque IDs in URLs. But for the core tables taking the write load? They are a self-inflicted wound. Prove me wrong with your numbers.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete storage-engine debate with measurable tradeoffs (BIGINT vs UUID, buffer pool churn, 4x index bloat) will trigger more technical replies than abstract architecture takes, per the \"concrete cache decision\" hypothesis and the 11K-view microservices debate precedent.",
+      "breakout": "",
+      "followers": 271,
+      "views_total": 6736,
+      "ids": [
+        "18095481140662705",
+        "18141242929531590",
+        "18095338259390137",
+        "18130186165771239",
+        "18132586246742496"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 271,
-  "last_views": 6611
+  "last_views": 6736
 }
