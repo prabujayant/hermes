@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A transparent before/after rewrite with evidence and a named tradeoff will earn more saves and specific replies than generic promo advice.",
-  "pivots": 180,
+  "hypothesis": "A transparent rewrite plus a concrete evidence checklist will earn more saves and specific replies than generic promo advice",
+  "pivots": 181,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T17:31:02.143826+00:00",
-      "pillar": "smart",
-      "hook_sig": "a junior engineer shipped a double-charge bug last",
-      "texts": [
-        "A junior engineer shipped a double-charge bug last week. Two identical requests hit the endpoint at the same millisecond. Both checked Redis, saw the key was missing, both inserted the charge. The test suite was green. Production lost a customer.",
-        "They tried to fix it with Redis SETNX. That still raced. The lock and the charge lived in different systems that could not promise atomicity together. One could succeed while the other failed. The data ended up inconsistent anyway.",
-        "The real fix was a database unique constraint on request_id. Only one INSERT can win. The loser gets a duplicate key error, which the API catches and returns an idempotent success. The database decided, not Redis.",
-        "Redis still helps as a cache for the happy path. If the key exists, return fast before touching the database. But the correctness boundary stays in the database where it can be proven, not in a distributed cache that can split.",
-        "Question for backend engineers: when have you seen a cache-first idempotency pattern silently allow duplicates in production? Share your war story below.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A nuanced, failure-focused take on Redis versus database uniqueness will earn more informed replies than another generic concurrency demo.",
-      "breakout": "none",
-      "followers": 267,
-      "views_total": 8524,
-      "ids": [
-        "18065008727510264",
-        "18151184308497230",
-        "18098619146417026",
-        "18074712560567532",
-        "18061588055555599"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-13T18:01:20.923711+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18635231539051364"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-15T02:31:02.244647+00:00",
+      "pillar": "smart",
+      "hook_sig": "things hiring managers can't tell from your resume",
+      "texts": [
+        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
+        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
+        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
+        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A transparent rewrite plus a concrete evidence checklist will earn more saves and specific replies than generic promo advice",
+      "breakout": "none",
+      "followers": 269,
+      "views_total": 11703,
+      "ids": [
+        "17936722194389312",
+        "17874530646594751",
+        "18113021459334788",
+        "17863362021695994",
+        "18083661779354374"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 269,
-  "last_views": 11622
+  "last_views": 11703
 }
