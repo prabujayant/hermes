@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Contrarian config claim with concrete before/after numbers (pool 100->15, p99 380->95ms, CPU -40%) matches P29's statement format velocity (321/h) and triggers \"what is your setting\" replies like P28/P30.",
+  "hypothesis": "A concrete, testable backend diagnosis with a specific comment prompt will outperform broad config claims without",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T08:31:03.780415+00:00",
-      "pillar": "smart",
-      "hook_sig": "the orm-versus-sql debate misses the real question: which",
-      "texts": [
-        "the ORM-versus-SQL debate misses the real question: which queries deserve handwritten SQL?",
-        "most teams pick a side and defend it like religion. the senior move is a decision rule: if the query touches money, inventory, or user-facing latency budgets, write the SQL. if it's CRUD on internal admin tables, let the ORM handle it.",
-        "learned this when our ORM generated a 47-table join for a billing reconciliation report. query took 12 seconds. rewrote it as two CTEs and a materialized view, dropped to 180ms. the ORM didn't know our indexes, our partition strategy, or that we only needed last 30 days.",
-        "conversely, spent three days hand-rolling a dynamic filter builder for an internal dashboard. threw it away and dropped in the ORM's query builder in 20 minutes. zero business logic, zero latency pressure, zero reason to maintain custom SQL.",
-        "what's one query you yanked out of your ORM and wrote by hand? Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A useful, specific ORM decision rule will earn more qualified replies and shares than a generic stack hot take.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 6917,
-      "ids": [
-        "17976497964137189",
-        "18126361969859219",
-        "18109548011268782",
-        "18094548770178084",
-        "18094377485447751"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T09:01:22.155740+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,31 @@
         "18116902954791440"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-15T13:31:02.292911+00:00",
+      "pillar": "smart",
+      "hook_sig": "a larger connection pool made my database slower,",
+      "texts": [
+        "A larger connection pool made my database slower, not faster. The team swore by 100 connections per service. p99 latency was 380ms under load. We dropped to 15 and it fell to 95ms. The fix was not the number itself, it was measuring where the database stopped scaling.",
+        "Here is how to find your real saturation point. Spin up a single replica of your production database. Use wrk or k6 with a fixed query set that mirrors your hottest endpoints. Incrementally raise concurrent connections from 1 to N. Record p99 latency at each step. The curve is the truth.",
+        "At low concurrency, latency stays flat and throughput grows. Then it bends. That bend is where adding more connections costs more in scheduling and lock contention than it gains in parallelism. In my case the bend was at 12. Beyond 20, latency climbed fast. The pool was a queue amplifier, not a throughput booster.",
+        "Most teams never see this because they test with idle databases and synthetic loads that never touch contention. Measure under realistic pressure, with warmup, with cache cold, with the noisy neighbors your queries actually fight. Pool size is not a config to copy from a blog.",
+        "What is your pool-sizing method? Did you measure the bend, or did you inherit the default? Share your worst latency surprise and I will dig into it next.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A concrete, testable backend diagnosis with a specific comment prompt will outperform broad config claims without",
+      "breakout": "none",
+      "followers": 274,
+      "views_total": 12200,
+      "ids": [
+        "18011789042986968",
+        "18093923816450022",
+        "18023591111864158",
+        "17997762882035107",
+        "18598034983067809"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 274,
-  "last_views": 11654
+  "last_views": 12200
 }
