@@ -251,7 +251,8 @@
     "stop using uuids as primary keys. they destroy",
     "stop using uuids as primary keys in high-write",
     "i used uuidv4 for every primary key on",
-    "if you want to pass system design interviews,"
+    "if you want to pass system design interviews,",
+    "if you want to become a senior engineer"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
