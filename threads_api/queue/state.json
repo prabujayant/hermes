@@ -245,7 +245,8 @@
     "most caching advice you read assumes a single",
     "kubernetes is overkill for 90 percent of startups.",
     "most teams under ten engineers should not run",
-    "i chose cassandra for the write path because"
+    "i chose cassandra for the write path because",
+    "constrained decision: given a user-facing workflow with strict"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
