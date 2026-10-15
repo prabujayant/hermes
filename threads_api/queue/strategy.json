@@ -4,31 +4,6 @@
   "streak": 0,
   "history": [
     {
-      "run_at": "2026-10-14T04:31:01.954515+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent two years retrying failed writes and",
-      "texts": [
-        "I spent two years retrying failed writes and calling it resilience. The bug wasn't the retry. The bug was retrying without knowing what changed.",
-        "The fix is a version column and a single UPDATE that checks it.\n\nUPDATE accounts\nSET balance = balance - 100, version = version + 1\nWHERE id = 42 AND version = 7;\n\nZero rows affected means someone else moved first. That is your conflict signal.",
-        "Most teams stop there and retry the whole transaction. Blind retry overwrites the other user's intent. You just erased their edit with yours.",
-        "The pattern demands a choice on conflict: retry only if the operation is still valid, reject and show the fresh state, or merge when the domain allows it. The version check makes the choice explicit.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A practical version-check example with a clear conflict tradeoff will earn saves and implementation questions; end by asking whether readers retry, reject, or merge.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 10542,
-      "ids": [
-        "18136337830730730",
-        "17910438510476852",
-        "18633300220032833",
-        "18386375719228034",
-        "18185382601423369"
-      ],
-      "pivoted": true
-    },
-    {
       "run_at": "2026-10-14T05:01:16.302431+00:00",
       "pillar": "smart",
       "hook_sig": "if you want behavioral rounds to remember you,",
@@ -1252,6 +1227,31 @@
         "18040160546837438"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-15T09:31:00.939423+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to pass system design interviews,",
+      "texts": [
+        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
+        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
+        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
+        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific Postgres benchmark with practical tradeoffs will draw more technical replies than an abstract storage-engine debate",
+      "breakout": "",
+      "followers": 273,
+      "views_total": 7531,
+      "ids": [
+        "18114218474037422",
+        "18126296489309994",
+        "18077021333449453",
+        "18029755718914003",
+        "18010603391771573"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 273,
-  "last_views": 7037
+  "last_views": 7531
 }
