@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete decision-to-outcome example with evidence and tradeoff will outperform generic promo-writing advice and invite specific replies.",
-  "pivots": 177,
+  "hypothesis": "A compact, evidence-backed example with a visible tradeoff will earn more saves and specific replies than generic promo advice.",
+  "pivots": 178,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T16:01:19.914542+00:00",
-      "pillar": "smart",
-      "hook_sig": "if a database write must happen exactly once,",
-      "texts": [
-        "if a database write must happen exactly once, Redis should not be your source of truth\n\nRedis idempotency keys survive only until the next Redis restart or failover. your database write either commits twice or not at all. the durability gap is not theoretical, it happens during every unplanned failover.",
-        "the failure case: payment service writes idempotency key to Redis, then calls the payment gateway. Redis primary fails before replicating the key. replica promotes, key is gone. retry arrives, new primary has no record, second charge goes through. customer sees double charge. logs show clean idempotency check both times.",
-        "most teams solve this by adding a unique constraint on the database side and treating Redis as a fast-path cache. the database becomes the actual source of truth. Redis only short-circuits the happy path. this works until the unique constraint violates on a legitimate retry, then you need a compensation flow anyway.",
-        "the hard rule: if exactly-once matters, the idempotency record lives in the same transaction as the business write. same database, same ACID boundary. Redis can accelerate reads, but it cannot be the authority. the moment you separate them, you own the reconciliation logic forever.",
-        "what is the longest Redis outage you have seen in production and did it cause duplicate writes? Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete challenge to Redis-as-source-of-truth will earn more engineer replies than a generic concurrency demo; end with a follow CTA.",
-      "breakout": "none",
-      "followers": 267,
-      "views_total": 8116,
-      "ids": [
-        "18124485442918100",
-        "18415246939080740",
-        "18081440933359801",
-        "17975062082942351",
-        "18450088441122124"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-13T16:31:05.148306+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "17910376149307402"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-15T01:01:15.281448+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want behavioral rounds to remember you,",
+      "texts": [
+        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
+        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
+        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
+        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A compact, evidence-backed example with a visible tradeoff will earn more saves and specific replies than generic promo advice.",
+      "breakout": "none",
+      "followers": 269,
+      "views_total": 11341,
+      "ids": [
+        "18167671570482603",
+        "18116292743588912",
+        "18465952960141702",
+        "17910844125519071",
+        "17988732732063831"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 269,
-  "last_views": 11305
+  "last_views": 11341
 }
