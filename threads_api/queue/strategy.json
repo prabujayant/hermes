@@ -1,29 +1,8 @@
 {
-  "hypothesis": "A transparent Postgres benchmark with reproducible conditions will earn more useful technical replies than a broad claim about UUID performance.",
+  "hypothesis": "A specific, config-level contrarian claim with a concrete before/after number will outperform general advice posts by triggering \"what is your setting\" replies, citing P30's velocity (328.9/h) and P28's reply rate (4 replies in 4.4h).",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T07:01:14.469543+00:00",
-      "pillar": "smart",
-      "hook_sig": "most impact logs read like a diary of",
-      "texts": [
-        "Most impact logs read like a diary of tasks shipped. Promo committees see a list of features. They do not see the risk you reduced, the money you saved, or the team you unblocked.",
-        "The fix is not more bullets. It is an evidence-led structure. Every entry needs three fields: the signal you saw, the action you took, the measurable change that followed. Attribution goes in the third field, not the first.",
-        "Copy this template. Paste it into your weekly note.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "An evidence-led impact-log template will earn more saves and specific replies than broad career advice.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 6494,
-      "ids": [
-        "18217654786355202",
-        "17920781097449869",
-        "18487688566110819"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T07:30:54.066766+00:00",
       "pillar": "smart",
@@ -1250,6 +1229,31 @@
         "18120768064942479"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-15T11:57:43.190292+00:00",
+      "pillar": "smart",
+      "hook_sig": "your orm's default connection pool size is silently",
+      "texts": [
+        "Your ORM's default connection pool size is silently killing your p99 latency. Most frameworks ship with 10-20 connections. Your database can handle hundreds. The mismatch queues requests before they even hit the engine.",
+        "A Java service at 5k RPS sat at p99 800ms. CPU was 15%. The pool was 20 connections. We raised it to 200. p99 dropped to 45ms. No code changes. No schema changes. One config knob.",
+        "The formula is not magic. Target connections = (core count * 2) + effective spindle count. For SSD on 16 cores: 32-64. For Aurora with 1000 max_connections: 200-400 per app instance. Monitor wait_event_type = ClientRead. That is your queue signal.",
+        "Pool sizing is the highest leverage config change most teams never touch. They add read replicas, caching layers, and rewrite queries. The pool was the bottleneck the whole time. What is your current pool size and max_connections setting?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific, config-level contrarian claim with a concrete before/after number will outperform general advice posts by triggering \"what is your setting\" replies, citing P30's velocity (328.9/h) and P28's reply rate (4 replies in 4.4h).",
+      "breakout": "",
+      "followers": 274,
+      "views_total": 10464,
+      "ids": [
+        "18109601171230373",
+        "18013585424764916",
+        "18152612620553247",
+        "18126215860863423",
+        "18231485353324603"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1258,6 +1262,6 @@
     "mandate": "200000 views in 30 days by 2026-11-10",
     "since": "2026-10-10"
   },
-  "last_followers": 273,
-  "last_views": 9930
+  "last_followers": 274,
+  "last_views": 10464
 }
