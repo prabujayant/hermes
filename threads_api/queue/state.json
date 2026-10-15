@@ -246,7 +246,8 @@
     "kubernetes is overkill for 90 percent of startups.",
     "most teams under ten engineers should not run",
     "i chose cassandra for the write path because",
-    "constrained decision: given a user-facing workflow with strict"
+    "constrained decision: given a user-facing workflow with strict",
+    "we shipped a checkout service with a hard"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
