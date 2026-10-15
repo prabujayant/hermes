@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A transparent rewrite plus a concrete evidence checklist will earn more saves and specific replies than generic promo advice",
-  "pivots": 181,
+  "hypothesis": "A specific before/after example with evidence a reviewer can verify will earn more saves and detailed replies than a standalone checklist",
+  "pivots": 182,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-13T18:01:20.923711+00:00",
-      "pillar": "smart",
-      "hook_sig": "i shipped a double-charge bug last year that",
-      "texts": [
-        "I shipped a double-charge bug last year that passed every test and every code review. The idempotency key lived in Redis. The charge lived in Postgres. They were never friends.",
-        "The request hit the idempotency endpoint. Redis said key not found. We wrote the key with a TTL. We called the payment provider. The provider timed out. The client retried.",
-        "Second request. Redis still had the key from the first try. Good, we thought. We returned early. But the first request had already written the charge to Postgres before the timeout. The retry wrote it again. Two rows. Same amount. Same user. No unique constraint.",
-        "Redis is best-effort coordination. It evaporates on restart, on network partition, on TTL expiry. A database unique constraint is durable correctness. It survives everything. The only thing that prevents duplicate charges is a unique index on (user_id, idempotency_key) inside the transaction that writes the charge.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete failure case and a precise boundary between Redis coordination and database guarantees will earn more informed replies than another race-condition timeline",
-      "breakout": "none",
-      "followers": 267,
-      "views_total": 8746,
-      "ids": [
-        "18642761851024000",
-        "17911852764546450",
-        "18335418799259149",
-        "17885474967688604",
-        "17976662507930499"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-13T18:31:07.612841+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18083661779354374"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-15T03:01:14.654589+00:00",
+      "pillar": "smart",
+      "hook_sig": "my promo packet said \"built the payments integration.\"",
+      "texts": [
+        "My promo packet said \"built the payments integration.\" The committee asked: so what? I had no answer. That rejection taught me the only metric that matters is the one a reviewer can verify without reading my code.",
+        "The vague claim: \"built the payments integration.\" Sounds like work. Proves nothing. A reviewer sees a ticket closed. They do not see risk reduced, revenue protected, or latency cut.",
+        "The rewrite: \"Redesigned the payments idempotency layer to eliminate duplicate charges. Cut retry storms by 92 percent. Prevented an estimated $2M in duplicate transactions per quarter. Verified by comparing chargeback rates before and after deploy, logged in Datadog dashboard DB-447.\"",
+        "The checklist I now use for every bullet: baseline metric, user-facing outcome, tradeoff call, verification link. If I cannot fill all four, the bullet gets cut. No exceptions.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific before/after example with evidence a reviewer can verify will earn more saves and detailed replies than a standalone checklist",
+      "breakout": "none",
+      "followers": 269,
+      "views_total": 11779,
+      "ids": [
+        "17971396143178647",
+        "18096867677120651",
+        "18105039335188691",
+        "17878294434632788",
+        "17886947184496403"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 269,
-  "last_views": 11703
+  "last_views": 11779
 }
