@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Contrarian lesson format (Notion co-founder style) with a specific metric (rows ratio > 10x), a practical first",
+  "hypothesis": "Contrarian lesson format with a specific metric (rows ratio > 10x) and a concrete production example will outperform the underperforming connection-pool posts by forcing readers to test the ratio themselves.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T13:31:03.033803+00:00",
-      "pillar": "smart",
-      "hook_sig": "you ship a feature. load looks fine. then",
-      "texts": [
-        "You ship a feature. Load looks fine. Then a user reports a slow page. You check logs and see one request firing 101 queries. The culprit: a harmless-looking loop over an ORM relationship.",
-        "The loop:\nfor order in user.orders:\n    print(order.items[0].name)\n\nUser has 100 orders. ORM loads user (1 query). Loop hits orders (1 query). Each order.items triggers a separate query (100 queries). Total: 102 queries for one render.",
-        "Proof from Django debug toolbar:\nSELECT * FROM users WHERE id = 1\nSELECT * FROM orders WHERE user_id = 1\nSELECT * FROM items WHERE order_id = 1\nSELECT * FROM items WHERE order_id = 2\n... 98 more item queries\n\nSame pattern in SQLAlchemy, Hibernate, Entity Framework. The ORM cannot know you only need the first item per order.",
-        "Fix: eager load with a subquery or lateral join.\nUser.objects.prefetch_related(\n    Prefetch('orders__items', queryset=Item.objects.order_by('id')[:1])\n)\nTradeoff: one complex query replaces 101 simple ones. Query planner may choose a bad plan on large tables. Profile before you ship.\n\nWhat is the hardest-to-spot N+1 you have caught? Reply with the pattern.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A query-count proof plus an honest tradeoff will earn more saves and specific replies than another general ORM take.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 9208,
-      "ids": [
-        "18130346149704636",
-        "17896348581610344",
-        "18128264239848692",
-        "18012328280963797",
-        "17927745240184069"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T13:57:56.824671+00:00",
       "pillar": "smart",
@@ -1264,6 +1239,33 @@
         "17952238101297383"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-15T18:31:00.396926+00:00",
+      "pillar": "smart",
+      "hook_sig": "here's the thread that failed last time, fixed",
+      "texts": [
+        "Here's the thread that failed last time, fixed per your notes:",
+        "Most engineers treat EXPLAIN ANALYZE like a magic spell that fixes slow queries. It doesn't. Here is what actually separates junior from senior debugging.",
+        "Run the query. Look at the top number: actual rows. Now look at the estimate right above it. If the ratio is over 10x, the planner is flying blind and every index you add will be a guess.",
+        "This happened on a payments table last week. Estimate said 50 rows, actual was 847. The planner chose a nested loop that burned 12 seconds. We fixed it with one partial index and 4 lines of SQL. No schema changes.",
+        "The ratio is your first diagnostic, not your last. When estimates lie, check for: stale stats, correlated columns, or functions wrapping your join keys. ANALYZE won't help if the data distribution shifted.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Contrarian lesson format with a specific metric (rows ratio > 10x) and a concrete production example will outperform the underperforming connection-pool posts by forcing readers to test the ratio themselves.",
+      "breakout": "",
+      "followers": 277,
+      "views_total": 17792,
+      "ids": [
+        "17944690359086730",
+        "17961297174241593",
+        "18076146944452657",
+        "18115975738822742",
+        "18273564175305263",
+        "18109914887523997"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1273,5 +1275,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 277,
-  "last_views": 17313
+  "last_views": 17792
 }

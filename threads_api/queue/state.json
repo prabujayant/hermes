@@ -268,7 +268,8 @@
     "production symptom: requests are slow but database cpu",
     "things that quietly kill engineering careers:",
     "if you want your side project to survive,",
-    "most engineers still treat explain analyze like a"
+    "most engineers still treat explain analyze like a",
+    "here's the thread that failed last time, fixed"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
