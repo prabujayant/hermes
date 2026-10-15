@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A production symptom paired with a specific metric and a focused closing question will earn more useful replies than a broad performance claim.",
+  "hypothesis": "A production symptom plus a specific metric and a closing question will earn more useful replies than a broad performance claim.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T11:31:05.144054+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to become a senior engineer",
-      "texts": [
-        "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:",
-        "Own outcomes, not tickets.\n\nJuniors close tasks. Seniors move metrics. Ask what number your work changes.",
-        "Write the doc nobody wants to write.\n\nDesign docs, runbooks, postmortems. Visibility compounds faster than commits.",
-        "Delete code on purpose.\n\nEvery quarter, kill something: a flag, a service, dead code. Simplifiers get promoted.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "cohere/north-mini-code:free",
-      "hypothesis": "A reproducible N+1 example with SQL, query counts, and a caveat will earn more saves and specific replies than generic ORM advice.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 8315,
-      "ids": [
-        "18153481792537202",
-        "17973596601155263",
-        "17914275789536194",
-        "18152074051484219",
-        "18152528200544959"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T12:01:33.909853+00:00",
       "pillar": "smart",
@@ -1262,6 +1237,31 @@
         "18638925517015278"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-15T16:31:06.693324+00:00",
+      "pillar": "smart",
+      "hook_sig": "production symptom: requests are slow but database cpu",
+      "texts": [
+        "Production symptom: requests are slow but database CPU sits at 15 percent. You check slow queries, nothing obvious. The engine is idle. The real bottleneck is the connection pool queueing work before it ever reaches Postgres.",
+        "The diagnostic split is two numbers. Pool wait time: how long a request waits for a connection. Query time: how long the statement actually runs. If pool wait dominates, adding indexes or tuning SQL will not move p99. You are optimizing the wrong layer.",
+        "Measure it in production. Wrap the pool borrow with a histogram: timestamp at checkout, timestamp at query start. The delta is queue time. In Postgres enable log_min_duration_statement = 0 briefly or use pg_stat_statements with a client-side wrapper. The gap tells the whole story.",
+        "When queue time exceeds query time you have three levers. Increase pool size until CPU saturates. Add a read replica for SELECT-heavy paths. Or push backpressure to the load balancer with a request queue and timeout. Re-measure the same two metrics to confirm the fix.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A production symptom plus a specific metric and a closing question will earn more useful replies than a broad performance claim.",
+      "breakout": "none",
+      "followers": 276,
+      "views_total": 15611,
+      "ids": [
+        "18134373406669358",
+        "17908138776328734",
+        "18464001142186112",
+        "17941286883371017",
+        "18210534937364846"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1271,5 +1271,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 276,
-  "last_views": 14934
+  "last_views": 15611
 }
