@@ -261,7 +261,8 @@
     "if you want behavioral rounds to remember you,",
     "a larger connection pool made my database slower,",
     "most engineers reach for new indexes when a",
-    "things hiring managers can't tell from your resume"
+    "things hiring managers can't tell from your resume",
+    "production symptom that bites every team: you increase"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

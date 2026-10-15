@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific, actionable production diagnosis with a focused comment prompt will outperform broad backend claims and attract relevant followers",
+  "hypothesis": "A practical production diagnosis with clear signals and a focused question will earn more relevant engagement than a broad performance claim",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T10:01:18.237955+00:00",
-      "pillar": "smart",
-      "hook_sig": "the orm is not automatically slow. the query",
-      "texts": [
-        "the ORM is not automatically slow. the query pattern it generates may be.\n\nspent two years blaming Hibernate for \"slow queries\" before a DBA showed me the real culprit: a lazy-loaded collection inside a loop. one line of Java. forty-seven round trips to Postgres. the ORM did exactly what I told it to.",
-        "User.findAll().forEach(user -> {\n    List<Order> orders = user.getOrders(); // lazy load fires HERE\n    orders.forEach(this::process);\n});\n\nlooks innocent. `getOrders()` is a getter. but with lazy loading, each call executes `SELECT * FROM orders WHERE user_id = ?`. run it for 50 users, you get 51 queries. the N+1 hides behind clean syntax.",
-        "turn on query logging. in Spring Boot:\n\nlogging.level.org.hibernate.SQL=DEBUG\nlogging.level.org.hibernate.orm.jdbc.bind=TRACE\n\nrun the endpoint once. count the SELECT statements. if you see `select o.* from orders o where o.user_id = ?` repeated for every user, you found it. no guessing. the log is the receipt.",
-        "fix: fetch join or entity graph.\n\n@Query(\"select u from User u left join fetch u.orders\")\nList<User> findAllWithOrders();\n\nor\n\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAll();\n\nre-run with logging on. one query. `EXPLAIN ANALYZE` shows a single hash join instead of fifty index scans. same ORM. different pattern. measured, not assumed.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A practical ORM example that reveals hidden query shape and verifies the fix will earn more qualified replies and shares than generic ORM-versus-SQL advice.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 7947,
-      "ids": [
-        "17931867747406375",
-        "18129581035855919",
-        "17954020938273656",
-        "18111603472881121",
-        "18184743484423818"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T10:31:01.490963+00:00",
       "pillar": "smart",
@@ -1258,6 +1233,31 @@
         "17977075905179341"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-15T15:01:19.286756+00:00",
+      "pillar": "smart",
+      "hook_sig": "production symptom that bites every team: you increase",
+      "texts": [
+        "Production symptom that bites every team: you increase the connection pool to fix throughput, and p99 latency gets worse. The database is not the bottleneck. Your requests are queueing for connections that do not exist yet.",
+        "The pool grows, new connections handshake, TLS negotiates, the OS schedules the thread. Meanwhile the request sits in the client-side queue. That wait time is invisible to your APM because it happens before the span starts. You see healthy DB latency, angry users.",
+        "How to tell which queue owns the pain. Instrument two timers at the client: time from request start to connection acquired, and time from query sent to first row. If the first timer dominates p99, you are connection-starved. If the second dominates, the DB is slow.",
+        "Quick diagnostic you can run in prod today. Add a histogram for pool wait time. Alert when p99 pool wait exceeds 50 ms. Correlate with active connection count. If they rise together while DB CPU is flat, the pool size is the problem, not the database.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A practical production diagnosis with clear signals and a focused question will earn more relevant engagement than a broad performance claim",
+      "breakout": "none",
+      "followers": 275,
+      "views_total": 13848,
+      "ids": [
+        "18360164251247940",
+        "18088556468278330",
+        "18126160693935465",
+        "18119198578985010",
+        "18119772145976641"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1267,5 +1267,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 275,
-  "last_views": 13129
+  "last_views": 13848
 }
