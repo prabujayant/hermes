@@ -265,7 +265,8 @@
     "production symptom that bites every team: you increase",
     "high p99 latency does not mean your queries",
     "if api p99 is rising while postgres cpu",
-    "production symptom: requests are slow but database cpu"
+    "production symptom: requests are slow but database cpu",
+    "things that quietly kill engineering careers:"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

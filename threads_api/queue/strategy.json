@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A production symptom plus a specific metric and a closing question will earn more useful replies than a broad performance claim.",
+  "hypothesis": "A specific metric plus a practical first check and a focused closing question will earn more useful replies than a broad performance claim.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T12:01:33.909853+00:00",
-      "pillar": "smart",
-      "hook_sig": "costly surprise: an orm loop quietly turns one",
-      "texts": [
-        "costly surprise: an ORM loop quietly turns one page load into a query per item\n\ni shipped a dashboard last quarter. clean code, eager loading everywhere i thought mattered. the page loaded in 200ms locally. production hit 4 seconds the first week. the culprit was a single partial that rendered a list of teams with their member counts.",
-        "the view looked innocent. `@teams.each do |team|` then `team.members.count` inside the loop. the association was `has_many :members`. no `includes`, no `joins`, no counter cache. rails executed one query for the teams, then one `COUNT(*)` per team. fifty teams meant fifty-one queries. the log showed the pattern clear as day: `SELECT COUNT(*) FROM members WHERE team_id = 1`, then `team_id = 2`, all the way to 50.",
-        "i added `includes(:members)` to the controller. the count still fired per row because `count` on a loaded association reloads. the fix was `team.members.size` which uses the loaded array, or a counter cache column `members_count` with `counter_cache: true` on the belongs_to. counter cache dropped the page to 120ms. `includes` plus `size` got it to 180ms. the query count went from 51 to 2.",
-        "caveat: counter caches add write overhead on every member create or destroy. if your team membership changes hundreds of times per minute, the lock contention on the teams table can hurt more than the N+1 read. measure your write-to-read ratio before you commit. the safest default is `includes` plus `size` unless you prove the cache wins.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete N+1 reproduction with SQL, query counts, and a caveat will earn more saves and specific replies than generic ORM advice.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 8511,
-      "ids": [
-        "18117382567792191",
-        "17894783742612200",
-        "18472470502113824",
-        "18132840187680058",
-        "18112233674152168"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T12:31:07.606015+00:00",
       "pillar": "smart",
@@ -1262,6 +1237,31 @@
         "18210534937364846"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-15T17:01:16.170906+00:00",
+      "pillar": "smart",
+      "hook_sig": "things that quietly kill engineering careers:",
+      "texts": [
+        "THINGS THAT QUIETLY KILL ENGINEERING CAREERS:",
+        "Never asking questions.\n\nSilent confusion ships bugs. The fastest engineers ask the dumb question on day one.",
+        "Avoiding code review feedback.\n\nDefensiveness freezes growth. Treat every comment as free mentoring.",
+        "Staying comfortable one level too long.\n\nIf you are the expert in every room, you are in the wrong rooms.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A specific metric plus a practical first check and a focused closing question will earn more useful replies than a broad performance claim.",
+      "breakout": "none",
+      "followers": 276,
+      "views_total": 16111,
+      "ids": [
+        "18129766907497836",
+        "17998204829829299",
+        "17975043488940423",
+        "18439974613199506",
+        "18076371977442412"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1271,5 +1271,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 276,
-  "last_views": 15611
+  "last_views": 16111
 }
