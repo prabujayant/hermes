@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A reproducible SQL rewrite with measured evidence and a clear caveat will earn more useful replies and shares than broad diagnostics",
+  "hypothesis": "A copyable SQL benchmark with a precise caveat will earn more useful replies and shares than a broad diagnostic.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T10:01:18.812172+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to become a senior engineer",
-      "texts": [
-        "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:",
-        "Own outcomes, not tickets.\n\nJuniors close tasks. Seniors move metrics. Ask what number your work changes.",
-        "Write the doc nobody wants to write.\n\nDesign docs, runbooks, postmortems. Visibility compounds faster than commits.",
-        "Delete code on purpose.\n\nEvery quarter, kill something: a flag, a service, dead code. Simplifiers get promoted.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific Postgres benchmark with practical tradeoffs will draw more technical replies than an abstract storage-engine debate",
-      "breakout": "",
-      "followers": 273,
-      "views_total": 8078,
-      "ids": [
-        "17936722527384416",
-        "18374779222240499",
-        "17906447814568070",
-        "18030257438910324",
-        "18106383500628158"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-15T10:31:05.610129+00:00",
       "pillar": "smart",
@@ -1274,6 +1249,31 @@
         "18149298184553840"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T15:31:06.707515+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to crack coding interviews, stop",
+      "texts": [
+        "IF YOU WANT TO CRACK CODING INTERVIEWS, STOP PRACTICING RANDOMLY.\n\nMEMORIZE THESE 5 PATTERNS INSTEAD:",
+        "Two pointers turn O(n^2) into O(n).\n\nSorted array, pair sum, container with water. Move ends inward instead of nesting loops.",
+        "Sliding window owns substring problems.\n\nLongest, shortest, best. Grow the right edge, shrink the left when invalid. One pass.",
+        "BFS and DFS are the same skill.\n\nGrids, islands, trees, graphs. Queue for shortest path, stack for exhaustive search. Learn both once.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A copyable SQL benchmark with a precise caveat will earn more useful replies and shares than a broad diagnostic.",
+      "breakout": "none",
+      "followers": 279,
+      "views_total": 23189,
+      "ids": [
+        "17909656800486401",
+        "18105752921526479",
+        "18344932720189256",
+        "18166973758490323",
+        "18061536038795160"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1283,5 +1283,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 279,
-  "last_views": 22923
+  "last_views": 23189
 }
