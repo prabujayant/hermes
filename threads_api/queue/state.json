@@ -281,7 +281,8 @@
     "the real query bottleneck isn't missing indexes. it's",
     "copyable diagnostic: run explain analyze and compare estimated",
     "i used to think query performance was about",
-    "--- your query returns 12 rows. the planner"
+    "--- your query returns 12 rows. the planner",
+    "if you want behavioral rounds to remember you,"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

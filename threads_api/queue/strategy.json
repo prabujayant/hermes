@@ -4,31 +4,6 @@
   "streak": 0,
   "history": [
     {
-      "run_at": "2026-10-15T00:01:15.343702+00:00",
-      "pillar": "smart",
-      "hook_sig": "i wrote \"added retries to the payment service\"",
-      "texts": [
-        "I wrote \"added retries to the payment service\" in my promo packet. The committee asked: so what? Same packet, next cycle: \"chose idempotency keys over retries for the payment service, cut duplicate charges from 200 per month to zero, saved $2M in refunds.\" That line got me promoted.",
-        "The weak bullet: \"Added retries to the payment service to improve reliability.\"\n\nIt sounds productive. It tells the committee nothing about the failure mode you solved, the alternative you rejected, or the metric that moved. They see a task. They do not see a decision.",
-        "The rewrite: \"Chose idempotency keys over exponential retries for the payment service. Retries caused duplicate charges during network partitions. Idempotency keys eliminated duplicates at the cost of 15ms latency per request. Duplicate charges dropped from 200 per month to zero. Refund workload fell by $2M per year.\"\n\nDecision named. Tradeoff stated. Baseline and outcome quantified. Committee can verify the logic without reading your code.",
-        "Template for any bullet: \n1. What choice did you make? \n2. What did you reject and why? \n3. What was the baseline metric? \n4. What did it become? \n5. What was the cost? \nReply with your weakest impact bullet and I will rewrite it live.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete decision-to-outcome example plus",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 11282,
-      "ids": [
-        "18416695648153177",
-        "18096098093133989",
-        "18106538519260750",
-        "18123361133515205",
-        "18635587813017403"
-      ],
-      "pivoted": true
-    },
-    {
       "run_at": "2026-10-15T00:31:02.858747+00:00",
       "pillar": "smart",
       "hook_sig": "i wrote \"built the payments integration\" in my",
@@ -1266,6 +1241,31 @@
         "17954571084255579"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T05:01:15.218490+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want behavioral rounds to remember you,",
+      "texts": [
+        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
+        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
+        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
+        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Matt Pocock explain-in-plain-words + concrete fix beats listicle hooks for SQL posts, citing P26 and P28 as proof of row-estimate interest.",
+      "breakout": "",
+      "followers": 278,
+      "views_total": 23216,
+      "ids": [
+        "18141849325623536",
+        "17929238214423838",
+        "18034597328847488",
+        "17886048345506368",
+        "18152109523528199"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1275,5 +1275,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 22846
+  "last_views": 23216
 }
