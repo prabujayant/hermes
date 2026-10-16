@@ -309,7 +309,8 @@
     "stop chasing faster queries when your benchmark lied",
     "the planner estimated 1 row. the table had",
     "if you want ai to write code you",
-    "if you want to become a top 1%"
+    "if you want to become a top 1%",
+    "should this request go through a queue? the"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

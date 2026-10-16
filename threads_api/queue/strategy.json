@@ -1,35 +1,8 @@
 {
-  "hypothesis": "Specific system-design interview methods outperform generic lists when they make one difficult decision easy to explain.",
+  "hypothesis": "System-design posts travel further when",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T14:01:17.313386+00:00",
-      "pillar": "smart",
-      "hook_sig": "most engineers reach for new indexes when a",
-      "texts": [
-        "Most engineers reach for new indexes when a query is slow. The counterintuitive move: run EXPLAIN ANALYZE first and compare estimated rows versus actual rows. A 100x gap means the planner is hallucinating. Fix the statistics, not the schema.",
-        "I watched a payments query scan 2 million rows to return 12. The plan estimated 50 rows. The culprit was a stale pg_statistic entry on a correlated column. ANALYZE fixed it in 400ms. The index would have taken 4 hours to build and changed nothing.",
-        "Run this on your slow query:\nEXPLAIN (ANALYZE, BUFFERS, FORMAT TEXT)\nSELECT ...\nLook at the rows= estimate versus actual rows= in each node. If actual exceeds estimate by more than 10x, the planner chose the wrong join order or scan type because it misunderstood the data distribution.",
-        "Common causes of estimation drift: correlated columns without extended statistics, skewed values without histograms, recent bulk loads without ANALYZE, and partition pruning failures. Each leaves a distinct fingerprint in the plan. Learn the fingerprints and you stop guessing.",
-        "What query symptom should I diagnose next? Reply with the plan shape that haunts you: nested loop explosion, hash join spill, sequential scan on a large table, or something else.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific, actionable production diagnosis with a focused comment prompt will outperform broad backend claims and attract relevant followers",
-      "breakout": "none",
-      "followers": 275,
-      "views_total": 12708,
-      "ids": [
-        "18177959194403096",
-        "17955833787260955",
-        "17938337811383358",
-        "18387649351234264",
-        "18012268250984839",
-        "17910995172552859"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-15T14:31:08.186868+00:00",
       "pillar": "smart",
@@ -1276,6 +1249,31 @@
         "18030313472906172"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T19:31:04.831701+00:00",
+      "pillar": "smart",
+      "hook_sig": "should this request go through a queue? the",
+      "texts": [
+        "Should this request go through a queue?\n\nThe one constraint that changes the answer: does the caller need the result within the same request lifetime?\n\nIf yes, skip the queue. If no, the queue is usually the right call.",
+        "A payment capture that returns a receipt to the user? No queue. The user is waiting.\n\nA payment capture that emails a receipt later? Queue it. The user already got their confirmation.\n\nThe difference is not technology. It is timing of the result, not the work itself.",
+        "This rule kills debates about \"async good\" vs \"sync bad.\"\n\nTeams waste weeks arguing patterns. The real question is one boolean: does the caller block on the outcome?\n\nIf the caller walks away happy without the result, queue it. If they need the result to proceed, do it inline.",
+        "I shipped a feature that queued every background job. Customers complained of slow responses.\n\nThe jobs were not slow. The queue added latency the caller did not need.\n\nI moved three endpoints inline. Response time dropped from 800ms to 120ms. No rework, no scaling changes.\n\nSame work. Different timing assumption.",
+        "What is the most recent request you queued that did not need the result back in the same response?\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "System-design posts travel further when",
+      "breakout": "none",
+      "followers": 280,
+      "views_total": 25485,
+      "ids": [
+        "18022991522938134",
+        "17878597011564832",
+        "18199133086388563",
+        "18151754971530753",
+        "18477881932117881"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1285,5 +1283,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 280,
-  "last_views": 25353
+  "last_views": 25485
 }
