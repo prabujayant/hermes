@@ -274,7 +274,8 @@
     "before you add another index, run this explain",
     "diagnostic misconception: accurate row estimates do not mean",
     "diagnostic blind spot: a large gap between estimated",
-    "your query returns 12 rows. the planner estimated"
+    "your query returns 12 rows. the planner estimated",
+    "if you want to pass system design interviews,"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

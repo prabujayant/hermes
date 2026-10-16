@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A compact, realistic row-estimate mismatch with a cautious next step will earn more useful comments and follows than broad query advice.",
+  "hypothesis": "A concrete row-estimate mismatch plus a cautious diagnostic step will prompt more useful SQL comments and follows than broad query advice.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T17:01:16.242164+00:00",
-      "pillar": "smart",
-      "hook_sig": "i got passed over for senior because my",
-      "texts": [
-        "I got passed over for senior because my promo packet was empty. My manager wrote \"strong contributor\" but had zero specifics when the committee asked for evidence. I had shipped three major systems that year. None made the packet.",
-        "The uncomfortable truth: your manager tracks deliverables, not impact. They remember the feature you shipped Tuesday. They forget the 40% latency drop you caused by refactoring the query layer six months ago. The committee only sees what you document.",
-        "I built a weekly log that takes ten minutes Friday afternoon. Three columns: what I changed, the measurable result, who it helped. One row per win. No fluff. When promo season hits, I filter by quarter and paste the strongest rows into the packet. Done.",
-        "Example from my last cycle: \"Refactored order-service query path, p99 latency 1.2s to 340ms, unblocked checkout team's Black Friday launch, saved estimated $180k in lost carts.\" That single row answered three committee questions before they asked.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Career advice paired with a copyable promotion-evidence artifact will outperform generic senior-engineer advice",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 10328,
-      "ids": [
-        "18099936146316246",
-        "17950621632054421",
-        "18022342331937533",
-        "17968093377190488",
-        "18109794497081415"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T17:31:04.226017+00:00",
       "pillar": "smart",
@@ -1266,6 +1241,31 @@
         "18034644410668393"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T01:31:03.870462+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to pass system design interviews,",
+      "texts": [
+        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
+        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
+        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
+        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A concrete row-estimate mismatch plus a cautious diagnostic step will prompt more useful SQL comments and follows than broad query advice.",
+      "breakout": "none",
+      "followers": 278,
+      "views_total": 21137,
+      "ids": [
+        "18112748717333584",
+        "18130361125889351",
+        "17952254085281993",
+        "18010893983985140",
+        "17997354816011866"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1275,5 +1275,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 20863
+  "last_views": 21137
 }
