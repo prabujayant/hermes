@@ -1,33 +1,8 @@
 {
-  "hypothesis": "System-design posts travel further when",
+  "hypothesis": "Contrarian lesson format on a painful, relatable backend mistake converts better than abstract advice, because it gives readers a concrete fix they can apply immediately.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T14:31:08.186868+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "texts": [
-        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
-        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
-        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
-        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A specific, actionable production diagnosis with a focused comment prompt will outperform broad backend claims and attract relevant followers",
-      "breakout": "",
-      "followers": 275,
-      "views_total": 13129,
-      "ids": [
-        "17992081263114645",
-        "17993685060023114",
-        "18011503418993683",
-        "17929948443415205",
-        "17977075905179341"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-15T15:01:19.286756+00:00",
       "pillar": "smart",
@@ -1274,6 +1249,31 @@
         "18477881932117881"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T20:01:14.180060+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- the dumbest performance bug i've seen in",
+      "texts": [
+        "---\nThe dumbest performance bug I've seen in production wasn't a missing index. It was a UUIDv4 primary key on a high-write table being used as the clustering key, which turned every insert into random I/O across 12 shards of Postgres.",
+        "The fix was swapping the PK to a sequential bigint and adding a separate UUID column for external references. That single change dropped the p99 write latency from 840ms to 12ms overnight, without touching the application layer or any queries.",
+        "UUIDs as default PKs are the duct tape of distributed systems, but they fragment the buffer pool, bloat secondary indexes by 4x, and force the planner to scan 50% more pages on every range query because the data on disk no longer matches the logical order of access.",
+        "The real lesson isn't \"never use UUIDs.\" It's \"don't let your default PK become your clustering key on a write-heavy table.\" Use a sequential internal ID for ordering and a UUID column for global uniqueness, and you get both safety and speed without rewriting your architecture later.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Contrarian lesson format on a painful, relatable backend mistake converts better than abstract advice, because it gives readers a concrete fix they can apply immediately.",
+      "breakout": "",
+      "followers": 280,
+      "views_total": 25597,
+      "ids": [
+        "17933389851406827",
+        "18108291629617092",
+        "18101572307635975",
+        "18077071865448795",
+        "17972629245149708"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1283,5 +1283,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 280,
-  "last_views": 25485
+  "last_views": 25597
 }
