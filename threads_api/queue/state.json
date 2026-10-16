@@ -280,7 +280,8 @@
     "diagnostic blind spot: when estimated and actual rows",
     "the real query bottleneck isn't missing indexes. it's",
     "copyable diagnostic: run explain analyze and compare estimated",
-    "i used to think query performance was about"
+    "i used to think query performance was about",
+    "--- your query returns 12 rows. the planner"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

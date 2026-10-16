@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Concrete row-estimate + buffer diagnostic beats general SQL advice and attracts SQL-focused follows.",
+  "hypothesis": "Matt Pocock explain-in-plain-words + concrete fix beats listicle hooks for SQL posts, citing P26 and P28 as proof of row-estimate interest.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T20:01:14.235525+00:00",
-      "pillar": "smart",
-      "hook_sig": "your promo packet is not a diary. it",
-      "texts": [
-        "Your promo packet is not a diary. It is a risk ledger. I learned this when a single architectural choice prevented $2M in duplicate charges. Here is the before/after proof most engineers never include.",
-        "Six months before promo season I owned the payments write path. Every retry on a failed charge risked double-billing the customer. The team treated it as an accepted edge case. We had alerts. We had manual refunds. We did not have a fix.",
-        "The decision: require idempotency keys on every mutating payment call, enforce them at the gateway layer, and reject any request missing or reusing a key. No config flags. No fallback. The PR was 200 lines. The review took three days because I forced the team to prove the failure modes could not happen.",
-        "Eighteen months later: zero duplicate charges across 14M transactions. P99 latency dropped 40 percent because retries became safe and fast. The on-call pager for payment duplicates went silent. My promo packet had one row for this: risk eliminated, dollars saved, pager quiet.",
-        "What is the one engineering decision you made that turned a recurring risk into a non-event? Reply with the decision and the metric that proved it. Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A compact decision-to-outcome example will earn more saves and specific replies than general promotion advice.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 11093,
-      "ids": [
-        "18098029745423519",
-        "18020550734927690",
-        "17960724078218944",
-        "17915562525496275",
-        "18346141945271308"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-15T00:01:15.343702+00:00",
       "pillar": "smart",
@@ -1266,6 +1241,31 @@
         "18411189667089225"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T04:30:59.071132+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- your query returns 12 rows. the planner",
+      "texts": [
+        "---\nYour query returns 12 rows. The planner estimated 1.\nEXPLAIN ANALYZE shows:\n- Estimated rows: 1\n- Actual rows: 12,487\n- Loops: 1\nThe nested loop join looked fine on paper. It was a death by a thousand cuts.",
+        "The gap between estimated and actual rows is the single most ignored signal in SQL performance.\nA 10x ratio gets a shrug.\nA 1000x ratio gets a CREATE INDEX.\nBoth are wrong.\nThe ratio tells you the statistics are lying, not that the index is missing.",
+        "When estimates are off by orders of magnitude, the planner is working from outdated or sampled statistics.\nRun ANALYZE on the table, or better, increase default_statistics_target for the join keys.\nIn one case, bumping it from 100 to 500 cut a 12-second query to 0.4 seconds.\nNo new indexes. No schema changes.",
+        "Here is the diagnostic checklist I run every time estimates diverge:\n1. EXPLAIN ANALYZE, compare estimated vs actual rows.\n2. If the ratio exceeds 10x, do NOT add an index yet.\n3. Run ANALYZE table_name.\n4. If still off, increase default_statistics_target for the relevant columns.\n5. Re-run EXPLAIN ANALYZE.\nIndexes are the symptom fix. Statistics are the cause fix.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Matt Pocock explain-in-plain-words + concrete fix beats listicle hooks for SQL posts, citing P26 and P28 as proof of row-estimate interest.",
+      "breakout": "",
+      "followers": 278,
+      "views_total": 22846,
+      "ids": [
+        "18147267562605228",
+        "17897937486607557",
+        "18076018598464285",
+        "18016609733748028",
+        "17954571084255579"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1275,5 +1275,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 22596
+  "last_views": 22846
 }
