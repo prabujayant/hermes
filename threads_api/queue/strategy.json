@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Specific EXPLAIN signals paired with a clear next action earn more useful comments and follows than broad database advice. End with a focused question asking which signal readers want diagnosed next.",
+  "hypothesis": "A concrete estimate-versus-actual example with a cautious next step will earn more useful comments and follows than broad query advice; end by asking which EXPLAIN signal readers want diagnosed next.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T16:01:24.887793+00:00",
-      "pillar": "smart",
-      "hook_sig": "your promotion case is not a diary of",
-      "texts": [
-        "Your promotion case is not a diary of effort. It is evidence of how your work changed outcomes. Most engineers fill packets with shipped tickets, lines of code, and hours logged. Promo committees read those packets and see activity. They do not see leverage.",
-        "I reviewed a packet last cycle that listed: \"Refactored payment service, 40 files changed, 2000 lines, zero bugs.\" Impressive activity. The committee asked: so what? Revenue impact? Latency drop? Incident reduction? The engineer had no answers. Packet denied.",
-        "Same engineer rewrote it as a before/after record. Before: payment p99 latency 1.2s, 3 incidents/month, $12k/month infra. After: p99 180ms, zero incidents in 90 days, $4k/month infra. One page. Two columns. Same work. Packet approved at staff level.",
-        "The artifact is a single table: metric, before, after, your role, verification method. Five rows max. Revenue, latency, reliability, cost, team velocity. If you cannot fill a row, the work was not promo-worthy. Stop writing diaries. Start building evidence. What metric would your current project move?",
-        "Follow @owlsky17 so you don't miss the next one.\nHYPOTHES"
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Specific career advice tied to a usable work artifact will earn",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 10088,
-      "ids": [
-        "17916863151264831",
-        "18120301280056063",
-        "17916742080259800",
-        "18128294890877662",
-        "18044956940827746"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T16:31:02.203544+00:00",
       "pillar": "smart",
@@ -1266,6 +1241,31 @@
         "17902627551669005"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T00:31:00.034025+00:00",
+      "pillar": "smart",
+      "hook_sig": "diagnostic blind spot: a large gap between estimated",
+      "texts": [
+        "diagnostic blind spot: a large gap between estimated and actual rows is a clue, not a verdict. Most engineers see 1000x ratio and immediately reach for CREATE INDEX. The planner is not lying to you. It is working with stale data. The fix starts with pg_stat_clear_snapshot and a fresh ANALYZE, not a new index.",
+        "your EXPLAIN ANALYZE shows Seq Scan with rows=1 actual=50000. Classic estimate miss. Before you touch indexes, run this:\n\nSELECT schemaname, tablename, last_analyze, last_autoanalyze, n_dead_tup\nFROM pg_stat_user_tables\nWHERE schemaname = 'public';\n\nIf last_analyze is hours or days old while n_dead_tup keeps climbing, autovacuum is not keeping up. That is your real bottleneck.",
+        "autovacuum defaults are conservative. For high-churn tables, tune per-table:\n\nALTER TABLE orders SET (\n  autovacuum_vacuum_scale_factor = 0.01,\n  autovacuum_analyze_scale_factor = 0.005,\n  autovacuum_vacuum_cost_delay = 2,\n  autovacuum_vacuum_cost_limit = 2000\n);\n\nLower scale factors trigger analyze sooner. Lower cost_delay with higher cost_limit lets it work faster without starving queries. Monitor pg_stat_progress_vacuum to verify it runs.",
+        "after ANALYZE, re-run EXPLAIN ANALYZE. Same plan? Estimate now close to actual? Good. The planner can now cost alternatives correctly. If it still picks a bad plan, then and only then consider indexes, statistics targets, or extended statistics. The order matters: fresh stats first, schema changes second.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete estimate-versus-actual example with a cautious next step will earn more useful comments and follows than broad query advice; end by asking which EXPLAIN signal readers want diagnosed next.",
+      "breakout": "none",
+      "followers": 278,
+      "views_total": 20599,
+      "ids": [
+        "18002426777806535",
+        "18356006326170790",
+        "18106174025255634",
+        "18641255521024847",
+        "18111687305601980"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1275,5 +1275,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 20362
+  "last_views": 20599
 }
