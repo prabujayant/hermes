@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A verifiable SQL before-and-after plus an invitation to share a query plan will earn more specific replies than abstract diagnostics.",
+  "hypothesis": "A reproducible SQL rewrite with visible plan evidence will draw more useful replies and shares than abstract query diagnostics.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T06:30:59.185910+00:00",
-      "pillar": "smart",
-      "hook_sig": "i chose cassandra for the write path because",
-      "texts": [
-        "I chose Cassandra for the write path because the team said \"we need linearizable reads.\" Six months later the on-call rotation was burning out debugging tombstone compaction storms at 3am. The requirement was never linearizable reads. It was \"patient records must never lose an update.\" Different constraint, totally different database.",
-        "The constraint-first framework has three axes. Consistency model: what happens when two writes race. Latency budget: p99 ceiling the product cannot exceed. Operational complexity: who runs this at 3am and how many people does it take. Pick one as non-negotiable. The other two bend around it.",
-        "If consistency is non-negotiable you get Postgres, Spanner, FoundationDB. You pay in write latency and operational depth. If latency is non-negotiable you get Redis, Scylla, Aerospike. You pay in consistency guarantees and data modeling rigidity. If operations is non-negotiable you get managed Postgres, DynamoDB, Cloud SQL. You pay in cost and vendor lock-in.",
-        "The trap is pretending you can maximize all three. A fintech ledger chose Spanner because \"we need SQL and global consistency.\" Their p99 write latency hit 800ms. A gaming leaderboard chose Redis because \"we need sub-millisecond.\" They lost score updates during failover. Both teams knew the tradeoff. Neither named it upfront.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific system-design decision with visible constraints will invite more useful replies than an abstract architecture debate.",
-      "breakout": "none",
-      "followers": 270,
-      "views_total": 12798,
-      "ids": [
-        "17904276948596469",
-        "17985348477065852",
-        "18099941210451675",
-        "18091321694197586",
-        "18631374322023660"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-15T07:01:20.610554+00:00",
       "pillar": "smart",
@@ -1276,6 +1251,31 @@
         "17906376423591309"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T12:01:22.047694+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to design like a senior,",
+      "texts": [
+        "IF YOU WANT TO DESIGN LIKE A SENIOR, STOP DRAWING BOXES FIRST.\n\nMEMORIZE THESE 5 QUESTIONS:",
+        "How many users, really.\n\nTen thousand or ten million changes every answer. Demand the number before the diagram.",
+        "What breaks first at 10x.\n\nEvery design has a weakest link. Name it out loud or the interviewer will.",
+        "What you would delete.\n\nGreat designs remove parts. If every box is essential, you haven't thought hard enough.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A reproducible SQL rewrite with visible plan evidence will draw more useful replies and shares than abstract query diagnostics.",
+      "breakout": "none",
+      "followers": 278,
+      "views_total": 20880,
+      "ids": [
+        "17993535150063331",
+        "18096568526118342",
+        "18114108887013205",
+        "18128859635481870",
+        "18139074976552100"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1285,5 +1285,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 20683
+  "last_views": 20880
 }
