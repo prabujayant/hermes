@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A copyable row-estimate diagnostic with a specific discussion prompt will earn SQL-focused follows better than general performance tips.",
+  "hypothesis": "A concrete row-estimate check plus a specific discussion prompt will outperform general SQL performance advice and attract SQL-focused follows",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T19:01:18.703916+00:00",
-      "pillar": "smart",
-      "hook_sig": "you ship a backend feature. the promo packet",
-      "texts": [
-        "You ship a backend feature. The promo packet asks for impact. You write \"built the payments integration.\" The committee sees a task shipped. They do not see the risk you prevented, the scale you enabled, or the decision that saved six months. That gap costs you the promo.",
-        "The fix is a five-field template you fill before you write a single bullet. Context: what the system looked like before. Constraint: the hard limit you could not ignore. Choice: the specific architectural decision you made and why the alternative failed. Result: the measurable change in latency, cost, or reliability. Signal: the metric a reviewer can verify without reading code.",
-        "Real example from a payments rewrite. Context: monolithic checkout, 2.3s p99, tight coupling to a legacy gateway. Constraint: zero-downtime migration, PCI scope freeze, two-engineer team. Choice: strangler fig with idempotency keys and a shadow traffic mirror, rejected event sourcing as overkill, rejected big bang as too risky. Result: p99 dropped to 380ms, rollback window under 60s, PCI scope reduced by 40%. Signal: dashboards showing error rate flat at 0.01% during cutover.",
-        "Copy the template, fill it for your last shipped feature, paste one filled row in the comments. I will reply with the one tweak that makes it review-proof.\n\nContext: ____\nConstraint: ____\nChoice: ____\nResult: ____\nSignal: ____",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete, reusable template that connects engineering decisions to measurable impact will earn more saves and specific replies than abstract career advice.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 10887,
-      "ids": [
-        "17949004329345644",
-        "17907892149664500",
-        "17994766662111588",
-        "18109992374269304",
-        "18233382643325360"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T19:31:02.234838+00:00",
       "pillar": "smart",
@@ -1266,6 +1241,31 @@
         "18226754644335812"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T03:31:04.871866+00:00",
+      "pillar": "smart",
+      "hook_sig": "copyable diagnostic: run explain analyze and compare estimated",
+      "texts": [
+        "copyable diagnostic: run EXPLAIN ANALYZE and compare estimated rows vs actual rows at every plan node. a gap above 10x means the planner is guessing wrong. fix statistics or rewrite the query before you even think about adding an index.",
+        "the 10x threshold is your trigger. if estimated rows shows 100 but actual rows returns 5000, the planner chose a nested loop when it needed a hash join. that single mismatch explains the slowdown more than any missing index ever will.",
+        "real example from a payments table: seq scan estimated 50 rows, actual 12000. the planner picked an index scan on a low-selectivity column. running ANALYZE on the table dropped the query from 800ms to 12ms. zero indexes added.",
+        "which plan node do you check first when the estimates look wrong? the top node, the join, or the scan?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete row-estimate check plus a specific discussion prompt will outperform general SQL performance advice and attract SQL-focused follows",
+      "breakout": "none",
+      "followers": 278,
+      "views_total": 22352,
+      "ids": [
+        "18019521821745554",
+        "18128538644492303",
+        "17909692074481184",
+        "18228729325333842",
+        "18372641167208096"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1275,5 +1275,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 22117
+  "last_views": 22352
 }
