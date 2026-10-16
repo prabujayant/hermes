@@ -4,33 +4,6 @@
   "streak": 0,
   "history": [
     {
-      "run_at": "2026-10-15T08:01:15.419784+00:00",
-      "pillar": "smart",
-      "hook_sig": "stop using uuids as primary keys. they destroy",
-      "texts": [
-        "Stop using UUIDs as primary keys. They destroy write performance, bloat indexes by 4x, and you almost certainly don't need them. Your database is paying a tax for a scale you will never hit.",
-        "A UUID v4 is 16 random bytes. InnoDB clusters data by primary key. Every insert lands on a random page. The buffer pool churns. The write-ahead log amplifies. I watched a 2 TB table go from 800 writes/sec to 3,200 writes/sec just by switching to BIGINT AUTO_INCREMENT. Same hardware. Same workload.",
-        "\"BUT what about merge conflicts across shards?\" Use a 64-bit composite: (shard_id << 48) | local_sequence. Monotonic inside each shard, globally unique, zero coordination. Fits in 8 bytes. Sequential on disk. No application rewrite required.",
-        "\"BUT UUIDs prevent ID enumeration attacks!\" Your API should not expose internal primary keys anyway. Return opaque tokens (UUIDv7 or nanoid) at the boundary. Keep the cluster key sequential. Security at the edge, performance at the core.",
-        "UUIDs make sense when you generate IDs offline, on mobile, or across truly independent services with no shared sequence. That is not your monolith. Benchmark your write path this week. If the primary key is random, you are lighting money on fire. Prove me wrong.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete storage-engine debate with measurable tradeoffs (BIGINT vs UUID, buffer pool churn, 4x index bloat) will trigger more technical replies than abstract architecture takes, per the \"concrete cache decision\" hypothesis and the 11K-view microservices debate precedent.",
-      "breakout": "",
-      "followers": 271,
-      "views_total": 6611,
-      "ids": [
-        "18343392172285452",
-        "18343157095287331",
-        "18014004845951471",
-        "18097648934643339",
-        "18375331648241574",
-        "18119034611280960"
-      ],
-      "pivoted": true
-    },
-    {
       "run_at": "2026-10-15T08:31:06.877006+00:00",
       "pillar": "smart",
       "hook_sig": "stop using uuids as primary keys in high-write",
@@ -1274,6 +1247,31 @@
         "18019580513948320"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T13:31:04.171861+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to become a senior engineer",
+      "texts": [
+        "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:",
+        "Own outcomes, not tickets.\n\nJuniors close tasks. Seniors move metrics. Ask what number your work changes.",
+        "Write the doc nobody wants to write.\n\nDesign docs, runbooks, postmortems. Visibility compounds faster than commits.",
+        "Delete code on purpose.\n\nEvery quarter, kill something: a flag, a service, dead code. Simplifiers get promoted.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A small SQL rewrite backed by comparable plan evidence will earn more useful replies and shares than abstract query diagnostics",
+      "breakout": "",
+      "followers": 279,
+      "views_total": 21815,
+      "ids": [
+        "18199944079376554",
+        "17948818281321963",
+        "18101407076058984",
+        "17992473678107555",
+        "18635810542022945"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1282,6 +1280,6 @@
     "mandate": "200000 views in 30 days by 2026-11-10",
     "since": "2026-10-10"
   },
-  "last_followers": 278,
-  "last_views": 21460
+  "last_followers": 279,
+  "last_views": 21815
 }
