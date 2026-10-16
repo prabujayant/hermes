@@ -295,7 +295,8 @@
     "if you want your side project to survive,",
     "if you write sql like this, your queries",
     "things ai coding assistants can't tell you (so",
-    "if you want to design like a senior,"
+    "if you want to design like a senior,",
+    "if you want to fix slow postgres queries,"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
