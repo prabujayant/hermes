@@ -292,7 +292,8 @@
     "the real bottleneck in query performance isn't missing",
     "things that quietly kill engineering careers:",
     "copyable diagnostic: when estimated and actual rows diverge",
-    "if you want your side project to survive,"
+    "if you want your side project to survive,",
+    "if you write sql like this, your queries"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
