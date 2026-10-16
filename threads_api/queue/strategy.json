@@ -4,31 +4,6 @@
   "streak": 0,
   "history": [
     {
-      "run_at": "2026-10-15T02:01:11.386280+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent three promo cycles writing bullets like",
-      "texts": [
-        "I spent three promo cycles writing bullets like \"shipped the payments integration\" and watching committees shrug. They do not care what you shipped. They care what changed because you shipped it.",
-        "The bullet that got rejected: \"Built the payments integration for checkout.\" Zero baseline. Zero user metric. Zero tradeoff call. It reads like a task list. Committees see a feature delivered. They do not see risk reduced or revenue protected.",
-        "The rewrite that passed: \"Redesigned the payments fallback path after the Stripe outage cost us $180k in lost orders. Cut retry latency from 12s to 2s by introducing idempotency keys and a local queue. Tradeoff: added 200 lines of state machine code we now own forever. Result: zero lost orders during the next two provider incidents.\"",
-        "The pattern: name the incident that forced the work, show the before metric, show the after metric, name the thing you accepted to get it. Committees verify evidence. They cannot verify \"built feature X.\"",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A transparent before/after rewrite with evidence and a named tradeoff will earn more saves and specific replies than generic promo advice.",
-      "breakout": "none",
-      "followers": 269,
-      "views_total": 11622,
-      "ids": [
-        "18123939823898980",
-        "17921758158445059",
-        "17975386320128666",
-        "18342418840249879",
-        "18635231539051364"
-      ],
-      "pivoted": true
-    },
-    {
       "run_at": "2026-10-15T02:31:02.244647+00:00",
       "pillar": "smart",
       "hook_sig": "things hiring managers can't tell from your resume",
@@ -1268,6 +1243,31 @@
         "18636490729019922"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T07:31:04.112833+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want ai to write code you",
+      "texts": [
+        "IF YOU WANT AI TO WRITE CODE YOU CAN SHIP, STOP PASTING BLINDLY.\n\nMEMORIZE THESE 5 RULES:",
+        "Give the model your constraints first.\n\nStack, versions, style rules, what done looks like. Vague prompts get vague code.",
+        "Review every diff like a junior wrote it.\n\nAI code looks confident and fails quietly. Read it line by line before it touches main.",
+        "Keep humans on architecture.\n\nLet AI fill functions, never design systems. You own the boundaries, it fills the boxes.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Specific SQL diagnosis plus a copyable fix will outperform broad planner advice and invite useful replies",
+      "breakout": "",
+      "followers": 278,
+      "views_total": 18321,
+      "ids": [
+        "18464769328190611",
+        "18645024418052431",
+        "18093175136663807",
+        "18121194934946065",
+        "17959849695224148"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1277,5 +1277,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 18041
+  "last_views": 18321
 }
