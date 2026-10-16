@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific, reusable system-design exercise with a clear comment prompt will outperform abstract advice.",
+  "hypothesis": "The same \"estimated vs actual rows\" diagnostic story beats 2.0 views/h because it is concrete, searchable, and invites replies from engineers who have hit this exact trap.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T03:31:03.441479+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent two promo cycles writing \"optimized database",
-      "texts": [
-        "I spent two promo cycles writing \"optimized database queries\" and watching committees shrug. They couldn't verify it. No baseline, no query plan, no production metric tied to user pain. Just a verb and a noun.",
-        "The bullet that finally landed: \"Cut p99 latency on the checkout write path from 1.2s to 180ms by rewriting the payment idempotency key lookup to use a covering index, verified against 30 days of prod traces and correlated to a 0.4% conversion lift.\"",
-        "Here is the proof trail the committee could check without asking me a single follow-up: the PR with the index definition, the Datadog dashboard link frozen to the deploy timestamp, the BigQuery query that joins latency percentiles to the conversion funnel, the incident review where the old path caused a retry storm.",
-        "The pattern: every claim in that bullet maps to an artifact a stranger can open. Index DDL in git. Dashboard URL in the PR description. SQL query in a shared folder. Incident doc linked from the postmortem. The bullet is just the index into the evidence.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete bullet paired with its verifiable evidence source will earn more saves and substantive replies than a standalone checklist or claim rewrite.",
-      "breakout": "none",
-      "followers": 269,
-      "views_total": 12037,
-      "ids": [
-        "18130860649765787",
-        "17970736040960836",
-        "17916782742464300",
-        "18125155676486645",
-        "18107282584955904"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-15T04:01:14.616313+00:00",
       "pillar": "smart",
@@ -1270,6 +1245,31 @@
         "18093734204187139"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T09:01:20.383927+00:00",
+      "pillar": "smart",
+      "hook_sig": "the real bottleneck in query performance isn't missing",
+      "texts": [
+        "The real bottleneck in query performance isn't missing indexes. It's the planner lying to you about row counts.\n\nA single estimated-versus-actual mismatch of 100x sent me down a three-day rabbit hole adding useless indexes to a query that should have taken 50ms but was taking 5 seconds.\n\nRun EXPLAIN ANALYZE and look at every node. If estimated rows and actual rows diverge by more than 10x, the planner is guessing wrong. Fix the stats, not the indexes.",
+        "I used to think query performance was about adding more indexes. Then I spent 4 hours debugging a query that should have taken 50ms but was taking 5 seconds.\n\nThe plan looked clean. Index scans everywhere. But something felt off.\n\nTurns out the planner estimated 1 row when 12,487 actually matched. It picked a nested loop join that should have been a hash join.",
+        "Your query returns 12 rows. The planner estimated 1.\n\nEXPLAIN ANALYZE shows:\n- Estimated rows: 1\n- Actual rows: 12,487\n- Loops: 1\n\nThe nested loop join looked fine on paper. In practice it executed 12,487 times. That is where your 5 seconds went.\n\nA gap this large means your table statistics are stale or missing. ANALYZE the table and try again.",
+        "Most engineers see a seq scan, assume missing index, and stop.\n\nThat is a diagnostic blind spot. When estimated and actual rows diverge, check this before adding an index.\n\nRun EXPLAIN ANALYZE and compare estimated rows vs actual rows at every plan node. A gap above 10x means the planner is guessing wrong. Fix the root cause: stale statistics or missing/histogram data on correlated columns.\n\nThe index was never the problem.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "The same \"estimated vs actual rows\" diagnostic story beats 2.0 views/h because it is concrete, searchable, and invites replies from engineers who have hit this exact trap.",
+      "breakout": "",
+      "followers": 278,
+      "views_total": 19588,
+      "ids": [
+        "17949985218315842",
+        "17880710187629828",
+        "17903325996666848",
+        "17922391023441406",
+        "17913447237283963"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1279,5 +1279,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 19244
+  "last_views": 19588
 }
