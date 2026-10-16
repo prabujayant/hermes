@@ -1,31 +1,8 @@
 {
-  "hypothesis": "A specific remedy for a familiar SQL diagnostic will outperform repeating the symptom alone and draw useful engineer replies.",
+  "hypothesis": "An ordered, caveated fix for a familiar SQL diagnostic will earn more useful engineer replies than describing the symptom alone.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T04:31:03.632725+00:00",
-      "pillar": "smart",
-      "hook_sig": "your behavioral story fails because you name the",
-      "texts": [
-        "Your behavioral story fails because you name the result but not the receipt.\nInterviewers hear \"I reduced latency by 40 percent.\" They think: compared to what baseline, measured how, verified by whom.\nThe fix takes one extra clause. I will show you.",
-        "Last cycle I wrote \"cut p99 latency 40 percent.\" The committee asked for the dashboard link. I had none. Same packet next cycle: \"cut p99 latency 40 percent, verified in Datadog dashboard db-latency-prod, baseline from the week before launch.\" No follow-up questions.",
-        "Name the artifact that would let a stranger verify the claim. A dashboard URL. A ticket number. A design doc section. A git commit range. A postmortem link. The clause is \"verifiable in [source].\" It turns a boast into a checkable fact.",
-        "Works for every\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific outcome paired with a checkable source will earn more saves and substantive replies than general interview advice.",
-      "breakout": "none",
-      "followers": 269,
-      "views_total": 12231,
-      "ids": [
-        "18062644502549159",
-        "18410391667091403",
-        "18123668326952808",
-        "18630316951047941"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-15T05:01:15.023204+00:00",
       "pillar": "smart",
@@ -1270,6 +1247,35 @@
         "18118017593050626"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T10:01:16.574895+00:00",
+      "pillar": "smart",
+      "hook_sig": "copyable diagnostic: when estimated and actual rows diverge",
+      "texts": [
+        "Copyable diagnostic: when estimated and actual rows diverge by 100x, check these three causes in order: 1) missing or stale statistics, 2) correlated columns confusing the planner, 3) skewed data without histograms.",
+        "Most engineers see a seq scan, assume a missing index, and stop. The real culprit is usually the planner being lied to by bad stats. Run this first: EXPLAIN ANALYZE your query and find any node where actual rows diverge from estimated rows by more than 10x.",
+        "Cause 1 is stale statistics. PostgreSQL auto-analyze stops at 200 million rows by default. Fix: run ANALYZE VERBOSE table_name, then set ALTER TABLE table_name SET (autovacuum_analyze_scale_factor = 0.01) for tables over 10 million rows.",
+        "Cause 2 is correlated columns. If your WHERE clause filters on (status, region) but stats only track each column independently, the planner multiplies independent probabilities and gets the estimate wildly wrong. Fix: CREATE STATISTICS s1 (dependencies) ON status, region FROM orders; ANALYZE orders;",
+        "Cause 3 is skewed data without histograms. For columns with heavy skew (e.g. 99% status=active), ANALYZE still won't help if the planner cannot see the distribution. Fix: use ALTER TABLE orders ALTER COLUMN status SET STATISTICS 1000; ANALYZE; or switch to BRIN indexes for large append-only tables where range queries dominate.",
+        "The trap? Blindly adding indexes. A missing index never causes a row estimate mismatch. If your estimates are off, fix the stats first, indexes second. Stale stats waste more cycles than any missing index.",
+        "Follow @owlsky17 so you don't miss the next one.\n---"
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "An ordered, caveated fix for a familiar SQL diagnostic will earn more useful engineer replies than describing the symptom alone.",
+      "breakout": "none",
+      "followers": 278,
+      "views_total": 19915,
+      "ids": [
+        "18100689029574839",
+        "18467275504185879",
+        "18144571042603530",
+        "18091536380204504",
+        "17924207916435373",
+        "18145815376585549",
+        "18196193497399882"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1279,5 +1285,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 19805
+  "last_views": 19915
 }
