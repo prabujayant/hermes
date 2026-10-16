@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A reproducible row-estimate check plus a focused discussion prompt will outperform broad query advice and attract SQL-focused follows",
+  "hypothesis": "A copyable row-estimate diagnostic with a specific discussion prompt will earn SQL-focused follows better than general performance tips.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T18:31:04.240485+00:00",
-      "pillar": "smart",
-      "hook_sig": "i wrote my promo packet the way everyone",
-      "texts": [
-        "I wrote my promo packet the way everyone does. List of features shipped. Lines of code. Tickets closed. The committee read it and asked \"so what?\" That question cost me six months.",
-        "The problem is not the work. The problem is the language. \"I shipped the payment refactor\" tells them you did a task. \"I changed the payment retry logic, which cut failed transactions by 23 percent and recovered $180k in monthly revenue\" tells them you moved the business. Same project. Different evidence.",
-        "Here is the template I now use for every project. One project, three rows.\n\nProject: Payment retry refactor\nBefore: 12 percent failure rate, manual retries, $180k monthly loss\nAfter: 0.9 percent failure rate, automated exponential backoff, zero manual intervention\nEvidence: Changed retry policy and idempotency keys, which improved success rate by 11.1 points and recovered $180k per month",
-        "Copy the table. Fill it for your last project. Strip every verb that describes effort. Keep only the change, the metric, and the business outcome. If you cannot fill the \"which improved Z\" column, the project is not promo-ready yet. That clarity is the signal.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A focused, copyable evidence-to-impact template will earn more saves, specific replies, and follows than generic promotion advice.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 10817,
-      "ids": [
-        "18357763585222563",
-        "18093358970446507",
-        "17983171557091388",
-        "18627523114006203",
-        "18071029046771768"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T19:01:18.703916+00:00",
       "pillar": "smart",
@@ -1266,6 +1241,31 @@
         "18096663491428398"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T03:01:16.786320+00:00",
+      "pillar": "smart",
+      "hook_sig": "the real query bottleneck isn't missing indexes. it's",
+      "texts": [
+        "The real query bottleneck isn't missing indexes. It's the planner lying to you about row counts. A single estimated-versus-actual mismatch of 100x sent me down a three-day index hunt before I checked statistics.",
+        "Most engineers run EXPLAIN ANALYZE and stare at the plan shape. They miss the number that actually matters: estimated rows versus actual rows. When the ratio exceeds 10x, the planner picks the wrong join order, the wrong scan type, the wrong everything.",
+        "Run this exact check on your slowest query:\n```\nEXPLAIN (ANALYZE, BUFFERS, FORMAT TEXT)\nSELECT * FROM your_table WHERE your_column = 'value';\n```\nLook at `rows=` (estimate) vs `actual rows=` in every node. A ratio above 10x means statistics are stale or the planner lacks correlation data. Fix with `ANALYZE table` or `CREATE STATISTICS` on correlated columns.",
+        "Last week a payments query showed 50 estimated rows, 12,000 actual. The planner chose a nested loop over a hash join. `ANALYZE` on the filtered column dropped p99 from 2.3s to 40ms. What's the biggest estimate-to-actual mismatch you've caught? Reply with the ratio and the fix.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A copyable row-estimate diagnostic with a specific discussion prompt will earn SQL-focused follows better than general performance tips.",
+      "breakout": "none",
+      "followers": 278,
+      "views_total": 22117,
+      "ids": [
+        "18188674345404893",
+        "17911867962502297",
+        "18140008687544613",
+        "18136777528653392",
+        "18226754644335812"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1275,5 +1275,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 21852
+  "last_views": 22117
 }
