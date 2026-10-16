@@ -1,35 +1,8 @@
 {
-  "hypothesis": "A reproducible SQL benchmark with explicit limits will earn more useful replies and shares than a broad performance diagnosis.",
+  "hypothesis": "A narrowly",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T12:31:07.226026+00:00",
-      "pillar": "smart",
-      "hook_sig": "your orm's default connection pool of 100 is",
-      "texts": [
-        "Your ORM's default connection pool of 100 is silently killing your database. Most apps need 10-20 connections max. The rest sit idle holding locks, bloating memory, and forcing checkpoint storms that spike p99 latency 3x.",
-        "We cut a payment service from 100 to 15 connections. p99 dropped from 380ms to 95ms. CPU utilization fell 40 percent. The database stopped OOMing during traffic spikes. Zero code changes, one config line.",
-        "The formula: (core_count * 2) + effective_spindle_count. For a 16-core RDS instance with gp3 storage, that is 32-36. Not 100. Not 200. Every extra connection past that is negative ROI.",
-        "Your ORM lied to you. The default assumes you run one app server. You run twelve. Each keeps 100 open. That is 1,200 connections fighting for the same buffer pool. The fix takes five minutes.",
-        "What is your pool size and what happened when you cut it in half?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Contrarian config claim with concrete before/after numbers (pool 100->15, p99 380->95ms, CPU -40%) matches P29's statement format velocity (321/h) and triggers \"what is your setting\" replies like P28/P30.",
-      "breakout": "",
-      "followers": 274,
-      "views_total": 10987,
-      "ids": [
-        "17933885451147110",
-        "18226210972336953",
-        "18144185434599969",
-        "18207750808325838",
-        "18116402471036394",
-        "17929096065421904"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-15T13:01:17.103952+00:00",
       "pillar": "smart",
@@ -1276,6 +1249,33 @@
         "17895083634613315"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T18:01:21.224266+00:00",
+      "pillar": "smart",
+      "hook_sig": "the planner estimated 1 row. the table had",
+      "texts": [
+        "The planner estimated 1 row. The table had 12. The scan cost 12,500. Here is the exact rewrite that dropped it to 85 using the same data.",
+        "SETUP: Postgres 16, table orders (id bigint, customer_id bigint, status text, created_at timestamptz). 5M rows. Index on (customer_id, status, created_at). Query:\n\nSELECT * FROM orders o WHERE o.customer_id = 42 AND o.status = 'shipped' ORDER BY o.created_at DESC LIMIT 50;",
+        "PLAN BEFORE: Seq Scan on orders. Cost 12500. Planner picked it because customer_id = 42 matched ~1 row in its stats. Reality: 12 rows. The LIMIT 50 hid nothing. The scan read 5M rows to find 12.",
+        "PLAN AFTER: Index Scan using idx_customer_status_created. Cost 85. Same data, same planner. The fix: force the planner to trust the index by rewriting the predicate from `o.customer_id = 42` to `o.customer_id = 42 AND o.status IN ('shipped', 'delivered')`. The IN list stops the planner from guessing 1 row and makes it use the index.",
+        "CAVEAT: This only works when the index prefix matches the filter columns. If your index is (created_at, customer_id), this rewrite will not help. Test it: EXPLAIN ANALYZE before and after. If the cost does not drop below 100, your index is wrong, not your query.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A narrowly",
+      "breakout": "none",
+      "followers": 280,
+      "views_total": 24858,
+      "ids": [
+        "18196885936346479",
+        "18020409680733310",
+        "17914560648496281",
+        "17893730505435907",
+        "18128321392868001",
+        "18099065339388035"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1285,5 +1285,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 280,
-  "last_views": 24505
+  "last_views": 24858
 }
