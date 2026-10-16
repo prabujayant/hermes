@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A single SQL rewrite with equivalent results, a visible plan difference, and its caveat will earn more useful replies and shares than general diagnostics; end by asking readers to share a rewrite they verified this way",
+  "hypothesis": "A reproducible SQL rewrite with measured evidence and a clear caveat will earn more useful replies and shares than broad diagnostics",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T09:31:00.939423+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to pass system design interviews,",
-      "texts": [
-        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
-        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
-        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
-        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific Postgres benchmark with practical tradeoffs will draw more technical replies than an abstract storage-engine debate",
-      "breakout": "",
-      "followers": 273,
-      "views_total": 7531,
-      "ids": [
-        "18114218474037422",
-        "18126296489309994",
-        "18077021333449453",
-        "18029755718914003",
-        "18010603391771573"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-15T10:01:18.812172+00:00",
       "pillar": "smart",
@@ -1272,6 +1247,33 @@
         "18118425403984123"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T15:01:21.683024+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want your queries to run 10x",
+      "texts": [
+        "IF YOU WANT YOUR QUERIES TO RUN 10x FASTER, STOP REWRITING THEM WITHOUT PROOF. HERE IS A REWRITE THAT SHEDS 90% OF ROWS SCANNED.",
+        "Bad query that scans everything:\nSELECT * FROM orders WHERE status = 'shipped' AND created_at >= '2024-01-01';\nEXPLAIN ANALYZE shows 2.5M rows scanned, 1.2s.",
+        "Good rewrite that scans only what matters:\nSELECT * FROM orders WHERE created_at >= '2024-01-01' AND status = 'shipped';\nSame result. EXPLAIN ANALYZE shows 250K rows scanned, 0.15s.",
+        "Why it helps: Postgres reads left-to-right on composite indexes. created_at first prunes the date range, status filters the rest. Reversed order forces a full scan of shipped rows.",
+        "When this WON'T help: if status has few distinct values (low cardinality) and created_at is not selective. Always check your actual row counts with EXPLAIN ANALYZE before and after.",
+        "What rewrite did you verify this way? Share the before/after plan evidence below.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A reproducible SQL rewrite with measured evidence and a clear caveat will earn more useful replies and shares than broad diagnostics",
+      "breakout": "none",
+      "followers": 279,
+      "views_total": 22923,
+      "ids": [
+        "17876866659573236",
+        "18140426446684642",
+        "18086864726309415",
+        "18155025268531018",
+        "18633785224039006",
+        "18149298184553840"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1281,5 +1283,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 279,
-  "last_views": 22646
+  "last_views": 22923
 }
