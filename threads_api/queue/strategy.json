@@ -4,31 +4,6 @@
   "streak": 0,
   "history": [
     {
-      "run_at": "2026-10-15T07:31:01.692605+00:00",
-      "pillar": "smart",
-      "hook_sig": "we shipped a checkout service with a hard",
-      "texts": [
-        "We shipped a checkout service with a hard p99 latency budget of 120ms. The database could do p99 80ms on a good day, but under load it spiked to 400ms. We put Redis in front with a 5-second TTL. Cache hit: 2ms. Cache miss: 400ms plus the Redis round trip.",
-        "The failure mode we didn't model: Redis network partition. When the cache became unavailable, every request fell through to the database simultaneously. The thundering herd took the primary from 80ms p99 to 2.3 seconds. We lost the latency budget and the error budget in the same minute.",
-        "We added a local in-memory fallback with a 500ms TTL and a circuit breaker that fails open to stale local data after 3 consecutive Redis timeouts. Now a Redis outage means 500ms of potentially stale reads instead of a full cascade. The tradeoff is explicit: 500ms staleness window, bounded by the local TTL.",
-        "The alternative was read-through with async refresh and a background job that keeps the cache warm. Simpler mental model, but the refresh job adds operational surface area and its own failure modes. We chose the local fallback because it fails deterministically and the staleness bound is visible in code, not in a cron schedule.",
-        "Would you accept briefly stale reads to keep p99 latency predictable?\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete cache decision with measurable tradeoffs will attract more useful replies than an open-ended architecture debate.",
-      "breakout": "none",
-      "followers": 271,
-      "views_total": 6454,
-      "ids": [
-        "18376054657241468",
-        "18152521171527037",
-        "18112450859140726",
-        "18009093596992792",
-        "18121678829289720"
-      ],
-      "pivoted": true
-    },
-    {
       "run_at": "2026-10-15T08:01:15.419784+00:00",
       "pillar": "smart",
       "hook_sig": "stop using uuids as primary keys. they destroy",
@@ -1274,6 +1249,31 @@
         "18132392434704163"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T13:01:26.398626+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to pass system design interviews,",
+      "texts": [
+        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
+        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
+        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
+        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "cohere/north-mini-code:free",
+      "hypothesis": "A small SQL rewrite backed by comparable plan evidence will earn more useful replies and shares than abstract query diagnostics",
+      "breakout": "",
+      "followers": 278,
+      "views_total": 21460,
+      "ids": [
+        "18640002385040807",
+        "17992323120105810",
+        "17885245962623129",
+        "18609693823064745",
+        "18019580513948320"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1283,5 +1283,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 21194
+  "last_views": 21460
 }
