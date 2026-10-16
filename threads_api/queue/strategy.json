@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Specific SQL diagnosis plus a copyable fix will outperform broad planner advice and invite useful replies",
+  "hypothesis": "Replicating the caps-listicle + system-design combo from P24 with fresh moves and a practice angle will beat abstract planner advice.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T02:31:02.244647+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "texts": [
-        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
-        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
-        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
-        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A transparent rewrite plus a concrete evidence checklist will earn more saves and specific replies than generic promo advice",
-      "breakout": "none",
-      "followers": 269,
-      "views_total": 11703,
-      "ids": [
-        "17936722194389312",
-        "17874530646594751",
-        "18113021459334788",
-        "17863362021695994",
-        "18083661779354374"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-15T03:01:14.654589+00:00",
       "pillar": "smart",
@@ -1268,6 +1243,31 @@
         "17959849695224148"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T08:01:16.804143+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- if you want to pass system design",
+      "texts": [
+        "---\nIF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES. MEMORIZE THESE 5 MOVES:\nP24 hit 350 views because candidates who list tools fail the \"walk me through your tradeoffs\" moment.",
+        "Move 1: Always start with capacity. \"We need 10k RPS with 99.9% uptime\" before naming Postgres or Redis.\nMove 2: Name your bottleneck first. \"The bottleneck is the write path\" then pick a queue + worker pool.\nMove 3: Size everything in orders of magnitude. Cache should hold 80% of hot keys, not \"a lot.\"",
+        "Move 4: Draw the data flow on the whiteboard before touching your pen. Where does the fan-out happen?\nMove 5: End with cost. \"This gives you 50ms latency at 10k RPS for 500 dollars a month.\"",
+        "I watched a senior engineer ace a design for Twitter's fan-out by writing \"fan-out cost: 1000x writes\" on slide one.\nNo framework mentioned. No tech stack read off. Just moves.",
+        "Your cheat sheet: 5 moves, 5 chances to show you think bigger than syntax.\nPractice them out loud. Record yourself. Cut the tool names.\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Replicating the caps-listicle + system-design combo from P24 with fresh moves and a practice angle will beat abstract planner advice.",
+      "breakout": "",
+      "followers": 278,
+      "views_total": 18857,
+      "ids": [
+        "18431182495145053",
+        "18158511928504618",
+        "18127672045798675",
+        "18117694495959052",
+        "17991171066104135"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1277,5 +1277,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 18321
+  "last_views": 18857
 }
