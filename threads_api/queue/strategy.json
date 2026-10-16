@@ -4,31 +4,6 @@
   "streak": 0,
   "history": [
     {
-      "run_at": "2026-10-15T00:31:02.858747+00:00",
-      "pillar": "smart",
-      "hook_sig": "i wrote \"built the payments integration\" in my",
-      "texts": [
-        "I wrote \"built the payments integration\" in my promo packet. The committee saw a task shipped. They did not see the architectural choice that prevented $2M in duplicate charges when the upstream provider double-billed for 47 minutes.",
-        "The original bullet: \"Built the payments integration for the new checkout flow. Integrated Stripe and Adyen. Reduced payment failures by 15%.\"\n\nTrue. Also useless. It reads like a Jira ticket. No baseline. No tradeoff call. No evidence the committee could verify without reading my code.",
-        "The rewrite: \"Chose idempotency keys at the API gateway layer instead of relying on provider webhooks. Tradeoff: added 12ms latency per request. Outcome: when Adyen double-billed 3,200 transactions during their 47-minute outage, our gateway rejected every duplicate. Verified savings: $2.1M in prevented chargebacks and reconciliation cost.\"",
-        "The counterfactual: if I had used webhook deduplication like the team suggested, the duplicates would have hit our database. We would have caught them in the nightly batch. By then, 3,200 customers would have been charged twice. Support would have drowned. The committee verified the gateway logs. They did not need to read my code.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete decision-to-outcome example with evidence and tradeoff will outperform generic promo-writing advice and invite specific replies.",
-      "breakout": "none",
-      "followers": 269,
-      "views_total": 11305,
-      "ids": [
-        "18119382884095903",
-        "18034129211850629",
-        "18113441216129040",
-        "18105354908569574",
-        "17910376149307402"
-      ],
-      "pivoted": true
-    },
-    {
       "run_at": "2026-10-15T01:01:15.281448+00:00",
       "pillar": "smart",
       "hook_sig": "if you want behavioral rounds to remember you,",
@@ -1266,6 +1241,31 @@
         "18152109523528199"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T06:01:23.683565+00:00",
+      "pillar": "smart",
+      "hook_sig": "things hiring managers can't tell from your resume",
+      "texts": [
+        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
+        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
+        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
+        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Matt Pocock explain-in-plain-words + concrete fix beats listicle hooks for SQL posts, citing P26 and P28 as proof of row-estimate interest.",
+      "breakout": "",
+      "followers": 278,
+      "views_total": 23712,
+      "ids": [
+        "18144718837594344",
+        "18109370429182282",
+        "18132715195811936",
+        "18130223719693364",
+        "18643358491048339"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1275,5 +1275,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 23216
+  "last_views": 23712
 }
