@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific, safe row-estimate check with a focused comment prompt will earn more useful SQL discussion and follows than broad query advice.",
+  "hypothesis": "A reproducible row-estimate check plus a focused discussion prompt will outperform broad query advice and attract SQL-focused follows",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T18:01:14.774814+00:00",
-      "pillar": "smart",
-      "hook_sig": "six months before my promo packet was due,",
-      "texts": [
-        "Six months before my promo packet was due, I realized my impact was buried in commit messages and Jira tickets. Here is the template I now use to turn any shipped project into promotion-grade evidence.",
-        "Project: [Feature Name]\nAction: Led [team size] engineers to deliver [what shipped]\nScope: [users affected / systems touched]\nImpact: Reduced [metric] by [X]% or saved [Y] hours/week\n\nExample:\nProject: Customer billing dashboard\nAction: Led 3 engineers to ship a unified billing view\nScope: 250+ enterprise customers, integrated with Stripe and NetSuite\nImpact: Cut support tickets by 40% and saved 15 hours/week in manual reconciliation",
-        "Question for you: which part of this template would you tweak for your last shipped feature? Drop your fill-in below.",
-        "Most engineers write impact statements that sound like task lists. The difference between a \"shipped this\" and a \"moved the needle\" line is scope and metric. The template above forces both. Use it for your next promo packet, performance review, or resume.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A concrete promotion-evidence template will earn more saves, specific replies, and follows than generic senior-engineer advice.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 10635,
-      "ids": [
-        "18115502381033296",
-        "17950026756313264",
-        "17907833712565075",
-        "18117263053972143",
-        "17954536122038981"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T18:31:04.240485+00:00",
       "pillar": "smart",
@@ -1266,6 +1241,31 @@
         "18639123226034683"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T02:31:01.814346+00:00",
+      "pillar": "smart",
+      "hook_sig": "diagnostic blind spot: when estimated and actual rows",
+      "texts": [
+        "diagnostic blind spot: when estimated and actual rows diverge, check this before adding an index\n\nmost engineers see a seq scan, assume missing index, and stop. the planner estimated 50 rows, actual returned 50,000. that 1000x gap means statistics are stale or the query shape defeats them. an index often makes it slower by adding random I/O on top of the bad plan.",
+        "run this first: ANALYZE the table, then re-run EXPLAIN ANALYZE with the same parameters. if the ratio drops below 10x, the fix was free statistics. if it stays high, the planner cannot see correlation or the predicate uses a function on the column. no index fixes a function-wrapped column without an expression index.",
+        "concrete check: look at the \"rows\" vs \"actual rows\" line for the scan node. also check \"loops\", a nested loop with high loops and low rows per loop is a join-order disaster masquerading as a scan problem. the planner picked the wrong driving table because it thought the inner side was tiny.",
+        "when the estimate is still wrong after ANALYZE, increase statistics target on the correlated columns: ALTER TABLE t ALTER COLUMN c SET STATISTICS 1000; then ANALYZE again. this costs storage and analyze time but fixes multivariate correlation blindness that default 100 buckets miss.",
+        "what is the highest estimated-to-actual ratio you have seen on a production query that turned out to be a statistics problem, not an index problem?\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A reproducible row-estimate check plus a focused discussion prompt will outperform broad query advice and attract SQL-focused follows",
+      "breakout": "none",
+      "followers": 278,
+      "views_total": 21852,
+      "ids": [
+        "17912069712513355",
+        "18022571942714240",
+        "17913186510520794",
+        "17947422501069208",
+        "18096663491428398"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1275,5 +1275,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 21550
+  "last_views": 21852
 }
