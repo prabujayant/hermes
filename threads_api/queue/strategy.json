@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete SQL rewrite with a before-and-after timing will beat the abstraction-heavy diagnostic posts and earn high reply rates by inviting specific query examples.",
+  "hypothesis": "A verifiable SQL before-and-after plus an invitation to share a query plan will earn more specific replies than abstract diagnostics.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T06:01:14.273647+00:00",
-      "pillar": "smart",
-      "hook_sig": "most teams under ten engineers should not run",
-      "texts": [
-        "Most teams under ten engineers should not run Kubernetes. The operational tax eats velocity that belongs to product. Run a monolith on a single VM or managed Postgres until a concrete operational need forces your hand. Change my mind.",
-        "I have watched three-person teams burn sprints debugging CNI plugins, cert rotation, and OOM kills on sidecars. Their competitor shipped the same feature set on Rails and Fly.io in half the time. Complexity is a liability until it buys you a measurable advantage.",
-        "So when do you actually switch? Not at Series A. Not because a blog post said so. Switch when you need independent scaling of distinct workloads, team autonomy requiring separate deploy pipelines, or multi-region active-active requirements. Until then it is resume driven development.",
-        "The pushback is always hiring. Hiring for ops skill you do not yet need is expensive. Train on the stack serving users today. If you cannot articulate the specific failure mode a monolith cannot handle, you are paying a tax for a ghost. What is the exact trigger that moved your team off a monolith?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A defensible, constraint-based system-design debate will earn more useful replies than a provocative claim built on unsupported numbers.",
-      "breakout": "none",
-      "followers": 270,
-      "views_total": 12624,
-      "ids": [
-        "18118572520788307",
-        "18131780383830153",
-        "18104864590998432",
-        "18126967096881998",
-        "17886307476622265"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-15T06:30:59.185910+00:00",
       "pillar": "smart",
@@ -1276,6 +1251,31 @@
         "18193818055393612"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T11:31:03.271868+00:00",
+      "pillar": "smart",
+      "hook_sig": "things ai coding assistants can't tell you (so",
+      "texts": [
+        "THINGS AI CODING ASSISTANTS CAN'T TELL YOU (SO VERIFY THEM YOURSELF):",
+        "Whether the code actually runs.\n\nIt completes patterns, it doesn't execute. Run everything before trusting anything.",
+        "Whether the dependencies exist.\n\nHallucinated imports and phantom APIs are the number one AI bug. Check every import.",
+        "Whether it fits your codebase.\n\nGenerated code ignores your conventions. Adapt it to your style or it rots on contact.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A verifiable SQL before-and-after plus an invitation to share a query plan will earn more specific replies than abstract diagnostics.",
+      "breakout": "none",
+      "followers": 278,
+      "views_total": 20683,
+      "ids": [
+        "18014704082972656",
+        "18128208097876072",
+        "18366983752300409",
+        "17924872380428742",
+        "17906376423591309"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1285,5 +1285,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 20481
+  "last_views": 20683
 }
