@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Matt Pocock plain-words + concrete fix format beats listicle hooks for SQL diagnostic posts, citing P26 and P28 which proved row-estimate interest converts to views.",
+  "hypothesis": "Specific SQL diagnosis plus a copyable fix will outperform broad planner advice and invite useful replies",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T01:31:00.978849+00:00",
-      "pillar": "smart",
-      "hook_sig": "i wrote \"improved api latency by 40%\" in",
-      "texts": [
-        "I wrote \"improved API latency by 40%\" in my promo packet. The committee asked: 40% of what? For whom? What did you trade to get it? I had no answers. The packet got sent back.",
-        "Before: \"Improved payment API latency by 40 percent.\"  \nAfter: \"Cut p99 latency from 1.2s to 720ms for checkout requests by adding idempotency keys and async reconciliation. Accepted 5 percent higher infrastructure cost and eventual consistency on refunds. Result: checkout drop-off fell 12 percent, recovering $380k per quarter.\"",
-        "The difference is evidence a stranger can verify. Baseline metric. User-facing metric. The explicit cost you chose to pay. Most engineers skip the cost line because it feels like a weakness. Committees read it as judgment.",
-        "Fill-in template:  \n\"I moved [metric] from [baseline] to [target] for [user flow] by [specific change]. I accepted [tradeoff: cost, consistency, complexity, ops burden]. The user impact was [measured outcome].\"\n\nIllustrative details above are from a real payments rewrite. Replace with your numbers.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete, transparent rewrite with evidence and a named tradeoff will prompt more saves and specific replies than generic promo advice.",
-      "breakout": "none",
-      "followers": 269,
-      "views_total": 11414,
-      "ids": [
-        "18144981475588528",
-        "18105740183148053",
-        "17992952571022668",
-        "17956177920270212",
-        "18341034115277316"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-15T02:01:11.386280+00:00",
       "pillar": "smart",
@@ -1268,6 +1243,31 @@
         "18647181259036136"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T07:01:13.942714+00:00",
+      "pillar": "smart",
+      "hook_sig": "the planner thinks 1000 rows. your query returns",
+      "texts": [
+        "The planner thinks 1000 rows. Your query returns 1. Then you add an index and it gets worse. Why? Because the two filters are related, and Postgres multiplies independent probabilities that were never independent.",
+        "This is the correlated filter trap. `WHERE status = 'active' AND created_at > '2024-01-01'`. Most active users were created recently. The planner sees 5% active AND 10% recent, so it guesses 0.5% overlap. Reality is 4%. Your index now serves 40x more rows than planned.",
+        "Fix: extended statistics. `CREATE STATISTICS s_active_recent ON status, created_at FROM users;`. Then `ANALYZE users;`. Now the planner knows active users cluster in recent dates instead of guessing independence.",
+        "Check your worst query right now. Run EXPLAIN ANALYZE. Find the node where estimated rows diverge most from actual. If two WHERE clauses reference related columns, this is your bug.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Specific SQL diagnosis plus a copyable fix will outperform broad planner advice and invite useful replies",
+      "breakout": "none",
+      "followers": 278,
+      "views_total": 18041,
+      "ids": [
+        "18122776595515375",
+        "18122774911905869",
+        "17863447461696434",
+        "17969548140196098",
+        "18636490729019922"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1277,5 +1277,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 24101
+  "last_views": 18041
 }
