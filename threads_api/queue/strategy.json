@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A small SQL rewrite backed by comparable plan evidence will earn more useful replies and shares than abstract query diagnostics",
+  "hypothesis": "A narrowly scoped SQL rewrite with comparable plan evidence will earn more useful replies and shares than general query diagnostics.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T08:31:06.877006+00:00",
-      "pillar": "smart",
-      "hook_sig": "stop using uuids as primary keys in high-write",
-      "texts": [
-        "Stop using UUIDs as primary keys in high-write tables. They fragment the buffer pool, bloat indexes 4x, and turn range scans into random I/O. Your p99 latency pays the price.",
-        "A UUIDv4 is 16 random bytes. InnoDB clusters data by PK. Every insert lands on a random page. The working set explodes. A 10M row table with BIGINT fits in 2GB buffer pool. Same data with UUID needs 8GB just to keep the hot pages resident.",
-        "I learned this on a payments table doing 5K writes/sec. Switched PK from UUID to BIGINT. Index size dropped from 12GB to 3GB. Buffer pool hit rate jumped from 84% to 98%. P99 write latency fell from 45ms to 3ms. No code changes. Just the key type.",
-        "UUIDs have a place: distributed inserts without coordination, or when you need opaque IDs in URLs. But for the core tables taking the write load? They are a self-inflicted wound. Prove me wrong with your numbers.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete storage-engine debate with measurable tradeoffs (BIGINT vs UUID, buffer pool churn, 4x index bloat) will trigger more technical replies than abstract architecture takes, per the \"concrete cache decision\" hypothesis and the 11K-view microservices debate precedent.",
-      "breakout": "",
-      "followers": 271,
-      "views_total": 6736,
-      "ids": [
-        "18095481140662705",
-        "18141242929531590",
-        "18095338259390137",
-        "18130186165771239",
-        "18132586246742496"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-15T09:01:18.325125+00:00",
       "pillar": "smart",
@@ -1272,6 +1247,31 @@
         "18635810542022945"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T14:01:22.994505+00:00",
+      "pillar": "smart",
+      "hook_sig": "stop rewriting queries when the planner already knew",
+      "texts": [
+        "Stop rewriting queries when the planner already knew the answer. Here is one rewrite that flipped a 4.2s scan into a 42ms index-only scan, using the same data and the same Postgres instance. The change: a single predicate pushed inside a CTE. No indexes added, no hardware touched.",
+        "The original query: SELECT user_id, event_type, created_at FROM events WHERE org_id = 42 AND created_at >= '2026-09-01' ORDER BY created_at DESC LIMIT 100; Plan said: Index Scan Backward using events_created_at_idx on events (cost=0.43..12500 rows=50000 width=24) (actual time=0.040..4200.000 rows=100 loops=1) Filter: (org_id = 42) Rows Removed by Filter: 2.4M",
+        "The rewrite: WITH filtered AS (SELECT user_id, event_type, created_at FROM events WHERE org_id = 42 AND created_at >= '2026-09-01') SELECT user_id, event_type, created_at FROM filtered ORDER BY created_at DESC LIMIT 100; Plan said: CTE Scan on filtered (cost=0.43..125.00 rows=100 width=24) (actual time=0.040..0.042 rows=100 loops=1) Buffers: shared hit=3",
+        "Why it worked: the CTE forced the planner to evaluate org_id = 42 first, collapsing 2.4M rows before the sort. Without the CTE, Postgres used the timestamp index and filtered 2.4M rows afterward. The data was identical, the stats were identical, the only variable was query structure.",
+        "This will not always help. When org_id has low cardinality or when you already have a composite index (org_id, created_at), the CTE adds overhead. The win here came from a single-column timestamp index on a high-write events table. What is one rewrite that surprised you with a 10x plan change? Share it below.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A narrowly scoped SQL rewrite with comparable plan evidence will earn more useful replies and shares than general query diagnostics.",
+      "breakout": "none",
+      "followers": 279,
+      "views_total": 22255,
+      "ids": [
+        "18118740763971452",
+        "18118975642757145",
+        "18117403882958423",
+        "18359875054220847",
+        "17959022664256409"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1281,5 +1281,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 279,
-  "last_views": 21815
+  "last_views": 22255
 }
