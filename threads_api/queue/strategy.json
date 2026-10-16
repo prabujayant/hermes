@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Replicating the caps-listicle + system-design combo from P24 with fresh moves and a practice angle will beat abstract planner advice.",
+  "hypothesis": "A specific, reusable system-design exercise with a clear comment prompt will outperform abstract advice.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T03:01:14.654589+00:00",
-      "pillar": "smart",
-      "hook_sig": "my promo packet said \"built the payments integration.\"",
-      "texts": [
-        "My promo packet said \"built the payments integration.\" The committee asked: so what? I had no answer. That rejection taught me the only metric that matters is the one a reviewer can verify without reading my code.",
-        "The vague claim: \"built the payments integration.\" Sounds like work. Proves nothing. A reviewer sees a ticket closed. They do not see risk reduced, revenue protected, or latency cut.",
-        "The rewrite: \"Redesigned the payments idempotency layer to eliminate duplicate charges. Cut retry storms by 92 percent. Prevented an estimated $2M in duplicate transactions per quarter. Verified by comparing chargeback rates before and after deploy, logged in Datadog dashboard DB-447.\"",
-        "The checklist I now use for every bullet: baseline metric, user-facing outcome, tradeoff call, verification link. If I cannot fill all four, the bullet gets cut. No exceptions.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific before/after example with evidence a reviewer can verify will earn more saves and detailed replies than a standalone checklist",
-      "breakout": "none",
-      "followers": 269,
-      "views_total": 11779,
-      "ids": [
-        "17971396143178647",
-        "18096867677120651",
-        "18105039335188691",
-        "17878294434632788",
-        "17886947184496403"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-15T03:31:03.441479+00:00",
       "pillar": "smart",
@@ -1268,6 +1243,33 @@
         "17991171066104135"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T08:31:00.314106+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to design a url shortener,",
+      "texts": [
+        "IF YOU WANT TO DESIGN A URL SHORTENER, STOP REPEATING TEXTBOOK ANSWERS. PICK ONE OF THESE FIVE TRADEOFFS AND DEFEND IT:",
+        "You run a URL shortener doing 10M writes/day, 100M reads/day. Latency SLA: 50ms p99. Which do you pick first?\n\nA) Auto-increment IDs in Postgres (sequential, cache-friendly)\nB) Base62-encoded random tokens (unguessable, but random I/O on inserts)\nC) Hash-based deterministic IDs (no collisions, but reveals data)\n\nPick one and say why. Most engineers pick B and die on the insert-hotspot hill.",
+        "Now the data layer. Same traffic. Which wins?\n\nA) Single Postgres with a BRIN index on created_at (cheap, but slow range scans)\nB) Postgres + Redis cache for hot links (fast, but cache invalidation hell)\nC) NoSQL like Cassandra (linear scale, but eventual consistency breaks redirects)\n\nThe textbook says \"use Redis.\" Real systems say \"depends on your hit rate.\" What is yours?",
+        "Write path. 10M/day = 115 writes/second. How do you shard?\n\nA) Hash the short code across 4 Postgres shards (even load, cross-shard joins suck)\nB) Range-shard by creation time (hot shard on writes, cold reads)\nC) One giant Postgres with async replication (simple, but single point of failure)\n\nIf you picked C, what happens when the master dies during a spike?",
+        "Redirect path. 100M reads/day. 95% are repeats. How do you serve them?\n\nA) CDN with 24h TTL (fast, but stale links hurt)\nB) In-memory LRU cache in the app (fast, but loses cache on restart)\nC) Edge functions with KV store (globally distributed, but cold starts)\n\nIf you picked A, how do you invalidate a malicious link in under 5 minutes?",
+        "The five tradeoffs above are not theoretical. They are the five decisions that separate a toy shortener from one that survives real traffic.\n\nPick one tradeoff you would change and why. The answer reveals your real system design instincts.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A specific, reusable system-design exercise with a clear comment prompt will outperform abstract advice.",
+      "breakout": "none",
+      "followers": 278,
+      "views_total": 19244,
+      "ids": [
+        "18135068863640434",
+        "18079716191707101",
+        "18093018350680664",
+        "18109800401461203",
+        "18117919954782793",
+        "18093734204187139"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1277,5 +1279,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 18857
+  "last_views": 19244
 }
