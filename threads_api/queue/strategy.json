@@ -4,31 +4,6 @@
   "streak": 0,
   "history": [
     {
-      "run_at": "2026-10-15T11:31:02.433807+00:00",
-      "pillar": "smart",
-      "hook_sig": "benchmark reveal: same workload, same machine, disclose the",
-      "texts": [
-        "BENCHMARK REVEAL: SAME WORKLOAD, SAME MACHINE, DISCLOSE THE SETUP BEFORE COMPARING UUID AND BIGINT\n\nPostgres 17 on Ubuntu 24.04, 8 vCPU AMD EPYC, 32 GB RAM, NVMe. Shared buffers 8 GB, work_mem 256 MB, max_wal_size 4 GB. Table: id PK, payload jsonb, created_at timestamptz. No indexes beyond PK. WAL on same volume.",
-        "Workload: pgbench custom script, 50 concurrent clients, 10 minute runs, 3 warmup minutes discarded. Mix: 70% single-row inserts (returning id), 20% PK point lookups, 10% range scans of 100 rows by created_at. Autovacuum default. Each variant run 5 times, median reported.",
-        "UUID v4 (gen_random_uuid): median insert throughput 42,300 rows/sec, p99 insert latency 8.2 ms, table size 3.8 GB after 25M rows, index size 3.1 GB. BIGINT (identity): median insert throughput 78,900 rows/sec, p99 insert latency 3.1 ms, table size 2.1 GB, index size 1.4 GB. Page splits 4x higher on UUID.",
-        "Read path: PK point lookup p99 0.4 ms both (cached). Range scan 100 rows p99 1.2 ms BIGINT vs 2.8 ms UUID (index bloat). Sequential scan 1M rows 340 ms BIGINT vs 590 ms UUID. The write tax compounds: more pages, more WAL, more vacuum cycles, larger backups.",
-        "Run the script on your hardware, post your numbers: workload shape, row width, concurrent writers, p99 target. I will aggregate into a community dataset. Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A transparent Postgres benchmark with reproducible conditions will earn more useful technical replies than a broad claim about UUID performance.",
-      "breakout": "none",
-      "followers": 273,
-      "views_total": 9930,
-      "ids": [
-        "17931475683166342",
-        "17891169195455826",
-        "17994299223066372",
-        "18129247678693716",
-        "18120768064942479"
-      ],
-      "pivoted": false
-    },
-    {
       "run_at": "2026-10-15T11:57:43.190292+00:00",
       "pillar": "smart",
       "hook_sig": "your orm's default connection pool size is silently",
@@ -1276,6 +1251,31 @@
         "18105775709201551"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T17:01:15.997004+00:00",
+      "pillar": "smart",
+      "hook_sig": "things hiring managers can't tell from your resume",
+      "texts": [
+        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
+        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
+        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
+        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "cohere/north-mini-code:free",
+      "hypothesis": "A reproducible SQL benchmark with a precise caveat will earn more useful replies and shares than a broad diagnostic.",
+      "breakout": "",
+      "followers": 280,
+      "views_total": 24139,
+      "ids": [
+        "18126537097923777",
+        "18136182868645142",
+        "18113795717145901",
+        "18150869926544701",
+        "18031372889681383"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1285,5 +1285,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 280,
-  "last_views": 23895
+  "last_views": 24139
 }
