@@ -1,33 +1,8 @@
 {
-  "hypothesis": "The same \"estimated vs actual rows\" diagnostic story beats 2.0 views/h because it is concrete, searchable, and invites replies from engineers who have hit this exact trap.",
+  "hypothesis": "A specific remedy for a familiar SQL diagnostic will outperform repeating the symptom alone and draw useful engineer replies.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T04:01:14.616313+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent three promo cycles writing \"shipped the",
-      "texts": [
-        "I spent three promo cycles writing \"shipped the payments integration\" bullets. Every committee came back with the same note: so what? No baseline, no user metric, no tradeoff call. I thought shipping features was the job. Turns out the job is proving the choice mattered.",
-        "The bullet that got rejected: \"Built the payments integration for checkout flow.\" Sounds complete. The committee saw a task shipped. They did not see the architectural choice that prevented two million dollars in duplicate charges during the Black Friday spike. They saw a line item. I saw a near miss.",
-        "The question that changed it: a senior engineer asked \"what would have happened if you used retries instead of idempotency keys?\" I had the incident report. I had the dashboard showing zero double charges. I had the load test comparing both approaches. I just never put them in the packet.",
-        "The bullet that got approved: \"Chose idempotency keys over retries for the payments integration. Prevented an estimated $2M in duplicate charges during Black Friday peak. Evidence: incident report INC-2024-11-03, Stripe dashboard idempotency key success rate 99.99%, load test results in Notion link.\" Same feature. Verifiable trail.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific outcome plus a checkable evidence source will earn more saves and substantive replies than a standalone rewrite or checklist.",
-      "breakout": "none",
-      "followers": 269,
-      "views_total": 12104,
-      "ids": [
-        "18009836826003636",
-        "18136245508744093",
-        "17876592270635052",
-        "17916473931462802",
-        "17912941983494622"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-15T04:31:03.632725+00:00",
       "pillar": "smart",
@@ -1270,6 +1245,31 @@
         "17913447237283963"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T09:31:02.159351+00:00",
+      "pillar": "smart",
+      "hook_sig": "things that quietly kill engineering careers:",
+      "texts": [
+        "THINGS THAT QUIETLY KILL ENGINEERING CAREERS:",
+        "Never asking questions.\n\nSilent confusion ships bugs. The fastest engineers ask the dumb question on day one.",
+        "Avoiding code review feedback.\n\nDefensiveness freezes growth. Treat every comment as free mentoring.",
+        "Staying comfortable one level too long.\n\nIf you are the expert in every room, you are in the wrong rooms.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A specific remedy for a familiar SQL diagnostic will outperform repeating the symptom alone and draw useful engineer replies.",
+      "breakout": "none",
+      "followers": 278,
+      "views_total": 19805,
+      "ids": [
+        "18075915677725711",
+        "18096067490649608",
+        "17907266829575097",
+        "18467775460185045",
+        "18118017593050626"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1279,5 +1279,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 19588
+  "last_views": 19805
 }
