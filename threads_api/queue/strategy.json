@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete estimate-versus-actual example with a cautious next step will earn more useful comments and follows than broad query advice; end by asking which EXPLAIN signal readers want diagnosed next.",
+  "hypothesis": "A compact, realistic row-estimate mismatch with a cautious next step will earn more useful comments and follows than broad query advice.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T16:31:02.203544+00:00",
-      "pillar": "smart",
-      "hook_sig": "six months before my promo packet was due",
-      "texts": [
-        "Six months before my promo packet was due I had a folder of screenshots, a messy Notion page, and zero narrative. Every time I tried to write the impact section I stared at a blank screen. The work was there but the evidence was not legible.",
-        "The problem was not the work. The problem was the format. Promo committees do not read diaries. They scan for three signals: business impact, scope of ownership, and a verifiable link to proof. If your doc does not surface those in seconds it gets skipped.",
-        "I built a one-page table with three columns. Column one: Impact, a single metric the business cares about. Column two: Scope, who depended on this, what systems touched, what risk you carried. Column three: Proof, a link to the PR, the dashboard, the incident review, the design doc. Nothing else.",
-        "Example row. Impact: reduced p99 latency 40 percent saving $200k per year in compute. Scope: owned the payment ingestion pipeline, five services, on-call for Black Friday. Proof: github.com/org/repo/pull/3421, datadog dashboard link, incident retro doc. One row. Thirty seconds to scan.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Career advice paired with a specific, reusable work artifact will outperform generic senior-engineer advice.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 10228,
-      "ids": [
-        "18020089001731370",
-        "18062293628531237",
-        "18095583245356512",
-        "18112558223111237",
-        "18104754323357013"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T17:01:16.242164+00:00",
       "pillar": "smart",
@@ -1266,6 +1241,31 @@
         "18111687305601980"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T01:01:13.844020+00:00",
+      "pillar": "smart",
+      "hook_sig": "your query returns 12 rows. the planner estimated",
+      "texts": [
+        "Your query returns 12 rows. The planner estimated 1.\n\nEXPLAIN ANALYZE shows:\n- Estimated rows: 1\n- Actual rows: 12,487\n- Loops: 1\n\nThe nested loop join looked cheap on paper. In production it scanned 12 million rows and timed out the payment endpoint.",
+        "The mismatch came from a stale pg_statistic entry on the status column. A bulk UPDATE last week flipped 95 percent of rows to 'completed' but autovacuum had not run ANALYZE yet. The planner still thought 'pending' was selective.",
+        "First step is never a new index. Run ANALYZE on the table and recheck the plan. If estimates stay wrong, check n_distinct and most_common_vals in pg_stats. A single ANALYZE call fixed this one and dropped latency from 8 seconds to 40 milliseconds.",
+        "If ANALYZE does not close the gap, the next signal to check is the filter removal rate on the scan node, or the join order switch point. Which EXPLAIN signal should I break down next?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A compact, realistic row-estimate mismatch with a cautious next step will earn more useful comments and follows than broad query advice.",
+      "breakout": "none",
+      "followers": 278,
+      "views_total": 20863,
+      "ids": [
+        "17947158876344360",
+        "18127729444659556",
+        "18415823827084513",
+        "18074230028771245",
+        "18034644410668393"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1275,5 +1275,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 20599
+  "last_views": 20863
 }
