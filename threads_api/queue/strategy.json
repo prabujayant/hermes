@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A narrowly",
+  "hypothesis": "Specific system-design interview methods outperform generic lists when they make one difficult decision easy to explain.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T13:31:02.292911+00:00",
-      "pillar": "smart",
-      "hook_sig": "a larger connection pool made my database slower,",
-      "texts": [
-        "A larger connection pool made my database slower, not faster. The team swore by 100 connections per service. p99 latency was 380ms under load. We dropped to 15 and it fell to 95ms. The fix was not the number itself, it was measuring where the database stopped scaling.",
-        "Here is how to find your real saturation point. Spin up a single replica of your production database. Use wrk or k6 with a fixed query set that mirrors your hottest endpoints. Incrementally raise concurrent connections from 1 to N. Record p99 latency at each step. The curve is the truth.",
-        "At low concurrency, latency stays flat and throughput grows. Then it bends. That bend is where adding more connections costs more in scheduling and lock contention than it gains in parallelism. In my case the bend was at 12. Beyond 20, latency climbed fast. The pool was a queue amplifier, not a throughput booster.",
-        "Most teams never see this because they test with idle databases and synthetic loads that never touch contention. Measure under realistic pressure, with warmup, with cache cold, with the noisy neighbors your queries actually fight. Pool size is not a config to copy from a blog.",
-        "What is your pool-sizing method? Did you measure the bend, or did you inherit the default? Share your worst latency surprise and I will dig into it next.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A concrete, testable backend diagnosis with a specific comment prompt will outperform broad config claims without",
-      "breakout": "none",
-      "followers": 274,
-      "views_total": 12200,
-      "ids": [
-        "18011789042986968",
-        "18093923816450022",
-        "18023591111864158",
-        "17997762882035107",
-        "18598034983067809"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-15T14:01:17.313386+00:00",
       "pillar": "smart",
@@ -1276,6 +1251,31 @@
         "18110732690062364"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T19:01:13.450020+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to become a top 1%",
+      "texts": [
+        "IF YOU WANT TO BECOME A TOP 1% PROBLEM SOLVER, STOP SKIPPING THE BASICS.\n\nMEMORIZE THESE 5 HABITS:",
+        "Always clarify before coding.\n\nInputs, edge cases, constraints. Five minutes of questions saves thirty minutes of rewrites.",
+        "Brute force first, on purpose.\n\nWrite the ugly O(n^2), then ask what repeats. The optimal solution hides inside the naive one.",
+        "Time yourself, then review.\n\n45 minutes per problem max. The learning happens in the 15 minutes after, studying the pattern you missed.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Specific system-design interview methods outperform generic lists when they make one difficult decision easy to explain.",
+      "breakout": "none",
+      "followers": 280,
+      "views_total": 25353,
+      "ids": [
+        "18127471174854577",
+        "18340810351261261",
+        "18111303550896817",
+        "18067488737789056",
+        "18030313472906172"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1285,5 +1285,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 280,
-  "last_views": 25089
+  "last_views": 25353
 }
