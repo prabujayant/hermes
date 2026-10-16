@@ -4,31 +4,6 @@
   "streak": 0,
   "history": [
     {
-      "run_at": "2026-10-15T05:01:15.023204+00:00",
-      "pillar": "smart",
-      "hook_sig": "most caching advice you read assumes a single",
-      "texts": [
-        "Most caching advice you read assumes a single server and low traffic. That world died years ago. At scale the rules invert: the hard part is not invalidation, it is coherence across tiers. Here are three lessons learned from a payment platform that processes 50k requests per second.",
-        "Lesson one: TTL based expiry causes thundering herds. When a hot key expires every client hits the database at once. We switched to probabilistic early refresh. Each client rolls a die on read, if the roll hits a threshold it refreshes in the background. The herd disappears, latency p99 drops forty percent.",
-        "Lesson two: Redis is not a silver bullet. Network round trips add up. We added a tiny in process LRU cache in front of Redis for the hottest thousand keys. Hit rate on the local tier is ninety two percent. Redis CPU dropped sixty percent. The extra complexity is two hundred lines of code and a config flag.",
-        "Lesson three: Cache coherence beats cache size. We version every cached object with a monotonic counter stored in Postgres. On write we increment the counter and publish the new version to a compacted Kafka topic. Readers poll the topic and evict stale entries locally. Zero stale reads, no distributed locks, no magic.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Contrarian lesson format with concrete production numbers and a checkable architecture pattern (versioned cache coherence via Kafka) will outperform general advice threads on saves and substantive replies, per P29 and P30 velocity signals.",
-      "breakout": "",
-      "followers": 269,
-      "views_total": 12310,
-      "ids": [
-        "18134215210683500",
-        "18118166468586232",
-        "18109432145221563",
-        "18166412116484496",
-        "17917325685461127"
-      ],
-      "pivoted": true
-    },
-    {
       "run_at": "2026-10-15T05:31:02.355493+00:00",
       "pillar": "smart",
       "hook_sig": "kubernetes is overkill for 90 percent of startups.",
@@ -1276,6 +1251,31 @@
         "18196193497399882"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T10:31:01.067404+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want your side project to survive,",
+      "texts": [
+        "IF YOU WANT YOUR SIDE PROJECT TO SURVIVE, STOP ADDING FEATURES.\n\nMEMORIZE THESE 5 RULES:",
+        "Ship to one user first.\n\nYourself counts. Real usage teaches more than ten planned features.",
+        "Boring tech wins weekends.\n\nMonolith, Postgres, one host. Excitement is for work hours.",
+        "Log progress in public.\n\nWeekly demos beat yearly launches. Accountability ships products.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "An ordered, caveated fix for a familiar SQL diagnostic will earn more useful engineer replies than describing the symptom alone.",
+      "breakout": "",
+      "followers": 278,
+      "views_total": 20228,
+      "ids": [
+        "18078165029419070",
+        "17905744998666696",
+        "18110597369350748",
+        "18104889788574036",
+        "18110359265594159"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1285,5 +1285,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 19915
+  "last_views": 20228
 }
