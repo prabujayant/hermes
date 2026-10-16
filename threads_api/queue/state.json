@@ -299,7 +299,8 @@
     "if you want to fix slow postgres queries,",
     "if you want to pass system design interviews,",
     "if you want to become a senior engineer",
-    "stop rewriting queries when the planner already knew"
+    "stop rewriting queries when the planner already knew",
+    "if you want systems that survive day one"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A narrowly scoped SQL rewrite with comparable plan evidence will earn more useful replies and shares than general query diagnostics.",
+  "hypothesis": "A single SQL rewrite with equivalent results, a visible plan difference, and its caveat will earn more useful replies and shares than general diagnostics; end by asking readers to share a rewrite they verified this way",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T09:01:18.325125+00:00",
-      "pillar": "smart",
-      "hook_sig": "i used uuidv4 for every primary key on",
-      "texts": [
-        "I used UUIDv4 for every primary key on a payments service because \"distributed systems need it.\" Two years later the buffer pool was 80 percent index pages. The table had 120 million rows. The primary key index alone was 18 GB. A BIGINT version of the same workload sat at 4.2 GB.",
-        "The difference is not magic. UUIDv4 is random. Every insert goes to a random leaf page. The B-tree fragments, pages split, the buffer pool churns. BIGINT inserts append to the rightmost page. Sequential writes, dense pages, minimal splits. On that workload the write throughput gap was 3.8x at peak.",
-        "But the caveats are real. If you shard by tenant and each shard stays under 50 million rows the index fits in RAM either way. If your write rate is under 5k inserts/sec the bottleneck is usually network or application code not the index. If you need globally unique IDs without coordination UUIDv4 is still the right call.",
-        "UUIDv7 fixes the locality problem. The timestamp prefix makes inserts mostly sequential. In the same test the index size dropped to 5.1 GB and write throughput matched BIGINT within 5 percent. The tradeoff: you lose pure randomness and gain a rough creation-time signal. For most OLTP workloads that is a feature not a bug.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific Postgres benchmark with practical tradeoffs will draw more technical replies than an abstract storage-engine debate",
-      "breakout": "none",
-      "followers": 273,
-      "views_total": 7037,
-      "ids": [
-        "18095660204411867",
-        "18392304514201948",
-        "18147415576566252",
-        "17971539111177389",
-        "18040160546837438"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-15T09:31:00.939423+00:00",
       "pillar": "smart",
@@ -1272,6 +1247,31 @@
         "17959022664256409"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T14:31:11.444490+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want systems that survive day one",
+      "texts": [
+        "IF YOU WANT SYSTEMS THAT SURVIVE DAY ONE TRAFFIC, STOP ADDING PARTS.\n\nMEMORIZE THESE 5 RULES:",
+        "One database until it screams.\n\nPostgres handles millions of rows before breaking a sweat. Sharding is a last resort, not a design.",
+        "Cache one layer at a time.\n\nCDN, then app cache, then query cache. Each layer you skip becomes the outage.",
+        "Design the failure first.\n\nWhat happens when the payment service dies? Answer that before drawing anything else.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A single SQL rewrite with equivalent results, a visible plan difference, and its caveat will earn more useful replies and shares than general diagnostics; end by asking readers to share a rewrite they verified this way",
+      "breakout": "none",
+      "followers": 279,
+      "views_total": 22646,
+      "ids": [
+        "18091571690213399",
+        "17878520355562144",
+        "18639341866040497",
+        "17871371040647767",
+        "18118425403984123"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1281,5 +1281,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 279,
-  "last_views": 22255
+  "last_views": 22646
 }
