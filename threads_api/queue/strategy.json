@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete row-estimate mismatch plus a cautious diagnostic step will prompt more useful SQL comments and follows than broad query advice.",
+  "hypothesis": "A specific, safe row-estimate check with a focused comment prompt will earn more useful SQL discussion and follows than broad query advice.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T17:31:04.226017+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to pass system design interviews,",
-      "texts": [
-        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
-        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
-        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
-        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Career advice paired with a practical, reusable promotion-evidence template will earn more saves, specific replies, and follows than generic senior-engineer advice.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 10380,
-      "ids": [
-        "18117343829064899",
-        "17995443054046016",
-        "18140439481620100",
-        "18124637738313242",
-        "18102838499333900"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T18:01:14.774814+00:00",
       "pillar": "smart",
@@ -1266,6 +1241,31 @@
         "17997354816011866"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T02:01:13.193964+00:00",
+      "pillar": "smart",
+      "hook_sig": "the costliest sql mistake i see: a slow",
+      "texts": [
+        "The costliest SQL mistake I see: a slow query plan that looks like an index problem but is actually a row-estimate mismatch. The planner thinks 10 rows will come back. Reality returns 500,000. Every downstream node in the plan over-allocates memory, picks nested loops instead of hash joins, and the whole thing grinds. You reach for an index that won't help.",
+        "Here is the tell: look at the gap between \"actual rows\" and \"rows\" in EXPLAIN ANALYZE. If the ratio jumps above 10x, the planner is flying blind. That blind spot then masquerades as a missing index. Teams add indexes that never get used, paying write-amplification tax for no read gain. The real fix is usually ANALYZE or a stats target bump, not a new index.",
+        "Concrete diagnostic step before touching indexes: run the query with a CTE boundary that isolates the estimated vs actual row mismatch, then compare the plan output. If estimated rows is 12 but actual is 500,000, do not add an index. Run ANALYZE, check default statistics, and consider ALTER TABLE .. ALTER COLUMN .. SET STATISTICS 1000. Index changes will not fix a stats problem.",
+        "The worst part: most engineers glance at the plan shape, nod, and move on. The plan shape is a lie when the estimates are wrong. The real signal is the row-estimate gap. A 10x ratio triggers nested-loop fallbacks. A 100x ratio forces the planner into hash joins that blow memory. Read the numbers, not the shape. Your next slow query might be solved by two SQL keywords: ANALYZE TABLE.",
+        "Got a plan where estimated rows diverged badly from actual rows? Drop the numbers in the comments. I will tell you whether to reach for an index or a stats reset. This is where good SQL advice lives. Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A specific, safe row-estimate check with a focused comment prompt will earn more useful SQL discussion and follows than broad query advice.",
+      "breakout": "none",
+      "followers": 278,
+      "views_total": 21550,
+      "ids": [
+        "17989782603074734",
+        "18129746243501570",
+        "18450377464123010",
+        "18100141199059495",
+        "18639123226034683"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1275,5 +1275,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 21137
+  "last_views": 21550
 }
