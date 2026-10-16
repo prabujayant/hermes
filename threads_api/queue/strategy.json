@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete row-estimate check plus a specific discussion prompt will outperform general SQL performance advice and attract SQL-focused follows",
+  "hypothesis": "Concrete row-estimate + buffer diagnostic beats general SQL advice and attracts SQL-focused follows.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-14T19:31:02.234838+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent three promo cycles writing \"shipped x",
-      "texts": [
-        "I spent three promo cycles writing \"shipped X feature\" bullets. Committee feedback was always the same: so what? No baseline, no user metric, no tradeoff call. The template that finally worked fits on a sticky note.",
-        "Baseline: what the metric was before. User impact: what the human experienced after. Tradeoff: what you deliberately didn't do. Proof: the link or log line that makes it auditable. Four fields. Zero fluff.",
-        "Copy this into your next promo doc or design review:\n\n**Baseline**: [metric, value, date]  \n**User impact**: [user story, metric delta, date]  \n**Tradeoff**: [what you deferred, why it was correct]  \n**Proof**: [dashboard link, query log, incident ID]",
-        "Real example from my last packet:  \nBaseline: p95 latency 1.2s on /orders, 2024-03-01  \nUser impact: p95 180ms, checkout drop-off -12%, 2024-03-15  \nTradeoff: deferred Redis cache invalidation rewrite, accepted stale reads <5s  \nProof: datadog dashboard #order-latency, PR #3442",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A compact evidence template tied to a real engineering decision will earn more saves and useful examples in replies.",
-      "breakout": "none",
-      "followers": 268,
-      "views_total": 11044,
-      "ids": [
-        "17902328406667874",
-        "17927310660424296",
-        "17911858734512807",
-        "17927764785425987",
-        "18108739142348970"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-14T20:01:14.235525+00:00",
       "pillar": "smart",
@@ -1266,6 +1241,31 @@
         "18372641167208096"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-16T04:01:20.506638+00:00",
+      "pillar": "smart",
+      "hook_sig": "i used to think query performance was about",
+      "texts": [
+        "I used to think query performance was about adding more indexes. Then I spent 4 hours debugging a query that should have taken 50ms but was taking 5 seconds. The fix wasn't in the index strategy. It was in the statistics.\n\nHere's what I missed: Postgres estimated 1000 rows, but the actual result was 10 million. The planner built a nested loop join thinking it was tiny. It wasn't.",
+        "Run EXPLAIN (ANALYZE, BUFFERS) and compare estimated vs actual rows. If the ratio is > 10x, your statistics are lying to the planner. Run ANALYZE table_name; to refresh them. This catches 80% of slow queries without touching indexes.",
+        "But here's the trap: accurate estimates don't mean fast queries. I've seen perfectly estimated plans still hit disk for every row. Check BUFFERS: if you see \"Shared Disk Reads\" climbing, you're doing random I/O. The fix is often a covering index or materialized CTE, not better stats.",
+        "Most engineers see a 1000x estimate gap and immediately write CREATE INDEX. That's cargo cult optimization. The real diagnostic sequence is: 1) compare estimates, 2) check buffers for disk reads, 3) only then decide if an index helps.",
+        "The one-liner that saves hours: \"EXPLAIN ANALYZE shows you what the planner thinks, BUFFERS shows you what actually happened.\" Most slow queries are not missing indexes. They are missing accurate statistics and bad buffer strategies.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Concrete row-estimate + buffer diagnostic beats general SQL advice and attracts SQL-focused follows.",
+      "breakout": "",
+      "followers": 278,
+      "views_total": 22596,
+      "ids": [
+        "17954615064267976",
+        "18118685176934478",
+        "18107061095246018",
+        "18148125130518245",
+        "18411189667089225"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1275,5 +1275,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 278,
-  "last_views": 22352
+  "last_views": 22596
 }
