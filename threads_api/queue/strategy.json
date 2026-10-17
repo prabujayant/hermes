@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A credible UUIDv4 incident paired with a careful, workload-aware migration path will earn more saves, specific comments, and followers than generic engineering advice.",
-  "pivots": 195,
+  "hypothesis": "A credible UUIDv4 incident with diagnostic guidance and workload-aware migration tradeoffs will earn more saves, specific comments, and followers than generic engineering advice.",
+  "pivots": 196,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T16:31:06.693324+00:00",
-      "pillar": "smart",
-      "hook_sig": "production symptom: requests are slow but database cpu",
-      "texts": [
-        "Production symptom: requests are slow but database CPU sits at 15 percent. You check slow queries, nothing obvious. The engine is idle. The real bottleneck is the connection pool queueing work before it ever reaches Postgres.",
-        "The diagnostic split is two numbers. Pool wait time: how long a request waits for a connection. Query time: how long the statement actually runs. If pool wait dominates, adding indexes or tuning SQL will not move p99. You are optimizing the wrong layer.",
-        "Measure it in production. Wrap the pool borrow with a histogram: timestamp at checkout, timestamp at query start. The delta is queue time. In Postgres enable log_min_duration_statement = 0 briefly or use pg_stat_statements with a client-side wrapper. The gap tells the whole story.",
-        "When queue time exceeds query time you have three levers. Increase pool size until CPU saturates. Add a read replica for SELECT-heavy paths. Or push backpressure to the load balancer with a request queue and timeout. Re-measure the same two metrics to confirm the fix.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A production symptom plus a specific metric and a closing question will earn more useful replies than a broad performance claim.",
-      "breakout": "none",
-      "followers": 276,
-      "views_total": 15611,
-      "ids": [
-        "18134373406669358",
-        "17908138776328734",
-        "18464001142186112",
-        "17941286883371017",
-        "18210534937364846"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-15T17:01:16.170906+00:00",
       "pillar": "smart",
@@ -1270,6 +1245,31 @@
         "18106437266627468"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T01:28:02.355154+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- the worst db outage i've seen wasn't",
+      "texts": [
+        "---\nThe worst DB outage I've seen wasn't a missing index. It was a UUIDv4 PK on a high-write table used as the clustering key. The buffer pool churned at 80 percent, random I/O on every insert, and range scans exploded into full leaf walks.",
+        "Most teams blame UUIDv4 itself. Wrong. The culprit is the workload: monotonic inserts + clustering on randomness + a planner that can't estimate cardinality. Same key on a low-write, append-heavy table with a separate sequential clustering index performs fine.",
+        "Migration is not \"switch to sequential.\" It's engine-aware: in Postgres, wrap sequences in a ULID generator and keep uuid_generate_uuid for distributed inserts; in MySQL, use UUID_TO_BIN with right-padded storage. Both need a workload audit first: measure write rate, read locality, and index depth before touching a single table.",
+        "After auditing, the safe move is a shadow-write: populate the new key alongside the old, backfill in batches, then cut over with a single transaction swap. Keep the old PK until the new index stats stabilize, otherwise the planner regresses worse than the original bug.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A credible UUIDv4 incident with diagnostic guidance and workload-aware migration tradeoffs will earn more saves, specific comments, and followers than generic engineering advice.",
+      "breakout": "none",
+      "followers": 280,
+      "views_total": 27400,
+      "ids": [
+        "18117659405051820",
+        "17883494022690965",
+        "17912773380544721",
+        "18115102592005913",
+        "18123774697907351"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1279,5 +1279,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 280,
-  "last_views": 27202
+  "last_views": 27400
 }
