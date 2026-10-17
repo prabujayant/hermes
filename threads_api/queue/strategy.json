@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A symptom-led SQL walkthrough that pairs execution-plan evidence with a specific fix will earn more saves and useful comments than generic optimization tips.",
-  "pivots": 199,
+  "hypothesis": "A concrete SQL slowdown, paired with",
+  "pivots": 200,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T19:01:17.469538+00:00",
-      "pillar": "smart",
-      "hook_sig": "most engineers run explain analyze and glance at",
-      "texts": [
-        "Most engineers run EXPLAIN ANALYZE and glance at the plan. They miss the number that actually matters: estimated rows versus actual rows. A ratio above 10x means the planner is guessing, and every index you add after that is a shot in the dark.",
-        "Last month a reporting query on our orders table hit 12 seconds. EXPLAIN ANALYZE showed a nested loop join with estimated rows 1, actual rows 47,000. Ratio 47,000x. The planner thought a customer filter would return one row. It returned forty-seven thousand because statistics were stale after a bulk insert.",
-        "The fix was not a new index. It was ANALYZE orders; then the same query ran in 40 milliseconds. The planner switched to a hash join because it finally knew the true cardinality. No schema change, no code deploy, two seconds of maintenance work.",
-        "Next time a query is slow, run EXPLAIN ANALYZE and divide actual rows by estimated rows for the driving table. If the ratio exceeds 10, stop adding indexes. Run ANALYZE on the underlying tables first. The planner cannot optimize what it cannot measure.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A testable EXPLAIN ANALYZE diagnostic with a verified production example",
-      "breakout": "none",
-      "followers": 278,
-      "views_total": 18163,
-      "ids": [
-        "17951178966295265",
-        "18032959484887294",
-        "18079309649534937",
-        "18113532482136850",
-        "18114283532125591"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-15T19:31:01.095514+00:00",
       "pillar": "smart",
@@ -1268,6 +1243,31 @@
         "18108076922616346"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T04:01:12.361931+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to pass system design interviews,",
+      "texts": [
+        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
+        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
+        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
+        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A concrete SQL slowdown, paired with",
+      "breakout": "none",
+      "followers": 281,
+      "views_total": 28515,
+      "ids": [
+        "18076654166457117",
+        "17955199674029796",
+        "18165423904468413",
+        "18027729176698667",
+        "18119242402953016"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1277,5 +1277,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 281,
-  "last_views": 28412
+  "last_views": 28515
 }
