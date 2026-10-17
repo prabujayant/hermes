@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A practical way to verify UUIDv4 index costs and choose a workload-appropriate fix will earn more saves and specific comments than a blanket warning.",
+  "hypothesis": "A concrete measurement method plus conditional fixes will earn more saves and specific comments than a blanket warning.",
   "pivots": 197,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T17:31:07.439702+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want your side project to survive,",
-      "texts": [
-        "IF YOU WANT YOUR SIDE PROJECT TO SURVIVE, STOP ADDING FEATURES.\n\nMEMORIZE THESE 5 RULES:",
-        "Ship to one user first.\n\nYourself counts. Real usage teaches more than ten planned features.",
-        "Boring tech wins weekends.\n\nMonolith, Postgres, one host. Excitement is for work hours.",
-        "Log progress in public.\n\nWeekly demos beat yearly launches. Accountability ships products.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A specific metric plus a practical first check and a focused closing question will earn more useful replies than a broad performance claim.",
-      "breakout": "",
-      "followers": 276,
-      "views_total": 16740,
-      "ids": [
-        "18133113043707337",
-        "18106150091364918",
-        "18097518431112803",
-        "17931361500162171",
-        "18112750277157479"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-15T18:01:21.320628+00:00",
       "pillar": "smart",
@@ -1270,6 +1245,31 @@
         "18186763186412160"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T02:31:02.410700+00:00",
+      "pillar": "smart",
+      "hook_sig": "production-cost reveal: a uuidv4 index can hurt write",
+      "texts": [
+        "production-cost reveal: a UUIDv4 index can hurt write performance, but here is how to measure whether it matters in your workload",
+        "the pain is real: random inserts scatter writes across the B-tree, forcing page splits and buffer pool churn. on a high-write table this shows up as rising CPU, longer checkpoint times, and replication lag that looks like network issues",
+        "the reproducible check: run this against your production-like data. capture pg_stat_statements or sys.dm_exec_query_stats before and after a sustained write burst. compare insert latency p99, pages written per second, and buffer pool eviction rate. if the delta is under your SLO threshold, the UUIDv4 cost is theoretical",
+        "workload-based decision: low-write lookup tables, keep UUIDv4. high-write event streams, switch to UUIDv7 or ULID for time-ordered inserts. sharded write paths with low contention, UUIDv4 stays fine. the fix matches the access pattern, not the dogma",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete measurement method plus conditional fixes will earn more saves and specific comments than a blanket warning.",
+      "breakout": "none",
+      "followers": 281,
+      "views_total": 27929,
+      "ids": [
+        "18498737971101391",
+        "18114769952079048",
+        "17887696926485508",
+        "18112731029152278",
+        "17991822948050638"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1279,5 +1279,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 281,
-  "last_views": 27696
+  "last_views": 27929
 }
