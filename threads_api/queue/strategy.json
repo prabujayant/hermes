@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Story format on payment idempotency failures, proven hook shape, ends with follow CTA, cites P28 and P30 for pacing and payoff.",
-  "pivots": 216,
+  "hypothesis": "Payment-failure stories earn attention; actionable recovery rules may turn that attention into follows. End with a relevant follow CTA.",
+  "pivots": 217,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T08:01:16.804143+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- if you want to pass system design",
-      "texts": [
-        "---\nIF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES. MEMORIZE THESE 5 MOVES:\nP24 hit 350 views because candidates who list tools fail the \"walk me through your tradeoffs\" moment.",
-        "Move 1: Always start with capacity. \"We need 10k RPS with 99.9% uptime\" before naming Postgres or Redis.\nMove 2: Name your bottleneck first. \"The bottleneck is the write path\" then pick a queue + worker pool.\nMove 3: Size everything in orders of magnitude. Cache should hold 80% of hot keys, not \"a lot.\"",
-        "Move 4: Draw the data flow on the whiteboard before touching your pen. Where does the fan-out happen?\nMove 5: End with cost. \"This gives you 50ms latency at 10k RPS for 500 dollars a month.\"",
-        "I watched a senior engineer ace a design for Twitter's fan-out by writing \"fan-out cost: 1000x writes\" on slide one.\nNo framework mentioned. No tech stack read off. Just moves.",
-        "Your cheat sheet: 5 moves, 5 chances to show you think bigger than syntax.\nPractice them out loud. Record yourself. Cut the tool names.\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Replicating the caps-listicle + system-design combo from P24 with fresh moves and a practice angle will beat abstract planner advice.",
-      "breakout": "",
-      "followers": 278,
-      "views_total": 18857,
-      "ids": [
-        "18431182495145053",
-        "18158511928504618",
-        "18127672045798675",
-        "18117694495959052",
-        "17991171066104135"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T08:31:00.314106+00:00",
       "pillar": "smart",
@@ -1262,6 +1237,31 @@
         "17892486696447161"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T12:31:02.400845+00:00",
+      "pillar": "smart",
+      "hook_sig": "a refund returned 200 ok. the customer got",
+      "texts": [
+        "A refund returned 200 OK. The customer got credited twice. The gateway swore it succeeded.\n\nHere is the trap: a successful response only proves the gateway accepted the request, not that the state transition happened exactly once. Network retries, gateway-side replays, and silent duplicate processing turn \"it worked\" into \"it worked twice.\"\n\nRefunds are not idempotent by default. They become idempotent when you model them as state machines.",
+        "A refund has states. Pending, processing, succeeded, failed, and an explicit duplicate-sentinel. Every transition is guarded. Before you ever call the gateway again you check: does a succeeded or duplicate-sentinel row already exist for this refund id? If yes, stop. Do not retry. Do not reissue.\n\nThe duplicate-sentinel is the secret weapon. It is a row that says \"we sent this refund and we are not sure what happened.\" It lets you safely retry while guaranteeing exactly-once crediting downstream.",
+        "The worst duplicate-refund failure I have seen was not a missing idempotency key. It was a refund that succeeded twice because the idempotency layer lived in the application code, not the ledger. The gateway processed both, the gateway returned success on both, and the accounting system applied the credit twice because no state machine was enforcing the boundary.\n\nReconciliation is not a nightly batch job. It is the guardrail that catches the uncertain outcomes you did not write a test for.",
+        "So we reconcile aggressively. Every hour we pull the last hour of refund ids from our ledger and compare them against the gateway's reported status. Any refund marked succeeded locally but not found in the gateway? We mark it duplicate-sentinel and investigate. Any refund still pending beyond a threshold? We cancel it and alert.\n\nThis is not about preventing every failure. It is about making failures expensive for the system, not for the customer.",
+        "The fix is three lines of discipline: model refund states, reconcile uncertain outcomes, and never trust a 200 OK as proof of exactly-once. Want more of these production-grade safeguards? Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Payment-failure stories earn attention; actionable recovery rules may turn that attention into follows. End with a relevant follow CTA.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 14557,
+      "ids": [
+        "18130351831693845",
+        "18020480834729187",
+        "18012383861766429",
+        "17969668827009645",
+        "18129196573830691"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1271,5 +1271,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 14427
+  "last_views": 14557
 }

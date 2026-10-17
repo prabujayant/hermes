@@ -336,7 +336,8 @@
     "--- i shipped retry logic that looked correct",
     "things that quietly kill engineering careers:",
     "distributed tracing is a waste of engineering hours",
-    "i shipped a retry loop that looked correct"
+    "i shipped a retry loop that looked correct",
+    "a refund returned 200 ok. the customer got"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
