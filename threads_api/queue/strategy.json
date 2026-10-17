@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete SQL slowdown, paired with",
-  "pivots": 200,
+  "hypothesis": "Sticking with the proven \"dumbest bug\" story format that already drove P25 to 290 views, but pivoting away from the UUIDv4 topic family to avoid saturation and open space for fresh debate angles.",
+  "pivots": 201,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T19:31:01.095514+00:00",
-      "pillar": "smart",
-      "hook_sig": "before you add another index, run this explain",
-      "texts": [
-        "Before you add another index, run this EXPLAIN ANALYZE check. Most slow queries are not missing indexes. They are missing accurate statistics, and the planner is guessing wrong.",
-        "The trap: you see a slow query, you add an index, nothing changes. The real problem is usually a join order chosen on bad row estimates, a filter the planner thinks returns 10 rows but returns 10000, or stale stats after a bulk load.",
-        "The diagnostic: run EXPLAIN ANALYZE and compare estimated rows versus actual rows on every node. A 10x gap means the planner is flying blind. A 100x gap means the plan is actively lying to you. Focus on the node with the widest gap.",
-        "Reproducible test you can run today:\n\nCREATE TABLE t (id serial, grp int, val text);\nINSERT INTO t (grp, val) SELECT g, md5(random()::text) FROM generate_series(1, 100000) g, generate_series(1, 10);\nANALYZE t;\n\nEXPLAIN ANALYZE SELECT * FROM t WHERE grp = 50000;\n\nCheck the Seq Scan node. Estimated rows versus actual rows. What plan node surprised you? Reply with the numbers.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Specific, reproducible SQL diagnostics earn more useful comments and follows than broad database advice",
-      "breakout": "none",
-      "followers": 278,
-      "views_total": 18458,
-      "ids": [
-        "18463610983142528",
-        "17872264764637365",
-        "18114874814024352",
-        "18008981636779820",
-        "18566263111079068"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T00:01:15.971786+00:00",
       "pillar": "smart",
@@ -1268,6 +1243,31 @@
         "18119242402953016"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T04:30:58.555505+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- the dumbest sql regression i shipped wasn't",
+      "texts": [
+        "---\nThe dumbest SQL regression I shipped wasn't a missing index. It was a UUIDv4 primary key on a high-write table, used as the clustering key. The buffer pool churned so hard we dropped from 50k writes/sec to single digits within hours.",
+        "I assumed UUIDs were safe because \"distributed systems need them.\" Two years later the buffer pool was 80% full of leaf pages for a single table, and every insert fought for the same hot page. The fix was swapping to a BIGINT identity and a new clustering key. Writes returned to 50k/sec instantly.",
+        "The lesson stuck because I'd seen it before: anyone treating the primary key as an afterthought pays with random I/O. UUIDv4 as a default looks clean until you hit write contention, then it turns into a full-system slowdown that looks like everything except the real cause.",
+        "Most engineers still reach for UUIDv4 on every table because it feels future-proof. It is not. Pick a sequential key for write-heavy tables, or pay the I/O tax later when scale exposes the lie.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Sticking with the proven \"dumbest bug\" story format that already drove P25 to 290 views, but pivoting away from the UUIDv4 topic family to avoid saturation and open space for fresh debate angles.",
+      "breakout": "",
+      "followers": 281,
+      "views_total": 28653,
+      "ids": [
+        "18192615634409709",
+        "18135535756733040",
+        "18103763114197598",
+        "18191828134410140",
+        "17914215645281988"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1277,5 +1277,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 281,
-  "last_views": 28515
+  "last_views": 28653
 }

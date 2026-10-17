@@ -320,7 +320,8 @@
     "production-cost reveal: a uuidv4 index can hurt write",
     "i was chasing the wrong number. query shows",
     "--- the query took 4.2 seconds. i added",
-    "if you want to pass system design interviews,"
+    "if you want to pass system design interviews,",
+    "--- the dumbest sql regression i shipped wasn't"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
