@@ -1,33 +1,8 @@
 {
   "hypothesis": "A specific duplicate-charge failure plus a practical idempotency lesson will earn practitioner replies and revive the proven engineering-mistake format.",
-  "pivots": 203,
+  "pivots": 204,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T01:01:13.844020+00:00",
-      "pillar": "smart",
-      "hook_sig": "your query returns 12 rows. the planner estimated",
-      "texts": [
-        "Your query returns 12 rows. The planner estimated 1.\n\nEXPLAIN ANALYZE shows:\n- Estimated rows: 1\n- Actual rows: 12,487\n- Loops: 1\n\nThe nested loop join looked cheap on paper. In production it scanned 12 million rows and timed out the payment endpoint.",
-        "The mismatch came from a stale pg_statistic entry on the status column. A bulk UPDATE last week flipped 95 percent of rows to 'completed' but autovacuum had not run ANALYZE yet. The planner still thought 'pending' was selective.",
-        "First step is never a new index. Run ANALYZE on the table and recheck the plan. If estimates stay wrong, check n_distinct and most_common_vals in pg_stats. A single ANALYZE call fixed this one and dropped latency from 8 seconds to 40 milliseconds.",
-        "If ANALYZE does not close the gap, the next signal to check is the filter removal rate on the scan node, or the join order switch point. Which EXPLAIN signal should I break down next?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A compact, realistic row-estimate mismatch with a cautious next step will earn more useful comments and follows than broad query advice.",
-      "breakout": "none",
-      "followers": 278,
-      "views_total": 20863,
-      "ids": [
-        "17947158876344360",
-        "18127729444659556",
-        "18415823827084513",
-        "18074230028771245",
-        "18034644410668393"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T01:31:03.870462+00:00",
       "pillar": "smart",
@@ -1270,6 +1245,31 @@
         "18078051020427762"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T06:01:12.042753+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to become a senior engineer",
+      "texts": [
+        "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:",
+        "Own outcomes, not tickets.\n\nJuniors close tasks. Seniors move metrics. Ask what number your work changes.",
+        "Write the doc nobody wants to write.\n\nDesign docs, runbooks, postmortems. Visibility compounds faster than commits.",
+        "Delete code on purpose.\n\nEvery quarter, kill something: a flag, a service, dead code. Simplifiers get promoted.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "cohere/north-mini-code:free",
+      "hypothesis": "A specific duplicate-charge failure plus a practical idempotency lesson will earn practitioner replies and revive the proven engineering-mistake format.",
+      "breakout": "",
+      "followers": 282,
+      "views_total": 29760,
+      "ids": [
+        "18453068356123934",
+        "17985941897892331",
+        "18010395443771504",
+        "18157523824508658",
+        "18118619276064585"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1279,5 +1279,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 29619
+  "last_views": 29760
 }
