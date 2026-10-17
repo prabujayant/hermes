@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A practical recovery rule with a clear retry boundary will earn more saves and follows than an anecdote alone.",
-  "pivots": 227,
+  "hypothesis": "A concrete verify-before-retry rule will earn more saves and follows than a timeout anecdote alone.",
+  "pivots": 228,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T13:31:04.171861+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to become a senior engineer",
-      "texts": [
-        "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:",
-        "Own outcomes, not tickets.\n\nJuniors close tasks. Seniors move metrics. Ask what number your work changes.",
-        "Write the doc nobody wants to write.\n\nDesign docs, runbooks, postmortems. Visibility compounds faster than commits.",
-        "Delete code on purpose.\n\nEvery quarter, kill something: a flag, a service, dead code. Simplifiers get promoted.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A small SQL rewrite backed by comparable plan evidence will earn more useful replies and shares than abstract query diagnostics",
-      "breakout": "",
-      "followers": 279,
-      "views_total": 21815,
-      "ids": [
-        "18199944079376554",
-        "17948818281321963",
-        "18101407076058984",
-        "17992473678107555",
-        "18635810542022945"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T14:01:22.994505+00:00",
       "pillar": "smart",
@@ -1258,6 +1233,31 @@
         "18219574006353927"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T18:01:15.462348+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want ai to write code you",
+      "texts": [
+        "IF YOU WANT AI TO WRITE CODE YOU CAN SHIP, STOP PASTING BLINDLY.\n\nMEMORIZE THESE 5 RULES:",
+        "Give the model your constraints first.\n\nStack, versions, style rules, what done looks like. Vague prompts get vague code.",
+        "Review every diff like a junior wrote it.\n\nAI code looks confident and fails quietly. Read it line by line before it touches main.",
+        "Keep humans on architecture.\n\nLet AI fill functions, never design systems. You own the boundaries, it fills the boxes.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "cohere/north-mini-code:free",
+      "hypothesis": "A concrete verify-before-retry rule will earn more saves and follows than a timeout anecdote alone.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 16341,
+      "ids": [
+        "18091184774678372",
+        "18075483644481838",
+        "18130560823793481",
+        "18213192136359855",
+        "17985660176892025"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1267,5 +1267,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 16119
+  "last_views": 16341
 }
