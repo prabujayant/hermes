@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Sticking with the proven \"dumbest bug\" story format that already drove P25 to 290 views, but pivoting away from the UUIDv4 topic family to avoid saturation and open space for fresh debate angles.",
-  "pivots": 201,
+  "hypothesis": "A concrete, broadly familiar reliability failure can revive the proven engineering-mistake format while inviting practitioners to share their own retry safeguards.",
+  "pivots": 202,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T00:01:15.971786+00:00",
-      "pillar": "smart",
-      "hook_sig": "diagnostic misconception: accurate row estimates do not mean",
-      "texts": [
-        "diagnostic misconception: accurate row estimates do not mean a query is fast. check BUFFERS to see whether it is reading from disk",
-        "most engineers stop at rows estimated versus rows actual. they see a 1.2x ratio and call it good. but the planner can nail the row count and still choose a plan that hammers the storage layer. the real latency signal lives in shared read versus shared hit",
-        "run EXPLAIN (ANALYZE, BUFFERS) and look at the Buffers line. shared hit means cache. shared read means disk. a query with perfect estimates and 50,000 shared reads will stall under load while the same plan with 50,000 shared hits flies",
-        "concrete next step: if shared read is high, check whether the working set fits in shared_buffers. then verify effective_io_concurrency and random_page_cost match your storage. the fix is often config, not indexes",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Specific EXPLAIN signals paired with a clear next action earn more useful comments and follows than broad database advice. End with a focused question asking which signal readers want diagnosed next.",
-      "breakout": "none",
-      "followers": 278,
-      "views_total": 20362,
-      "ids": [
-        "18105339748991197",
-        "18334291507275002",
-        "18190485733408722",
-        "18115170674022774",
-        "17902627551669005"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T00:31:00.034025+00:00",
       "pillar": "smart",
@@ -1268,6 +1243,33 @@
         "17914215645281988"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T05:01:12.765152+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- the retry logic looked correct on paper.",
+      "texts": [
+        "--- the retry logic looked correct on paper. exponential backoff, max attempts, all the textbook patterns. shipped it to the payment gateway client and went home proud.",
+        "at 2am the gateway hiccuped for 90 seconds. our fleet of 200 instances woke up simultaneously, each retrying every 2s, 4s, 8s in perfect lockstep. the retry storm amplified the original blip into a 45-minute cascade that took down the entire checkout flow.",
+        "the bug wasn't the backoff formula. it was the missing jitter and the missing retry budget. without jitter, every client retried at the exact same millisecond. without a budget, we kept hammering a service that was already drowning. we turned a transient error into a distributed denial of service against ourselves.",
+        "fixed it three ways: full jitter on every backoff (random 0 to 2^attempt), a token-bucket retry budget per downstream (max 10% of baseline QPS), and a circuit breaker that trips after 5 consecutive failures and stays open for 30s. the next gateway blip barely registered.",
+        "what retry policy does your team actually enforce in production, and when did you last load-test it against a thundering herd?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete, broadly familiar reliability failure can revive the proven engineering-mistake format while inviting practitioners to share their own retry safeguards.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 29315,
+      "ids": [
+        "18478333819118799",
+        "18428424631144865",
+        "17912130120520295",
+        "18117100979049006",
+        "18173346679454830",
+        "17909454681555076"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1276,6 +1278,6 @@
     "mandate": "200000 views in 30 days by 2026-11-10",
     "since": "2026-10-10"
   },
-  "last_followers": 281,
-  "last_views": 28653
+  "last_followers": 282,
+  "last_views": 29315
 }

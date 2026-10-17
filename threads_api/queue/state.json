@@ -321,7 +321,8 @@
     "i was chasing the wrong number. query shows",
     "--- the query took 4.2 seconds. i added",
     "if you want to pass system design interviews,",
-    "--- the dumbest sql regression i shipped wasn't"
+    "--- the dumbest sql regression i shipped wasn't",
+    "--- the retry logic looked correct on paper."
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
