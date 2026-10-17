@@ -1,37 +1,8 @@
 {
-  "hypothesis": "A specific, reusable recovery rule will earn more saves and follows than a payment-failure anecdote",
-  "pivots": 220,
+  "hypothesis": "A specific recovery rule for ambiguous payment outcomes will earn more saves and follows than a failure anecdote alone",
+  "pivots": 221,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T10:01:16.574895+00:00",
-      "pillar": "smart",
-      "hook_sig": "copyable diagnostic: when estimated and actual rows diverge",
-      "texts": [
-        "Copyable diagnostic: when estimated and actual rows diverge by 100x, check these three causes in order: 1) missing or stale statistics, 2) correlated columns confusing the planner, 3) skewed data without histograms.",
-        "Most engineers see a seq scan, assume a missing index, and stop. The real culprit is usually the planner being lied to by bad stats. Run this first: EXPLAIN ANALYZE your query and find any node where actual rows diverge from estimated rows by more than 10x.",
-        "Cause 1 is stale statistics. PostgreSQL auto-analyze stops at 200 million rows by default. Fix: run ANALYZE VERBOSE table_name, then set ALTER TABLE table_name SET (autovacuum_analyze_scale_factor = 0.01) for tables over 10 million rows.",
-        "Cause 2 is correlated columns. If your WHERE clause filters on (status, region) but stats only track each column independently, the planner multiplies independent probabilities and gets the estimate wildly wrong. Fix: CREATE STATISTICS s1 (dependencies) ON status, region FROM orders; ANALYZE orders;",
-        "Cause 3 is skewed data without histograms. For columns with heavy skew (e.g. 99% status=active), ANALYZE still won't help if the planner cannot see the distribution. Fix: use ALTER TABLE orders ALTER COLUMN status SET STATISTICS 1000; ANALYZE; or switch to BRIN indexes for large append-only tables where range queries dominate.",
-        "The trap? Blindly adding indexes. A missing index never causes a row estimate mismatch. If your estimates are off, fix the stats first, indexes second. Stale stats waste more cycles than any missing index.",
-        "Follow @owlsky17 so you don't miss the next one.\n---"
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "An ordered, caveated fix for a familiar SQL diagnostic will earn more useful engineer replies than describing the symptom alone.",
-      "breakout": "none",
-      "followers": 278,
-      "views_total": 19915,
-      "ids": [
-        "18100689029574839",
-        "18467275504185879",
-        "18144571042603530",
-        "18091536380204504",
-        "17924207916435373",
-        "18145815376585549",
-        "18196193497399882"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T10:31:01.067404+00:00",
       "pillar": "smart",
@@ -1260,6 +1231,31 @@
         "18080286371448595"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T14:31:04.460318+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- my payment retry loop looked bulletproof on",
+      "texts": [
+        "---\nMy payment retry loop looked bulletproof on paper. Exponential backoff, max attempts, idempotency keys, all the textbook patterns.",
+        "Two years later the buffer pool was 80% fragmented. Not from traffic, not from scale, from trusting that a timeout meant failure.",
+        "A gateway timeout on a capture call is not a failure. It is a question waiting for an answer.",
+        "Recovery rule: never retry a charge until you know whether the first attempt committed. Query the gateway, check the ledger, confirm state first.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A specific recovery rule for ambiguous payment outcomes will earn more saves and follows than a failure anecdote alone",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 15015,
+      "ids": [
+        "18098113805093688",
+        "18083188319343640",
+        "18114779513039757",
+        "18131371732682603",
+        "18193783828398365"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1269,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 14791
+  "last_views": 15015
 }

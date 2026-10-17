@@ -340,7 +340,8 @@
     "a refund returned 200 ok. the customer got",
     "a gateway timeout on a capture call is",
     "if you want your side project to survive,",
-    "a payment timeout is not a failure. it"
+    "a payment timeout is not a failure. it",
+    "--- my payment retry loop looked bulletproof on"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
