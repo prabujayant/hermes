@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific payment-retry failure paired with a practical idempotency invariant will earn more practitioner replies than broad performance advice.",
-  "pivots": 207,
+  "hypothesis": "A concrete payment timeout scenario plus a precise idempotency invariant will draw more useful practitioner replies than broad retry advice.",
+  "pivots": 208,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T03:01:16.786320+00:00",
-      "pillar": "smart",
-      "hook_sig": "the real query bottleneck isn't missing indexes. it's",
-      "texts": [
-        "The real query bottleneck isn't missing indexes. It's the planner lying to you about row counts. A single estimated-versus-actual mismatch of 100x sent me down a three-day index hunt before I checked statistics.",
-        "Most engineers run EXPLAIN ANALYZE and stare at the plan shape. They miss the number that actually matters: estimated rows versus actual rows. When the ratio exceeds 10x, the planner picks the wrong join order, the wrong scan type, the wrong everything.",
-        "Run this exact check on your slowest query:\n```\nEXPLAIN (ANALYZE, BUFFERS, FORMAT TEXT)\nSELECT * FROM your_table WHERE your_column = 'value';\n```\nLook at `rows=` (estimate) vs `actual rows=` in every node. A ratio above 10x means statistics are stale or the planner lacks correlation data. Fix with `ANALYZE table` or `CREATE STATISTICS` on correlated columns.",
-        "Last week a payments query showed 50 estimated rows, 12,000 actual. The planner chose a nested loop over a hash join. `ANALYZE` on the filtered column dropped p99 from 2.3s to 40ms. What's the biggest estimate-to-actual mismatch you've caught? Reply with the ratio and the fix.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A copyable row-estimate diagnostic with a specific discussion prompt will earn SQL-focused follows better than general performance tips.",
-      "breakout": "none",
-      "followers": 278,
-      "views_total": 22117,
-      "ids": [
-        "18188674345404893",
-        "17911867962502297",
-        "18140008687544613",
-        "18136777528653392",
-        "18226754644335812"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T03:31:04.871866+00:00",
       "pillar": "smart",
@@ -1264,6 +1239,31 @@
         "18415529650081064"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T08:01:12.006015+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want behavioral rounds to remember you,",
+      "texts": [
+        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
+        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
+        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
+        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A concrete payment timeout scenario plus a precise idempotency invariant will draw more useful practitioner replies than broad retry advice.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 12725,
+      "ids": [
+        "18133080670742942",
+        "18111984884140709",
+        "18068051237604027",
+        "17916495702528274",
+        "18144021778567588"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1273,5 +1273,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 12595
+  "last_views": 12725
 }
