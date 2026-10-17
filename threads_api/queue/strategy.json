@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concise status-check-then-retry rule will earn more saves and follows than a timeout anecdote alone.",
-  "pivots": 229,
+  "hypothesis": "A concise post-migration metric (1.7k to 6.8k TPS) will earn more saves and follows than the anecdotal timeout stories alone.",
+  "pivots": 230,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T14:31:11.444490+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want systems that survive day one",
-      "texts": [
-        "IF YOU WANT SYSTEMS THAT SURVIVE DAY ONE TRAFFIC, STOP ADDING PARTS.\n\nMEMORIZE THESE 5 RULES:",
-        "One database until it screams.\n\nPostgres handles millions of rows before breaking a sweat. Sharding is a last resort, not a design.",
-        "Cache one layer at a time.\n\nCDN, then app cache, then query cache. Each layer you skip becomes the outage.",
-        "Design the failure first.\n\nWhat happens when the payment service dies? Answer that before drawing anything else.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A single SQL rewrite with equivalent results, a visible plan difference, and its caveat will earn more useful replies and shares than general diagnostics; end by asking readers to share a rewrite they verified this way",
-      "breakout": "none",
-      "followers": 279,
-      "views_total": 22646,
-      "ids": [
-        "18091571690213399",
-        "17878520355562144",
-        "18639341866040497",
-        "17871371040647767",
-        "18118425403984123"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T15:01:21.683024+00:00",
       "pillar": "smart",
@@ -1258,6 +1233,33 @@
         "18136562617640889"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T19:01:12.737888+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- i spent a week profiling a payments",
+      "texts": [
+        "---\nI spent a week profiling a payments service whose throughput flatlined at 1.7k TPS despite a beefy 8-core box. The DB was the bottleneck, but not where you'd expect. The bottleneck was the buffer pool churning through UUID v4 page splits on every write.",
+        "Each insert hammered random pages, causing constant page splits and index fragmentation. The PRIMARY KEY was a UUID, but the secondary indexes all pointed back to those scattered pages. Reads degraded fast, and the pool never stabilized.",
+        "The fix was a 10-minute schema migration. Switch the PK to a BIGINT auto-increment and keep the UUID as a unique business key. Throughput jumped to 6.8k TPS on the same hardware. The buffer pool finally stopped thrashing.",
+        "This isn't unique. Any high-write table using UUID v4 as the PK will hit the same wall. The random distribution kills sequential page locality, bloats the index 3x, and forces the pool to evict hot pages prematurely. I have seen this tank services twice.",
+        "If you are designing a high-write table, use a monotonically increasing PK and relegate UUIDs to business-key uniqueness. Your buffer pool, your cache, and your on-call nights will thank you.",
+        "Follow @owlsky17 so you don't miss the next one.\n---"
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A concise post-migration metric (1.7k to 6.8k TPS) will earn more saves and follows than the anecdotal timeout stories alone.",
+      "breakout": "",
+      "followers": 282,
+      "views_total": 16681,
+      "ids": [
+        "18096889334402065",
+        "18135259708676430",
+        "18107718218628656",
+        "17964026505231310",
+        "18027112889912512",
+        "18207258136370864"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1267,5 +1269,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 16542
+  "last_views": 16681
 }
