@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete timeout scenario plus an idempotency invariant will earn more useful practitioner replies than broad retry advice.",
-  "pivots": 209,
+  "hypothesis": "A concrete payment-timeout scenario paired with a precise idempotency invariant will earn more practitioner replies than broad retry advice.",
+  "pivots": 210,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T04:01:20.506638+00:00",
-      "pillar": "smart",
-      "hook_sig": "i used to think query performance was about",
-      "texts": [
-        "I used to think query performance was about adding more indexes. Then I spent 4 hours debugging a query that should have taken 50ms but was taking 5 seconds. The fix wasn't in the index strategy. It was in the statistics.\n\nHere's what I missed: Postgres estimated 1000 rows, but the actual result was 10 million. The planner built a nested loop join thinking it was tiny. It wasn't.",
-        "Run EXPLAIN (ANALYZE, BUFFERS) and compare estimated vs actual rows. If the ratio is > 10x, your statistics are lying to the planner. Run ANALYZE table_name; to refresh them. This catches 80% of slow queries without touching indexes.",
-        "But here's the trap: accurate estimates don't mean fast queries. I've seen perfectly estimated plans still hit disk for every row. Check BUFFERS: if you see \"Shared Disk Reads\" climbing, you're doing random I/O. The fix is often a covering index or materialized CTE, not better stats.",
-        "Most engineers see a 1000x estimate gap and immediately write CREATE INDEX. That's cargo cult optimization. The real diagnostic sequence is: 1) compare estimates, 2) check buffers for disk reads, 3) only then decide if an index helps.",
-        "The one-liner that saves hours: \"EXPLAIN ANALYZE shows you what the planner thinks, BUFFERS shows you what actually happened.\" Most slow queries are not missing indexes. They are missing accurate statistics and bad buffer strategies.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Concrete row-estimate + buffer diagnostic beats general SQL advice and attracts SQL-focused follows.",
-      "breakout": "",
-      "followers": 278,
-      "views_total": 22596,
-      "ids": [
-        "17954615064267976",
-        "18118685176934478",
-        "18107061095246018",
-        "18148125130518245",
-        "18411189667089225"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T04:30:59.071132+00:00",
       "pillar": "smart",
@@ -1264,6 +1239,31 @@
         "18436118686183309"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T09:01:16.084011+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- i shipped retry logic i thought was",
+      "texts": [
+        "---\nI shipped retry logic I thought was safe. Three lines of config, exponential backoff, max attempts. It looked bulletproof.",
+        "Then the gateway timed out on a $2,847 charge. The customer's card was billed, but our system never got the webhook. So the retry fired.",
+        "The customer got charged twice. Not because retry was wrong. Because the idempotency key expired after 24 hours.",
+        "The real invariant: idempotency keys must live at least as long as your retry window. If you retry for 72 hours, your key must persist for 72+ hours.",
+        "Timeout retries are not the bug. Missing the idempotency invariant is. Every payment system has this silent failure mode.\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A concrete payment-timeout scenario paired with a precise idempotency invariant will earn more practitioner replies than broad retry advice.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 13211,
+      "ids": [
+        "18421068535155483",
+        "18023154557952991",
+        "18080724044418610",
+        "17964117096226888",
+        "17922852846224579"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1273,5 +1273,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 13030
+  "last_views": 13211
 }

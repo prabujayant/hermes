@@ -329,7 +329,8 @@
     "a payment succeeded, the response timed out, and",
     "i thought my payment retry was a safety",
     "if you want behavioral rounds to remember you,",
-    "--- i shipped a payment retry once that"
+    "--- i shipped a payment retry once that",
+    "--- i shipped retry logic i thought was"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
