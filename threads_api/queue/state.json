@@ -313,7 +313,8 @@
     "should this request go through a queue? the",
     "--- the dumbest performance bug i've seen in",
     "if you want to master dynamic programming, stop",
-    "--- the dumbest performance bug i've shipped wasn't"
+    "--- the dumbest performance bug i've shipped wasn't",
+    "--- the dumbest performance regression i shipped wasn't"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

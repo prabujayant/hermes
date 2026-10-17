@@ -1,35 +1,8 @@
 {
-  "hypothesis": "Reusing the proven UUIDv4 PK failure story format (P29, P30) with fresh numbers and a concrete migration path will outperform the current plateau and re-accelerate both views and follower conversion.",
-  "pivots": 194,
+  "hypothesis": "A credible UUIDv4 incident paired with a careful, workload-aware migration path will earn more saves, specific comments, and followers than generic engineering advice.",
+  "pivots": 195,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T16:01:17.802015+00:00",
-      "pillar": "smart",
-      "hook_sig": "if api p99 is rising while postgres cpu",
-      "texts": [
-        "If API p99 is rising while Postgres CPU stays low, check pool wait time before adding database capacity. Most teams scale the wrong layer.",
-        "The symptom looks like a database problem. Latency climbs, errors spike, on-call gets paged. But `pg_stat_activity` shows idle connections, CPU is at 15 percent, and query plans look fine. The real bottleneck is invisible in standard dashboards.",
-        "Your application spends milliseconds waiting for a free connection from the pool. That wait time adds directly to p99 but never shows up in `EXPLAIN ANALYZE`. The database executes fast. The queue to reach it does not.",
-        "Measure it: instrument your pool library to record `wait_time_ms` per request. In HikariCP enable `poolStatsLogInterval`. In Go `database/sql` wrap `Conn()` with timing. Plot p99 wait time alongside p99 query time. They diverge when the pool is undersized.",
-        "Fix it: raise `maximumPoolSize` until wait-time p99 drops below 1ms. Then tune `minimumIdle` to absorb bursts without new connection overhead. One config change, measurable result, no new hardware.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A production symptom paired with a specific metric and a focused closing question will earn more useful replies than a broad performance claim.",
-      "breakout": "none",
-      "followers": 276,
-      "views_total": 14934,
-      "ids": [
-        "17940652383385518",
-        "18396102826166875",
-        "18108211388213819",
-        "18227694139329391",
-        "17911176198509729",
-        "18638925517015278"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-15T16:31:06.693324+00:00",
       "pillar": "smart",
@@ -1272,6 +1245,31 @@
         "18130098142625850"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-17T01:01:14.423147+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- the dumbest performance regression i shipped wasn't",
+      "texts": [
+        "---\nThe dumbest performance regression I shipped wasn't a missing index. It was a UUIDv4 primary key on a 50k-writes-per-second table. We treated the PK as a clustering key, so every insert became random I/O across the buffer pool. Latency jumped from 3ms p99 to 42ms in production.",
+        "The fix wasn't \"use UUIDs everywhere\" or \"never use UUIDs.\" It was switching that one hot table to a composite key of (tenant_id, sequence_id) and moving the UUID to a secondary unique index. Writes dropped back to 4ms p99. The migration took 6 hours with dual-write shadow tables and a blue-green cutover.",
+        "Here is the concrete tradeoff nobody tells you: UUIDv4 gives you distributed write freedom, but it murders range locality. If your workload is tenant-scoped and append-heavy, a natural composite key wins. If you genuinely need global uniqueness with random writes, keep the UUID but never let it be the clustering key. One table, one rule.",
+        "The migration playbook: add the new key as UNIQUE NOT NULL, backfill in batches with rate limiting, dual-write both keys, verify with checksum queries, then cut over in a single transaction and drop the old index. We caught three edge cases this way that a big-bang swap would have missed.",
+        "Question for you: what is the one table in your system where random writes are hiding as \"just an ID\"? Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A credible UUIDv4 incident paired with a careful, workload-aware migration path will earn more saves, specific comments, and followers than generic engineering advice.",
+      "breakout": "none",
+      "followers": 280,
+      "views_total": 27202,
+      "ids": [
+        "18145576096606843",
+        "17964494814208270",
+        "18334778863275736",
+        "18245831311315644",
+        "18106437266627468"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1281,5 +1279,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 280,
-  "last_views": 26748
+  "last_views": 27202
 }
