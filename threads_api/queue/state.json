@@ -326,7 +326,8 @@
     "--- the worst duplicate-charge bug i've seen wasn't",
     "if you want to become a senior engineer",
     "--- the worst duplicate-charge failure i've seen wasn't",
-    "a payment succeeded, the response timed out, and"
+    "a payment succeeded, the response timed out, and",
+    "i thought my payment retry was a safety"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

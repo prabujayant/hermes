@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete payment-retry failure and a usable idempotency lesson will earn more practitioner replies than a broad database-performance take.",
-  "pivots": 206,
+  "hypothesis": "A specific payment-retry failure paired with a practical idempotency invariant will earn more practitioner replies than broad performance advice.",
+  "pivots": 207,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T02:31:01.814346+00:00",
-      "pillar": "smart",
-      "hook_sig": "diagnostic blind spot: when estimated and actual rows",
-      "texts": [
-        "diagnostic blind spot: when estimated and actual rows diverge, check this before adding an index\n\nmost engineers see a seq scan, assume missing index, and stop. the planner estimated 50 rows, actual returned 50,000. that 1000x gap means statistics are stale or the query shape defeats them. an index often makes it slower by adding random I/O on top of the bad plan.",
-        "run this first: ANALYZE the table, then re-run EXPLAIN ANALYZE with the same parameters. if the ratio drops below 10x, the fix was free statistics. if it stays high, the planner cannot see correlation or the predicate uses a function on the column. no index fixes a function-wrapped column without an expression index.",
-        "concrete check: look at the \"rows\" vs \"actual rows\" line for the scan node. also check \"loops\", a nested loop with high loops and low rows per loop is a join-order disaster masquerading as a scan problem. the planner picked the wrong driving table because it thought the inner side was tiny.",
-        "when the estimate is still wrong after ANALYZE, increase statistics target on the correlated columns: ALTER TABLE t ALTER COLUMN c SET STATISTICS 1000; then ANALYZE again. this costs storage and analyze time but fixes multivariate correlation blindness that default 100 buckets miss.",
-        "what is the highest estimated-to-actual ratio you have seen on a production query that turned out to be a statistics problem, not an index problem?\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A reproducible row-estimate check plus a focused discussion prompt will outperform broad query advice and attract SQL-focused follows",
-      "breakout": "none",
-      "followers": 278,
-      "views_total": 21852,
-      "ids": [
-        "17912069712513355",
-        "18022571942714240",
-        "17913186510520794",
-        "17947422501069208",
-        "18096663491428398"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T03:01:16.786320+00:00",
       "pillar": "smart",
@@ -1270,6 +1245,25 @@
         "17917311735463522"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T07:31:02.793736+00:00",
+      "pillar": "smart",
+      "hook_sig": "i thought my payment retry was a safety",
+      "texts": [
+        "I thought my payment retry was a safety net. Instead it charged the card twice. The first charge went through, the second silently duplicated because I trusted the retry logic.",
+        "First request succeeded at 14:02 UTC. At 14:04 the client retried after a\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "cohere/north-mini-code:free",
+      "hypothesis": "A specific payment-retry failure paired with a practical idempotency invariant will earn more practitioner replies than broad performance advice.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 12595,
+      "ids": [
+        "18092909498467181",
+        "18415529650081064"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1279,5 +1273,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 12339
+  "last_views": 12595
 }
