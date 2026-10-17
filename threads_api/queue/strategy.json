@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete rule for ambiguous payment outcomes will earn more saves and follows than a failure anecdote alone",
-  "pivots": 222,
+  "hypothesis": "A concrete reconciliation rule for ambiguous payment outcomes will earn more saves and follows than a failure anecdote alone. End with a specific question about how readers handle uncertain outcomes.",
+  "pivots": 223,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T11:01:15.853311+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you write sql like this, your queries",
-      "texts": [
-        "IF YOU WRITE SQL LIKE THIS, YOUR QUERIES WILL ALWAYS BE SLOW. HERE IS THE ONE PATTERN TO AVOID:\nWhen you join a table to itself or use a subquery, the planner sees a flat list of conditions. It has no idea which conditions depend on each other. So it multiplies selectivities like they are independent events. That is why a query with two filters, each 10% selective, becomes a 1% guess instead of 10%. The fix is not more indexes. The fix is telling the planner what it cannot guess.",
-        "I spent three days chasing a 50ms query that took 5 seconds. Same data. Same indexes. The only difference was how I wrote the WHERE clause. The planner estimated 1 row, returned 12,487. EXPLAIN ANALYZE showed a nested loop join where every inner scan was a full table walk. The root cause was not the join. It was the selectivity math blowing up on correlated predicates.",
-        "Here is the concrete fix that dropped the query from 5 seconds to 48ms. Wrap correlated conditions so the planner treats them as a unit instead of multiplying them apart. Use a CTE or a lateral join to isolate the dependent filter, then index the joined columns. The planner stops guessing and starts using the index. This is the single change that fixes 80% of the slow queries I audit.",
-        "Most engineers add indexes when queries slow down. That is the wrong reflex. Indexes hide the real problem: the planner is making bad guesses because your SQL hides the relationships between conditions. The fix is rewriting the query so the dependencies are visible, not adding more indexes to paper over them.",
-        "What query pattern do you see break the planner most often in your codebase? Drop the pattern and I will show you the rewrite that fixes it.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A concrete SQL rewrite with a before-and-after timing will beat the abstraction-heavy diagnostic posts and earn high reply rates by inviting specific query examples.",
-      "breakout": "",
-      "followers": 278,
-      "views_total": 20481,
-      "ids": [
-        "17999067345032361",
-        "18104671904369084",
-        "18146059096574143",
-        "18127438798862310",
-        "18193818055393612"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T11:31:03.271868+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,31 @@
         "17904211899656404"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T15:31:10.875349+00:00",
+      "pillar": "smart",
+      "hook_sig": "costly-mistake rule: a timeout after capture is not",
+      "texts": [
+        "costly-mistake rule: a timeout after capture is not proof the charge failed; reconcile before retrying",
+        "the gateway returns a 504 on capture. your code sees timeout, assumes failure, retries the capture. the first request actually succeeded. customer gets charged twice. this is not theoretical. it happens every day on Stripe, Adyen, Braintree.",
+        "the rule: one stable idempotency key per logical charge attempt. on timeout, do NOT retry the capture. instead, poll GET /charges/{id} or wait for the webhook. only retry when the provider explicitly returns FAILED or the charge is absent after the idempotency window expires.",
+        "every retry library defaults to retrying on 5xx and timeout. they treat \"unknown\" as \"safe to retry.\" it is not safe. the only safe retry is one the provider guarantees is idempotent and you have verified the prior attempt did not settle.",
+        "why does the entire ecosystem default to the dangerous behavior? Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete reconciliation rule for ambiguous payment outcomes will earn more saves and follows than a failure anecdote alone. End with a specific question about how readers handle uncertain outcomes.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 15322,
+      "ids": [
+        "17941756446101562",
+        "18098000969556901",
+        "18134599204699905",
+        "18129226303796609",
+        "18114629594039473"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 15121
+  "last_views": 15322
 }
