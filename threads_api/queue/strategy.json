@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A practical reconciliation rule will earn more saves and follows than a failure anecdote alone.",
-  "pivots": 224,
+  "hypothesis": "A specific, usable payment-recovery rule will earn more saves and follows than a failure anecdote alone.",
+  "pivots": 225,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T12:01:22.047694+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to design like a senior,",
-      "texts": [
-        "IF YOU WANT TO DESIGN LIKE A SENIOR, STOP DRAWING BOXES FIRST.\n\nMEMORIZE THESE 5 QUESTIONS:",
-        "How many users, really.\n\nTen thousand or ten million changes every answer. Demand the number before the diagram.",
-        "What breaks first at 10x.\n\nEvery design has a weakest link. Name it out loud or the interviewer will.",
-        "What you would delete.\n\nGreat designs remove parts. If every box is essential, you haven't thought hard enough.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A reproducible SQL rewrite with visible plan evidence will draw more useful replies and shares than abstract query diagnostics.",
-      "breakout": "none",
-      "followers": 278,
-      "views_total": 20880,
-      "ids": [
-        "17993535150063331",
-        "18096568526118342",
-        "18114108887013205",
-        "18128859635481870",
-        "18139074976552100"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T12:31:04.990034+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,33 @@
         "18073914884751740"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T16:31:04.655615+00:00",
+      "pillar": "smart",
+      "hook_sig": "operational rule: after a capture timeout, check the",
+      "texts": [
+        "Operational rule: after a capture timeout, check the provider balance before retrying.",
+        "Most engineers retry on timeout and call it a day. I did too, until I learned that a gateway timeout on capture is not a failure signal. It is a question mark.",
+        "The money may have moved, or it may not. Treating it as a hard failure and retrying blind is how you double-charge a customer. I shipped retry logic that looked correct on paper. It went home thinking it was solid.",
+        "Here is the rule I now enforce on every payments service:\n1. On capture timeout, fetch the transaction status using the SAME idempotency key.\n2. If the provider reports success, mark it settled and do NOT retry.\n3. If the provider reports pending, wait and poll up to the configured window.\n4. Only retry if the provider returns a hard failure code.",
+        "The idempotency key lived in the service layer, so reconciliation was one extra call. No more ghost charges. No more angry customers. Just a question mark resolved before a retry.",
+        "Follow @owlsky17 so you don't miss the next one.\n---"
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A specific, usable payment-recovery rule will earn more saves and follows than a failure anecdote alone.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 15610,
+      "ids": [
+        "18121294888887790",
+        "18630165805023589",
+        "18218399704351321",
+        "18102118298378703",
+        "17944264440086643",
+        "18103433177643857"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1267,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 15447
+  "last_views": 15610
 }
