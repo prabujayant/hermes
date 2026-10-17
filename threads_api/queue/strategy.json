@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete verify-before-retry rule will earn more saves and follows than a timeout anecdote alone.",
-  "pivots": 228,
+  "hypothesis": "A concise status-check-then-retry rule will earn more saves and follows than a timeout anecdote alone.",
+  "pivots": 229,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T14:01:22.994505+00:00",
-      "pillar": "smart",
-      "hook_sig": "stop rewriting queries when the planner already knew",
-      "texts": [
-        "Stop rewriting queries when the planner already knew the answer. Here is one rewrite that flipped a 4.2s scan into a 42ms index-only scan, using the same data and the same Postgres instance. The change: a single predicate pushed inside a CTE. No indexes added, no hardware touched.",
-        "The original query: SELECT user_id, event_type, created_at FROM events WHERE org_id = 42 AND created_at >= '2026-09-01' ORDER BY created_at DESC LIMIT 100; Plan said: Index Scan Backward using events_created_at_idx on events (cost=0.43..12500 rows=50000 width=24) (actual time=0.040..4200.000 rows=100 loops=1) Filter: (org_id = 42) Rows Removed by Filter: 2.4M",
-        "The rewrite: WITH filtered AS (SELECT user_id, event_type, created_at FROM events WHERE org_id = 42 AND created_at >= '2026-09-01') SELECT user_id, event_type, created_at FROM filtered ORDER BY created_at DESC LIMIT 100; Plan said: CTE Scan on filtered (cost=0.43..125.00 rows=100 width=24) (actual time=0.040..0.042 rows=100 loops=1) Buffers: shared hit=3",
-        "Why it worked: the CTE forced the planner to evaluate org_id = 42 first, collapsing 2.4M rows before the sort. Without the CTE, Postgres used the timestamp index and filtered 2.4M rows afterward. The data was identical, the stats were identical, the only variable was query structure.",
-        "This will not always help. When org_id has low cardinality or when you already have a composite index (org_id, created_at), the CTE adds overhead. The win here came from a single-column timestamp index on a high-write events table. What is one rewrite that surprised you with a 10x plan change? Share it below.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A narrowly scoped SQL rewrite with comparable plan evidence will earn more useful replies and shares than general query diagnostics.",
-      "breakout": "none",
-      "followers": 279,
-      "views_total": 22255,
-      "ids": [
-        "18118740763971452",
-        "18118975642757145",
-        "18117403882958423",
-        "18359875054220847",
-        "17959022664256409"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T14:31:11.444490+00:00",
       "pillar": "smart",
@@ -1258,6 +1233,31 @@
         "17985660176892025"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T18:31:04.719353+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- i shipped a retry loop that retried",
+      "texts": [
+        "---\nI shipped a retry loop that retried on every gateway timeout. Then an $847 charge hit twice, 27 hours apart, both idempotent under the same key, both settled by the gateway.",
+        "Timeouts are not failures. They are question marks. The gateway accepted the charge, the network dropped the ack, and your code sees nothing. Retrying blindly just doubles the bet on a coin flip you never meant to place.",
+        "The only safe retry rule I ship now: before you retry a capture, call the gateway's status-check endpoint with the same idempotency key. If it returns settled, stop. If it returns pending, retry. If it returns unknown, escalate to a human and hold the funds.",
+        "I used to trust exponential backoff and idempotency keys as enough. They protect against duplicates only when you know which side dropped the packet. Without a status check, you're gambling on the gateway's internal state. Most teams never instrument this path.",
+        "Follow @owlsky17 so you don't miss the next one.\n---"
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A concise status-check-then-retry rule will earn more saves and follows than a timeout anecdote alone.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 16542,
+      "ids": [
+        "18099056795639559",
+        "18033175442899894",
+        "17937875175126943",
+        "18105204221298082",
+        "18136562617640889"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1267,5 +1267,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 16341
+  "last_views": 16542
 }

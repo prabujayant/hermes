@@ -348,7 +348,8 @@
     "operational rule: after a capture timeout, check the",
     "if you want to pass system design interviews,",
     "production rule: a timeout means unknown, not failed.",
-    "if you want ai to write code you"
+    "if you want ai to write code you",
+    "--- i shipped a retry loop that retried"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
