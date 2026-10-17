@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A practical rule for resolving ambiguous payment outcomes will earn more saves and follows than an anecdote alone.",
-  "pivots": 226,
+  "hypothesis": "A practical recovery rule with a clear retry boundary will earn more saves and follows than an anecdote alone.",
+  "pivots": 227,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T13:01:26.398626+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to pass system design interviews,",
-      "texts": [
-        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
-        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
-        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
-        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "cohere/north-mini-code:free",
-      "hypothesis": "A small SQL rewrite backed by comparable plan evidence will earn more useful replies and shares than abstract query diagnostics",
-      "breakout": "",
-      "followers": 278,
-      "views_total": 21460,
-      "ids": [
-        "18640002385040807",
-        "17992323120105810",
-        "17885245962623129",
-        "18609693823064745",
-        "18019580513948320"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T13:31:04.171861+00:00",
       "pillar": "smart",
@@ -1258,6 +1233,31 @@
         "18116409653011815"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T17:28:45.004877+00:00",
+      "pillar": "smart",
+      "hook_sig": "production rule: a timeout means unknown, not failed.",
+      "texts": [
+        "production rule: a timeout means unknown, not failed. most teams retry and double-charge. the safe path is a decision tree, not a guess.",
+        "the gateway accepted the charge. the network dropped the ack. your code sees nothing but a socket timeout. retrying blindly is how you charge twice. the only honest state is unknown.",
+        "decision tree for capture timeout:\n1. persist the attempt with idempotency key and status=pending\n2. call the gateway's reconciliation endpoint (not retry capture)\n3. if reconciled=succeeded -> mark captured, notify customer\n4. if reconciled=failed -> safe to retry capture once\n5. if reconciliation times out -> queue for manual review, alert on-call",
+        "the trap: treating reconciliation as optional. it is the only source of truth. your database is a log of intent. the gateway is the ledger. when they disagree, the gateway wins. build the queue, run the cron, sleep at night.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A practical recovery rule with a clear retry boundary will earn more saves and follows than an anecdote alone.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 16119,
+      "ids": [
+        "18118735393937822",
+        "17875722477583841",
+        "18087524318295045",
+        "18008901995970056",
+        "18219574006353927"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1267,5 +1267,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 15857
+  "last_views": 16119
 }
