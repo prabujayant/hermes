@@ -343,7 +343,8 @@
     "a payment timeout is not a failure. it",
     "--- my payment retry loop looked bulletproof on",
     "i shipped retry logic that retried on every",
-    "costly-mistake rule: a timeout after capture is not"
+    "costly-mistake rule: a timeout after capture is not",
+    "operational rule: after a payment timeout, reconcile by"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete reconciliation rule for ambiguous payment outcomes will earn more saves and follows than a failure anecdote alone. End with a specific question about how readers handle uncertain outcomes.",
-  "pivots": 223,
+  "hypothesis": "A practical reconciliation rule will earn more saves and follows than a failure anecdote alone.",
+  "pivots": 224,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T11:31:03.271868+00:00",
-      "pillar": "smart",
-      "hook_sig": "things ai coding assistants can't tell you (so",
-      "texts": [
-        "THINGS AI CODING ASSISTANTS CAN'T TELL YOU (SO VERIFY THEM YOURSELF):",
-        "Whether the code actually runs.\n\nIt completes patterns, it doesn't execute. Run everything before trusting anything.",
-        "Whether the dependencies exist.\n\nHallucinated imports and phantom APIs are the number one AI bug. Check every import.",
-        "Whether it fits your codebase.\n\nGenerated code ignores your conventions. Adapt it to your style or it rots on contact.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A verifiable SQL before-and-after plus an invitation to share a query plan will earn more specific replies than abstract diagnostics.",
-      "breakout": "none",
-      "followers": 278,
-      "views_total": 20683,
-      "ids": [
-        "18014704082972656",
-        "18128208097876072",
-        "18366983752300409",
-        "17924872380428742",
-        "17906376423591309"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T12:01:22.047694+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,31 @@
         "18114629594039473"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T16:01:14.382450+00:00",
+      "pillar": "smart",
+      "hook_sig": "operational rule: after a payment timeout, reconcile by",
+      "texts": [
+        "operational rule: after a payment timeout, reconcile by provider reference before retrying. most teams retry on timeout and hope idempotency saves them. it won't when the gateway captured but the response never arrived.",
+        "the rule is simple. on any timeout after sending a capture or charge call: 1. fetch the transaction by your idempotency key from the provider, 2. if a provider reference exists, treat it as success and record it locally, 3. if no reference exists, safe to retry with the same key. never assume timeout means failure.",
+        "this handles the ambiguous middle where the gateway processed the card but the network ate the 200. your local DB shows pending, the provider shows succeeded. reconciling by provider reference closes the gap. skipping this step is how double charges slip into production.",
+        "what do you do when the provider lookup itself times out or returns an error? do you queue for manual review, escalate to on-call, or have an automated fallback rule?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A practical reconciliation rule will earn more saves and follows than a failure anecdote alone.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 15447,
+      "ids": [
+        "17929609995421409",
+        "18023946860926626",
+        "18130770046762541",
+        "18138797641725896",
+        "18073914884751740"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 15322
+  "last_views": 15447
 }
