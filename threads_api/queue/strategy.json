@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete, broadly familiar reliability failure can revive the proven engineering-mistake format while inviting practitioners to share their own retry safeguards.",
-  "pivots": 202,
+  "hypothesis": "A specific duplicate-charge failure plus a practical idempotency lesson will earn practitioner replies and revive the proven engineering-mistake format.",
+  "pivots": 203,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T00:31:00.034025+00:00",
-      "pillar": "smart",
-      "hook_sig": "diagnostic blind spot: a large gap between estimated",
-      "texts": [
-        "diagnostic blind spot: a large gap between estimated and actual rows is a clue, not a verdict. Most engineers see 1000x ratio and immediately reach for CREATE INDEX. The planner is not lying to you. It is working with stale data. The fix starts with pg_stat_clear_snapshot and a fresh ANALYZE, not a new index.",
-        "your EXPLAIN ANALYZE shows Seq Scan with rows=1 actual=50000. Classic estimate miss. Before you touch indexes, run this:\n\nSELECT schemaname, tablename, last_analyze, last_autoanalyze, n_dead_tup\nFROM pg_stat_user_tables\nWHERE schemaname = 'public';\n\nIf last_analyze is hours or days old while n_dead_tup keeps climbing, autovacuum is not keeping up. That is your real bottleneck.",
-        "autovacuum defaults are conservative. For high-churn tables, tune per-table:\n\nALTER TABLE orders SET (\n  autovacuum_vacuum_scale_factor = 0.01,\n  autovacuum_analyze_scale_factor = 0.005,\n  autovacuum_vacuum_cost_delay = 2,\n  autovacuum_vacuum_cost_limit = 2000\n);\n\nLower scale factors trigger analyze sooner. Lower cost_delay with higher cost_limit lets it work faster without starving queries. Monitor pg_stat_progress_vacuum to verify it runs.",
-        "after ANALYZE, re-run EXPLAIN ANALYZE. Same plan? Estimate now close to actual? Good. The planner can now cost alternatives correctly. If it still picks a bad plan, then and only then consider indexes, statistics targets, or extended statistics. The order matters: fresh stats first, schema changes second.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete estimate-versus-actual example with a cautious next step will earn more useful comments and follows than broad query advice; end by asking which EXPLAIN signal readers want diagnosed next.",
-      "breakout": "none",
-      "followers": 278,
-      "views_total": 20599,
-      "ids": [
-        "18002426777806535",
-        "18356006326170790",
-        "18106174025255634",
-        "18641255521024847",
-        "18111687305601980"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T01:01:13.844020+00:00",
       "pillar": "smart",
@@ -1270,6 +1245,31 @@
         "17909454681555076"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T05:31:00.083611+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- the worst duplicate-charge bug i've seen wasn't",
+      "texts": [
+        "---\nThe worst duplicate-charge bug I've seen wasn't a retry race. It was an idempotency key that expired after 24 hours. A customer got charged $847 twice because their first attempt sat in a queue longer than the key lived.",
+        "Retry logic looks correct on paper until the network lies to you. We shipped a payments service that retried on any 5xx, including 502s from a gateway that had already captured the funds. The idempotency key was scoped per API key, so a rotated token meant a fresh key, and a fresh charge.",
+        "The fix wasn't more retries. It was a durable idempotency table keyed on (provider_transaction_id, amount_cents) with a unique constraint. Any duplicate insert fails fast, no race, no double charge, survives token rotation and 24h timeouts.",
+        "What's the idempotency key strategy you ship on day one of a payments project? Most teams treat it as an afterthought and pay for it later.",
+        "Follow @owlsky17 so you don't miss the next one.\n---"
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A specific duplicate-charge failure plus a practical idempotency lesson will earn practitioner replies and revive the proven engineering-mistake format.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 29619,
+      "ids": [
+        "18116936672011232",
+        "18162305548435940",
+        "18122332117940531",
+        "18101387675641438",
+        "18078051020427762"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1279,5 +1279,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 29315
+  "last_views": 29619
 }
