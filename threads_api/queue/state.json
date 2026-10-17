@@ -333,7 +333,8 @@
     "--- i shipped retry logic i thought was",
     "things hiring managers can't tell from your resume",
     "--- my idempotency key was a customer id",
-    "--- i shipped retry logic that looked correct"
+    "--- i shipped retry logic that looked correct",
+    "things that quietly kill engineering careers:"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

@@ -1,35 +1,8 @@
 {
   "hypothesis": "A timeout example plus the same-operation/same-key invariant and a key-expiry caveat will prompt more practitioner replies than general retry advice",
-  "pivots": 213,
+  "pivots": 214,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T06:31:00.052990+00:00",
-      "pillar": "smart",
-      "hook_sig": "i'll analyze what failed and fix it. the",
-      "texts": [
-        "I'll analyze what failed and fix it. The issue was likely weak hooks or not matching a proven format. Let me craft a stronger thread using the Matt Pocock format (plain words + concrete fix) which my data shows works well for SQL posts.",
-        "Your query plan shows a Seq Scan on a 50-million-row table. Your instinct screams \"missing index.\" But the EXPLAIN ANALYZE output tells a different story.\n\nEstimated rows: 1. Actual rows: 12,487.\n\nThat 12,000x gap isn't a missing index problem. It's a statistics problem.",
-        "Here is what is really happening. PostgreSQL's planner builds cost estimates based on table statistics. When those statistics are stale or missing, the planner thinks 1 row matches your WHERE clause. So it picks a Nested Loop expecting to iterate once.\n\nInstead it iterates 12,487 times. What should have been an Index Scan becomes a full table scan.",
-        "The fix is one command run during low traffic:\n\nANALYZE VERBOSE table_name;\n\nThis refreshes the statistics the planner uses. After this, the same query estimated 12,000 rows and chose a Hash Join with an Index Scan. Runtime dropped from 8 seconds to 47 milliseconds.",
-        "But here is the trap. Running ANALYZE on every table every day kills performance. You need targeted updates.\n\nCreate a cron job that runs ANALYZE only on tables with high write churn. Use pg_stat_user_tables to find tables where n_tup_upd + n_tup_del exceeds a threshold since the last ANALYZE.",
-        "Most engineers see a slow query and immediately write CREATE INDEX. They never check if the planner is lying to them first.\n\nThe real bottleneck isn't missing indexes. It's the planner making decisions on outdated information.\n\nCheck your statistics age before you add another index.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Matt Pocock plain-words + concrete fix format beats listicle hooks for SQL diagnostic posts, citing P26 and P28 which proved row-estimate interest converts to views.",
-      "breakout": "",
-      "followers": 278,
-      "views_total": 24101,
-      "ids": [
-        "18176889037444006",
-        "18440723266179173",
-        "18453691912192341",
-        "18129364444889316",
-        "17883438408522866",
-        "18647181259036136"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T07:01:13.942714+00:00",
       "pillar": "smart",
@@ -1264,6 +1237,31 @@
         "18075601361729469"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T11:01:12.743595+00:00",
+      "pillar": "smart",
+      "hook_sig": "things that quietly kill engineering careers:",
+      "texts": [
+        "THINGS THAT QUIETLY KILL ENGINEERING CAREERS:",
+        "Never asking questions.\n\nSilent confusion ships bugs. The fastest engineers ask the dumb question on day one.",
+        "Avoiding code review feedback.\n\nDefensiveness freezes growth. Treat every comment as free mentoring.",
+        "Staying comfortable one level too long.\n\nIf you are the expert in every room, you are in the wrong rooms.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A timeout example plus the same-operation/same-key invariant and a key-expiry caveat will prompt more practitioner replies than general retry advice",
+      "breakout": "",
+      "followers": 282,
+      "views_total": 13982,
+      "ids": [
+        "18187298092416666",
+        "18114425795141503",
+        "17964419004204651",
+        "18091936415692801",
+        "18128586596307203"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1273,5 +1271,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 13901
+  "last_views": 13982
 }
