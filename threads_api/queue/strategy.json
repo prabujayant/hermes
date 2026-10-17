@@ -1,33 +1,8 @@
 {
   "hypothesis": "A concrete payment-timeout scenario paired with a precise idempotency invariant will earn more practitioner replies than broad retry advice.",
-  "pivots": 210,
+  "pivots": 211,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T04:30:59.071132+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- your query returns 12 rows. the planner",
-      "texts": [
-        "---\nYour query returns 12 rows. The planner estimated 1.\nEXPLAIN ANALYZE shows:\n- Estimated rows: 1\n- Actual rows: 12,487\n- Loops: 1\nThe nested loop join looked fine on paper. It was a death by a thousand cuts.",
-        "The gap between estimated and actual rows is the single most ignored signal in SQL performance.\nA 10x ratio gets a shrug.\nA 1000x ratio gets a CREATE INDEX.\nBoth are wrong.\nThe ratio tells you the statistics are lying, not that the index is missing.",
-        "When estimates are off by orders of magnitude, the planner is working from outdated or sampled statistics.\nRun ANALYZE on the table, or better, increase default_statistics_target for the join keys.\nIn one case, bumping it from 100 to 500 cut a 12-second query to 0.4 seconds.\nNo new indexes. No schema changes.",
-        "Here is the diagnostic checklist I run every time estimates diverge:\n1. EXPLAIN ANALYZE, compare estimated vs actual rows.\n2. If the ratio exceeds 10x, do NOT add an index yet.\n3. Run ANALYZE table_name.\n4. If still off, increase default_statistics_target for the relevant columns.\n5. Re-run EXPLAIN ANALYZE.\nIndexes are the symptom fix. Statistics are the cause fix.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Matt Pocock explain-in-plain-words + concrete fix beats listicle hooks for SQL posts, citing P26 and P28 as proof of row-estimate interest.",
-      "breakout": "",
-      "followers": 278,
-      "views_total": 22846,
-      "ids": [
-        "18147267562605228",
-        "17897937486607557",
-        "18076018598464285",
-        "18016609733748028",
-        "17954571084255579"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T05:01:15.218490+00:00",
       "pillar": "smart",
@@ -1264,6 +1239,31 @@
         "17922852846224579"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T09:31:02.347693+00:00",
+      "pillar": "smart",
+      "hook_sig": "things hiring managers can't tell from your resume",
+      "texts": [
+        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
+        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
+        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
+        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A concrete payment-timeout scenario paired with a precise idempotency invariant will earn more practitioner replies than broad retry advice.",
+      "breakout": "",
+      "followers": 282,
+      "views_total": 13408,
+      "ids": [
+        "17965826081978895",
+        "18126023698903175",
+        "17976007401144931",
+        "18627721963059094",
+        "18023629301713007"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1273,5 +1273,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 13211
+  "last_views": 13408
 }
