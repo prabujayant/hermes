@@ -1,35 +1,8 @@
 {
-  "hypothesis": "Payment-failure stories earn attention; actionable recovery rules may turn that attention into follows. End with a relevant follow CTA.",
-  "pivots": 217,
+  "hypothesis": "Concrete recovery rules will convert interest in payment-failure stories into follows better than another incident retelling.",
+  "pivots": 218,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T08:31:00.314106+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to design a url shortener,",
-      "texts": [
-        "IF YOU WANT TO DESIGN A URL SHORTENER, STOP REPEATING TEXTBOOK ANSWERS. PICK ONE OF THESE FIVE TRADEOFFS AND DEFEND IT:",
-        "You run a URL shortener doing 10M writes/day, 100M reads/day. Latency SLA: 50ms p99. Which do you pick first?\n\nA) Auto-increment IDs in Postgres (sequential, cache-friendly)\nB) Base62-encoded random tokens (unguessable, but random I/O on inserts)\nC) Hash-based deterministic IDs (no collisions, but reveals data)\n\nPick one and say why. Most engineers pick B and die on the insert-hotspot hill.",
-        "Now the data layer. Same traffic. Which wins?\n\nA) Single Postgres with a BRIN index on created_at (cheap, but slow range scans)\nB) Postgres + Redis cache for hot links (fast, but cache invalidation hell)\nC) NoSQL like Cassandra (linear scale, but eventual consistency breaks redirects)\n\nThe textbook says \"use Redis.\" Real systems say \"depends on your hit rate.\" What is yours?",
-        "Write path. 10M/day = 115 writes/second. How do you shard?\n\nA) Hash the short code across 4 Postgres shards (even load, cross-shard joins suck)\nB) Range-shard by creation time (hot shard on writes, cold reads)\nC) One giant Postgres with async replication (simple, but single point of failure)\n\nIf you picked C, what happens when the master dies during a spike?",
-        "Redirect path. 100M reads/day. 95% are repeats. How do you serve them?\n\nA) CDN with 24h TTL (fast, but stale links hurt)\nB) In-memory LRU cache in the app (fast, but loses cache on restart)\nC) Edge functions with KV store (globally distributed, but cold starts)\n\nIf you picked A, how do you invalidate a malicious link in under 5 minutes?",
-        "The five tradeoffs above are not theoretical. They are the five decisions that separate a toy shortener from one that survives real traffic.\n\nPick one tradeoff you would change and why. The answer reveals your real system design instincts.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A specific, reusable system-design exercise with a clear comment prompt will outperform abstract advice.",
-      "breakout": "none",
-      "followers": 278,
-      "views_total": 19244,
-      "ids": [
-        "18135068863640434",
-        "18079716191707101",
-        "18093018350680664",
-        "18109800401461203",
-        "18117919954782793",
-        "18093734204187139"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T09:01:20.383927+00:00",
       "pillar": "smart",
@@ -1262,6 +1235,31 @@
         "18129196573830691"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T13:01:15.100466+00:00",
+      "pillar": "smart",
+      "hook_sig": "a gateway timeout on a capture call is",
+      "texts": [
+        "A gateway timeout on a capture call is not a failure signal. It is a question mark. The money may have moved, or it may not. Treating it as a hard failure and retrying blindly is how you double-charge customers.",
+        "The safe recovery sequence starts before the first request leaves your service. Generate an idempotency key per business operation, not per HTTP attempt. Store it with the payment intent, the amount, and a pending status. This key is your source of truth for every subsequent decision.",
+        "When the timeout hits, do not retry the capture. Call the gateway's status endpoint with the same idempotency key. Most major providers (Stripe, Adyen, Braintree) support this. If the status returns succeeded, mark the intent complete and move on. If it returns failed or not found, then you may safely retry the capture once with the same key.",
+        "If the status endpoint itself times out or returns an ambiguous state, pause. Write a reconciliation job that runs every five minutes. It queries the gateway for all intents in pending state older than two minutes, compares against your ledger, and resolves discrepancies. This is the step most teams skip. Which step does your system miss?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Concrete recovery rules will convert interest in payment-failure stories into follows better than another incident retelling.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 14634,
+      "ids": [
+        "18030520283909345",
+        "18128978566859493",
+        "18109117892628129",
+        "18114854882014685",
+        "18021201767925176"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1271,5 +1269,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 14557
+  "last_views": 14634
 }
