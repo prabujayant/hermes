@@ -1,35 +1,8 @@
 {
-  "hypothesis": "Specific backend failure",
+  "hypothesis": "Reusing the proven UUIDv4 PK failure story format (P29, P30) with fresh numbers and a concrete migration path will outperform the current plateau and re-accelerate both views and follower conversion.",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T15:31:08.365520+00:00",
-      "pillar": "smart",
-      "hook_sig": "high p99 latency does not mean your queries",
-      "texts": [
-        "High p99 latency does not mean your queries are slow. It means sessions are stuck waiting for something, and most teams waste weeks chasing the wrong bottleneck. Here is how to tell the difference in 3 minutes.",
-        "Check pg_stat_activity where state = 'active'. If you see a swarm of sessions all running the same query but p99 is sky-high, the queries are likely slow. But if active sessions are few and p99 is still bad, the bottleneck is upstream: connection-pool exhaustion or lock contention.",
-        "Run this query: select wait_event_type, wait_event, count(*) from pg_stat_activity where wait_event is not null group by wait_event_type, wait_event order by count desc. If you see a flood of 'Lock', 'LWLock', or 'BufferPin' waits, your queries are slow. If you see 'Client', 'Socket', or 'Timeout' waits dominating, your connection pool is exhausted.",
-        "The tell: connection-pool exhaustion shows up as sessions sitting idle in transaction or waiting on Client/Socket events. Slow queries show up as long-running active states with heavy CPU or I/O wait events. One is a resource-starvation problem, the other is a query-efficiency problem. Fix the wrong one and you will stay stuck.",
-        "Which wait event shows up most in your production pg_stat_activity dumps? Drop the exact wait_event_type and wait_event you are seeing. If you are unsure, run the query above and paste your top three rows.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A concrete production symptom, a verifiable diagnostic signal, and a focused question will earn more",
-      "breakout": "none",
-      "followers": 275,
-      "views_total": 14414,
-      "ids": [
-        "17911045122552374",
-        "18124843327822723",
-        "18079508513393402",
-        "17941029801365256",
-        "18011521154965942",
-        "18117340723977354"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-15T16:01:17.802015+00:00",
       "pillar": "smart",
@@ -1274,6 +1247,31 @@
         "18148573237518103"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-17T00:31:03.157079+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- the dumbest performance bug i've shipped wasn't",
+      "texts": [
+        "---\nThe dumbest performance bug I've shipped wasn't a missing index. It was a UUIDv4 primary key on a 500K-row writes/day table, used as the clustering key. Postgres couldn't page-locate, so every insert became a random write across 12GB of RAM.",
+        "The page split stats were silent, the query plans looked fine, and pgbadger showed nothing alarming. Two weeks in production the cache hit ratio dropped to 62 percent and latency doubled. The fix took five minutes: switch the PK to a bigint sequence and add a separate uuid column with a unique index.",
+        "UUIDv4 as PK = random inserts = constant page splits = cache eviction. The buffer pool thrashes because rows scatter instead of landing in chronological order. You do not notice this at 100 rows/s. You absolutely notice it at 5K rows/s.",
+        "Here is the exact migration path I use now on every write-heavy table: bigint PK as clustering key, uuid column with unique index for external IDs, and a composite index on (created_at, id) for range scans. It is three lines of SQL and it saves your buffer pool.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Reusing the proven UUIDv4 PK failure story format (P29, P30) with fresh numbers and a concrete migration path will outperform the current plateau and re-accelerate both views and follower conversion.",
+      "breakout": "",
+      "followers": 280,
+      "views_total": 26748,
+      "ids": [
+        "18002304410808477",
+        "17935453752402566",
+        "18137498827651642",
+        "18118387213767215",
+        "18130098142625850"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1283,5 +1281,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 280,
-  "last_views": 26696
+  "last_views": 26748
 }
