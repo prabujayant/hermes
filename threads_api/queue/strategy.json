@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific, usable payment-recovery rule will earn more saves and follows than a failure anecdote alone.",
-  "pivots": 225,
+  "hypothesis": "A practical rule for resolving ambiguous payment outcomes will earn more saves and follows than an anecdote alone.",
+  "pivots": 226,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T12:31:04.990034+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to fix slow postgres queries,",
-      "texts": [
-        "IF YOU WANT TO FIX SLOW POSTGRES QUERIES, STOP BLAMING THE PLANNER. START WITH THIS ONE REWRITE THAT SHIPS THE COST FROM 12500 TO 85:\n\nA reader emailed me a query that ran for 27 seconds every morning. The planner estimated 1 row. The real table had 4.2 million. Here is the exact before.",
-        "SELECT customer_id, total\nFROM orders o\nWHERE o.status = 'completed'\nAND o.created_at >= '2026-09-01'\nAND o.customer_id IN (\nSELECT c.id FROM customers c WHERE c.tier = 'vip')\nORDER BY o.created_at DESC\nLIMIT 100;\n\nEXPLAIN shows: Index Scan on orders using created_at, cost 12500, rows 1. Nested Loop over a 4M table. That is the whole problem in one line.",
-        "Same query, one swap: replace the IN subquery with a JOIN and push the filter inside. Now the planner sees the real shape and uses the customer_id index it was hiding from.\n\nSELECT customer_id, total\nFROM orders o\nJOIN customers c ON c.id = o.customer_id\nWHERE o.status = 'completed'\nAND o.created_at >= '2026-09-01'\nAND c.tier = 'vip'\nORDER BY o.created_at DESC\nLIMIT 100;",
-        "EXPLAIN AFTER:\n\nIndex Only Scan using orders_customer_status_created_idx\ncost 85.20, rows 100, actual 0.042s.\n\nThe rewrite did not add an index. It did not touch the schema. It just stopped hiding the join from the planner. Cost dropped from 12500 to 85. Runtime dropped from 27s to 42ms.",
-        "Why this works: correlated subqueries and IN lists make the planner guess. A real JOIN gives it concrete stats. The planner stops lying about row counts and picks the index you already built. Stop treating EXPLAIN like a mystery novel.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A small SQL rewrite backed by comparable plan evidence will earn more useful replies and shares than abstract query diagnostics",
-      "breakout": "none",
-      "followers": 278,
-      "views_total": 21194,
-      "ids": [
-        "17938869168378729",
-        "18429788743199776",
-        "18109347074223357",
-        "18028433111700333",
-        "18132392434704163"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T13:01:26.398626+00:00",
       "pillar": "smart",
@@ -1258,6 +1233,31 @@
         "18103433177643857"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T17:01:15.271288+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to pass system design interviews,",
+      "texts": [
+        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
+        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
+        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
+        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A practical rule for resolving ambiguous payment outcomes will earn more saves and follows than an anecdote alone.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 15857,
+      "ids": [
+        "18077697917480511",
+        "17925430167202247",
+        "18093332273657416",
+        "17976195441135469",
+        "18116409653011815"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1267,5 +1267,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 15610
+  "last_views": 15857
 }
