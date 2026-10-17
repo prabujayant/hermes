@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete payment-timeout scenario paired with a precise idempotency invariant will earn more practitioner replies than broad retry advice.",
-  "pivots": 212,
+  "hypothesis": "A timeout example plus the same-operation/same-key invariant and a key-expiry caveat will prompt more practitioner replies than general retry advice",
+  "pivots": 213,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T06:01:23.683565+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "texts": [
-        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
-        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
-        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
-        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Matt Pocock explain-in-plain-words + concrete fix beats listicle hooks for SQL posts, citing P26 and P28 as proof of row-estimate interest.",
-      "breakout": "",
-      "followers": 278,
-      "views_total": 23712,
-      "ids": [
-        "18144718837594344",
-        "18109370429182282",
-        "18132715195811936",
-        "18130223719693364",
-        "18643358491048339"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T06:31:00.052990+00:00",
       "pillar": "smart",
@@ -1264,6 +1239,31 @@
         "18092016479677038"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T10:31:07.004139+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- i shipped retry logic that looked correct",
+      "texts": [
+        "---\nI shipped retry logic that looked correct on paper. Exponential backoff, max attempts, all the textbook patterns. Went home thinking it was solid.",
+        "Next morning: finance flags a customer charged $847 twice for a single subscription renewal. Same card, same timestamp, same amount. Two successful charges on one invoice.",
+        "Root cause was not a retry race. It was an idempotency key that expired after 24 hours. The first request timed out at the gateway. The retry generated a new key. The gateway saw a brand new charge.",
+        "The invariant every payment service must enforce: a timed-out payment retry MUST reuse the same idempotency key for the same logical charge. Period. No exceptions. Not even for refunds or partial captures.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A timeout example plus the same-operation/same-key invariant and a key-expiry caveat will prompt more practitioner replies than general retry advice",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 13901,
+      "ids": [
+        "18112497893162252",
+        "18166321384483890",
+        "18025653497871064",
+        "18126904015907995",
+        "18075601361729469"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1273,5 +1273,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 13628
+  "last_views": 13901
 }
