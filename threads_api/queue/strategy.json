@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific recovery rule for ambiguous payment outcomes will earn more saves and follows than a failure anecdote alone",
-  "pivots": 221,
+  "hypothesis": "A concrete rule for ambiguous payment outcomes will earn more saves and follows than a failure anecdote alone",
+  "pivots": 222,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T10:31:01.067404+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want your side project to survive,",
-      "texts": [
-        "IF YOU WANT YOUR SIDE PROJECT TO SURVIVE, STOP ADDING FEATURES.\n\nMEMORIZE THESE 5 RULES:",
-        "Ship to one user first.\n\nYourself counts. Real usage teaches more than ten planned features.",
-        "Boring tech wins weekends.\n\nMonolith, Postgres, one host. Excitement is for work hours.",
-        "Log progress in public.\n\nWeekly demos beat yearly launches. Accountability ships products.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "An ordered, caveated fix for a familiar SQL diagnostic will earn more useful engineer replies than describing the symptom alone.",
-      "breakout": "",
-      "followers": 278,
-      "views_total": 20228,
-      "ids": [
-        "18078165029419070",
-        "17905744998666696",
-        "18110597369350748",
-        "18104889788574036",
-        "18110359265594159"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T11:01:15.853311+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,31 @@
         "18193783828398365"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T15:01:14.959611+00:00",
+      "pillar": "smart",
+      "hook_sig": "i shipped retry logic that retried on every",
+      "texts": [
+        "I shipped retry logic that retried on every timeout. Then a $847 charge hit twice, 27 hours apart, both idempotent under the same key, both settled by the gateway.",
+        "The real bug wasn't the retry. It was the assumption that a timeout means failure. A payment timeout is an unknown outcome, not a failed one. Retrying blindly is a coin flip you can't afford.",
+        "Recovery rule: if a payment times out after submission, do not retry blindly. Check the original operation first. Query the gateway by reference or idempotency key. If already settled, stop. If rejected or still pending, then decide.",
+        "Pending-state decision path:\n1. Capture original request ID and submission timestamp.\n2. Call gateway status endpoint with that ID before any retry.\n3. If status is settled or rejected, no retry needed.\n4. If status is pending, poll with bounded retries and exponential backoff.\n5. Log the gap between submission and confirmation. Alert on long-pending.",
+        "The cost of a duplicate charge is measured in trust, not cents. Every timeout handler should start with verification, not execution. Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A concrete rule for ambiguous payment outcomes will earn more saves and follows than a failure anecdote alone",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 15121,
+      "ids": [
+        "18042962957841569",
+        "18077257898452434",
+        "18146628553567898",
+        "17929537815420265",
+        "17904211899656404"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 15015
+  "last_views": 15121
 }
