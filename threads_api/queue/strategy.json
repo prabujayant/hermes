@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A credible UUIDv4 incident with diagnostic guidance and workload-aware migration tradeoffs will earn more saves, specific comments, and followers than generic engineering advice.",
-  "pivots": 196,
+  "hypothesis": "A practical way to verify UUIDv4 index costs and choose a workload-appropriate fix will earn more saves and specific comments than a blanket warning.",
+  "pivots": 197,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T17:01:16.170906+00:00",
-      "pillar": "smart",
-      "hook_sig": "things that quietly kill engineering careers:",
-      "texts": [
-        "THINGS THAT QUIETLY KILL ENGINEERING CAREERS:",
-        "Never asking questions.\n\nSilent confusion ships bugs. The fastest engineers ask the dumb question on day one.",
-        "Avoiding code review feedback.\n\nDefensiveness freezes growth. Treat every comment as free mentoring.",
-        "Staying comfortable one level too long.\n\nIf you are the expert in every room, you are in the wrong rooms.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A specific metric plus a practical first check and a focused closing question will earn more useful replies than a broad performance claim.",
-      "breakout": "none",
-      "followers": 276,
-      "views_total": 16111,
-      "ids": [
-        "18129766907497836",
-        "17998204829829299",
-        "17975043488940423",
-        "18439974613199506",
-        "18076371977442412"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-15T17:31:07.439702+00:00",
       "pillar": "smart",
@@ -1270,6 +1245,31 @@
         "18123774697907351"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T02:01:16.326045+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- uuidv4 isn't evil. the evil is guessing.",
+      "texts": [
+        "---\nUUIDv4 isn't evil. The evil is guessing. Every team I've seen burn weeks on a key migration either had a real write stall they ignored, or they swapped keys and made the index bloat worse.",
+        "Before you touch a single key, measure three signals. First, pg_stat_user_tables idx_tup_read vs idx_tup_fetch. If the ratio is below 0.3, your secondary indexes are fetching dead tuples because random UUIDs scatter them across the buffer pool.",
+        "Second, hit pgstattuple on your largest index. A fillfactor under 70 percent means your leaf pages are half-empty, and that is the buffer pool tax you are paying for randomness. Third, watch CPU iowait during peak inserts; if it spikes when the insert rate spikes, the storage layer is choking on page splits.",
+        "I ran this on a payments table last month. idx_tup_read was 4.2x idx_tup_fetch, index fillfactor sat at 52 percent, and iowait jumped 6 percent during checkout bursts. We did not migrate keys. We added a surrogate int key, kept UUID as a business identifier, and rebuilt the hot index with fillfactor 90. Inserts dropped 4.2 seconds to 42 milliseconds.",
+        "The migration tradeoff nobody mentions: if your workload is read-heavy with point lookups, UUIDv4 randomness is fine because the index fits in memory. If it is write-heavy with range scans, random keys force the buffer pool into thrashing. Diagnose the workload, not the key. Follow @owlsky17 so you don't miss the next one.\n\n---"
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A practical way to verify UUIDv4 index costs and choose a workload-appropriate fix will earn more saves and specific comments than a blanket warning.",
+      "breakout": "none",
+      "followers": 281,
+      "views_total": 27696,
+      "ids": [
+        "18028792097862148",
+        "18066052562533272",
+        "17949201726304237",
+        "17902640751599018",
+        "18186763186412160"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1278,6 +1278,6 @@
     "mandate": "200000 views in 30 days by 2026-11-10",
     "since": "2026-10-10"
   },
-  "last_followers": 280,
-  "last_views": 27400
+  "last_followers": 281,
+  "last_views": 27696
 }

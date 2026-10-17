@@ -315,7 +315,8 @@
     "if you want to master dynamic programming, stop",
     "--- the dumbest performance bug i've shipped wasn't",
     "--- the dumbest performance regression i shipped wasn't",
-    "--- the worst db outage i've seen wasn't"
+    "--- the worst db outage i've seen wasn't",
+    "--- uuidv4 isn't evil. the evil is guessing."
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
