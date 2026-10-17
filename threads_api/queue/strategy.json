@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Concrete recovery rules will convert interest in payment-failure stories into follows better than another incident retelling.",
-  "pivots": 218,
+  "hypothesis": "A concise recovery playbook will earn more saves and follows than another payment-failure story.",
+  "pivots": 219,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T09:01:20.383927+00:00",
-      "pillar": "smart",
-      "hook_sig": "the real bottleneck in query performance isn't missing",
-      "texts": [
-        "The real bottleneck in query performance isn't missing indexes. It's the planner lying to you about row counts.\n\nA single estimated-versus-actual mismatch of 100x sent me down a three-day rabbit hole adding useless indexes to a query that should have taken 50ms but was taking 5 seconds.\n\nRun EXPLAIN ANALYZE and look at every node. If estimated rows and actual rows diverge by more than 10x, the planner is guessing wrong. Fix the stats, not the indexes.",
-        "I used to think query performance was about adding more indexes. Then I spent 4 hours debugging a query that should have taken 50ms but was taking 5 seconds.\n\nThe plan looked clean. Index scans everywhere. But something felt off.\n\nTurns out the planner estimated 1 row when 12,487 actually matched. It picked a nested loop join that should have been a hash join.",
-        "Your query returns 12 rows. The planner estimated 1.\n\nEXPLAIN ANALYZE shows:\n- Estimated rows: 1\n- Actual rows: 12,487\n- Loops: 1\n\nThe nested loop join looked fine on paper. In practice it executed 12,487 times. That is where your 5 seconds went.\n\nA gap this large means your table statistics are stale or missing. ANALYZE the table and try again.",
-        "Most engineers see a seq scan, assume missing index, and stop.\n\nThat is a diagnostic blind spot. When estimated and actual rows diverge, check this before adding an index.\n\nRun EXPLAIN ANALYZE and compare estimated rows vs actual rows at every plan node. A gap above 10x means the planner is guessing wrong. Fix the root cause: stale statistics or missing/histogram data on correlated columns.\n\nThe index was never the problem.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "The same \"estimated vs actual rows\" diagnostic story beats 2.0 views/h because it is concrete, searchable, and invites replies from engineers who have hit this exact trap.",
-      "breakout": "",
-      "followers": 278,
-      "views_total": 19588,
-      "ids": [
-        "17949985218315842",
-        "17880710187629828",
-        "17903325996666848",
-        "17922391023441406",
-        "17913447237283963"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T09:31:02.159351+00:00",
       "pillar": "smart",
@@ -1260,6 +1235,31 @@
         "18021201767925176"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T13:31:03.124528+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want your side project to survive,",
+      "texts": [
+        "IF YOU WANT YOUR SIDE PROJECT TO SURVIVE, STOP ADDING FEATURES.\n\nMEMORIZE THESE 5 RULES:",
+        "Ship to one user first.\n\nYourself counts. Real usage teaches more than ten planned features.",
+        "Boring tech wins weekends.\n\nMonolith, Postgres, one host. Excitement is for work hours.",
+        "Log progress in public.\n\nWeekly demos beat yearly launches. Accountability ships products.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A concise recovery playbook will earn more saves and follows than another payment-failure story.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 14721,
+      "ids": [
+        "18126888505657474",
+        "18342941062279566",
+        "18430760755145860",
+        "18147553312492417",
+        "18096231395444168"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1269,5 +1269,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 14634
+  "last_views": 14721
 }
