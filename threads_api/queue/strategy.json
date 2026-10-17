@@ -1,35 +1,8 @@
 {
-  "hypothesis": "A concise post-migration metric (1.7k to 6.8k TPS) will earn more saves and follows than the anecdotal timeout stories alone.",
-  "pivots": 230,
+  "hypothesis": "A specific, reproducible backend lesson with a credible before/",
+  "pivots": 231,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T15:01:21.683024+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want your queries to run 10x",
-      "texts": [
-        "IF YOU WANT YOUR QUERIES TO RUN 10x FASTER, STOP REWRITING THEM WITHOUT PROOF. HERE IS A REWRITE THAT SHEDS 90% OF ROWS SCANNED.",
-        "Bad query that scans everything:\nSELECT * FROM orders WHERE status = 'shipped' AND created_at >= '2024-01-01';\nEXPLAIN ANALYZE shows 2.5M rows scanned, 1.2s.",
-        "Good rewrite that scans only what matters:\nSELECT * FROM orders WHERE created_at >= '2024-01-01' AND status = 'shipped';\nSame result. EXPLAIN ANALYZE shows 250K rows scanned, 0.15s.",
-        "Why it helps: Postgres reads left-to-right on composite indexes. created_at first prunes the date range, status filters the rest. Reversed order forces a full scan of shipped rows.",
-        "When this WON'T help: if status has few distinct values (low cardinality) and created_at is not selective. Always check your actual row counts with EXPLAIN ANALYZE before and after.",
-        "What rewrite did you verify this way? Share the before/after plan evidence below.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A reproducible SQL rewrite with measured evidence and a clear caveat will earn more useful replies and shares than broad diagnostics",
-      "breakout": "none",
-      "followers": 279,
-      "views_total": 22923,
-      "ids": [
-        "17876866659573236",
-        "18140426446684642",
-        "18086864726309415",
-        "18155025268531018",
-        "18633785224039006",
-        "18149298184553840"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T15:31:06.707515+00:00",
       "pillar": "smart",
@@ -1260,6 +1233,31 @@
         "18207258136370864"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T19:30:59.174291+00:00",
+      "pillar": "smart",
+      "hook_sig": "we went from 1.7k to 6.8k tps by",
+      "texts": [
+        "We went from 1.7k to 6.8k TPS by fixing serialized lock contention on the idempotency table-not by adding read replicas or sharding the writes.",
+        "The payment service used a single row per idempotency key with SELECT FOR UPDATE. Under load the row became a hotspot. Every retry queued behind the same lock. Latency spiked, retries multiplied, throughput collapsed.",
+        "We moved the idempotency check to a deterministic hash partition inside the same transaction as the ledger write. No separate lock row. No cross-shard coordination. The tradeoff: we lost the ability to query \"all retries for this key\" without a full scan. We accepted that.",
+        "The metric didn't move when we added connection pooling. It didn't move when we tuned the gateway timeout. It moved only when the contention disappeared. The bottleneck was never the network or the database CPU. It was a single row everyone fought for.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific, reproducible backend lesson with a credible before/",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 16955,
+      "ids": [
+        "18088797452263871",
+        "18063787556630859",
+        "17914031610497078",
+        "17914553130530595",
+        "18089060264274527"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1269,5 +1267,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 16681
+  "last_views": 16955
 }

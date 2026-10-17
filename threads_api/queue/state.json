@@ -350,7 +350,8 @@
     "production rule: a timeout means unknown, not failed.",
     "if you want ai to write code you",
     "--- i shipped a retry loop that retried",
-    "--- i spent a week profiling a payments"
+    "--- i spent a week profiling a payments",
+    "we went from 1.7k to 6.8k tps by"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
