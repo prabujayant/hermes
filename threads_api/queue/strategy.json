@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Contrarian lesson format on a painful, relatable backend mistake converts better than abstract advice, because it gives readers a concrete fix they can apply immediately.",
+  "hypothesis": "Specific backend failure",
   "pivots": 194,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T15:01:19.286756+00:00",
-      "pillar": "smart",
-      "hook_sig": "production symptom that bites every team: you increase",
-      "texts": [
-        "Production symptom that bites every team: you increase the connection pool to fix throughput, and p99 latency gets worse. The database is not the bottleneck. Your requests are queueing for connections that do not exist yet.",
-        "The pool grows, new connections handshake, TLS negotiates, the OS schedules the thread. Meanwhile the request sits in the client-side queue. That wait time is invisible to your APM because it happens before the span starts. You see healthy DB latency, angry users.",
-        "How to tell which queue owns the pain. Instrument two timers at the client: time from request start to connection acquired, and time from query sent to first row. If the first timer dominates p99, you are connection-starved. If the second dominates, the DB is slow.",
-        "Quick diagnostic you can run in prod today. Add a histogram for pool wait time. Alert when p99 pool wait exceeds 50 ms. Correlate with active connection count. If they rise together while DB CPU is flat, the pool size is the problem, not the database.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A practical production diagnosis with clear signals and a focused question will earn more relevant engagement than a broad performance claim",
-      "breakout": "none",
-      "followers": 275,
-      "views_total": 13848,
-      "ids": [
-        "18360164251247940",
-        "18088556468278330",
-        "18126160693935465",
-        "18119198578985010",
-        "18119772145976641"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-15T15:31:08.365520+00:00",
       "pillar": "smart",
@@ -1274,6 +1249,31 @@
         "17972629245149708"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-17T00:01:20.633631+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to master dynamic programming, stop",
+      "texts": [
+        "IF YOU WANT TO MASTER DYNAMIC PROGRAMMING, STOP FEARING IT.\n\nMEMORIZE THESE 5 STEPS:",
+        "Ask one question: does the answer build from smaller answers?\n\nIf yes, it's DP. If no, stop forcing it.",
+        "Define the state in one sentence.\n\ndp[i] means the best answer for the first i items. Vague state, wrong answer.",
+        "Write the recurrence before any code.\n\nHow does dp[i] use dp[i-1]? One line of math beats fifty lines of guessing.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Specific backend failure",
+      "breakout": "none",
+      "followers": 280,
+      "views_total": 26696,
+      "ids": [
+        "18094522898441059",
+        "18133927783741045",
+        "18102087896551824",
+        "18129988201744543",
+        "18148573237518103"
+      ],
+      "pivoted": false
     }
   ],
   "chief_strategist": {
@@ -1283,5 +1283,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 280,
-  "last_views": 25597
+  "last_views": 26696
 }
