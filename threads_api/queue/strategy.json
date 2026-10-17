@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Debate hot take on observability spend targets a different pillar (ops/tooling) than recent payment-retry threads, uses proven contrarian format that drove 11k views for monolith post, and ends with direct challenge to maximize reply rate.",
-  "pivots": 215,
+  "hypothesis": "Story format on payment idempotency failures, proven hook shape, ends with follow CTA, cites P28 and P30 for pacing and payoff.",
+  "pivots": 216,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T07:31:04.112833+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want ai to write code you",
-      "texts": [
-        "IF YOU WANT AI TO WRITE CODE YOU CAN SHIP, STOP PASTING BLINDLY.\n\nMEMORIZE THESE 5 RULES:",
-        "Give the model your constraints first.\n\nStack, versions, style rules, what done looks like. Vague prompts get vague code.",
-        "Review every diff like a junior wrote it.\n\nAI code looks confident and fails quietly. Read it line by line before it touches main.",
-        "Keep humans on architecture.\n\nLet AI fill functions, never design systems. You own the boundaries, it fills the boxes.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Specific SQL diagnosis plus a copyable fix will outperform broad planner advice and invite useful replies",
-      "breakout": "",
-      "followers": 278,
-      "views_total": 18321,
-      "ids": [
-        "18464769328190611",
-        "18645024418052431",
-        "18093175136663807",
-        "18121194934946065",
-        "17959849695224148"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T08:01:16.804143+00:00",
       "pillar": "smart",
@@ -1262,6 +1237,31 @@
         "17987292384075990"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T12:01:15.258917+00:00",
+      "pillar": "smart",
+      "hook_sig": "i shipped a retry loop that looked correct",
+      "texts": [
+        "I shipped a retry loop that looked correct until the gateway timed out on capture and silently charged the card twice. The idempotency key lived in the service, not the gateway, so when the response dropped, the retry sent a second capture that succeeded. $847 gone, customer gone, trust gone. I thought a 24-hour expiry was safe. It wasnt. The worst duplicate-charge bugs are not races. They are assumptions that the layer below handles dedupe when it doesnt.",
+        "The retry came back as a timeout. I queued the charge again. The gateway charged the card twice. The first charge went through, the response timed out, and my retry sent a second capture that succeeded because the idempotency key expired after 24 hours. The customer was charged $847 twice. No race condition, no missing key, just a 24-hour expiry that let the duplicate through.",
+        "A payment succeeded, the response timed out, and the retry charged the customer twice. The idempotency layer lived in the service tier, not the gateway, so when the network dropped the response, the retry bypassed it entirely. The second capture hit the gateway fresh, no key to reject it, and the card was charged again. $847 duplicated by a timeout and a misplaced trust boundary.",
+        "I thought my payment retry was a safety net. Instead it charged the card twice. The first charge went through, the second silently duplicated because I trusted the gateway to dedupe when it did not. The idempotency key lived in the service, not the gateway, and it expired after 24 hours. The retry saw a timeout, not a success, and sent a second capture that cleared without question.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Story format on payment idempotency failures, proven hook shape, ends with follow CTA, cites P28 and P30 for pacing and payoff.",
+      "breakout": "",
+      "followers": 282,
+      "views_total": 14427,
+      "ids": [
+        "17994877269021998",
+        "18192592372404074",
+        "18002055822009392",
+        "18166239718489508",
+        "17892486696447161"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1271,5 +1271,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 14197
+  "last_views": 14427
 }

@@ -335,7 +335,8 @@
     "--- my idempotency key was a customer id",
     "--- i shipped retry logic that looked correct",
     "things that quietly kill engineering careers:",
-    "distributed tracing is a waste of engineering hours"
+    "distributed tracing is a waste of engineering hours",
+    "i shipped a retry loop that looked correct"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
