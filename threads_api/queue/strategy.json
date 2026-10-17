@@ -1,35 +1,8 @@
 {
-  "hypothesis": "A reproducible SQL diagnostic with fixes tied to observed evidence will earn more saves and useful comments than broad performance advice.",
-  "pivots": 198,
+  "hypothesis": "A symptom-led SQL walkthrough that pairs execution-plan evidence with a specific fix will earn more saves and useful comments than generic optimization tips.",
+  "pivots": 199,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T18:31:00.396926+00:00",
-      "pillar": "smart",
-      "hook_sig": "here's the thread that failed last time, fixed",
-      "texts": [
-        "Here's the thread that failed last time, fixed per your notes:",
-        "Most engineers treat EXPLAIN ANALYZE like a magic spell that fixes slow queries. It doesn't. Here is what actually separates junior from senior debugging.",
-        "Run the query. Look at the top number: actual rows. Now look at the estimate right above it. If the ratio is over 10x, the planner is flying blind and every index you add will be a guess.",
-        "This happened on a payments table last week. Estimate said 50 rows, actual was 847. The planner chose a nested loop that burned 12 seconds. We fixed it with one partial index and 4 lines of SQL. No schema changes.",
-        "The ratio is your first diagnostic, not your last. When estimates lie, check for: stale stats, correlated columns, or functions wrapping your join keys. ANALYZE won't help if the data distribution shifted.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Contrarian lesson format with a specific metric (rows ratio > 10x) and a concrete production example will outperform the underperforming connection-pool posts by forcing readers to test the ratio themselves.",
-      "breakout": "",
-      "followers": 277,
-      "views_total": 17792,
-      "ids": [
-        "17944690359086730",
-        "17961297174241593",
-        "18076146944452657",
-        "18115975738822742",
-        "18273564175305263",
-        "18109914887523997"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-15T19:01:17.469538+00:00",
       "pillar": "smart",
@@ -1270,6 +1243,31 @@
         "18132382144790273"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T03:31:05.137483+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- the query took 4.2 seconds. i added",
+      "texts": [
+        "---\nThe query took 4.2 seconds. I added an index. It got worse. The EXPLAIN lied to me, and here is the exact plan line that told me why.",
+        "Seq Scan on orders. Cost 0.00..12500.00. Rows 12. The planner thought 1 row. 12 rows exist. That 12x underestimate made it pick a seq scan over an index scan.",
+        "Here is the rewrite. Same data. Same index. The planner now estimates 12 rows. Cost drops to 85. The scan becomes an index scan. Runtime 42ms.",
+        "The fix? `ANALYZE orders` after the bulk load. The stats were three days stale. The planner was guessing. Guessing is the real bottleneck.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A symptom-led SQL walkthrough that pairs execution-plan evidence with a specific fix will earn more saves and useful comments than generic optimization tips.",
+      "breakout": "none",
+      "followers": 281,
+      "views_total": 28412,
+      "ids": [
+        "18171555139456919",
+        "18078059057729796",
+        "18075252380759925",
+        "18169979560482152",
+        "18108076922616346"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1279,5 +1277,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 281,
-  "last_views": 28215
+  "last_views": 28412
 }
