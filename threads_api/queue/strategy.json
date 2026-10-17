@@ -1,35 +1,8 @@
 {
-  "hypothesis": "A concrete measurement method plus conditional fixes will earn more saves and specific comments than a blanket warning.",
-  "pivots": 197,
+  "hypothesis": "A reproducible SQL diagnostic with fixes tied to observed evidence will earn more saves and useful comments than broad performance advice.",
+  "pivots": 198,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-15T18:01:21.320628+00:00",
-      "pillar": "smart",
-      "hook_sig": "most engineers still treat explain analyze like a",
-      "texts": [
-        "Most engineers still treat EXPLAIN ANALYZE like a checkbox. They look at the plan shape, nod, and move on. The real signal isnt the plan shape. It is the gap between estimated rows and actual rows. That gap tells you exactly why the optimizer picked a bad path.",
-        "Postgres defaults statistics target to 100. On a column with 10 million distinct values that captures 0.001 percent of the distribution. The optimizer sees a flat line and assumes uniform distribution. Your query asks for a hot key. The plan expects 50 rows. Reality returns 500,000. Nested loops melt the CPU.",
-        "First check: run EXPLAIN ANALYZE on the slow query. Find the node with the widest estimated vs actual rows ratio. Ignore cost numbers. A ratio above 10x on any join or filter node means your statistics are lying to the planner. That is the smoking gun.",
-        "Fix: raise statistics target on the skewed column to 1000 or create extended statistics on the correlated columns. ANALYZE afterward. Re run EXPLAIN ANALYZE. The ratio collapses. The planner switches to a hash join or bitmap scan. Latency drops 10x without a single index change.",
-        "What is the widest estimated vs actual rows ratio you have seen in production? Reply with the number and the column type.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Contrarian lesson format (Notion co-founder style) with a specific metric (rows ratio > 10x), a practical first",
-      "breakout": "",
-      "followers": 277,
-      "views_total": 17313,
-      "ids": [
-        "17906215596340796",
-        "18145108885585445",
-        "18052727465803748",
-        "18448924039125994",
-        "18127692640848554",
-        "17952238101297383"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-15T18:31:00.396926+00:00",
       "pillar": "smart",
@@ -1270,6 +1243,33 @@
         "17991822948050638"
       ],
       "pivoted": false
+    },
+    {
+      "run_at": "2026-10-17T03:01:15.008071+00:00",
+      "pillar": "smart",
+      "hook_sig": "i was chasing the wrong number. query shows",
+      "texts": [
+        "I was chasing the wrong number. Query shows 42ms in EXPLAIN, 4ms with the same data in practice. The planner said 1 row, the table had 12. That gap is why your production query is slow and your benchmark lies.",
+        "Here is the one diagnostic move that catches 90% of slow queries: compare estimated rows vs actual rows, then branch your fix on where they diverge. Overestimate, underestimate, or both. Each error has a different parent fix.",
+        "Underestimate (planner expects 1, sees 1000): statistics are stale. Run ANALYZE, raise stats target, or add a partial index on the filtered column. The estimate will track the real distribution.",
+        "Overestimate (planner expects 10000, sees 5): predicates confuse it. Rewrite the WHERE to push filters early, or split the query with a CTE that materializes the selective part first.",
+        "Both diverge (multi-column correlation): the planner assumes independence and loses. Add a extended statistics call on the correlated columns, then re-run EXPLAIN. Your estimates should land inside 3x of actual.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A reproducible SQL diagnostic with fixes tied to observed evidence will earn more saves and useful comments than broad performance advice.",
+      "breakout": "none",
+      "followers": 281,
+      "views_total": 28215,
+      "ids": [
+        "18108612230185061",
+        "18054957824586734",
+        "18077573609764786",
+        "17964062799215463",
+        "18180969025437080",
+        "18132382144790273"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1279,5 +1279,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 281,
-  "last_views": 27929
+  "last_views": 28215
 }
