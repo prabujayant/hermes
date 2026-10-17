@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete payment timeout scenario plus a precise idempotency invariant will draw more useful practitioner replies than broad retry advice.",
-  "pivots": 208,
+  "hypothesis": "A concrete timeout scenario plus an idempotency invariant will earn more useful practitioner replies than broad retry advice.",
+  "pivots": 209,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T03:31:04.871866+00:00",
-      "pillar": "smart",
-      "hook_sig": "copyable diagnostic: run explain analyze and compare estimated",
-      "texts": [
-        "copyable diagnostic: run EXPLAIN ANALYZE and compare estimated rows vs actual rows at every plan node. a gap above 10x means the planner is guessing wrong. fix statistics or rewrite the query before you even think about adding an index.",
-        "the 10x threshold is your trigger. if estimated rows shows 100 but actual rows returns 5000, the planner chose a nested loop when it needed a hash join. that single mismatch explains the slowdown more than any missing index ever will.",
-        "real example from a payments table: seq scan estimated 50 rows, actual 12000. the planner picked an index scan on a low-selectivity column. running ANALYZE on the table dropped the query from 800ms to 12ms. zero indexes added.",
-        "which plan node do you check first when the estimates look wrong? the top node, the join, or the scan?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete row-estimate check plus a specific discussion prompt will outperform general SQL performance advice and attract SQL-focused follows",
-      "breakout": "none",
-      "followers": 278,
-      "views_total": 22352,
-      "ids": [
-        "18019521821745554",
-        "18128538644492303",
-        "17909692074481184",
-        "18228729325333842",
-        "18372641167208096"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T04:01:20.506638+00:00",
       "pillar": "smart",
@@ -1264,6 +1239,31 @@
         "18144021778567588"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T08:31:01.712621+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- i shipped a payment retry once that",
+      "texts": [
+        "---\nI shipped a payment retry once that double-charged a customer. The gateway timed out on the capture, my retry loop sent a second capture, and the money came out twice. The fix was a single idempotency key derived from order_id + attempt_number, enforced with a unique constraint at the DB layer.",
+        "Most engineers treat timeouts like failures. They are not. A timeout means the request is still in flight somewhere, or it already succeeded and the response got lost. Retries without idempotency keys turn that ambiguity into duplicate charges, duplicate writes, and angry customers.",
+        "The hard invariant every payments backend needs: a retry must be safe to replay. The key must be deterministic per logical operation, not per HTTP attempt. Use order_id + operation_type + attempt_version as the key, and make the database reject duplicates with a unique constraint.",
+        "I have seen teams spend weeks debugging phantom charges that were just retries hitting an already-succeeded payment. The pattern is always the same: no idempotency key, or a key that changes on every retry. The database is the only source of truth, not the gateway response.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A concrete timeout scenario plus an idempotency invariant will earn more useful practitioner replies than broad retry advice.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 13030,
+      "ids": [
+        "18153259891538769",
+        "18136353907648654",
+        "18129832264697058",
+        "17950811358323473",
+        "18436118686183309"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1273,5 +1273,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 12725
+  "last_views": 13030
 }
