@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific duplicate-charge failure plus a practical idempotency lesson will earn practitioner replies and revive the proven engineering-mistake format. P27 showed the payments-service bug resonated; P30's query-plan gap proved concrete numbers drive replies. Story format with a sharp technical take",
-  "pivots": 205,
+  "hypothesis": "A concrete payment-retry failure and a usable idempotency lesson will earn more practitioner replies than a broad database-performance take.",
+  "pivots": 206,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T02:01:13.193964+00:00",
-      "pillar": "smart",
-      "hook_sig": "the costliest sql mistake i see: a slow",
-      "texts": [
-        "The costliest SQL mistake I see: a slow query plan that looks like an index problem but is actually a row-estimate mismatch. The planner thinks 10 rows will come back. Reality returns 500,000. Every downstream node in the plan over-allocates memory, picks nested loops instead of hash joins, and the whole thing grinds. You reach for an index that won't help.",
-        "Here is the tell: look at the gap between \"actual rows\" and \"rows\" in EXPLAIN ANALYZE. If the ratio jumps above 10x, the planner is flying blind. That blind spot then masquerades as a missing index. Teams add indexes that never get used, paying write-amplification tax for no read gain. The real fix is usually ANALYZE or a stats target bump, not a new index.",
-        "Concrete diagnostic step before touching indexes: run the query with a CTE boundary that isolates the estimated vs actual row mismatch, then compare the plan output. If estimated rows is 12 but actual is 500,000, do not add an index. Run ANALYZE, check default statistics, and consider ALTER TABLE .. ALTER COLUMN .. SET STATISTICS 1000. Index changes will not fix a stats problem.",
-        "The worst part: most engineers glance at the plan shape, nod, and move on. The plan shape is a lie when the estimates are wrong. The real signal is the row-estimate gap. A 10x ratio triggers nested-loop fallbacks. A 100x ratio forces the planner into hash joins that blow memory. Read the numbers, not the shape. Your next slow query might be solved by two SQL keywords: ANALYZE TABLE.",
-        "Got a plan where estimated rows diverged badly from actual rows? Drop the numbers in the comments. I will tell you whether to reach for an index or a stats reset. This is where good SQL advice lives. Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A specific, safe row-estimate check with a focused comment prompt will earn more useful SQL discussion and follows than broad query advice.",
-      "breakout": "none",
-      "followers": 278,
-      "views_total": 21550,
-      "ids": [
-        "17989782603074734",
-        "18129746243501570",
-        "18450377464123010",
-        "18100141199059495",
-        "18639123226034683"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T02:31:01.814346+00:00",
       "pillar": "smart",
@@ -1270,6 +1245,31 @@
         "18179651521439881"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T07:01:15.269375+00:00",
+      "pillar": "smart",
+      "hook_sig": "a payment succeeded, the response timed out, and",
+      "texts": [
+        "A payment succeeded, the response timed out, and the retry charged the customer twice.",
+        "The idempotency key was set. The gateway returned 200. The client timed out at 3.2 seconds and retried with the same key. The gateway ignored the duplicate and returned the original success.",
+        "Then the webhook arrived 15 seconds late. Our handler had no record of the original charge. It created a new one. The customer was billed twice.",
+        "The real bug was not the retry. It was the race between the synchronous response and the asynchronous webhook, with no shared source of truth.",
+        "How do you make idempotency keys survive both retries and late-arriving webhooks without a single source of truth? Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A concrete payment-retry failure and a usable idempotency lesson will earn more practitioner replies than a broad database-performance take.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 12339,
+      "ids": [
+        "18116729878797647",
+        "17985597701891898",
+        "17962054626233030",
+        "17948794131340886",
+        "17917311735463522"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1279,5 +1279,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 29960
+  "last_views": 12339
 }

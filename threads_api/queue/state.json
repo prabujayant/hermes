@@ -325,7 +325,8 @@
     "--- the retry logic looked correct on paper.",
     "--- the worst duplicate-charge bug i've seen wasn't",
     "if you want to become a senior engineer",
-    "--- the worst duplicate-charge failure i've seen wasn't"
+    "--- the worst duplicate-charge failure i've seen wasn't",
+    "a payment succeeded, the response timed out, and"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
