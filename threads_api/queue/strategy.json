@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific duplicate-charge failure plus a practical idempotency lesson will earn practitioner replies and revive the proven engineering-mistake format.",
-  "pivots": 204,
+  "hypothesis": "A specific duplicate-charge failure plus a practical idempotency lesson will earn practitioner replies and revive the proven engineering-mistake format. P27 showed the payments-service bug resonated; P30's query-plan gap proved concrete numbers drive replies. Story format with a sharp technical take",
+  "pivots": 205,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T01:31:03.870462+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to pass system design interviews,",
-      "texts": [
-        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
-        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
-        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
-        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A concrete row-estimate mismatch plus a cautious diagnostic step will prompt more useful SQL comments and follows than broad query advice.",
-      "breakout": "none",
-      "followers": 278,
-      "views_total": 21137,
-      "ids": [
-        "18112748717333584",
-        "18130361125889351",
-        "17952254085281993",
-        "18010893983985140",
-        "17997354816011866"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T02:01:13.193964+00:00",
       "pillar": "smart",
@@ -1270,6 +1245,31 @@
         "18118619276064585"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-17T06:30:59.836658+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- the worst duplicate-charge failure i've seen wasn't",
+      "texts": [
+        "---\nThe worst duplicate-charge failure I've seen wasn't a missing idempotency key. It was a refund that succeeded twice because the idempotency layer lived in the API gateway, not the payment processor. By the time the gateway timed out and retried, the processor had already recorded the refund as new.",
+        "I shipped that bug. Two customers got double refunds, the ledger showed phantom credits, and finance spent three days reconciling. The root cause: we trusted the gateway to enforce idempotency across services that had no shared state. When the network partition hit, both sides thought they were the winner.",
+        "The fix was brutal: move idempotency into the payment processor itself, keyed on a customer-action-token. Every refund, every charge, every webhook now carries that token. The processor rejects duplicates before they touch the ledger. No gateway, no retry logic, no race.",
+        "Most teams treat idempotency as an API layer concern. That breaks the moment you have async workers, multiple gateways, or a webhook that fires twice in a partition. Real idempotency must survive the worst-case retry: a request that already succeeded, but the response was lost.",
+        "Follow @owlsky17 so you don't miss the next one.\n---"
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A specific duplicate-charge failure plus a practical idempotency lesson will earn practitioner replies and revive the proven engineering-mistake format. P27 showed the payments-service bug resonated; P30's query-plan gap proved concrete numbers drive replies. Story format with a sharp technical take",
+      "breakout": "",
+      "followers": 282,
+      "views_total": 29960,
+      "ids": [
+        "18129629087497629",
+        "18387326569206291",
+        "17973265356150264",
+        "18123513931713575",
+        "18179651521439881"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1279,5 +1279,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 29760
+  "last_views": 29960
 }
