@@ -368,7 +368,8 @@
     "orms promise productivity but hand you a leaky",
     "most ai coding advice circulating today is already",
     "orms are fine until you stop inspecting the",
-    "i let an orm manage schema migrations on"
+    "i let an orm manage schema migrations on",
+    "an orm transaction held a row lock for"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

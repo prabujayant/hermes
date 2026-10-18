@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Concrete ORM failure story with specific lock mechanics will trigger debate from both ORM defenders and raw-SQL advocates, driving replies and profile clicks.",
-  "pivots": 248,
+  "hypothesis": "A concrete lock timeline with a balanced fix will earn debate and specific comments from engineers who have seen the same failure",
+  "pivots": 249,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T03:31:05.137483+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- the query took 4.2 seconds. i added",
-      "texts": [
-        "---\nThe query took 4.2 seconds. I added an index. It got worse. The EXPLAIN lied to me, and here is the exact plan line that told me why.",
-        "Seq Scan on orders. Cost 0.00..12500.00. Rows 12. The planner thought 1 row. 12 rows exist. That 12x underestimate made it pick a seq scan over an index scan.",
-        "Here is the rewrite. Same data. Same index. The planner now estimates 12 rows. Cost drops to 85. The scan becomes an index scan. Runtime 42ms.",
-        "The fix? `ANALYZE orders` after the bulk load. The stats were three days stale. The planner was guessing. Guessing is the real bottleneck.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A symptom-led SQL walkthrough that pairs execution-plan evidence with a specific fix will earn more saves and useful comments than generic optimization tips.",
-      "breakout": "none",
-      "followers": 281,
-      "views_total": 28412,
-      "ids": [
-        "18171555139456919",
-        "18078059057729796",
-        "18075252380759925",
-        "18169979560482152",
-        "18108076922616346"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T04:01:12.361931+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18184737754422018"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T08:31:00.487906+00:00",
+      "pillar": "smart",
+      "hook_sig": "an orm transaction held a row lock for",
+      "texts": [
+        "An ORM transaction held a row lock for 47 seconds while waiting on an external HTTP call. The lock chain: UPDATE users SET last_login=now() WHERE id=123 \u2192 SELECT FOR UPDATE on orders \u2192 HTTP POST to payment gateway \u2192 COMMIT. Every concurrent login for that user queued behind it.",
+        "The payment gateway averaged 200ms. But the 99th percentile hit 12 seconds during a provider incident. Our service had 200 connections in the pool. All 200 piled up on that single row lock. CPU sat at 3 percent. The database showed zero active queries, just 200 waiting on Lock:tuple.",
+        "The pattern: transaction boundary wrapped business logic AND I/O. The ORM didn't force this. The code opened a transaction, mutated state, then called out. Fix: move the HTTP call outside the transaction. Read-committed snapshot for the read. Explicit lock only on the write, held for 3ms.",
+        "Same service, different endpoint: bulk order import. One transaction, 5000 rows, 4 minutes. Lock escalation promoted row locks to table lock. All reads blocked. Fix: chunk into 100-row transactions with explicit savepoints. Import time dropped to 90 seconds. Zero lock contention.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete lock timeline with a balanced fix will earn debate and specific comments from engineers who have seen the same failure",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 8126,
+      "ids": [
+        "18125872771859046",
+        "18058766381797404",
+        "18117476627004277",
+        "18136633810641106",
+        "17993739888103134"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 7972
+  "last_views": 8126
 }
