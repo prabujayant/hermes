@@ -383,7 +383,8 @@
     "foreign keys are not optional in production. if",
     "i let ai review every pr on our",
     "if you want to pass system design interviews,",
-    "most engineers think idempotency keys solve payment races."
+    "most engineers think idempotency keys solve payment races.",
+    "production invariant: a retry must return the original"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

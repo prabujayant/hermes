@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A contrarian lesson on a specific payment race with a concrete invariant will outperform general AI failure stories by targeting backend engineers who own billing flows and crave battle-tested patterns.",
-  "pivots": 263,
+  "hypothesis": "A concrete payment race with a testable invariant will earn more saves and specific backend-engineer replies than general AI failure stories; end with a focused question.",
+  "pivots": 264,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T11:01:12.743595+00:00",
-      "pillar": "smart",
-      "hook_sig": "things that quietly kill engineering careers:",
-      "texts": [
-        "THINGS THAT QUIETLY KILL ENGINEERING CAREERS:",
-        "Never asking questions.\n\nSilent confusion ships bugs. The fastest engineers ask the dumb question on day one.",
-        "Avoiding code review feedback.\n\nDefensiveness freezes growth. Treat every comment as free mentoring.",
-        "Staying comfortable one level too long.\n\nIf you are the expert in every room, you are in the wrong rooms.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A timeout example plus the same-operation/same-key invariant and a key-expiry caveat will prompt more practitioner replies than general retry advice",
-      "breakout": "",
-      "followers": 282,
-      "views_total": 13982,
-      "ids": [
-        "18187298092416666",
-        "18114425795141503",
-        "17964419004204651",
-        "18091936415692801",
-        "18128586596307203"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T11:31:02.279189+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18032960930883409"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T16:01:18.409187+00:00",
+      "pillar": "smart",
+      "hook_sig": "production invariant: a retry must return the original",
+      "texts": [
+        "production invariant: a retry must return the original payment result, not create a second charge\n\nI learned this the hard way on a billing service processing 50k transactions daily. Our retry wrapper caught gateway timeouts and re-sent the charge request. Seemed reasonable until a network blip hit during a Black Friday flash sale.",
+        "The gateway returned a 504 on a $2,400 enterprise payment. Our retry logic fired three times in 200ms. The customer got charged four times. The gateway eventually processed all four. We issued refunds, ate the fees, and lost the customer's trust.",
+        "The fix was not better retry logic. It was a database invariant: every payment attempt row carries an idempotency key with a unique constraint. The first insert wins. Subsequent retries hit the constraint, fetch the existing row, and return that result. No second charge can exist.",
+        "Most teams put the idempotency check in application code. That fails under concurrent retries because the check and the insert are not atomic. The database unique constraint is the only enforcement that survives race conditions, connection pools, and deployed bugs.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete payment race with a testable invariant will earn more saves and specific backend-engineer replies than general AI failure stories; end with a focused question.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 11057,
+      "ids": [
+        "17906925522569594",
+        "18109290928927025",
+        "18034634618894173",
+        "18009917531996527",
+        "18129200377860058"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 10892
+  "last_views": 11057
 }
