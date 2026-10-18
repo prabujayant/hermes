@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Backend failure-mode posts earn more attention when they pair an ambiguous symptom with a specific check that prevents a costly action.",
-  "pivots": 244,
+  "hypothesis": "Debate hot take on ORMs vs raw SQL targets a perennial backend fault line, invites strong replies from both camps, and extends the proven contrarian pillar that delivered 11k views on the monolith post.",
+  "pivots": 245,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T01:28:02.355154+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- the worst db outage i've seen wasn't",
-      "texts": [
-        "---\nThe worst DB outage I've seen wasn't a missing index. It was a UUIDv4 PK on a high-write table used as the clustering key. The buffer pool churned at 80 percent, random I/O on every insert, and range scans exploded into full leaf walks.",
-        "Most teams blame UUIDv4 itself. Wrong. The culprit is the workload: monotonic inserts + clustering on randomness + a planner that can't estimate cardinality. Same key on a low-write, append-heavy table with a separate sequential clustering index performs fine.",
-        "Migration is not \"switch to sequential.\" It's engine-aware: in Postgres, wrap sequences in a ULID generator and keep uuid_generate_uuid for distributed inserts; in MySQL, use UUID_TO_BIN with right-padded storage. Both need a workload audit first: measure write rate, read locality, and index depth before touching a single table.",
-        "After auditing, the safe move is a shadow-write: populate the new key alongside the old, backfill in batches, then cut over with a single transaction swap. Keep the old PK until the new index stats stabilize, otherwise the planner regresses worse than the original bug.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A credible UUIDv4 incident with diagnostic guidance and workload-aware migration tradeoffs will earn more saves, specific comments, and followers than generic engineering advice.",
-      "breakout": "none",
-      "followers": 280,
-      "views_total": 27400,
-      "ids": [
-        "18117659405051820",
-        "17883494022690965",
-        "17912773380544721",
-        "18115102592005913",
-        "18123774697907351"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T02:01:16.326045+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,33 @@
         "17954974473035821"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T06:31:00.240744+00:00",
+      "pillar": "smart",
+      "hook_sig": "orms promise productivity but hand you a leaky",
+      "texts": [
+        "ORMs promise productivity but hand you a leaky abstraction that bites hardest at scale. The query planner becomes a black box you cannot negotiate with, and every migration turns into a negotiated settlement with the framework.",
+        "I watched a team spend three sprints coaxing Hibernate into a half-decent query plan for a reporting dashboard. The same report written in raw SQL with a materialized view took one afternoon and ran 40x faster.",
+        "The framework won the sprint. The database lost the quarter. When the ORM generates a cartesian join on a 50M row table because you forgot a fetch strategy, the outage owns you, not the library.",
+        "Senior engineers I trust reach for sqlc or jOOQ or plain driver code. They want the query in the repo, visible in grep, explainable in EXPLAIN ANALYZE, and versioned like any other artifact.",
+        "Stop letting the ORM write your indexes. Write the SQL, own the plan, sleep at night. Change my mind.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Debate hot take on ORMs vs raw SQL targets a perennial backend fault line, invites strong replies from both camps, and extends the proven contrarian pillar that delivered 11k views on the monolith post.",
+      "breakout": "",
+      "followers": 282,
+      "views_total": 19774,
+      "ids": [
+        "18079501499457782",
+        "18107647331525842",
+        "18098085176199623",
+        "18097962743653183",
+        "18143215156716685",
+        "18117711989281542"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1263,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 19664
+  "last_views": 19774
 }
