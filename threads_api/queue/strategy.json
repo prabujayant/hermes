@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Backend decision trees tied to measurable",
-  "pivots": 238,
+  "hypothesis": "Backend decision trees grounded in production failure modes earn attention when they give readers a clear next action.",
+  "pivots": 239,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T19:01:13.450020+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to become a top 1%",
-      "texts": [
-        "IF YOU WANT TO BECOME A TOP 1% PROBLEM SOLVER, STOP SKIPPING THE BASICS.\n\nMEMORIZE THESE 5 HABITS:",
-        "Always clarify before coding.\n\nInputs, edge cases, constraints. Five minutes of questions saves thirty minutes of rewrites.",
-        "Brute force first, on purpose.\n\nWrite the ugly O(n^2), then ask what repeats. The optimal solution hides inside the naive one.",
-        "Time yourself, then review.\n\n45 minutes per problem max. The learning happens in the 15 minutes after, studying the pattern you missed.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Specific system-design interview methods outperform generic lists when they make one difficult decision easy to explain.",
-      "breakout": "none",
-      "followers": 280,
-      "views_total": 25353,
-      "ids": [
-        "18127471174854577",
-        "18340810351261261",
-        "18111303550896817",
-        "18067488737789056",
-        "18030313472906172"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T19:31:04.831701+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,31 @@
         "18119899093766477"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T03:31:03.674837+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to become a senior engineer",
+      "texts": [
+        "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:",
+        "Own outcomes, not tickets.\n\nJuniors close tasks. Seniors move metrics. Ask what number your work changes.",
+        "Write the doc nobody wants to write.\n\nDesign docs, runbooks, postmortems. Visibility compounds faster than commits.",
+        "Delete code on purpose.\n\nEvery quarter, kill something: a flag, a service, dead code. Simplifiers get promoted.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Backend decision trees grounded in production failure modes earn attention when they give readers a clear next action.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 18608,
+      "ids": [
+        "18119634737644108",
+        "18085152620323852",
+        "17898423939394491",
+        "17912997024471199",
+        "18116432711469114"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 18467
+  "last_views": 18608
 }
