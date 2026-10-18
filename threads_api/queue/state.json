@@ -363,7 +363,8 @@
     "requests stall. cpu sits at 8 percent. your",
     "a timeout fired, then a retry, then a",
     "a gateway timeout tells you the network hiccuped.",
-    "a gateway timeout on a payment capture is"
+    "a gateway timeout on a payment capture is",
+    "your retry logic passes every test but still"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

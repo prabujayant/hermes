@@ -1,33 +1,8 @@
 {
   "hypothesis": "Backend failure-mode posts earn more attention when they pair an ambiguous symptom with a specific check that prevents a costly action.",
-  "pivots": 243,
+  "pivots": 244,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T01:01:14.423147+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- the dumbest performance regression i shipped wasn't",
-      "texts": [
-        "---\nThe dumbest performance regression I shipped wasn't a missing index. It was a UUIDv4 primary key on a 50k-writes-per-second table. We treated the PK as a clustering key, so every insert became random I/O across the buffer pool. Latency jumped from 3ms p99 to 42ms in production.",
-        "The fix wasn't \"use UUIDs everywhere\" or \"never use UUIDs.\" It was switching that one hot table to a composite key of (tenant_id, sequence_id) and moving the UUID to a secondary unique index. Writes dropped back to 4ms p99. The migration took 6 hours with dual-write shadow tables and a blue-green cutover.",
-        "Here is the concrete tradeoff nobody tells you: UUIDv4 gives you distributed write freedom, but it murders range locality. If your workload is tenant-scoped and append-heavy, a natural composite key wins. If you genuinely need global uniqueness with random writes, keep the UUID but never let it be the clustering key. One table, one rule.",
-        "The migration playbook: add the new key as UNIQUE NOT NULL, backfill in batches with rate limiting, dual-write both keys, verify with checksum queries, then cut over in a single transaction and drop the old index. We caught three edge cases this way that a big-bang swap would have missed.",
-        "Question for you: what is the one table in your system where random writes are hiding as \"just an ID\"? Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A credible UUIDv4 incident paired with a careful, workload-aware migration path will earn more saves, specific comments, and followers than generic engineering advice.",
-      "breakout": "none",
-      "followers": 280,
-      "views_total": 27202,
-      "ids": [
-        "18145576096606843",
-        "17964494814208270",
-        "18334778863275736",
-        "18245831311315644",
-        "18106437266627468"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T01:28:02.355154+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,27 @@
         "18194095042401442"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T06:01:14.772257+00:00",
+      "pillar": "smart",
+      "hook_sig": "your retry logic passes every test but still",
+      "texts": [
+        "Your retry logic passes every test but still double-charges customers in production. The gateway returns a 504 on capture. Your code retries. The first request actually succeeded. Both settle. I'll show you the one check that prevents this.",
+        "This happens because 504 means \"I don't know if the write happened,\" not \"it failed.\" Most teams treat it as a failure and retry blindly. The idempotency key prevents duplicate processing but not duplicate settlement if the first write committed before the timeout.",
+        "The fix: before retrying a 504 on capture, poll the gateway's transaction status endpoint with the same idempotency key. Only retry if the status is genuinely unknown or failed. If it shows \"\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Backend failure-mode posts earn more attention when they pair an ambiguous symptom with a specific check that prevents a costly action.",
+      "breakout": "",
+      "followers": 282,
+      "views_total": 19664,
+      "ids": [
+        "18113633018600634",
+        "18098081636396024",
+        "17954974473035821"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 19526
+  "last_views": 19664
 }
