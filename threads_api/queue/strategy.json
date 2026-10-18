@@ -1,33 +1,8 @@
 {
-  "hypothesis": "AI-coding posts gain traction when they expose a production failure and give backend engineers a review technique they can use immediately.",
-  "pivots": 254,
+  "hypothesis": "Story-format confession about AI migration failure with concrete guardrail technique will outperform recent median by targeting backend engineers who have felt migration pain, using codingwithroby's build-in-public confession mechanics applied to our AI-coding pillar.",
+  "pivots": 255,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T06:30:59.836658+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- the worst duplicate-charge failure i've seen wasn't",
-      "texts": [
-        "---\nThe worst duplicate-charge failure I've seen wasn't a missing idempotency key. It was a refund that succeeded twice because the idempotency layer lived in the API gateway, not the payment processor. By the time the gateway timed out and retried, the processor had already recorded the refund as new.",
-        "I shipped that bug. Two customers got double refunds, the ledger showed phantom credits, and finance spent three days reconciling. The root cause: we trusted the gateway to enforce idempotency across services that had no shared state. When the network partition hit, both sides thought they were the winner.",
-        "The fix was brutal: move idempotency into the payment processor itself, keyed on a customer-action-token. Every refund, every charge, every webhook now carries that token. The processor rejects duplicates before they touch the ledger. No gateway, no retry logic, no race.",
-        "Most teams treat idempotency as an API layer concern. That breaks the moment you have async workers, multiple gateways, or a webhook that fires twice in a partition. Real idempotency must survive the worst-case retry: a request that already succeeded, but the response was lost.",
-        "Follow @owlsky17 so you don't miss the next one.\n---"
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A specific duplicate-charge failure plus a practical idempotency lesson will earn practitioner replies and revive the proven engineering-mistake format. P27 showed the payments-service bug resonated; P30's query-plan gap proved concrete numbers drive replies. Story format with a sharp technical take",
-      "breakout": "",
-      "followers": 282,
-      "views_total": 29960,
-      "ids": [
-        "18129629087497629",
-        "18387326569206291",
-        "17973265356150264",
-        "18123513931713575",
-        "18179651521439881"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T07:01:15.269375+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "18387421792226766"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T11:31:03.876028+00:00",
+      "pillar": "smart",
+      "hook_sig": "i let an ai write a database migration",
+      "texts": [
+        "I let an AI write a database migration for a high-throughput billing service. It generated clean code, passed every test, and looked production-ready. Three hours after deploy the payments table locked solid. The culprit was a single `ALTER COLUMN TYPE` that the model swore was safe on Postgres 15.",
+        "The migration ran in a transaction. The AI assured me `ALTER COLUMN TYPE bigint USING id::bigint` would be a metadata-only change since the column was already `bigint` under the hood. It was not. Postgres rewrote the entire table, took an `ACCESS EXCLUSIVE` lock, and blocked every write for forty-seven minutes.",
+        "The model had no concept of lock queues, replication lag, or the fact that our read replicas would fall behind and trigger failover alerts. It optimized for syntax correctness, not operational semantics. That gap is where senior engineers earn their keep.",
+        "Now every AI-generated migration gets a dry-run on a production-size shadow table with `pg_stat_activity` monitored. We check lock modes, rewrite estimates, and replica lag before anything touches the primary. The AI writes the first draft. We supply the guardrails.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Story-format confession about AI migration failure with concrete guardrail technique will outperform recent median by targeting backend engineers who have felt migration pain, using codingwithroby's build-in-public confession mechanics applied to our AI-coding pillar.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 9244,
+      "ids": [
+        "17913559323288894",
+        "18103224176343213",
+        "18076169261736637",
+        "18014673782967396",
+        "18232165270325290"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 9083
+  "last_views": 9244
 }
