@@ -376,7 +376,8 @@
     "most ai code review advice assumes the model",
     "production failure reversal: ai code can pass tests",
     "i let an ai write a database migration",
-    "failure-mode warning: an ai-generated migration can be correct"
+    "failure-mode warning: an ai-generated migration can be correct",
+    "your service mesh is adding latency, not reliability."
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
