@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Backend engineers engage more with concrete",
-  "pivots": 252,
+  "hypothesis": "Contrarian lesson format on AI code review (proven 516k views for Notion co-founder) applied to backend pillar; shifts from recent statement/debate posts to numbered hard lessons with production pain, targeting the AI coding topic that drove our highest velocity post (P30 at 47.1/h).",
+  "pivots": 253,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T05:31:00.083611+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- the worst duplicate-charge bug i've seen wasn't",
-      "texts": [
-        "---\nThe worst duplicate-charge bug I've seen wasn't a retry race. It was an idempotency key that expired after 24 hours. A customer got charged $847 twice because their first attempt sat in a queue longer than the key lived.",
-        "Retry logic looks correct on paper until the network lies to you. We shipped a payments service that retried on any 5xx, including 502s from a gateway that had already captured the funds. The idempotency key was scoped per API key, so a rotated token meant a fresh key, and a fresh charge.",
-        "The fix wasn't more retries. It was a durable idempotency table keyed on (provider_transaction_id, amount_cents) with a unique constraint. Any duplicate insert fails fast, no race, no double charge, survives token rotation and 24h timeouts.",
-        "What's the idempotency key strategy you ship on day one of a payments project? Most teams treat it as an afterthought and pay for it later.",
-        "Follow @owlsky17 so you don't miss the next one.\n---"
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A specific duplicate-charge failure plus a practical idempotency lesson will earn practitioner replies and revive the proven engineering-mistake format.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 29619,
-      "ids": [
-        "18116936672011232",
-        "18162305548435940",
-        "18122332117940531",
-        "18101387675641438",
-        "18078051020427762"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T06:01:12.042753+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "18088649474264879"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T10:31:00.139413+00:00",
+      "pillar": "smart",
+      "hook_sig": "most ai code review advice assumes the model",
+      "texts": [
+        "Most AI code review advice assumes the model reads like a human. It does not. It pattern-matches token sequences against training distributions. The \"best practices\" you paste into prompts are often the exact patterns it learned to ignore.",
+        "LLMs flag style nits because those tokens correlate with \"code review\" in training data. They miss the race condition in your distributed lock because that pattern rarely appears in the review corpus. The model optimizes for review-shaped output, not correctness.",
+        "A senior engineer reviews the diff against system invariants. An LLM reviews the diff against statistical expectations. When the invariant lives in a design doc three repos away, the model has zero access. It will approve the bug with high confidence.",
+        "The workflow that works: you write the invariant as an executable check, the model suggests the fix, you verify the check passes. The model becomes a pattern completer for the mechanical part. You stay the invariant keeper. That division is the only one that scales.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Contrarian lesson format on AI code review (proven 516k views for Notion co-founder) applied to backend pillar; shifts from recent statement/debate posts to numbered hard lessons with production pain, targeting the AI coding topic that drove our highest velocity post (P30 at 47.1/h).",
+      "breakout": "",
+      "followers": 282,
+      "views_total": 8924,
+      "ids": [
+        "18598207957069344",
+        "18111206336142235",
+        "18131971447795032",
+        "17919173139451739",
+        "17950439346300582"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 8737
+  "last_views": 8924
 }

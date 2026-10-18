@@ -372,7 +372,8 @@
     "an orm transaction held a row lock for",
     "your connection pool size is not a throughput",
     "i watched a team double their connection pool",
-    "your p99 latency doubles overnight. cpu sits at"
+    "your p99 latency doubles overnight. cpu sits at",
+    "most ai code review advice assumes the model"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
