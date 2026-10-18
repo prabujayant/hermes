@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Story-format confession about AI migration failure with concrete guardrail technique will outperform recent median by targeting backend engineers who have felt migration pain, using codingwithroby's build-in-public confession mechanics applied to our AI-coding pillar.",
-  "pivots": 255,
+  "hypothesis": "A concrete AI-coding failure mode",
+  "pivots": 256,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T07:01:15.269375+00:00",
-      "pillar": "smart",
-      "hook_sig": "a payment succeeded, the response timed out, and",
-      "texts": [
-        "A payment succeeded, the response timed out, and the retry charged the customer twice.",
-        "The idempotency key was set. The gateway returned 200. The client timed out at 3.2 seconds and retried with the same key. The gateway ignored the duplicate and returned the original success.",
-        "Then the webhook arrived 15 seconds late. Our handler had no record of the original charge. It created a new one. The customer was billed twice.",
-        "The real bug was not the retry. It was the race between the synchronous response and the asynchronous webhook, with no shared source of truth.",
-        "How do you make idempotency keys survive both retries and late-arriving webhooks without a single source of truth? Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A concrete payment-retry failure and a usable idempotency lesson will earn more practitioner replies than a broad database-performance take.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 12339,
-      "ids": [
-        "18116729878797647",
-        "17985597701891898",
-        "17962054626233030",
-        "17948794131340886",
-        "17917311735463522"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T07:31:02.793736+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "18232165270325290"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T12:01:13.454941+00:00",
+      "pillar": "smart",
+      "hook_sig": "failure-mode warning: an ai-generated migration can be correct",
+      "texts": [
+        "failure-mode warning: an AI-generated migration can be correct SQL and still lock your production table. the model writes valid ALTER TABLE, adds the index, passes CI. then it runs on a 50M-row payments table and the exclusive lock holds for 47 minutes. zero rollback path.",
+        "the failure mode is not syntax. it is lock duration. Postgres takes ACCESS EXCLUSIVE on ALTER TABLE ADD COLUMN with default, ALTER COLUMN TYPE, DROP COLUMN, RENAME. any migration that rewrites the table blocks every read and write. AI does not know your table size or traffic pattern.",
+        "expand-migrate-contract breaks the lock into three safe steps. expand: add nullable column, no default, no rewrite. backfill: batched UPDATE in small transactions, throttled, idempotent. contract: add NOT NULL, add index CONCURRENTLY, drop old column. each step holds locks for milliseconds.",
+        "guardrail checklist for every AI migration: 1) forbid ALTER COLUMN TYPE, DROP COLUMN, ADD COLUMN WITH DEFAULT on tables > 1M rows. 2) require CONCURRENTLY for index creation. 3) require batched backfill script with LIMIT and pg_sleep. 4) dry-run on staging with production-scale data. 5) rollback plan must be a single reversible step.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete AI-coding failure mode",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 9404,
+      "ids": [
+        "18118261273955854",
+        "17879049579632851",
+        "17950764885326405",
+        "18351595840266157",
+        "18117947117048870"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 9244
+  "last_views": 9404
 }

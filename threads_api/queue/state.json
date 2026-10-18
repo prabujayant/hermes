@@ -375,7 +375,8 @@
     "your p99 latency doubles overnight. cpu sits at",
     "most ai code review advice assumes the model",
     "production failure reversal: ai code can pass tests",
-    "i let an ai write a database migration"
+    "i let an ai write a database migration",
+    "failure-mode warning: an ai-generated migration can be correct"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
