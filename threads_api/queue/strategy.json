@@ -1,33 +1,8 @@
 {
   "hypothesis": "Debate hot take on ORMs vs raw SQL targets a perennial backend fault line, invites strong replies from both camps, and extends the proven contrarian pillar that delivered 11k views on the monolith post.",
-  "pivots": 245,
+  "pivots": 246,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T02:01:16.326045+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- uuidv4 isn't evil. the evil is guessing.",
-      "texts": [
-        "---\nUUIDv4 isn't evil. The evil is guessing. Every team I've seen burn weeks on a key migration either had a real write stall they ignored, or they swapped keys and made the index bloat worse.",
-        "Before you touch a single key, measure three signals. First, pg_stat_user_tables idx_tup_read vs idx_tup_fetch. If the ratio is below 0.3, your secondary indexes are fetching dead tuples because random UUIDs scatter them across the buffer pool.",
-        "Second, hit pgstattuple on your largest index. A fillfactor under 70 percent means your leaf pages are half-empty, and that is the buffer pool tax you are paying for randomness. Third, watch CPU iowait during peak inserts; if it spikes when the insert rate spikes, the storage layer is choking on page splits.",
-        "I ran this on a payments table last month. idx_tup_read was 4.2x idx_tup_fetch, index fillfactor sat at 52 percent, and iowait jumped 6 percent during checkout bursts. We did not migrate keys. We added a surrogate int key, kept UUID as a business identifier, and rebuilt the hot index with fillfactor 90. Inserts dropped 4.2 seconds to 42 milliseconds.",
-        "The migration tradeoff nobody mentions: if your workload is read-heavy with point lookups, UUIDv4 randomness is fine because the index fits in memory. If it is write-heavy with range scans, random keys force the buffer pool into thrashing. Diagnose the workload, not the key. Follow @owlsky17 so you don't miss the next one.\n\n---"
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A practical way to verify UUIDv4 index costs and choose a workload-appropriate fix will earn more saves and specific comments than a blanket warning.",
-      "breakout": "none",
-      "followers": 281,
-      "views_total": 27696,
-      "ids": [
-        "18028792097862148",
-        "18066052562533272",
-        "17949201726304237",
-        "17902640751599018",
-        "18186763186412160"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T02:31:02.410700+00:00",
       "pillar": "smart",
@@ -1254,6 +1229,27 @@
         "18117711989281542"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T07:01:13.371461+00:00",
+      "pillar": "smart",
+      "hook_sig": "most ai coding advice circulating today is already",
+      "texts": [
+        "Most AI coding advice circulating today is already obsolete. The models changed, the tooling changed, and the failure modes changed. Here is what actually works in production now, learned the hard way.",
+        "Lesson 1: Stop treating the model as a junior dev who types fast. It is a senior dev who hallucinates architecture. You don't review its code for syntax. You review it for implicit assumptions about your data model, your retry semantics, your idempotency keys. The bugs that ship are the ones that look correct.",
+        "Lesson 2: Context window size is a trap. Stuffing 50 files into the prompt does not give you better changes. It gives you diffuse, inconsistent edits across layers. The winning workflow: one file, one intent, one diff. Chain\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Debate hot take on ORMs vs raw SQL targets a perennial backend fault line, invites strong replies from both camps, and extends the proven contrarian pillar that delivered 11k views on the monolith post.",
+      "breakout": "",
+      "followers": 282,
+      "views_total": 7438,
+      "ids": [
+        "18024824861875853",
+        "18107203169219268",
+        "18438029026196201"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1263,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 19774
+  "last_views": 7438
 }
