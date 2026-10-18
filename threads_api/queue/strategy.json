@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific, reproducible backend lesson with a credible before/",
-  "pivots": 231,
+  "hypothesis": "Specific backend failure lessons with a clear decision procedure and credible stakes will outperform generic advice and build a follow-up series.",
+  "pivots": 232,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T15:31:06.707515+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to crack coding interviews, stop",
-      "texts": [
-        "IF YOU WANT TO CRACK CODING INTERVIEWS, STOP PRACTICING RANDOMLY.\n\nMEMORIZE THESE 5 PATTERNS INSTEAD:",
-        "Two pointers turn O(n^2) into O(n).\n\nSorted array, pair sum, container with water. Move ends inward instead of nesting loops.",
-        "Sliding window owns substring problems.\n\nLongest, shortest, best. Grow the right edge, shrink the left when invalid. One pass.",
-        "BFS and DFS are the same skill.\n\nGrids, islands, trees, graphs. Queue for shortest path, stack for exhaustive search. Learn both once.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A copyable SQL benchmark with a precise caveat will earn more useful replies and shares than a broad diagnostic.",
-      "breakout": "none",
-      "followers": 279,
-      "views_total": 23189,
-      "ids": [
-        "17909656800486401",
-        "18105752921526479",
-        "18344932720189256",
-        "18166973758490323",
-        "18061536038795160"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T16:01:16.923348+00:00",
       "pillar": "smart",
@@ -1258,6 +1233,31 @@
         "18089060264274527"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T00:01:20.064076+00:00",
+      "pillar": "smart",
+      "hook_sig": "i shipped a retry loop that treated every",
+      "texts": [
+        "I shipped a retry loop that treated every gateway timeout as a failure. Two weeks later an $847 charge settled twice, 27 hours apart, same idempotency key, both marked successful. The logs showed clean retries. The customer saw double posts on their statement. We refunded, apologized, and I spent the weekend reading gateway docs.",
+        "The rule nobody tells you: a timeout means unknown, not failed. The payment may have succeeded, failed, or still be processing. Most teams retry on 5xx and call it resilience. That is how you double-charge. The only safe move is to check the provider balance or transaction status before you send a second request.",
+        "Decision tree we now run in production: on timeout, do not retry immediately. First, call the provider's lookup endpoint with the original idempotency key. If it returns succeeded, record and return success. If it returns failed or not found, then retry with a new idempotency key. If lookup itself times out, alert on-call and pause the queue. No guessing.",
+        "Code pattern that implements the tree: wrap the charge call in a function that catches timeout, then calls `provider.lookup(idempotencyKey)`. Switch on the result: succeeded -> return existing charge; failed -> retry with fresh key; not_found -> retry with fresh key; lookup_timeout -> throw `AmbiguousStateError` for the queue dead-letter handler. Ten lines, zero double charges since deploy.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific backend failure lessons with a clear decision procedure and credible stakes will outperform generic advice and build a follow-up series.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 17426,
+      "ids": [
+        "18073077593584800",
+        "18127578610867786",
+        "18104224535569629",
+        "18018006617958131",
+        "17971863084171722"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1267,5 +1267,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 16955
+  "last_views": 17426
 }
