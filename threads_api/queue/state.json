@@ -386,7 +386,8 @@
     "most engineers think idempotency keys solve payment races.",
     "production invariant: a retry must return the original",
     "we shipped a retry wrapper on the payments",
-    "most payment retry advice obsesses over idempotency keys."
+    "most payment retry advice obsesses over idempotency keys.",
+    "a payment request hit our gateway. the network"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

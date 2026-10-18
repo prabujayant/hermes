@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete timeout-and-retry sequence plus an explicit idempotency invariant will earn more saves and specific backend replies than broad AI failure stories.",
-  "pivots": 266,
+  "hypothesis": "A specific post-commit timeout sequence plus a clear idempotency invariant will earn more saves and useful backend replies than broad retry advice.",
+  "pivots": 267,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T12:31:02.400845+00:00",
-      "pillar": "smart",
-      "hook_sig": "a refund returned 200 ok. the customer got",
-      "texts": [
-        "A refund returned 200 OK. The customer got credited twice. The gateway swore it succeeded.\n\nHere is the trap: a successful response only proves the gateway accepted the request, not that the state transition happened exactly once. Network retries, gateway-side replays, and silent duplicate processing turn \"it worked\" into \"it worked twice.\"\n\nRefunds are not idempotent by default. They become idempotent when you model them as state machines.",
-        "A refund has states. Pending, processing, succeeded, failed, and an explicit duplicate-sentinel. Every transition is guarded. Before you ever call the gateway again you check: does a succeeded or duplicate-sentinel row already exist for this refund id? If yes, stop. Do not retry. Do not reissue.\n\nThe duplicate-sentinel is the secret weapon. It is a row that says \"we sent this refund and we are not sure what happened.\" It lets you safely retry while guaranteeing exactly-once crediting downstream.",
-        "The worst duplicate-refund failure I have seen was not a missing idempotency key. It was a refund that succeeded twice because the idempotency layer lived in the application code, not the ledger. The gateway processed both, the gateway returned success on both, and the accounting system applied the credit twice because no state machine was enforcing the boundary.\n\nReconciliation is not a nightly batch job. It is the guardrail that catches the uncertain outcomes you did not write a test for.",
-        "So we reconcile aggressively. Every hour we pull the last hour of refund ids from our ledger and compare them against the gateway's reported status. Any refund marked succeeded locally but not found in the gateway? We mark it duplicate-sentinel and investigate. Any refund still pending beyond a threshold? We cancel it and alert.\n\nThis is not about preventing every failure. It is about making failures expensive for the system, not for the customer.",
-        "The fix is three lines of discipline: model refund states, reconcile uncertain outcomes, and never trust a 200 OK as proof of exactly-once. Want more of these production-grade safeguards? Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Payment-failure stories earn attention; actionable recovery rules may turn that attention into follows. End with a relevant follow CTA.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 14557,
-      "ids": [
-        "18130351831693845",
-        "18020480834729187",
-        "18012383861766429",
-        "17969668827009645",
-        "18129196573830691"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T13:01:15.100466+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18149316349563499"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T17:29:31.467090+00:00",
+      "pillar": "smart",
+      "hook_sig": "a payment request hit our gateway. the network",
+      "texts": [
+        "A payment request hit our gateway. The network hiccuped for 2.3 seconds. Our client saw a timeout and threw. The logs showed the request never left our server. We retried. The customer got charged twice. The first request had actually committed. The timeout was a lie.",
+        "The gateway had already processed the charge. Our database had the transaction row. But the response never made it back through the load balancer. Our retry wrapper saw a 504 and blindly re-sent. No idempotency key. No deduplication. Just a second POST that looked identical to the first. The ledger now had two rows for one purchase.",
+        "This is the ambiguous timeout trap. You cannot distinguish \"request failed before commit\" from \"request succeeded but response died.\" Retrying without an invariant assumes the former. Production proves the latter happens often enough to drain accounts. The only safe move is making every retry carry proof it is the same logical operation.",
+        "The invariant: every mutating call must carry a client-generated idempotency key the server stores and checks before any side effect. On timeout you retry with the same key. The server sees the key, finds the completed row, returns the original result. No double charge. No manual reconciliation. What retry rule does your team enforce for ambiguous timeouts?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific post-commit timeout sequence plus a clear idempotency invariant will earn more saves and useful backend replies than broad retry advice.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 11588,
+      "ids": [
+        "18077813420546734",
+        "18626977459027255",
+        "18152317651580762",
+        "18015733556956902",
+        "18341542612262453"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 11387
+  "last_views": 11588
 }
