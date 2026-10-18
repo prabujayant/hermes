@@ -1,35 +1,8 @@
 {
-  "hypothesis": "Specific troubleshooting beats generic pool-size debate by earning saves and useful replies from backend engineers.",
-  "pivots": 251,
+  "hypothesis": "Backend engineers engage more with concrete",
+  "pivots": 252,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T05:01:12.765152+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- the retry logic looked correct on paper.",
-      "texts": [
-        "--- the retry logic looked correct on paper. exponential backoff, max attempts, all the textbook patterns. shipped it to the payment gateway client and went home proud.",
-        "at 2am the gateway hiccuped for 90 seconds. our fleet of 200 instances woke up simultaneously, each retrying every 2s, 4s, 8s in perfect lockstep. the retry storm amplified the original blip into a 45-minute cascade that took down the entire checkout flow.",
-        "the bug wasn't the backoff formula. it was the missing jitter and the missing retry budget. without jitter, every client retried at the exact same millisecond. without a budget, we kept hammering a service that was already drowning. we turned a transient error into a distributed denial of service against ourselves.",
-        "fixed it three ways: full jitter on every backoff (random 0 to 2^attempt), a token-bucket retry budget per downstream (max 10% of baseline QPS), and a circuit breaker that trips after 5 consecutive failures and stays open for 30s. the next gateway blip barely registered.",
-        "what retry policy does your team actually enforce in production, and when did you last load-test it against a thundering herd?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete, broadly familiar reliability failure can revive the proven engineering-mistake format while inviting practitioners to share their own retry safeguards.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 29315,
-      "ids": [
-        "18478333819118799",
-        "18428424631144865",
-        "17912130120520295",
-        "18117100979049006",
-        "18173346679454830",
-        "17909454681555076"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T05:31:00.083611+00:00",
       "pillar": "smart",
@@ -1248,6 +1221,31 @@
         "18127506719493079"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T10:01:16.375952+00:00",
+      "pillar": "smart",
+      "hook_sig": "your p99 latency doubles overnight. cpu sits at",
+      "texts": [
+        "Your p99 latency doubles overnight. CPU sits at 8 percent. Memory flat. Disk quiet. You stare at the dashboard wondering if you need more instances. That was me last quarter on the orders service.",
+        "The breakthrough came when I split the timeline. I instrumented two numbers: time waiting for a pool connection and time inside the actual query. The pool wait was 90 percent of the p99. The queries themselves were fast.",
+        "Most teams reach for maxPoolSize first. That hides the symptom. The real fix was shortening the critical section: we moved a slow validation call outside the transaction, dropped the pool wait from 800ms to 40ms, and p99 normalized without adding a single instance.",
+        "The two timings that separate queueing from query cost are pool_wait_duration and query_execution_duration. If pool_wait dominates, your pool is the bottleneck. If query_execution dominates, look at indexes and plans. Which metric do you check first when p99 climbs but CPU stays low?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Backend engineers engage more with concrete",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 8737,
+      "ids": [
+        "18130833679693496",
+        "18133726651776765",
+        "18095082188653592",
+        "17893854264432852",
+        "18088649474264879"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 8561
+  "last_views": 8737
 }
