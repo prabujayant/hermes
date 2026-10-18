@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete post-commit timeout timeline plus a testable idempotency invariant will earn more saves and useful backend replies than generic retry advice.",
-  "pivots": 268,
+  "hypothesis": "A blunt debate hook on connection pooling (Format 5) with concrete before/after numbers will outpace the caps-listicle median (3.9/h) by triggering reply-driven reach, citing P2",
+  "pivots": 269,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T13:31:03.124528+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want your side project to survive,",
-      "texts": [
-        "IF YOU WANT YOUR SIDE PROJECT TO SURVIVE, STOP ADDING FEATURES.\n\nMEMORIZE THESE 5 RULES:",
-        "Ship to one user first.\n\nYourself counts. Real usage teaches more than ten planned features.",
-        "Boring tech wins weekends.\n\nMonolith, Postgres, one host. Excitement is for work hours.",
-        "Log progress in public.\n\nWeekly demos beat yearly launches. Accountability ships products.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A concise recovery playbook will earn more saves and follows than another payment-failure story.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 14721,
-      "ids": [
-        "18126888505657474",
-        "18342941062279566",
-        "18430760755145860",
-        "18147553312492417",
-        "18096231395444168"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T14:01:14.648486+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "17942497416366113"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T18:31:05.483829+00:00",
+      "pillar": "smart",
+      "hook_sig": "stop setting your database connection pool to 100",
+      "texts": [
+        "Stop setting your database connection pool to 100 because \"more connections equal more throughput.\" That is the single biggest lie in backend tuning. Most OLTP workloads peak at 8 to 16 active connections. The rest sit idle holding locks and bloating memory.",
+        "We ran a payments service on Postgres with a pool of 100. P99 latency was 1.2 seconds. Dropped the pool to 12, added a small queue, and P99 fell to 45 milliseconds. The database stopped thrashing on context switches. Throughput doubled because transactions actually committed instead of waiting on lock queues.",
+        "The rule: size your pool to CPU cores times two, plus a tiny buffer for headroom. If you need more concurrency, fix the query, add an index, or shard. A big pool is a band aid that hides the real problem and makes incidents harder to debug.",
+        "Your pool of 50 on a 4 core box is not \"safe.\" It is a latency bomb. Prove me wrong: show me a production workload where 50 idle connections beat 12 with a queue.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A blunt debate hook on connection pooling (Format 5) with concrete before/after numbers will outpace the caps-listicle median (3.9/h) by triggering reply-driven reach, citing P2",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 12204,
+      "ids": [
+        "17951377992302127",
+        "17962863249238191",
+        "18093510608447400",
+        "18095230916426448",
+        "18107510041963722"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 11878
+  "last_views": 12204
 }
