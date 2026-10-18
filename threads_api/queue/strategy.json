@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific post-commit timeout sequence plus a clear idempotency invariant will earn more saves and useful backend replies than broad retry advice.",
-  "pivots": 267,
+  "hypothesis": "A concrete post-commit timeout timeline plus a testable idempotency invariant will earn more saves and useful backend replies than generic retry advice.",
+  "pivots": 268,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T13:01:15.100466+00:00",
-      "pillar": "smart",
-      "hook_sig": "a gateway timeout on a capture call is",
-      "texts": [
-        "A gateway timeout on a capture call is not a failure signal. It is a question mark. The money may have moved, or it may not. Treating it as a hard failure and retrying blindly is how you double-charge customers.",
-        "The safe recovery sequence starts before the first request leaves your service. Generate an idempotency key per business operation, not per HTTP attempt. Store it with the payment intent, the amount, and a pending status. This key is your source of truth for every subsequent decision.",
-        "When the timeout hits, do not retry the capture. Call the gateway's status endpoint with the same idempotency key. Most major providers (Stripe, Adyen, Braintree) support this. If the status returns succeeded, mark the intent complete and move on. If it returns failed or not found, then you may safely retry the capture once with the same key.",
-        "If the status endpoint itself times out or returns an ambiguous state, pause. Write a reconciliation job that runs every five minutes. It queries the gateway for all intents in pending state older than two minutes, compares against your ledger, and resolves discrepancies. This is the step most teams skip. Which step does your system miss?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Concrete recovery rules will convert interest in payment-failure stories into follows better than another incident retelling.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 14634,
-      "ids": [
-        "18030520283909345",
-        "18128978566859493",
-        "18109117892628129",
-        "18114854882014685",
-        "18021201767925176"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T13:31:03.124528+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18341542612262453"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T18:01:19.128248+00:00",
+      "pillar": "smart",
+      "hook_sig": "failure timeline: the payment write commits to postgres,",
+      "texts": [
+        "failure timeline: the payment write commits to postgres, the network drops the ack, the client retries with the same idempotency key, and the duplicate charge never happens because the invariant lives in the database, not the application layer",
+        "we processed a $2,400 subscription renewal. the insert committed, the row exists, but the gateway response timed out at 30 seconds. the client saw no response, waited, and retried with the exact same idempotency key. without the invariant, that retry would have created a second charge row",
+        "the invariant: unique constraint on (idempotency_key, user_id) inside the charges table. the first insert wins. the retry hits a duplicate key error. the application catches it, reads the existing charge row, and returns the original success response. zero duplicate money movement",
+        "implementation detail: the idempotency key comes from the client header. we generate the charge row with that key in a single transaction. on conflict we select the existing row by key. question: what edge case breaks this when the first request crashes after commit but before the client receives the key?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete post-commit timeout timeline plus a testable idempotency invariant will earn more saves and useful backend replies than generic retry advice.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 11878,
+      "ids": [
+        "18117255136798831",
+        "18133264879663757",
+        "18013594541760313",
+        "17896544760416852",
+        "17942497416366113"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 11588
+  "last_views": 11878
 }
