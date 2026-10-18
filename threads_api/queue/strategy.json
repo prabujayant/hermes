@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A blunt debate hook on connection pooling (Format 5) with concrete before/after numbers will outpace the caps-listicle median (3.9/h) by triggering reply-driven reach, citing P2",
-  "pivots": 269,
+  "hypothesis": "Blunt debate hook on connection pooling (Format 5) with concrete before/after numbers will outpace caps-listicle median (3.9/h) by triggering reply-driven reach, citing P26's 96.2/h velocity on a similar contrarian statement.",
+  "pivots": 270,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T14:01:14.648486+00:00",
-      "pillar": "smart",
-      "hook_sig": "a payment timeout is not a failure. it",
-      "texts": [
-        "A payment timeout is not a failure. It is a question mark. The gateway accepted the charge, the network dropped the ack, and your code sees nothing. Retrying blindly is how you double-charge. The rule: reconcile first, retry second.",
-        "Reconciliation means asking the source of truth before you send another request. Call the gateway's retrieve endpoint with your idempotency key. If the charge exists, mark it succeeded and stop. If it returns not-found, the timeout happened before persistence, now retry safely.",
-        "Your idempotency key must survive the full lifecycle. Customer ID plus amount is not enough, two legitimate charges for the same amount look identical. Use a request-scoped UUID generated before the first attempt. Store it with the order. Pass it on every retry. The gateway deduplicates; you stay consistent.",
-        "Reconciliation adds one round-trip. That latency is the cost of correctness. Skipping it saves milliseconds and costs chargebacks, support tickets, and lost trust. The decision rule is binary: if you cannot prove the first attempt failed, you must verify before you repeat it.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific, reusable recovery rule will earn more saves and follows than a payment-failure anecdote",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 14791,
-      "ids": [
-        "18129753061700499",
-        "18115369259023052",
-        "18112511447141135",
-        "18119355602069499",
-        "18080286371448595"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T14:31:04.460318+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18107510041963722"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T19:01:12.862564+00:00",
+      "pillar": "smart",
+      "hook_sig": "your connection pool of 100 is choking the",
+      "texts": [
+        "Your connection pool of 100 is choking the database. Cut it to 12 and throughput doubles. The math is simple: each connection holds a buffer, each buffer eats RAM, and context switching burns CPU. Most teams size pools by gut feel, not Little's Law.",
+        "We ran a payments service at 5k RPS with a pool of 100. P99 latency sat at 1.2s. Dropped it to 12, added a retry queue, and P99 fell to 180ms. The database went from 90% CPU wait to 40%. Zero code changes, one config line.",
+        "The formula is not max_connections. It is (core_count * 2) + effective_spindle_count. For Aurora Postgres on db.r6g.xlarge that is 12. For RDS on i3.2xlarge it is 16. Every connection above that number is negative throughput.",
+        "Your ORM defaults lied to you. Hikari defaults to 10. Node pg defaults to 10. Java apps ship with 50. None of them know your hardware. Measure saturation with pg_stat_activity wait_event_type, not application metrics. Change my mind.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Blunt debate hook on connection pooling (Format 5) with concrete before/after numbers will outpace caps-listicle median (3.9/h) by triggering reply-driven reach, citing P26's 96.2/h velocity on a similar contrarian statement.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 12307,
+      "ids": [
+        "18473695906113115",
+        "17923135704225225",
+        "17990528939859623",
+        "18132605800776220",
+        "17913189078492944"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 12204
+  "last_views": 12307
 }

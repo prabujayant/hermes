@@ -389,7 +389,8 @@
     "most payment retry advice obsesses over idempotency keys.",
     "a payment request hit our gateway. the network",
     "failure timeline: the payment write commits to postgres,",
-    "stop setting your database connection pool to 100"
+    "stop setting your database connection pool to 100",
+    "your connection pool of 100 is choking the"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
