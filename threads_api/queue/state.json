@@ -380,7 +380,8 @@
     "your service mesh is adding latency, not reliability.",
     "decision rule: add a service mesh only when",
     "decision test: before adopting a service mesh, measure",
-    "foreign keys are not optional in production. if"
+    "foreign keys are not optional in production. if",
+    "i let ai review every pr on our"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

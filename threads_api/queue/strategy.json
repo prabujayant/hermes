@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete go/no-go test will earn more saves and credible replies than a general pro/anti service-mesh take.",
-  "pivots": 260,
+  "hypothesis": "A concrete confession of an AI review failure with a specific race condition will outperform general advice posts by triggering \"this happened to me\" replies and saves from engineers who run payments or billing systems.",
+  "pivots": 261,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T09:31:02.347693+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "texts": [
-        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
-        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
-        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
-        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A concrete payment-timeout scenario paired with a precise idempotency invariant will earn more practitioner replies than broad retry advice.",
-      "breakout": "",
-      "followers": 282,
-      "views_total": 13408,
-      "ids": [
-        "17965826081978895",
-        "18126023698903175",
-        "17976007401144931",
-        "18627721963059094",
-        "18023629301713007"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T10:01:16.395019+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18057575486567425"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T14:31:00.896374+00:00",
+      "pillar": "smart",
+      "hook_sig": "i let ai review every pr on our",
+      "texts": [
+        "I let AI review every PR on our payments service for thirty days. Zero human reviews. The model caught style issues, missing null checks, and off-by-one loops. It missed the race condition that double-charged two thousand customers.",
+        "The bug was a classic lost update: read balance, compute new balance, write balance. The AI flagged the missing index on the balance column. It did not flag the missing row lock. The test suite passed because the test ran single-threaded.",
+        "Production ran forty threads. The window between read and write was twelve microseconds. At peak load that window collided forty times per second. The AI had no concept of concurrency because the training data treats functions as pure transforms.",
+        "We rolled back to mandatory human review on money-moving code. The first human reviewer caught the missing `SELECT FOR UPDATE` in three minutes. The AI had reviewed that same PR twice and approved it both times.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete confession of an AI review failure with a specific race condition will outperform general advice posts by triggering \"this happened to me\" replies and saves from engineers who run payments or billing systems.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 10495,
+      "ids": [
+        "18126676345681203",
+        "18106758248205106",
+        "18139688083627062",
+        "18143668903607878",
+        "18118238309074091"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 9975
+  "last_views": 10495
 }
