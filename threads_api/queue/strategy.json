@@ -1,33 +1,8 @@
 {
   "hypothesis": "Blunt debate hook on connection pooling (Format 5) with concrete before/after numbers will outpace caps-listicle median (3.9/h) by triggering reply-driven reach, citing P26's 96.2/h velocity on a similar contrarian statement.",
-  "pivots": 270,
+  "pivots": 271,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T14:31:04.460318+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- my payment retry loop looked bulletproof on",
-      "texts": [
-        "---\nMy payment retry loop looked bulletproof on paper. Exponential backoff, max attempts, idempotency keys, all the textbook patterns.",
-        "Two years later the buffer pool was 80% fragmented. Not from traffic, not from scale, from trusting that a timeout meant failure.",
-        "A gateway timeout on a capture call is not a failure. It is a question waiting for an answer.",
-        "Recovery rule: never retry a charge until you know whether the first attempt committed. Query the gateway, check the ledger, confirm state first.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A specific recovery rule for ambiguous payment outcomes will earn more saves and follows than a failure anecdote alone",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 15015,
-      "ids": [
-        "18098113805093688",
-        "18083188319343640",
-        "18114779513039757",
-        "18131371732682603",
-        "18193783828398365"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T15:01:14.959611+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "17913189078492944"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T19:30:59.487920+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want behavioral rounds to remember you,",
+      "texts": [
+        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
+        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
+        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
+        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Blunt debate hook on connection pooling (Format 5) with concrete before/after numbers will outpace caps-listicle median (3.9/h) by triggering reply-driven reach, citing P26's 96.2/h velocity on a similar contrarian statement.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 12405,
+      "ids": [
+        "17884096203522868",
+        "18093807092173437",
+        "18195690259399893",
+        "18114751685036214",
+        "17989280391119949"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 12307
+  "last_views": 12405
 }
