@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific payment race plus the invariant that prevents it will earn more engineer replies and saves than a general AI-code failure",
-  "pivots": 262,
+  "hypothesis": "A contrarian lesson on a specific payment race with a concrete invariant will outperform general AI failure stories by targeting backend engineers who own billing flows and crave battle-tested patterns.",
+  "pivots": 263,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T10:31:07.004139+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- i shipped retry logic that looked correct",
-      "texts": [
-        "---\nI shipped retry logic that looked correct on paper. Exponential backoff, max attempts, all the textbook patterns. Went home thinking it was solid.",
-        "Next morning: finance flags a customer charged $847 twice for a single subscription renewal. Same card, same timestamp, same amount. Two successful charges on one invoice.",
-        "Root cause was not a retry race. It was an idempotency key that expired after 24 hours. The first request timed out at the gateway. The retry generated a new key. The gateway saw a brand new charge.",
-        "The invariant every payment service must enforce: a timed-out payment retry MUST reuse the same idempotency key for the same logical charge. Period. No exceptions. Not even for refunds or partial captures.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A timeout example plus the same-operation/same-key invariant and a key-expiry caveat will prompt more practitioner replies than general retry advice",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 13901,
-      "ids": [
-        "18112497893162252",
-        "18166321384483890",
-        "18025653497871064",
-        "18126904015907995",
-        "18075601361729469"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T11:01:12.743595+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "17906122956570485"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T15:31:01.939553+00:00",
+      "pillar": "smart",
+      "hook_sig": "most engineers think idempotency keys solve payment races.",
+      "texts": [
+        "Most engineers think idempotency keys solve payment races. They don't, not when the network partitions between your service and the payment gateway.",
+        "The common advice: generate a UUID, send it as Idempotency-Key, retry on 5xx. The gateway deduplicates, you're safe. That works until the gateway accepts the charge but the ACK never makes it back to you.",
+        "Your service times out, retries with the same key. The gateway sees a duplicate and returns the original success. But your local transaction already rolled back. Now the customer is charged, your order row shows failed, and reconciliation finds a mismatch three days later.",
+        "The invariant that actually works: persist the gateway's response before you acknowledge the customer. Write the charge_id, status, and raw response to an append-only ledger in the same transaction that marks the order paid. If the ledger row exists, the charge is final. No ledger row, no charge.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A contrarian lesson on a specific payment race with a concrete invariant will outperform general AI failure stories by targeting backend engineers who own billing flows and crave battle-tested patterns.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 10892,
+      "ids": [
+        "18131354449795104",
+        "18423269470157220",
+        "18021149909948892",
+        "18093070061675984",
+        "18032960930883409"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 10624
+  "last_views": 10892
 }
