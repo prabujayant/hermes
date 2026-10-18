@@ -1,33 +1,8 @@
 {
   "hypothesis": "A concrete go/no-go test will earn more saves and credible replies than a general pro/anti service-mesh take.",
-  "pivots": 259,
+  "pivots": 260,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T09:01:16.084011+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- i shipped retry logic i thought was",
-      "texts": [
-        "---\nI shipped retry logic I thought was safe. Three lines of config, exponential backoff, max attempts. It looked bulletproof.",
-        "Then the gateway timed out on a $2,847 charge. The customer's card was billed, but our system never got the webhook. So the retry fired.",
-        "The customer got charged twice. Not because retry was wrong. Because the idempotency key expired after 24 hours.",
-        "The real invariant: idempotency keys must live at least as long as your retry window. If you retry for 72 hours, your key must persist for 72+ hours.",
-        "Timeout retries are not the bug. Missing the idempotency invariant is. Every payment system has this silent failure mode.\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A concrete payment-timeout scenario paired with a precise idempotency invariant will earn more practitioner replies than broad retry advice.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 13211,
-      "ids": [
-        "18421068535155483",
-        "18023154557952991",
-        "18080724044418610",
-        "17964117096226888",
-        "17922852846224579"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T09:31:02.347693+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,27 @@
         "18130630963768846"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T14:01:15.789287+00:00",
+      "pillar": "smart",
+      "hook_sig": "foreign keys are not optional in production. if",
+      "texts": [
+        "Foreign keys are not optional in production. If your ORM makes them painful, change the ORM, not the schema.",
+        "I watched a payments team drop foreign keys because \"the ORM handles referential integrity in application code.\" Six months later a race condition orphaned 40,000 transaction rows. The cleanup took three weeks and required manual SQL surgery on a live database.",
+        "The argument against foreign keys is always the same: they slow down writes, complicate migrations, and the ORM validates anyway. All three are true in a vacuum\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete go/no-go test will earn more saves and credible replies than a general pro/anti service-mesh take.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 9975,
+      "ids": [
+        "17974201617156819",
+        "18126756655803689",
+        "18057575486567425"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 9892
+  "last_views": 9975
 }
