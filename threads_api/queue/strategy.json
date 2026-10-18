@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete confession of an AI review failure with a specific race condition will outperform general advice posts by triggering \"this happened to me\" replies and saves from engineers who run payments or billing systems.",
-  "pivots": 261,
+  "hypothesis": "A specific payment race plus the invariant that prevents it will earn more engineer replies and saves than a general AI-code failure",
+  "pivots": 262,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T10:01:16.395019+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- my idempotency key was a customer id",
-      "texts": [
-        "---\nMy idempotency key was a customer ID plus the charge amount. Two charges for $847.00 came in 27 hours apart. The key said they were different transactions. They weren't.",
-        "I used a hash of customer_id and amount as the idempotency key. A retry after a timeout regenerated the same key. But the gateway treated each hour-long window as a fresh namespace. Same key, different hour, different charge.",
-        "The fix: include a deterministic window in the key. Not the calendar hour. The settlement day. A 24-hour bucket that survives retries but prevents double processing. The bug was time, not identity.",
-        "Idempotency keys need time-bounded uniqueness, not just collision prevention. I learned this after a $847 duplicate charge that our \"correct\" retry logic happily reprocessed.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A concrete payment-timeout scenario paired with a precise idempotency invariant will earn more practitioner replies than broad retry advice.",
-      "breakout": "",
-      "followers": 282,
-      "views_total": 13628,
-      "ids": [
-        "17947395978343995",
-        "17993324970103115",
-        "18115380527040757",
-        "18129582592865149",
-        "18092016479677038"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T10:31:07.004139+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18118238309074091"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T15:01:13.618426+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to pass system design interviews,",
+      "texts": [
+        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
+        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
+        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
+        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific payment race plus the invariant that prevents it will earn more engineer replies and saves than a general AI-code failure",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 10624,
+      "ids": [
+        "18136907422629248",
+        "17937607065382952",
+        "18129677620859561",
+        "18149159863483499",
+        "17906122956570485"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 10495
+  "last_views": 10624
 }
