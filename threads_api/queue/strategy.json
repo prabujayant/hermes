@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete payment race paired with a testable invariant will earn more saves and specific backend-engineer replies than general AI failure stories.",
-  "pivots": 265,
+  "hypothesis": "A concrete timeout-and-retry sequence plus an explicit idempotency invariant will earn more saves and specific backend replies than broad AI failure stories.",
+  "pivots": 266,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T12:01:15.258917+00:00",
-      "pillar": "smart",
-      "hook_sig": "i shipped a retry loop that looked correct",
-      "texts": [
-        "I shipped a retry loop that looked correct until the gateway timed out on capture and silently charged the card twice. The idempotency key lived in the service, not the gateway, so when the response dropped, the retry sent a second capture that succeeded. $847 gone, customer gone, trust gone. I thought a 24-hour expiry was safe. It wasnt. The worst duplicate-charge bugs are not races. They are assumptions that the layer below handles dedupe when it doesnt.",
-        "The retry came back as a timeout. I queued the charge again. The gateway charged the card twice. The first charge went through, the response timed out, and my retry sent a second capture that succeeded because the idempotency key expired after 24 hours. The customer was charged $847 twice. No race condition, no missing key, just a 24-hour expiry that let the duplicate through.",
-        "A payment succeeded, the response timed out, and the retry charged the customer twice. The idempotency layer lived in the service tier, not the gateway, so when the network dropped the response, the retry bypassed it entirely. The second capture hit the gateway fresh, no key to reject it, and the card was charged again. $847 duplicated by a timeout and a misplaced trust boundary.",
-        "I thought my payment retry was a safety net. Instead it charged the card twice. The first charge went through, the second silently duplicated because I trusted the gateway to dedupe when it did not. The idempotency key lived in the service, not the gateway, and it expired after 24 hours. The retry saw a timeout, not a success, and sent a second capture that cleared without question.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Story format on payment idempotency failures, proven hook shape, ends with follow CTA, cites P28 and P30 for pacing and payoff.",
-      "breakout": "",
-      "followers": 282,
-      "views_total": 14427,
-      "ids": [
-        "17994877269021998",
-        "18192592372404074",
-        "18002055822009392",
-        "18166239718489508",
-        "17892486696447161"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T12:31:02.400845+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "17916538278460834"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T17:01:12.923215+00:00",
+      "pillar": "smart",
+      "hook_sig": "most payment retry advice obsesses over idempotency keys.",
+      "texts": [
+        "Most payment retry advice obsesses over idempotency keys. The real invariant is simpler and harder to test: a retry must return the original response, not a new one.",
+        "Our gateway timed out on a $3,200 charge. The client retried. The gateway had actually succeeded. We charged twice. Idempotency key was present. The retry path generated a new request id.",
+        "The invariant: retry handler returns the exact response bytes from the first attempt. No new gateway call. No new transaction id. The client gets the original success or the original failure, never a second outcome.",
+        "We test this by injecting a 5-second delay before the gateway responds, firing the retry at 3 seconds, and asserting the response body matches byte-for-byte. Most implementations fail this test. What does your test suite assert?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete timeout-and-retry sequence plus an explicit idempotency invariant will earn more saves and specific backend replies than broad AI failure stories.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 11387,
+      "ids": [
+        "18023520044712643",
+        "18118386377059767",
+        "18381564820239590",
+        "17950804560054998",
+        "18149316349563499"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 11265
+  "last_views": 11387
 }
