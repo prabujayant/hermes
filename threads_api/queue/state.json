@@ -354,7 +354,8 @@
     "we went from 1.7k to 6.8k tps by",
     "i shipped a retry loop that treated every",
     "if you want behavioral rounds to remember you,",
-    "things hiring managers can't tell from your resume"
+    "things hiring managers can't tell from your resume",
+    "i shipped a retry loop that retried on"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

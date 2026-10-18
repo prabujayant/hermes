@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Specific backend failure lessons with a clear decision procedure and credible stakes will outperform generic advice and build a follow-up series.",
-  "pivots": 234,
+  "hypothesis": "A concrete, reusable backend decision procedure will earn more saves and useful replies than a general failure lesson.",
+  "pivots": 235,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T17:01:15.997004+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "texts": [
-        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
-        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
-        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
-        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "cohere/north-mini-code:free",
-      "hypothesis": "A reproducible SQL benchmark with a precise caveat will earn more useful replies and shares than a broad diagnostic.",
-      "breakout": "",
-      "followers": 280,
-      "views_total": 24139,
-      "ids": [
-        "18126537097923777",
-        "18136182868645142",
-        "18113795717145901",
-        "18150869926544701",
-        "18031372889681383"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T17:31:02.583469+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,31 @@
         "18357046099168517"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T01:30:58.294739+00:00",
+      "pillar": "smart",
+      "hook_sig": "i shipped a retry loop that retried on",
+      "texts": [
+        "I shipped a retry loop that retried on every gateway timeout. Then an $847 charge hit twice, 27 hours apart, both idempotent under the same key, both settled. The bank flagged it as fraud and froze the merchant account for three days.",
+        "The root cause was not the retry. The root cause was treating a timeout as a failure instead of an unknown. A timeout means: we don't know if the payment was created, captured, or lost in flight. Guessing is how you double-charge customers.",
+        "Here is the decision tree every payments team should run on timeout:\n1. Was an idempotency key sent? If no, stop and add one before retrying.\n2. If yes, query the provider by idempotency key. If found, trust the provider state. Do not re-issue.\n3. If not found, the request never reached the provider. Safe to retry.\n4. If the provider is unreachable, wait and poll. Do not blindly retry.",
+        "Most teams skip step 2 because they assume a timeout equals a failure. That assumption is why duplicate charges survive code review. The provider is the source of truth, not your retry counter.",
+        "What edge case broke your retry logic? Was it a 504 that masked a 409, or a gateway that dropped the idempotency key entirely? Reply with your war story so we can map the failure surface together.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A concrete, reusable backend decision procedure will earn more saves and useful replies than a general failure lesson.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 17985,
+      "ids": [
+        "18126869392888241",
+        "18111530162140788",
+        "18228862204334818",
+        "18113659025028114",
+        "18098111081388365"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 17655
+  "last_views": 17985
 }
