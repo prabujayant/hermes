@@ -1,35 +1,8 @@
 {
   "hypothesis": "Specific backend failure lessons with a clear decision procedure and credible stakes will outperform generic advice and build a follow-up series.",
-  "pivots": 232,
+  "pivots": 233,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T16:01:16.923348+00:00",
-      "pillar": "smart",
-      "hook_sig": "copyable benchmark: join a table to itself vs",
-      "texts": [
-        "Copyable benchmark: join a table to itself vs a subquery, on 1M rows, Postgres 16. Here's the exact setup.",
-        "CREATE TABLE users (id serial primary key, org_id int, salary int);\nINSERT INTO users SELECT g, (g % 1000), (g % 50000) FROM generate_series(1,1000000) g;\nANALYZE users;",
-        "Slow shape: self-join with correlated filter.\nEXPLAIN ANALYZE SELECT u1.org_id, u1.salary FROM users u1 JOIN users u2 ON u1.org_id = u2.org_id WHERE u1.salary > 10000 AND u2.salary > 40000;\nResult: 2.8s, 12.4M rows examined.",
-        "Fast shape: subquery with EXISTS.\nEXPLAIN ANALYZE SELECT DISTINCT u1.org_id, u1.salary FROM users u1 WHERE u1.salary > 10000 AND EXISTS (SELECT 1 FROM users u2 WHERE u2.org_id = u1.org_id AND u2.salary > 40000);\nResult: 1.1s, 3.2M rows examined.",
-        "Caveat: this only holds when the inner predicate is highly selective and org_id has low cardinality. Flip the selectivity and the self-join wins. Your mileage depends on data distribution.",
-        "What database and scale are you running? Drop your numbers below. Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A reproducible SQL benchmark with a precise caveat will earn more useful replies and shares than a broad diagnostic.",
-      "breakout": "none",
-      "followers": 280,
-      "views_total": 23452,
-      "ids": [
-        "17883748329625277",
-        "18424470880153546",
-        "18105993274975083",
-        "18393633412165636",
-        "17961516536997999",
-        "17913090522547868"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T16:31:01.594802+00:00",
       "pillar": "smart",
@@ -1258,6 +1231,31 @@
         "17971863084171722"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T00:31:02.110886+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want behavioral rounds to remember you,",
+      "texts": [
+        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
+        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
+        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
+        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Specific backend failure lessons with a clear decision procedure and credible stakes will outperform generic advice and build a follow-up series.",
+      "breakout": "",
+      "followers": 282,
+      "views_total": 17523,
+      "ids": [
+        "18079264547391952",
+        "18075562733737646",
+        "18638408869055592",
+        "18117269107812087",
+        "18083732222355434"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1267,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 17426
+  "last_views": 17523
 }
