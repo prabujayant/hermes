@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Backend decision trees grounded in production failure modes earn attention when they give readers a clear next action.",
-  "pivots": 239,
+  "hypothesis": "Backend failure-mode posts earn attention when they turn a familiar symptom into a concrete next diagnostic step.",
+  "pivots": 240,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T19:31:04.831701+00:00",
-      "pillar": "smart",
-      "hook_sig": "should this request go through a queue? the",
-      "texts": [
-        "Should this request go through a queue?\n\nThe one constraint that changes the answer: does the caller need the result within the same request lifetime?\n\nIf yes, skip the queue. If no, the queue is usually the right call.",
-        "A payment capture that returns a receipt to the user? No queue. The user is waiting.\n\nA payment capture that emails a receipt later? Queue it. The user already got their confirmation.\n\nThe difference is not technology. It is timing of the result, not the work itself.",
-        "This rule kills debates about \"async good\" vs \"sync bad.\"\n\nTeams waste weeks arguing patterns. The real question is one boolean: does the caller block on the outcome?\n\nIf the caller walks away happy without the result, queue it. If they need the result to proceed, do it inline.",
-        "I shipped a feature that queued every background job. Customers complained of slow responses.\n\nThe jobs were not slow. The queue added latency the caller did not need.\n\nI moved three endpoints inline. Response time dropped from 800ms to 120ms. No rework, no scaling changes.\n\nSame work. Different timing assumption.",
-        "What is the most recent request you queued that did not need the result back in the same response?\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "System-design posts travel further when",
-      "breakout": "none",
-      "followers": 280,
-      "views_total": 25485,
-      "ids": [
-        "18022991522938134",
-        "17878597011564832",
-        "18199133086388563",
-        "18151754971530753",
-        "18477881932117881"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T20:01:14.180060+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,31 @@
         "18116432711469114"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T04:01:15.158302+00:00",
+      "pillar": "smart",
+      "hook_sig": "requests stall. cpu sits at 8 percent. your",
+      "texts": [
+        "Requests stall. CPU sits at 8 percent. Your first instinct is to raise the connection pool size. That is usually wrong.",
+        "Last month a payments worker flatlined at 1.2k TPS on a 16-core box. The pool showed 50 of 50 connections leased. Everyone reached for the config file. The real bug was a missing index making each lease hold a lock for 900ms.",
+        "Before you touch pool size, trace this path. Step one: confirm wait events. Step two: check average lease time vs query latency. Step three: look at which queries hold connections longest. The pool is rarely the root cause.",
+        "If your average lease time is under 50ms and throughput still stalls, the bottleneck is upstream, not the pool. If lease time climbs past 200ms, find the slowest query holding a connection and fix it. The pool is a symptom mirror.",
+        "What was the first thing you checked when your pool ran dry? Drop it below. Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Backend failure-mode posts earn attention when they turn a familiar symptom into a concrete next diagnostic step.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 18755,
+      "ids": [
+        "18415295821155369",
+        "18118551521093864",
+        "18447985408131453",
+        "18099137138432536",
+        "17963785923199851"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 18608
+  "last_views": 18755
 }
