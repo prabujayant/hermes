@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Backend decision trees with actionable branches and edge cases will earn more saves and useful replies than general failure lessons.",
-  "pivots": 237,
+  "hypothesis": "Backend decision trees tied to measurable",
+  "pivots": 238,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T18:31:04.540590+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want ai to write code you",
-      "texts": [
-        "IF YOU WANT AI TO WRITE CODE YOU CAN SHIP, STOP PASTING BLINDLY.\n\nMEMORIZE THESE 5 RULES:",
-        "Give the model your constraints first.\n\nStack, versions, style rules, what done looks like. Vague prompts get vague code.",
-        "Review every diff like a junior wrote it.\n\nAI code looks confident and fails quietly. Read it line by line before it touches main.",
-        "Keep humans on architecture.\n\nLet AI fill functions, never design systems. You own the boundaries, it fills the boxes.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A narrowly",
-      "breakout": "",
-      "followers": 280,
-      "views_total": 25089,
-      "ids": [
-        "17949320199299646",
-        "18116566694062097",
-        "18136084414652807",
-        "17883521919626748",
-        "18110732690062364"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T19:01:13.450020+00:00",
       "pillar": "smart",
@@ -1254,6 +1229,33 @@
         "18131853808811573"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T03:01:14.978257+00:00",
+      "pillar": "smart",
+      "hook_sig": "a payments service flatlined at 1.7k tps on",
+      "texts": [
+        "A payments service flatlined at 1.7k TPS on an 8-core box. Everyone reached for read replicas. The DB was maxed, but not how you think.",
+        "The first signal I check when TPS is flat: CPU saturation. If iostat shows >80% CPU during the plateau, it is CPU. Add replicas or scale up. If CPU is idle under 30%, rule it out.",
+        "Second signal: lock contention. Check pg_stat_activity for rows stuck in \"idle in transaction\" or wait events on \"tuple\" locks. If you see them, the bottleneck is rows, not queries. The fix is NOT indexing. It is splitting hot rows or moving the lock scope.",
+        "Third signal: connection pool queues. Look at pgbouncer stats: if cl_active is near cl_max and waiters are climbing, the pool is saturated. More connections hurt. The fix is fewer long-lived connections, not more.",
+        "A team I worked with hit 1.7k TPS plateau. CPU was 22%. pg_stat_activity was clean. pgbouncer showed 50+ waiters. We cut connection lifetime from 30m to 5m. TPS jumped to 6.8k. No code changes.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Backend decision trees tied to measurable",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 18467,
+      "ids": [
+        "18145392109600777",
+        "18125651105486007",
+        "18109811609523242",
+        "18019467359736274",
+        "18091326380215805",
+        "18119899093766477"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1263,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 18226
+  "last_views": 18467
 }
