@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Debate hook on connection pool sizing mirrors the P26/P29 lock-contention pattern but flips to a direct challenge, targeting the 40/h velocity ceiling with reply-bait question.",
-  "pivots": 250,
+  "hypothesis": "Specific troubleshooting beats generic pool-size debate by earning saves and useful replies from backend engineers.",
+  "pivots": 251,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T04:30:58.555505+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- the dumbest sql regression i shipped wasn't",
-      "texts": [
-        "---\nThe dumbest SQL regression I shipped wasn't a missing index. It was a UUIDv4 primary key on a high-write table, used as the clustering key. The buffer pool churned so hard we dropped from 50k writes/sec to single digits within hours.",
-        "I assumed UUIDs were safe because \"distributed systems need them.\" Two years later the buffer pool was 80% full of leaf pages for a single table, and every insert fought for the same hot page. The fix was swapping to a BIGINT identity and a new clustering key. Writes returned to 50k/sec instantly.",
-        "The lesson stuck because I'd seen it before: anyone treating the primary key as an afterthought pays with random I/O. UUIDv4 as a default looks clean until you hit write contention, then it turns into a full-system slowdown that looks like everything except the real cause.",
-        "Most engineers still reach for UUIDv4 on every table because it feels future-proof. It is not. Pick a sequential key for write-heavy tables, or pay the I/O tax later when scale exposes the lie.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Sticking with the proven \"dumbest bug\" story format that already drove P25 to 290 views, but pivoting away from the UUIDv4 topic family to avoid saturation and open space for fresh debate angles.",
-      "breakout": "",
-      "followers": 281,
-      "views_total": 28653,
-      "ids": [
-        "18192615634409709",
-        "18135535756733040",
-        "18103763114197598",
-        "18191828134410140",
-        "17914215645281988"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T05:01:12.765152+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18137895811633159"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T09:31:01.176037+00:00",
+      "pillar": "smart",
+      "hook_sig": "i watched a team double their connection pool",
+      "texts": [
+        "I watched a team double their connection pool from 50 to 100 because p99 latency spiked. Latency tripled instead. The database CPU barely moved. The real bottleneck was row locks on the accounts table, not connection slots.",
+        "The payment service hit 2k TPS on 8 cores. Every request needed the same hot rows. More connections meant more threads fighting for the same locks. Context switching ate the CPU that queries needed. Throughput collapsed while the pool sat half-empty.",
+        "The falsifiable signal: run `pg_locks` filtered by `granted = false` during the spike. If waiters exceed active connections, you have lock contention, not pool starvation. Check `pg_stat_activity` for `wait_event_type = Lock`. That query takes ten seconds and ends the guessing.",
+        "The fix was never pool sizing. We shortened the critical section, moved the balance check into the same row lock, and added a retry with jitter at the application layer. p99 dropped from 800ms to 120ms at the same pool size. Bigger pools hide the symptom. Locks reveal the cause.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific troubleshooting beats generic pool-size debate by earning saves and useful replies from backend engineers.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 8561,
+      "ids": [
+        "17879414634633700",
+        "18139109716651889",
+        "18021629606924893",
+        "18166740157485263",
+        "18127506719493079"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 8395
+  "last_views": 8561
 }

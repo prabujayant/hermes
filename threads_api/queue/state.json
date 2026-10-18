@@ -370,7 +370,8 @@
     "orms are fine until you stop inspecting the",
     "i let an orm manage schema migrations on",
     "an orm transaction held a row lock for",
-    "your connection pool size is not a throughput"
+    "your connection pool size is not a throughput",
+    "i watched a team double their connection pool"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
