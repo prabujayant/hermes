@@ -377,7 +377,8 @@
     "production failure reversal: ai code can pass tests",
     "i let an ai write a database migration",
     "failure-mode warning: an ai-generated migration can be correct",
-    "your service mesh is adding latency, not reliability."
+    "your service mesh is adding latency, not reliability.",
+    "decision rule: add a service mesh only when"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
