@@ -361,7 +361,8 @@
     "a payments service flatlined at 1.7k tps on",
     "if you want to become a senior engineer",
     "requests stall. cpu sits at 8 percent. your",
-    "a timeout fired, then a retry, then a"
+    "a timeout fired, then a retry, then a",
+    "a gateway timeout tells you the network hiccuped."
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
