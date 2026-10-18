@@ -1,33 +1,8 @@
 {
   "hypothesis": "Specific backend failure lessons with a clear decision procedure and credible stakes will outperform generic advice and build a follow-up series.",
-  "pivots": 233,
+  "pivots": 234,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T16:31:01.594802+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want behavioral rounds to remember you,",
-      "texts": [
-        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
-        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
-        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
-        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "cohere/north-mini-code:free",
-      "hypothesis": "A reproducible SQL benchmark with a precise caveat will earn more useful replies and shares than a broad diagnostic.",
-      "breakout": "",
-      "followers": 280,
-      "views_total": 23895,
-      "ids": [
-        "18638159413054075",
-        "18107988104522687",
-        "18027253463916993",
-        "18117986032913897",
-        "18105775709201551"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T17:01:15.997004+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,31 @@
         "18083732222355434"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T00:57:12.764867+00:00",
+      "pillar": "smart",
+      "hook_sig": "things hiring managers can't tell from your resume",
+      "texts": [
+        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
+        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
+        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
+        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Specific backend failure lessons with a clear decision procedure and credible stakes will outperform generic advice and build a follow-up series.",
+      "breakout": "",
+      "followers": 282,
+      "views_total": 17655,
+      "ids": [
+        "17923070265223754",
+        "18472287058137596",
+        "18130145965799856",
+        "18094756622423461",
+        "18357046099168517"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 17523
+  "last_views": 17655
 }
