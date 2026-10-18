@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete service-mesh adoption test will earn more saves and credible replies than a broad pro/anti debate.",
-  "pivots": 258,
+  "hypothesis": "A concrete go/no-go test will earn more saves and credible replies than a general pro/anti service-mesh take.",
+  "pivots": 259,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T08:31:01.712621+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- i shipped a payment retry once that",
-      "texts": [
-        "---\nI shipped a payment retry once that double-charged a customer. The gateway timed out on the capture, my retry loop sent a second capture, and the money came out twice. The fix was a single idempotency key derived from order_id + attempt_number, enforced with a unique constraint at the DB layer.",
-        "Most engineers treat timeouts like failures. They are not. A timeout means the request is still in flight somewhere, or it already succeeded and the response got lost. Retries without idempotency keys turn that ambiguity into duplicate charges, duplicate writes, and angry customers.",
-        "The hard invariant every payments backend needs: a retry must be safe to replay. The key must be deterministic per logical operation, not per HTTP attempt. Use order_id + operation_type + attempt_version as the key, and make the database reject duplicates with a unique constraint.",
-        "I have seen teams spend weeks debugging phantom charges that were just retries hitting an already-succeeded payment. The pattern is always the same: no idempotency key, or a key that changes on every retry. The database is the only source of truth, not the gateway response.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A concrete timeout scenario plus an idempotency invariant will earn more useful practitioner replies than broad retry advice.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 13030,
-      "ids": [
-        "18153259891538769",
-        "18136353907648654",
-        "18129832264697058",
-        "17950811358323473",
-        "18436118686183309"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T09:01:16.084011+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "18073486016784381"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T13:31:01.071104+00:00",
+      "pillar": "smart",
+      "hook_sig": "decision test: before adopting a service mesh, measure",
+      "texts": [
+        "decision test: before adopting a service mesh, measure whether these three failure modes actually exist. most teams skip this and pay for complexity they never needed.",
+        "i watched a platform team spend six months rolling out Istio across twelve services. the mesh added four milliseconds per hop, config drift caused two SEV-2s, and the actual failure modes they feared (cascading retries, noisy neighbors, zone failures) never materialized in their traffic patterns.",
+        "the three failure modes worth measuring:\n1. cascading retries from downstream timeouts - check your retry budgets and p99 latency correlation\n2. noisy neighbor contention - measure request queue depth and CPU steal time under load\n3. zone-level blast radius - simulate single-zone loss and track error rate spread",
+        "run the test on one service for two weeks. instrument the raw metrics without mesh. if the failure modes dont appear in your actual traffic, you have data to defer adoption. if they do, you have a business case. comment with the one metric that would change your mind.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete go/no-go test will earn more saves and credible replies than a general pro/anti service-mesh take.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 9892,
+      "ids": [
+        "17910638694555590",
+        "17908331886329629",
+        "18103606031575415",
+        "18382006909235912",
+        "18130630963768846"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 9776
+  "last_views": 9892
 }
