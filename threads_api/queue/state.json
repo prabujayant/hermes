@@ -356,7 +356,8 @@
     "if you want behavioral rounds to remember you,",
     "things hiring managers can't tell from your resume",
     "i shipped a retry loop that retried on",
-    "things that quietly kill engineering careers:"
+    "things that quietly kill engineering careers:",
+    "a retry on a 504 gateway timeout just"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

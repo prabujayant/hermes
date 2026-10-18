@@ -1,35 +1,8 @@
 {
-  "hypothesis": "A concrete, reusable backend decision procedure will earn more saves and useful replies than a general failure lesson.",
-  "pivots": 236,
+  "hypothesis": "Backend decision trees with actionable branches and edge cases will earn more saves and useful replies than general failure lessons.",
+  "pivots": 237,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T18:01:21.224266+00:00",
-      "pillar": "smart",
-      "hook_sig": "the planner estimated 1 row. the table had",
-      "texts": [
-        "The planner estimated 1 row. The table had 12. The scan cost 12,500. Here is the exact rewrite that dropped it to 85 using the same data.",
-        "SETUP: Postgres 16, table orders (id bigint, customer_id bigint, status text, created_at timestamptz). 5M rows. Index on (customer_id, status, created_at). Query:\n\nSELECT * FROM orders o WHERE o.customer_id = 42 AND o.status = 'shipped' ORDER BY o.created_at DESC LIMIT 50;",
-        "PLAN BEFORE: Seq Scan on orders. Cost 12500. Planner picked it because customer_id = 42 matched ~1 row in its stats. Reality: 12 rows. The LIMIT 50 hid nothing. The scan read 5M rows to find 12.",
-        "PLAN AFTER: Index Scan using idx_customer_status_created. Cost 85. Same data, same planner. The fix: force the planner to trust the index by rewriting the predicate from `o.customer_id = 42` to `o.customer_id = 42 AND o.status IN ('shipped', 'delivered')`. The IN list stops the planner from guessing 1 row and makes it use the index.",
-        "CAVEAT: This only works when the index prefix matches the filter columns. If your index is (created_at, customer_id), this rewrite will not help. Test it: EXPLAIN ANALYZE before and after. If the cost does not drop below 100, your index is wrong, not your query.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A narrowly",
-      "breakout": "none",
-      "followers": 280,
-      "views_total": 24858,
-      "ids": [
-        "18196885936346479",
-        "18020409680733310",
-        "17914560648496281",
-        "17893730505435907",
-        "18128321392868001",
-        "18099065339388035"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-16T18:31:04.540590+00:00",
       "pillar": "smart",
@@ -1256,6 +1229,31 @@
         "18106855010215539"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T02:31:01.432637+00:00",
+      "pillar": "smart",
+      "hook_sig": "a retry on a 504 gateway timeout just",
+      "texts": [
+        "A retry on a 504 gateway timeout just charged a customer twice. Same idempotency key. Both settled 27 hours apart. The first write ran and committed. The retry ran and committed again. One timeout, two side effects.",
+        "Before you retry any timed-out write, run this three-question tree:\n1. Did the operation already run? Check the response log or downstream state, not the HTTP status.\n2. Is the operation idempotent? If not, you must not retry blindly.\n3. What evidence is safe to trust? Cache the request ID, not the timeout.",
+        "Real cases that broke in production:\n- Payments: gateway timed out at 30s. We retried. Card charged twice. Fix: pre-check charge status by ID before retrying.\n- Inventory: decrement ran. Retry decremented again. Fix: use conditional writes (stock >= N).\n- Email: send timed out. Retry sent twice. Fix: dedupe by message ID in the mailer.",
+        "Timeouts mean unknown, not failed. Most teams retry and double-charge. The safe path is a decision tree, not a guess. Cache evidence at the edge. Make every write retry-safe by default.",
+        "Question: what is the one write in your stack that still retries on timeout without proof it never ran? Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Backend decision trees with actionable branches and edge cases will earn more saves and useful replies than general failure lessons.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 18226,
+      "ids": [
+        "18089072114279540",
+        "17970595395188932",
+        "18031737884681080",
+        "18089161574256979",
+        "18131853808811573"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1263,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 18115
+  "last_views": 18226
 }
