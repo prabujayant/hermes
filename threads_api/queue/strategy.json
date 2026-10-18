@@ -1,35 +1,8 @@
 {
-  "hypothesis": "A concrete ORM failure mode will draw useful debate from both camps and earn more follows than a blanket hot take.",
-  "pivots": 247,
+  "hypothesis": "Concrete ORM failure story with specific lock mechanics will trigger debate from both ORM defenders and raw-SQL advocates, driving replies and profile clicks.",
+  "pivots": 248,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T03:01:15.008071+00:00",
-      "pillar": "smart",
-      "hook_sig": "i was chasing the wrong number. query shows",
-      "texts": [
-        "I was chasing the wrong number. Query shows 42ms in EXPLAIN, 4ms with the same data in practice. The planner said 1 row, the table had 12. That gap is why your production query is slow and your benchmark lies.",
-        "Here is the one diagnostic move that catches 90% of slow queries: compare estimated rows vs actual rows, then branch your fix on where they diverge. Overestimate, underestimate, or both. Each error has a different parent fix.",
-        "Underestimate (planner expects 1, sees 1000): statistics are stale. Run ANALYZE, raise stats target, or add a partial index on the filtered column. The estimate will track the real distribution.",
-        "Overestimate (planner expects 10000, sees 5): predicates confuse it. Rewrite the WHERE to push filters early, or split the query with a CTE that materializes the selective part first.",
-        "Both diverge (multi-column correlation): the planner assumes independence and loses. Add a extended statistics call on the correlated columns, then re-run EXPLAIN. Your estimates should land inside 3x of actual.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A reproducible SQL diagnostic with fixes tied to observed evidence will earn more saves and useful comments than broad performance advice.",
-      "breakout": "none",
-      "followers": 281,
-      "views_total": 28215,
-      "ids": [
-        "18108612230185061",
-        "18054957824586734",
-        "18077573609764786",
-        "17964062799215463",
-        "18180969025437080",
-        "18132382144790273"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T03:31:05.137483+00:00",
       "pillar": "smart",
@@ -1250,6 +1223,31 @@
         "18074967887478522"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T08:01:14.228525+00:00",
+      "pillar": "smart",
+      "hook_sig": "i let an orm manage schema migrations on",
+      "texts": [
+        "I let an ORM manage schema migrations on a billing service for eighteen months. Zero incidents. Then a single `alter column` generated a lock that froze payments for forty minutes. The migration took twelve seconds. The lock waited on a long-running analytics query nobody knew existed.",
+        "The ORM wrapped the DDL in a transaction. Postgres took an `ACCESS EXCLUSIVE` lock. The analytics query held `ACCESS SHARE`. Queue formed. Every `INSERT` into `payments` stacked up. P99 latency went from eighty milliseconds to twenty-three seconds. Revenue dipped. On-call got paged.",
+        "We rolled back. The fix was manual: `SET lock_timeout = '2s'` before the migration, run outside a transaction, retry with exponential backoff. The ORM could not express this. Its abstraction leaked at the worst possible moment, production, under load, with money moving.",
+        "ORMs are not the enemy. Hidden lock behavior is. If you cannot name the lock type your migration takes and what it blocks, you do not own your schema. You are borrowing it from a library that assumes a quiet database.",
+        "What is the longest migration lock you have accidentally held in production? Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Concrete ORM failure story with specific lock mechanics will trigger debate from both ORM defenders and raw-SQL advocates, driving replies and profile clicks.",
+      "breakout": "",
+      "followers": 282,
+      "views_total": 7972,
+      "ids": [
+        "18110038292595974",
+        "18076807874734142",
+        "18135450259675040",
+        "18118775299998354",
+        "18184737754422018"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 7606
+  "last_views": 7972
 }

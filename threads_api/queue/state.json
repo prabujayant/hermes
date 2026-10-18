@@ -367,7 +367,8 @@
     "your retry logic passes every test but still",
     "orms promise productivity but hand you a leaky",
     "most ai coding advice circulating today is already",
-    "orms are fine until you stop inspecting the"
+    "orms are fine until you stop inspecting the",
+    "i let an orm manage schema migrations on"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
