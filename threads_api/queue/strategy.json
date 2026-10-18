@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Backend failure-mode posts earn attention when they turn a familiar symptom into a concrete next diagnostic step.",
-  "pivots": 240,
+  "hypothesis": "Backend failure-mode posts earn attention when a familiar symptom leads to a specific diagnostic step readers can use immediately.",
+  "pivots": 241,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-16T20:01:14.180060+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- the dumbest performance bug i've seen in",
-      "texts": [
-        "---\nThe dumbest performance bug I've seen in production wasn't a missing index. It was a UUIDv4 primary key on a high-write table being used as the clustering key, which turned every insert into random I/O across 12 shards of Postgres.",
-        "The fix was swapping the PK to a sequential bigint and adding a separate UUID column for external references. That single change dropped the p99 write latency from 840ms to 12ms overnight, without touching the application layer or any queries.",
-        "UUIDs as default PKs are the duct tape of distributed systems, but they fragment the buffer pool, bloat secondary indexes by 4x, and force the planner to scan 50% more pages on every range query because the data on disk no longer matches the logical order of access.",
-        "The real lesson isn't \"never use UUIDs.\" It's \"don't let your default PK become your clustering key on a write-heavy table.\" Use a sequential internal ID for ordering and a UUID column for global uniqueness, and you get both safety and speed without rewriting your architecture later.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Contrarian lesson format on a painful, relatable backend mistake converts better than abstract advice, because it gives readers a concrete fix they can apply immediately.",
-      "breakout": "",
-      "followers": 280,
-      "views_total": 25597,
-      "ids": [
-        "17933389851406827",
-        "18108291629617092",
-        "18101572307635975",
-        "18077071865448795",
-        "17972629245149708"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-17T00:01:20.633631+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,31 @@
         "17963785923199851"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T04:31:01.598713+00:00",
+      "pillar": "smart",
+      "hook_sig": "a timeout fired, then a retry, then a",
+      "texts": [
+        "A timeout fired, then a retry, then a second charge on the same idempotency key. Your first instinct is to blame the retry policy.",
+        "Before you touch the policy, look at three signals in your logs: request ID, attempt count, and idempotency key.",
+        "If the request ID is the same across both charges, the client retried. If the attempt count jumps from 1 to 2, your service did not deduplicate.",
+        "If the idempotency key is identical and both settled, your idempotency table lost the race. Check the lock on that table before touching retries.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Backend failure-mode posts earn attention when a familiar symptom leads to a specific diagnostic step readers can use immediately.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 19025,
+      "ids": [
+        "18113038118593168",
+        "17905370835355946",
+        "18117388699801425",
+        "17933897922146603",
+        "18126601735901987"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 18755
+  "last_views": 19025
 }
