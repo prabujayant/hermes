@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Backend failure-mode posts earn more attention when they turn an ambiguous symptom into a concrete check readers can apply before taking risky action.",
-  "pivots": 242,
+  "hypothesis": "Backend failure-mode posts earn more attention when they pair an ambiguous symptom with a specific check that prevents a costly action.",
+  "pivots": 243,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T00:31:03.157079+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- the dumbest performance bug i've shipped wasn't",
-      "texts": [
-        "---\nThe dumbest performance bug I've shipped wasn't a missing index. It was a UUIDv4 primary key on a 500K-row writes/day table, used as the clustering key. Postgres couldn't page-locate, so every insert became a random write across 12GB of RAM.",
-        "The page split stats were silent, the query plans looked fine, and pgbadger showed nothing alarming. Two weeks in production the cache hit ratio dropped to 62 percent and latency doubled. The fix took five minutes: switch the PK to a bigint sequence and add a separate uuid column with a unique index.",
-        "UUIDv4 as PK = random inserts = constant page splits = cache eviction. The buffer pool thrashes because rows scatter instead of landing in chronological order. You do not notice this at 100 rows/s. You absolutely notice it at 5K rows/s.",
-        "Here is the exact migration path I use now on every write-heavy table: bigint PK as clustering key, uuid column with unique index for external IDs, and a composite index on (created_at, id) for range scans. It is three lines of SQL and it saves your buffer pool.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Reusing the proven UUIDv4 PK failure story format (P29, P30) with fresh numbers and a concrete migration path will outperform the current plateau and re-accelerate both views and follower conversion.",
-      "breakout": "",
-      "followers": 280,
-      "views_total": 26748,
-      "ids": [
-        "18002304410808477",
-        "17935453752402566",
-        "18137498827651642",
-        "18118387213767215",
-        "18130098142625850"
-      ],
-      "pivoted": false
-    },
     {
       "run_at": "2026-10-17T01:01:14.423147+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,31 @@
         "18034305644852290"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-18T05:31:00.139594+00:00",
+      "pillar": "smart",
+      "hook_sig": "a gateway timeout on a payment capture is",
+      "texts": [
+        "A gateway timeout on a payment capture is not a failure signal. It is a question mark. The request left your server, hit the network, and the response never came back. The charge could be sitting in authorized, captured, or failed. You have no idea until you ask the provider.",
+        "Most teams treat timeout as failure and immediately retry with the same idempotency key. That works if the original request never reached the provider. It creates a duplicate charge if the request succeeded and only the response was lost. The idempotency key protects against your retries, not against the provider having already processed the first attempt.",
+        "The fix is a single extra call before any retry. Call the provider's transaction status endpoint with the original request ID or your idempotency key. Stripe: retrieve PaymentIntent. Adyen: getPaymentDetails. Braintree: findTransaction. Check the status field. Only retry if it is genuinely failed or missing. If it is captured or settled, reconcile and move on.",
+        "This check costs one round trip and saves you from the reconciliation nightmare of duplicate settlements, angry customers, and chargeback fees. It also gives you the exact failure reason if the charge actually failed, card declined, insufficient funds, fraud block, so you can surface the right message to the user instead of a generic \"try again.\"",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Backend failure-mode posts earn more attention when they pair an ambiguous symptom with a specific check that prevents a costly action.",
+      "breakout": "none",
+      "followers": 282,
+      "views_total": 19526,
+      "ids": [
+        "17995265037043126",
+        "18453816799120768",
+        "18443864446131947",
+        "17937739662389348",
+        "18194095042401442"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 282,
-  "last_views": 19280
+  "last_views": 19526
 }
