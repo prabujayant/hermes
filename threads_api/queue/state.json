@@ -373,7 +373,8 @@
     "your connection pool size is not a throughput",
     "i watched a team double their connection pool",
     "your p99 latency doubles overnight. cpu sits at",
-    "most ai code review advice assumes the model"
+    "most ai code review advice assumes the model",
+    "production failure reversal: ai code can pass tests"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
