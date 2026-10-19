@@ -401,7 +401,8 @@
     "your distributed system is a premature optimization. the",
     "most teams reach for distributed locks the moment",
     "a client timeout does not tell you whether",
-    "most ai coding advice assumes the model is"
+    "most ai coding advice assumes the model is",
+    "most teams treat retries as free safety. they"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
