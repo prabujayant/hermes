@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Pivot from debate hot takes to contrarian lessons format (Notion co-founder style) on backend engineering fundamentals \u2014 proven 516k views for niche leader, matches all-time winner pillar, changes only format while keeping high-signal topic.",
-  "pivots": 296,
+  "hypothesis": "Pivot to contrarian lessons format (Notion co-founder style) on PostgreSQL connection pooling \u2014 proven 516k views for niche leader, matches backend pillar, changes only format from failed caps-listicles while keeping high-signal topic.",
+  "pivots": 297,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T07:31:03.586721+00:00",
-      "pillar": "smart",
-      "hook_sig": "orms are fine until you stop inspecting the",
-      "texts": [
-        "ORMs are fine until you stop inspecting the SQL they generate. The bottleneck is not the abstraction, it is the blindness.",
-        "Most teams adopt an ORM to move fast. It handles migrations, types, and basic CRUD without raw strings. That speed is real and it ships features.",
-        "The problem starts when a query plan shows a sequential scan on a 50 million row table because the ORM generated a join with a missing index hint. Or when N+1 selects fire inside a loop because the relationship was eager-loaded three layers deep.",
-        "The practical boundary: if you cannot explain the execution plan of the query your ORM just ran, you do not own that query. Drop to raw SQL for that path. Keep the ORM for the 80 percent that stays simple.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete ORM failure mode will draw useful debate from both camps and earn more follows than a blanket hot take.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 7606,
-      "ids": [
-        "18154219219525801",
-        "18110421500351776",
-        "18024645245947481",
-        "18103829204572214",
-        "18074967887478522"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T08:01:14.228525+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,33 @@
         "17939452602379025"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T12:31:05.410399+00:00",
+      "pillar": "smart",
+      "hook_sig": "most connection pooling advice you read assumes 2015",
+      "texts": [
+        "Most connection pooling advice you read assumes 2015 traffic patterns. The defaults that worked at 100 QPS become the bottleneck at 10k QPS. Here are 5 lessons we learned the hard way scaling Postgres at a payments company.",
+        "1. The default pool size of 10-20 connections wastes CPU on context switching. At scale we run 2-3x CPU cores per instance. More connections than that and the kernel spends more time scheduling than executing queries.",
+        "2. Prepared statement caching breaks silently when schema changes. We lost 40% throughput one deploy because the pool held stale plans. Now every deploy cycles the pool with a 30-second drain window. Zero surprises since.",
+        "3. Idle-in-transaction connections are silent killers. A single forgotten `BEGIN` without `COMMIT` holds a slot and blocks vacuum. We added a 10-second `idle_in_transaction_session_timeout` and alert on any connection exceeding it.",
+        "4. PgBouncer in transaction mode breaks advisory locks and `LISTEN/NOTIFY`. We learned this during a Friday incident when the job queue stalled. Session mode costs more memory but preserves semantics. Worth it for correctness.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Pivot to contrarian lessons format (Notion co-founder style) on PostgreSQL connection pooling \u2014 proven 516k views for niche leader, matches backend pillar, changes only format from failed caps-listicles while keeping high-signal topic.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 5828,
+      "ids": [
+        "18081053471442927",
+        "17899917165611564",
+        "17907006930663698",
+        "18000301431010366",
+        "18173769403457668",
+        "18117716716779558"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 5823
+  "last_views": 5828
 }
