@@ -408,7 +408,8 @@
     "a payment gateway returns 200 ok but the",
     "sql puzzle: why does adding one null to",
     "most ai coding advice you read is six",
-    "if you want to pass system design interviews,"
+    "if you want to pass system design interviews,",
+    "most ai coding advice assumes the model writes"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

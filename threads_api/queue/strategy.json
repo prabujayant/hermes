@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Contrarian lessons on AI coding (format #4) will outperform distributed systems topics because P24-P27 hit 7-16 views/hour vs P28-P30 at 0.3-0.9 views/hour, and the Notion co-founder proved this format at 516k views.",
-  "pivots": 288,
+  "hypothesis": "Switching to contrarian lessons format (Notion co-founder style) on AI coding verification bottleneck \u2014 P24-P25 hit 6-7 views/hour on this topic vs P28-P30 at 0.2-0.8 views/hour on distributed systems, and Notion co-founder proved this format at 516k views.",
+  "pivots": 289,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T03:31:03.674837+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to become a senior engineer",
-      "texts": [
-        "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:",
-        "Own outcomes, not tickets.\n\nJuniors close tasks. Seniors move metrics. Ask what number your work changes.",
-        "Write the doc nobody wants to write.\n\nDesign docs, runbooks, postmortems. Visibility compounds faster than commits.",
-        "Delete code on purpose.\n\nEvery quarter, kill something: a flag, a service, dead code. Simplifiers get promoted.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Backend decision trees grounded in production failure modes earn attention when they give readers a clear next action.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 18608,
-      "ids": [
-        "18119634737644108",
-        "18085152620323852",
-        "17898423939394491",
-        "17912997024471199",
-        "18116432711469114"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T04:01:15.158302+00:00",
       "pillar": "smart",
@@ -1242,6 +1217,31 @@
         "18119331530093771",
         "18108337523189289",
         "18131895787798949"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T08:31:02.965337+00:00",
+      "pillar": "smart",
+      "hook_sig": "most ai coding advice assumes the model writes",
+      "texts": [
+        "Most AI coding advice assumes the model writes code and you review it. That model is broken. The real workflow is you architect, the model drafts, you verify, the model fixes, you ship. The bottleneck moved from typing to verification.",
+        "I learned this shipping a payment reconciliation job last month. The model wrote the happy path in 30 seconds. I spent four hours crafting property-based tests that caught three silent data-corruption bugs the model called \"edge cases.\" Verification is now the skill.",
+        "Lesson 1: Stop asking for code. Ask for test strategies first. \"Write property-based tests for a payment idempotency key generator\" produces better outcomes than \"write a payment idempotency key generator.\" The tests become the spec the model codes against.",
+        "Lesson 2: Treat every model output as a PR from a junior who hallucinates APIs. Read the diff. Run the tests. Check the error paths. The model does not know your schema, your retry policies, or your compliance requirements. You do. That is the job now.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Switching to contrarian lessons format (Notion co-founder style) on AI coding verification bottleneck \u2014 P24-P25 hit 6-7 views/hour on this topic vs P28-P30 at 0.2-0.8 views/hour on distributed systems, and Notion co-founder proved this format at 516k views.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 5751,
+      "ids": [
+        "18071604275761878",
+        "17946730947357141",
+        "17949194661344047",
+        "18014872427971574",
+        "18128980792846256"
       ],
       "pivoted": true
     }
