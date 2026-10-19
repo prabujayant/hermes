@@ -1,33 +1,8 @@
 {
   "hypothesis": "A concrete, defensible backend hot take will earn more replies than broad caps-listicles after the recent underperforming streak.",
-  "pivots": 302,
+  "pivots": 303,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T10:31:00.139413+00:00",
-      "pillar": "smart",
-      "hook_sig": "most ai code review advice assumes the model",
-      "texts": [
-        "Most AI code review advice assumes the model reads like a human. It does not. It pattern-matches token sequences against training distributions. The \"best practices\" you paste into prompts are often the exact patterns it learned to ignore.",
-        "LLMs flag style nits because those tokens correlate with \"code review\" in training data. They miss the race condition in your distributed lock because that pattern rarely appears in the review corpus. The model optimizes for review-shaped output, not correctness.",
-        "A senior engineer reviews the diff against system invariants. An LLM reviews the diff against statistical expectations. When the invariant lives in a design doc three repos away, the model has zero access. It will approve the bug with high confidence.",
-        "The workflow that works: you write the invariant as an executable check, the model suggests the fix, you verify the check passes. The model becomes a pattern completer for the mechanical part. You stay the invariant keeper. That division is the only one that scales.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Contrarian lesson format on AI code review (proven 516k views for Notion co-founder) applied to backend pillar; shifts from recent statement/debate posts to numbered hard lessons with production pain, targeting the AI coding topic that drove our highest velocity post (P30 at 47.1/h).",
-      "breakout": "",
-      "followers": 282,
-      "views_total": 8924,
-      "ids": [
-        "18598207957069344",
-        "18111206336142235",
-        "18131971447795032",
-        "17919173139451739",
-        "17950439346300582"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T10:56:45.305228+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18023586362946487"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T15:31:05.426883+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want your side project to survive,",
+      "texts": [
+        "IF YOU WANT YOUR SIDE PROJECT TO SURVIVE, STOP ADDING FEATURES.\n\nMEMORIZE THESE 5 RULES:",
+        "Ship to one user first.\n\nYourself counts. Real usage teaches more than ten planned features.",
+        "Boring tech wins weekends.\n\nMonolith, Postgres, one host. Excitement is for work hours.",
+        "Log progress in public.\n\nWeekly demos beat yearly launches. Accountability ships products.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete, defensible backend hot take will earn more replies than broad caps-listicles after the recent underperforming streak.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 5928,
+      "ids": [
+        "18115296584021471",
+        "17922841614445373",
+        "17992046571107065",
+        "17873515182639465",
+        "18118690010039620"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 5872
+  "last_views": 5928
 }
