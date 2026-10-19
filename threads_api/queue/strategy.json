@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Blunt debate hook on connection pooling (Format 5) with concrete before/after numbers will outpace caps-listicle median (3.9/h) by triggering reply-driven reach, citing P26's 96.2/h velocity on a similar contrarian statement.",
-  "pivots": 271,
+  "hypothesis": "A precise correction with actionable diagnostics will earn more useful replies than a blanket pool-size claim.",
+  "pivots": 272,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T15:01:14.959611+00:00",
-      "pillar": "smart",
-      "hook_sig": "i shipped retry logic that retried on every",
-      "texts": [
-        "I shipped retry logic that retried on every timeout. Then a $847 charge hit twice, 27 hours apart, both idempotent under the same key, both settled by the gateway.",
-        "The real bug wasn't the retry. It was the assumption that a timeout means failure. A payment timeout is an unknown outcome, not a failed one. Retrying blindly is a coin flip you can't afford.",
-        "Recovery rule: if a payment times out after submission, do not retry blindly. Check the original operation first. Query the gateway by reference or idempotency key. If already settled, stop. If rejected or still pending, then decide.",
-        "Pending-state decision path:\n1. Capture original request ID and submission timestamp.\n2. Call gateway status endpoint with that ID before any retry.\n3. If status is settled or rejected, no retry needed.\n4. If status is pending, poll with bounded retries and exponential backoff.\n5. Log the gap between submission and confirmation. Alert on long-pending.",
-        "The cost of a duplicate charge is measured in trust, not cents. Every timeout handler should start with verification, not execution. Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A concrete rule for ambiguous payment outcomes will earn more saves and follows than a failure anecdote alone",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 15121,
-      "ids": [
-        "18042962957841569",
-        "18077257898452434",
-        "18146628553567898",
-        "17929537815420265",
-        "17904211899656404"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T15:31:10.875349+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "17989280391119949"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T00:01:15.605389+00:00",
+      "pillar": "smart",
+      "hook_sig": "most teams pick a connection pool number from",
+      "texts": [
+        "Most teams pick a connection pool number from a blog post or a default config. The database does not care about your config. It cares about active sessions, buffer memory, and lock contention. A larger pool often means more queueing, not more throughput.",
+        "The symptom looks like latency spikes under load. You add connections. Latency gets worse. The real limit is usually CPU cores or disk IOPS on the primary. Each extra connection consumes a private buffer and a process slot. Past the saturation point you trade throughput for context switches.",
+        "Measure before you size. Run a controlled ramp test: fix the pool at a low number, drive load until p99 latency doubles, record the active session count at that knee. That number is your ceiling. Size the pool at 70 to 80 percent of the knee with headroom for maintenance tasks.",
+        "If you cannot run a ramp test, start with a pool equal to CPU cores times two for OLTP. Watch pg_stat_activity or performance_schema for wait events. If you see \"ClientRead\" or \"lock wait\" dominating, the pool is too large. Cut it until the waits drop.",
+        "What pool size are you running and what signal told you it was right? Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A precise correction with actionable diagnostics will earn more useful replies than a blanket pool-size claim.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 12791,
+      "ids": [
+        "17974915779171728",
+        "18385956013233225",
+        "17978131665132502",
+        "18120062567066455",
+        "18632707516044694"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 12405
+  "last_views": 12791
 }
