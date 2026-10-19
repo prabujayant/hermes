@@ -424,7 +424,8 @@
     "things that quietly kill engineering careers:",
     "most teams add distributed tracing before they have",
     "if you want your side project to survive,",
-    "microservices are a premature optimization for 95 percent"
+    "microservices are a premature optimization for 95 percent",
+    "kubernetes is a career optimization tool disguised as"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
