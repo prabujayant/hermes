@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Debate hot take on AI-assisted engineering (format #5) targets high-reply engagement from both skeptics and adopters, citing P30's 32.1/h velocity proof that contrarian career posts outperform tactical threads and P27's 22.0/h showing payment failure stories drive replies.",
-  "pivots": 275,
+  "hypothesis": "A useful AI-coding workflow diagnostic will earn more qualified replies than a general pro/anti hot take.",
+  "pivots": 276,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T17:01:15.271288+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to pass system design interviews,",
-      "texts": [
-        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
-        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
-        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
-        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A practical rule for resolving ambiguous payment outcomes will earn more saves and follows than an anecdote alone.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 15857,
-      "ids": [
-        "18077697917480511",
-        "17925430167202247",
-        "18093332273657416",
-        "17976195441135469",
-        "18116409653011815"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T17:28:45.004877+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "17920551027445226"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T02:01:11.976801+00:00",
+      "pillar": "smart",
+      "hook_sig": "ai writes code faster than you can review",
+      "texts": [
+        "AI writes code faster than you can review it. The bottleneck didn't disappear, it moved downstream. Teams shipping 3x more PRs are drowning in review debt they didn't have six months ago.",
+        "Last sprint our team merged 47 PRs. Two engineers spent 18 hours just reading diffs. The AI wrote clean code, passed tests, followed patterns. But the logic was subtle, the edge cases were buried, and the reviewer had to reconstruct intent from scratch.",
+        "Test this on your team: track review time per PR for the last 20 merges. Split by AI-assisted vs human-written. If the median review time for AI PRs exceeds human PRs by more than 30 percent, the tool is slowing you down, not speeding you up.",
+        "The fix isn't less AI. It's smaller PRs, stricter conventions, and review checklists that catch what the model misses. What changed on your team when AI adoption crossed 50 percent of commits?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A useful AI-coding workflow diagnostic will earn more qualified replies than a general pro/anti hot take.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 13088,
+      "ids": [
+        "18137777242652801",
+        "18153660424554779",
+        "18137834281722862",
+        "18348045877285871",
+        "18127035928859737"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 12976
+  "last_views": 13088
 }
