@@ -1,35 +1,8 @@
 {
   "hypothesis": "Contrarian lessons on AI coding (format #4) will outperform distributed systems topics because P24-P27 hit 7-16 views/hour vs P28-P30 at 0.3-0.9 views/hour, and the Notion co-founder proved this format at 516k views.",
-  "pivots": 287,
+  "pivots": 288,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T03:01:14.978257+00:00",
-      "pillar": "smart",
-      "hook_sig": "a payments service flatlined at 1.7k tps on",
-      "texts": [
-        "A payments service flatlined at 1.7k TPS on an 8-core box. Everyone reached for read replicas. The DB was maxed, but not how you think.",
-        "The first signal I check when TPS is flat: CPU saturation. If iostat shows >80% CPU during the plateau, it is CPU. Add replicas or scale up. If CPU is idle under 30%, rule it out.",
-        "Second signal: lock contention. Check pg_stat_activity for rows stuck in \"idle in transaction\" or wait events on \"tuple\" locks. If you see them, the bottleneck is rows, not queries. The fix is NOT indexing. It is splitting hot rows or moving the lock scope.",
-        "Third signal: connection pool queues. Look at pgbouncer stats: if cl_active is near cl_max and waiters are climbing, the pool is saturated. More connections hurt. The fix is fewer long-lived connections, not more.",
-        "A team I worked with hit 1.7k TPS plateau. CPU was 22%. pg_stat_activity was clean. pgbouncer showed 50+ waiters. We cut connection lifetime from 30m to 5m. TPS jumped to 6.8k. No code changes.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Backend decision trees tied to measurable",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 18467,
-      "ids": [
-        "18145392109600777",
-        "18125651105486007",
-        "18109811609523242",
-        "18019467359736274",
-        "18091326380215805",
-        "18119899093766477"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T03:31:03.674837+00:00",
       "pillar": "smart",
@@ -1246,6 +1219,31 @@
         "17986421136091616"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T08:01:16.001218+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to pass system design interviews,",
+      "texts": [
+        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
+        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
+        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
+        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Contrarian lessons on AI coding (format #4) will outperform distributed systems topics because P24-P27 hit 7-16 views/hour vs P28-P30 at 0.3-0.9 views/hour, and the Notion co-founder proved this format at 516k views.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 5751,
+      "ids": [
+        "18117142274021104",
+        "18433087861198962",
+        "18119331530093771",
+        "18108337523189289",
+        "18131895787798949"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1253,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 5749
+  "last_views": 5751
 }
