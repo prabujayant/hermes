@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Specific production debugging guidance will earn more saves and useful replies than broad platform-team hot takes; put the CTA last.",
-  "pivots": 307,
+  "hypothesis": "Specific production symptoms paired with a practical way to isolate the cause will earn more saves and useful replies than broad engineering hot takes.",
+  "pivots": 308,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T13:01:15.539826+00:00",
-      "pillar": "smart",
-      "hook_sig": "decision rule: add a service mesh only when",
-      "texts": [
-        "decision rule: add a service mesh only when it solves a named problem your current platform cannot\n\nwe adopted istio at 12 services because \"that is what mature teams do.\" six months later the control plane consumed more cpu than our payment service. zero mtls incidents prevented. the mesh solved problems we did not have and created ones we could not debug.",
-        "the threshold is not service count. it is operational pain you can name: certificate rotation across trust domains, fine-grained traffic shifting for canary releases, or cross-cluster failover with automatic dns failover. if your platform handles these with annotations or a sidecar-less proxy, the mesh is negative roi.",
-        "a useful prompt for your team: list every incident in the last quarter where a mesh feature would have changed the outcome. if the list is empty, you are paying for insurance against a risk that has not materialized. if the list has items, rank them by blast radius and estimate the engineering weeks to operate the mesh versus the weeks saved per incident.",
-        "we removed istio and moved traffic splitting to envoy filters managed by argocd. mtls handled by cert-manager with spiiffe. observability via otel collectors we already ran. the cluster cpu dropped 30 percent. on-call rotations got quieter. the mesh earned its keep only after we could prove the gap.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete service-mesh adoption test will earn more saves and credible replies than a broad pro/anti debate.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 9776,
-      "ids": [
-        "17927380998424283",
-        "18437687779179000",
-        "18107973412964485",
-        "18114576464146406",
-        "18073486016784381"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T13:31:01.071104+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18381546985301021"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T19:01:20.281475+00:00",
+      "pillar": "smart",
+      "hook_sig": "your query shows 2.3 seconds in pg_stat_statements. the",
+      "texts": [
+        "Your query shows 2.3 seconds in pg_stat_statements. The application logs show 2.3 seconds. You optimize the index, rewrite the CTE, swap the join order. Nothing changes. The query was not slow. It was blocked.",
+        "I learned this during an outage at 2am. The dashboard screamed \"slow query\" on a simple select by primary key. Explain analyze showed 0.4ms. The same query ran in 2.3 seconds from the app. The difference was not planning. It was a forgotten transaction in a background worker holding a row lock for four minutes while it called a flaky third party API.",
+        "Postgres reports lock wait time inside the query duration. pg_stat_statements does not split it. The fix is not better indexes. It is checking pg_locks and pg_stat_activity while the query runs. Look for wait_event_type = Lock and wait_event = transactionid. That row tells you exactly who is holding the lock and since when.",
+        "Run this when a query feels slower than explain analyze says:\n\nselect pid, state, wait_event_type, wait_event, query_start, backend_xmin\nfrom pg_stat_activity\nwhere wait_event_type = 'Lock'\nand query_start < now() - interval '5 seconds';\n\nThe backend_xmin is the transaction ID of the blocker. Join it to pg_locks to see the relation and tuple. You now have the culprit in one query.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific production symptoms paired with a practical way to isolate the cause will earn more saves and useful replies than broad engineering hot takes.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 6001,
+      "ids": [
+        "17990459517104278",
+        "18095539532151111",
+        "18127429904308423",
+        "18102244439527618",
+        "17986766834888605"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 5979
+  "last_views": 6001
 }
