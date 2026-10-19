@@ -406,7 +406,8 @@
     "production failure lesson: a timed-out request can succeed,",
     "a payment request timed out at the gateway.",
     "a payment gateway returns 200 ok but the",
-    "sql puzzle: why does adding one null to"
+    "sql puzzle: why does adding one null to",
+    "most ai coding advice you read is six"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A practical SQL gotcha with a verifiable explanation will earn more saves and replies than broad backend",
-  "pivots": 286,
+  "hypothesis": "Contrarian lessons on AI coding (format #4) will outperform distributed systems topics because P24-P27 hit 7-16 views/hour vs P28-P30 at 0.3-0.9 views/hour, and the Notion co-founder proved this format at 516k views.",
+  "pivots": 287,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T02:31:01.432637+00:00",
-      "pillar": "smart",
-      "hook_sig": "a retry on a 504 gateway timeout just",
-      "texts": [
-        "A retry on a 504 gateway timeout just charged a customer twice. Same idempotency key. Both settled 27 hours apart. The first write ran and committed. The retry ran and committed again. One timeout, two side effects.",
-        "Before you retry any timed-out write, run this three-question tree:\n1. Did the operation already run? Check the response log or downstream state, not the HTTP status.\n2. Is the operation idempotent? If not, you must not retry blindly.\n3. What evidence is safe to trust? Cache the request ID, not the timeout.",
-        "Real cases that broke in production:\n- Payments: gateway timed out at 30s. We retried. Card charged twice. Fix: pre-check charge status by ID before retrying.\n- Inventory: decrement ran. Retry decremented again. Fix: use conditional writes (stock >= N).\n- Email: send timed out. Retry sent twice. Fix: dedupe by message ID in the mailer.",
-        "Timeouts mean unknown, not failed. Most teams retry and double-charge. The safe path is a decision tree, not a guess. Cache evidence at the edge. Make every write retry-safe by default.",
-        "Question: what is the one write in your stack that still retries on timeout without proof it never ran? Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Backend decision trees with actionable branches and edge cases will earn more saves and useful replies than general failure lessons.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 18226,
-      "ids": [
-        "18089072114279540",
-        "17970595395188932",
-        "18031737884681080",
-        "18089161574256979",
-        "18131853808811573"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T03:01:14.978257+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "18132379177760339"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T07:31:02.093489+00:00",
+      "pillar": "smart",
+      "hook_sig": "most ai coding advice you read is six",
+      "texts": [
+        "Most AI coding advice you read is six months stale. The models changed, the tooling changed, the failure modes changed. Here is what actually holds up after shipping production features with assistants every day since January.",
+        "Lesson 1: Context window size is a trap. Feeding the whole repo makes the model hallucinate architecture that does not exist. The winning move is a hand-curated 200-line spec file that describes the exact interfaces, invariants, and error contracts the model must respect. The spec becomes the source of truth, not the codebase.",
+        "Lesson 2: Review velocity is the new bottleneck. You can generate three PRs in the time it takes to properly review one. The fix is not faster review, it is smaller generated diffs. Prompt for one function, one migration, one config change at a time. Treat the assistant like a junior who needs tight scope and immediate feedback.",
+        "Lesson 3: The model does not own the on-call rotation. You do. Every generated line that you cannot explain in a 3am incident is a liability. If the assistant writes a retry policy, you must know the backoff curve, the idempotency key strategy, and the exact failure modes it covers. No exceptions.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Contrarian lessons on AI coding (format #4) will outperform distributed systems topics because P24-P27 hit 7-16 views/hour vs P28-P30 at 0.3-0.9 views/hour, and the Notion co-founder proved this format at 516k views.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 5749,
+      "ids": [
+        "17928844140182181",
+        "18107046182615180",
+        "18077114963449949",
+        "18098408123395685",
+        "17986421136091616"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 5747
+  "last_views": 5749
 }
