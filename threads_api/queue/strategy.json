@@ -1,33 +1,8 @@
 {
   "hypothesis": "Switching from caps-listicle to debate hot take format (niche leader #5) on observability overengineering \u2014 proven high-reply format, fresh topic vs. interview/career fatigue, cites P23-P30 underperform streak as pivot trigger.",
-  "pivots": 300,
+  "pivots": 301,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T09:31:01.176037+00:00",
-      "pillar": "smart",
-      "hook_sig": "i watched a team double their connection pool",
-      "texts": [
-        "I watched a team double their connection pool from 50 to 100 because p99 latency spiked. Latency tripled instead. The database CPU barely moved. The real bottleneck was row locks on the accounts table, not connection slots.",
-        "The payment service hit 2k TPS on 8 cores. Every request needed the same hot rows. More connections meant more threads fighting for the same locks. Context switching ate the CPU that queries needed. Throughput collapsed while the pool sat half-empty.",
-        "The falsifiable signal: run `pg_locks` filtered by `granted = false` during the spike. If waiters exceed active connections, you have lock contention, not pool starvation. Check `pg_stat_activity` for `wait_event_type = Lock`. That query takes ten seconds and ends the guessing.",
-        "The fix was never pool sizing. We shortened the critical section, moved the balance check into the same row lock, and added a retry with jitter at the application layer. p99 dropped from 800ms to 120ms at the same pool size. Bigger pools hide the symptom. Locks reveal the cause.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Specific troubleshooting beats generic pool-size debate by earning saves and useful replies from backend engineers.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 8561,
-      "ids": [
-        "17879414634633700",
-        "18139109716651889",
-        "18021629606924893",
-        "18166740157485263",
-        "18127506719493079"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T10:01:16.375952+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18394063837160544"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T14:31:05.141034+00:00",
+      "pillar": "smart",
+      "hook_sig": "things that quietly kill engineering careers:",
+      "texts": [
+        "THINGS THAT QUIETLY KILL ENGINEERING CAREERS:",
+        "Never asking questions.\n\nSilent confusion ships bugs. The fastest engineers ask the dumb question on day one.",
+        "Avoiding code review feedback.\n\nDefensiveness freezes growth. Treat every comment as free mentoring.",
+        "Staying comfortable one level too long.\n\nIf you are the expert in every room, you are in the wrong rooms.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Switching from caps-listicle to debate hot take format (niche leader #5) on observability overengineering \u2014 proven high-reply format, fresh topic vs. interview/career fatigue, cites P23-P30 underperform streak as pivot trigger.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 5863,
+      "ids": [
+        "18342861361274864",
+        "18133104808779626",
+        "18078959444663922",
+        "18099657140434728",
+        "17977957173123368"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 5859
+  "last_views": 5863
 }

@@ -420,7 +420,8 @@
     "most connection pooling advice you read assumes 2015",
     "--- i spent three weeks chasing a phantom",
     "production confession: i blamed a slow query; the",
-    "most teams implement distributed tracing before they have"
+    "most teams implement distributed tracing before they have",
+    "things that quietly kill engineering careers:"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
