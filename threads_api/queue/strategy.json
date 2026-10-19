@@ -1,33 +1,8 @@
 {
   "hypothesis": "A precise failure-mode lesson with an actionable invariant and a targeted comment prompt will beat broad backend debate hooks.",
-  "pivots": 280,
+  "pivots": 281,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T19:30:59.174291+00:00",
-      "pillar": "smart",
-      "hook_sig": "we went from 1.7k to 6.8k tps by",
-      "texts": [
-        "We went from 1.7k to 6.8k TPS by fixing serialized lock contention on the idempotency table-not by adding read replicas or sharding the writes.",
-        "The payment service used a single row per idempotency key with SELECT FOR UPDATE. Under load the row became a hotspot. Every retry queued behind the same lock. Latency spiked, retries multiplied, throughput collapsed.",
-        "We moved the idempotency check to a deterministic hash partition inside the same transaction as the ledger write. No separate lock row. No cross-shard coordination. The tradeoff: we lost the ability to query \"all retries for this key\" without a full scan. We accepted that.",
-        "The metric didn't move when we added connection pooling. It didn't move when we tuned the gateway timeout. It moved only when the contention disappeared. The bottleneck was never the network or the database CPU. It was a single row everyone fought for.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific, reproducible backend lesson with a credible before/",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 16955,
-      "ids": [
-        "18088797452263871",
-        "18063787556630859",
-        "17914031610497078",
-        "17914553130530595",
-        "18089060264274527"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T00:01:20.064076+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "18647628970016021"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T04:31:01.395040+00:00",
+      "pillar": "smart",
+      "hook_sig": "most ai coding advice assumes the model is",
+      "texts": [
+        "Most AI coding advice assumes the model is a fancy autocomplete. That assumption shipped bugs to production last week. Here is what changed.",
+        "The model does not know your latency budget. It does not know your retry policy. It does not know that the idempotency key lives in Redis with a 24 hour TTL. When you prompt \"write the payment handler,\" it writes happy-path code that passes tests and charges customers twice under network partition. The fix is not better prompts. The fix is treating the model like a junior architect who submits PRs you must review for systemic invariants, not syntax.",
+        "Stop asking the model to generate code from scratch. Ask it to propose three approaches with trade-offs, then you pick one and have it implement only the tricky middle. You keep the architecture decisions. The model fills the boilerplate. This cuts review time in half because the risky logic never leaves your head. The fastest engineers I know never let the model touch the state machine.",
+        "The highest leverage use of AI is not writing code. It is simulating the reviewer who will wake up at 3am. Paste your diff and ask: what fails when the network drops, when the queue backs up, when the clock skews? The model catches race conditions humans miss because it has read every bug report on GitHub. But you must prompt for failure modes, not features.",
+        "Follow @owlsky17 so you don't miss the next"
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A precise failure-mode lesson with an actionable invariant and a targeted comment prompt will beat broad backend debate hooks.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 13249,
+      "ids": [
+        "17866339719677630",
+        "18177576235439845",
+        "18199648024376754",
+        "18100106426645300",
+        "17967342063191952"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 13244
+  "last_views": 13249
 }
