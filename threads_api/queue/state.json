@@ -421,7 +421,8 @@
     "--- i spent three weeks chasing a phantom",
     "production confession: i blamed a slow query; the",
     "most teams implement distributed tracing before they have",
-    "things that quietly kill engineering careers:"
+    "things that quietly kill engineering careers:",
+    "most teams add distributed tracing before they have"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
