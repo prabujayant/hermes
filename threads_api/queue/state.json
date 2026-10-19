@@ -402,7 +402,8 @@
     "most teams reach for distributed locks the moment",
     "a client timeout does not tell you whether",
     "most ai coding advice assumes the model is",
-    "most teams treat retries as free safety. they"
+    "most teams treat retries as free safety. they",
+    "production failure lesson: a timed-out request can succeed,"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
