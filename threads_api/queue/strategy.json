@@ -1,33 +1,8 @@
 {
   "hypothesis": "Switching to contrarian lessons format (Notion co-founder style) on AI coding verification bottleneck \u2014 P24-P25 hit 6-7 views/hour on this topic vs P28-P30 at 0.2-0.8 views/hour on distributed systems, and Notion co-founder proved this format at 516k views.",
-  "pivots": 291,
+  "pivots": 292,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T05:00:35.918980+00:00",
-      "pillar": "smart",
-      "hook_sig": "a gateway timeout tells you the network hiccuped.",
-      "texts": [
-        "A gateway timeout tells you the network hiccuped. It does not tell you whether the payment succeeded, failed, or never reached the processor. Treating every timeout as a retry trigger is how you double-charge customers.",
-        "The only source of truth is durable transaction state. Before any retry, read the idempotency key from your ledger. If the row says settled, you are done. If it says pending, you investigate. If it is missing, you safe-retry with the same key.",
-        "Diagnostic decision path: one, fetch the idempotency record by key. Two, if status is settled or refunded, return success to the caller and alert ops. Three, if status is pending, call the processor query endpoint, not a retry. Four, only if the record is absent do you POST a new charge with that key.",
-        "This replaces \"retry on timeout\" with \"read, decide, act.\" The idempotency table becomes your system of record, not the gateway response. Add a background job that reconciles pending rows every five minutes against the processor API. That job catches the cases your request path misses.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Backend failure-mode posts earn more attention when they turn an ambiguous symptom into a concrete check readers can apply before taking risky action.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 19280,
-      "ids": [
-        "18217106407358625",
-        "17946032787358280",
-        "18118152452082526",
-        "17937445452125020",
-        "18034305644852290"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T05:31:00.139594+00:00",
       "pillar": "smart",
@@ -1240,6 +1215,31 @@
         "18113157638597327"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T10:01:18.945675+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want behavioral rounds to remember you,",
+      "texts": [
+        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
+        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
+        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
+        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Switching to contrarian lessons format (Notion co-founder style) on AI coding verification bottleneck \u2014 P24-P25 hit 6-7 views/hour on this topic vs P28-P30 at 0.2-0.8 views/hour on distributed systems, and Notion co-founder proved this format at 516k views.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 5776,
+      "ids": [
+        "18269463139305309",
+        "18114637937115119",
+        "17953438845316943",
+        "18251783044309639",
+        "18108979343626160"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1249,5 +1249,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 5769
+  "last_views": 5776
 }
