@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Pivot to story-confession format (P26, P28) with concrete Postgres production lesson, replacing failing caps-listicle hooks.",
-  "pivots": 298,
+  "hypothesis": "A specific",
+  "pivots": 299,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T08:31:00.487906+00:00",
-      "pillar": "smart",
-      "hook_sig": "an orm transaction held a row lock for",
-      "texts": [
-        "An ORM transaction held a row lock for 47 seconds while waiting on an external HTTP call. The lock chain: UPDATE users SET last_login=now() WHERE id=123 \u2192 SELECT FOR UPDATE on orders \u2192 HTTP POST to payment gateway \u2192 COMMIT. Every concurrent login for that user queued behind it.",
-        "The payment gateway averaged 200ms. But the 99th percentile hit 12 seconds during a provider incident. Our service had 200 connections in the pool. All 200 piled up on that single row lock. CPU sat at 3 percent. The database showed zero active queries, just 200 waiting on Lock:tuple.",
-        "The pattern: transaction boundary wrapped business logic AND I/O. The ORM didn't force this. The code opened a transaction, mutated state, then called out. Fix: move the HTTP call outside the transaction. Read-committed snapshot for the read. Explicit lock only on the write, held for 3ms.",
-        "Same service, different endpoint: bulk order import. One transaction, 5000 rows, 4 minutes. Lock escalation promoted row locks to table lock. All reads blocked. Fix: chunk into 100-row transactions with explicit savepoints. Import time dropped to 90 seconds. Zero lock contention.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete lock timeline with a balanced fix will earn debate and specific comments from engineers who have seen the same failure",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 8126,
-      "ids": [
-        "18125872771859046",
-        "18058766381797404",
-        "18117476627004277",
-        "18136633810641106",
-        "17993739888103134"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T09:01:09.765267+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18119142382967526"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T13:31:04.446988+00:00",
+      "pillar": "smart",
+      "hook_sig": "production confession: i blamed a slow query; the",
+      "texts": [
+        "production confession: I blamed a slow query; the real problem was a transaction nobody had closed",
+        "the dashboard showed p95 latency climbing from 40ms to 2.3s over four hours. the usual suspects: missing index, plan regression, lock contention. I spent two hours EXPLAIN ANALYZE-ing the hot path, adding a partial index, watching latency barely budge. the query looked fine on paper.",
+        "then I checked pg_stat_activity and found a session idle in transaction from the batch job that ran at 02:00. it had opened a cursor, processed 50k rows, then crashed before COMMIT. the transaction stayed open for six hours. every UPDATE on that table created dead tuples vacuum could not clean.",
+        "autovacuum ran three times but skipped the table because the old snapshot pinned the horizon. table bloat grew 400 percent. the fix was a single pg_terminate_backend call. latency dropped to 45ms in seconds. the index I added was useless.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 5842,
+      "ids": [
+        "18178874800445342",
+        "17975404679939908",
+        "17891438190456493",
+        "18097021490442037",
+        "18135275803740877"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 5840
+  "last_views": 5842
 }
