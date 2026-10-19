@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete lost-response payment retry, paired with a testable idempotency invariant and a specific final question, will earn more saves and replies than broad backend debate hooks.",
-  "pivots": 285,
+  "hypothesis": "A practical SQL gotcha with a verifiable explanation will earn more saves and replies than broad backend",
+  "pivots": 286,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T02:01:12.935406+00:00",
-      "pillar": "smart",
-      "hook_sig": "things that quietly kill engineering careers:",
-      "texts": [
-        "THINGS THAT QUIETLY KILL ENGINEERING CAREERS:",
-        "Never asking questions.\n\nSilent confusion ships bugs. The fastest engineers ask the dumb question on day one.",
-        "Avoiding code review feedback.\n\nDefensiveness freezes growth. Treat every comment as free mentoring.",
-        "Staying comfortable one level too long.\n\nIf you are the expert in every room, you are in the wrong rooms.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A concrete, reusable backend decision procedure will earn more saves and useful replies than a general failure lesson.",
-      "breakout": "",
-      "followers": 282,
-      "views_total": 18115,
-      "ids": [
-        "18131226337666966",
-        "18125272447823318",
-        "18076547516753921",
-        "17994937982844320",
-        "18106855010215539"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T02:31:01.432637+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "17920068057239809"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T07:01:19.805531+00:00",
+      "pillar": "smart",
+      "hook_sig": "sql puzzle: why does adding one null to",
+      "texts": [
+        "SQL puzzle: why does adding one NULL to a NOT IN subquery make every row disappear?",
+        "create table users (id int, name text);\ncreate table orders (id int, user_id int);\n\ninsert into users values (1, 'alice'), (2, 'bob'), (3, 'carol');\ninsert into orders values (10, 1), (20, 2);\n\nselect name from users where id not in (select user_id from orders);\n-- returns carol",
+        "insert into orders values (30, null);\n\nselect name from users where id not in (select user_id from orders);\n-- returns zero rows",
+        "the invariant: NOT IN (subquery) means id <> every value in the subquery. in three-valued logic, id <> null is unknown, not true. unknown filters the row out. the fix is NOT EXISTS or add where user_id is not null to the subquery.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A practical SQL gotcha with a verifiable explanation will earn more saves and replies than broad backend",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 5747,
+      "ids": [
+        "17966128905198144",
+        "17925866532439802",
+        "18089879075260395",
+        "18138059083641805",
+        "18132379177760339"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 13264
+  "last_views": 5747
 }
