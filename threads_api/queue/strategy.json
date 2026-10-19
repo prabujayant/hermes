@@ -1,29 +1,8 @@
 {
-  "hypothesis": "Switching to contrarian lessons format (Notion co-founder style) on AI coding verification bottleneck \u2014 P24-P25 hit 6-7 views/hour on this topic vs P28-P30 at 0.2-0.8 views/hour on distributed systems, and Notion co-founder proved this format at 516k views.",
-  "pivots": 293,
+  "hypothesis": "Switched format from contrarian lessons to debate hot takes on AI coding verification (P24-P25 proved topic velocity, niche leaders confirm debate format drives highest replies).",
+  "pivots": 294,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T06:01:14.772257+00:00",
-      "pillar": "smart",
-      "hook_sig": "your retry logic passes every test but still",
-      "texts": [
-        "Your retry logic passes every test but still double-charges customers in production. The gateway returns a 504 on capture. Your code retries. The first request actually succeeded. Both settle. I'll show you the one check that prevents this.",
-        "This happens because 504 means \"I don't know if the write happened,\" not \"it failed.\" Most teams treat it as a failure and retry blindly. The idempotency key prevents duplicate processing but not duplicate settlement if the first write committed before the timeout.",
-        "The fix: before retrying a 504 on capture, poll the gateway's transaction status endpoint with the same idempotency key. Only retry if the status is genuinely unknown or failed. If it shows \"\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Backend failure-mode posts earn more attention when they pair an ambiguous symptom with a specific check that prevents a costly action.",
-      "breakout": "",
-      "followers": 282,
-      "views_total": 19664,
-      "ids": [
-        "18113633018600634",
-        "18098081636396024",
-        "17954974473035821"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T06:31:00.240744+00:00",
       "pillar": "smart",
@@ -1240,6 +1219,31 @@
         "17912114835510323"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T11:01:14.528120+00:00",
+      "pillar": "smart",
+      "hook_sig": "ai coding assistants are making junior engineers worse,",
+      "texts": [
+        "AI coding assistants are making junior engineers worse, not better. The verification step they skip is exactly where intuition gets built.",
+        "When the model writes the code, the engineer never wrestles with the syntax, the edge cases, the why. They just accept. That acceptance muscle atrophies the debugging instinct.",
+        "Last week a junior on my team shipped a bug that Copilot suggested. The fix was a one-line null check. They had never seen that pattern fail because the model always handled it. Now they know. But only because it broke in prod.",
+        "If you are senior, use the model as a tireless pair programmer you constantly challenge. If you are junior, turn it off for the first implementation. Prove you can build it, then ask the model to review. Change my mind.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Switched format from contrarian lessons to debate hot takes on AI coding verification (P24-P25 proved topic velocity, niche leaders confirm debate format drives highest replies).",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 5796,
+      "ids": [
+        "18199708009389132",
+        "18024743879864937",
+        "18130659994700607",
+        "18073818398485572",
+        "17913381426501159"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1249,5 +1253,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 5791
+  "last_views": 5796
 }
