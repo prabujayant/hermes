@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete duplicate-side-effect failure plus a testable idempotency invariant and targeted comment prompt will earn more saves and replies than broad backend debate hooks.",
-  "pivots": 283,
+  "hypothesis": "A specific retry failure paired with a testable idempotency invariant and a targeted final question will earn more saves and replies than broad backend debate hooks.",
+  "pivots": 284,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T00:57:12.764867+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "texts": [
-        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
-        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
-        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
-        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Specific backend failure lessons with a clear decision procedure and credible stakes will outperform generic advice and build a follow-up series.",
-      "breakout": "",
-      "followers": 282,
-      "views_total": 17655,
-      "ids": [
-        "17923070265223754",
-        "18472287058137596",
-        "18130145965799856",
-        "18094756622423461",
-        "18357046099168517"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T01:30:58.294739+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "18123726649901662"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T06:01:14.392604+00:00",
+      "pillar": "smart",
+      "hook_sig": "a payment request timed out at the gateway.",
+      "texts": [
+        "A payment request timed out at the gateway. The client retried. The gateway had already processed the first one. Customer charged twice. The logs showed two successful POSTs with the same idempotency key, because the middleware generated a new key per retry attempt.",
+        "The invariant that should have held: for any idempotency key, the side effect executes exactly once regardless of how many times the request arrives. Not \"at most once.\" Exactly once. If your system cannot distinguish \"not processed\" from \"processed but response lost,\" the invariant is broken.",
+        "Test it tomorrow: send the same idempotency key twice with a 500ms gap. Check your database, one charge row or two? If two, your idempotency layer is decorative. The fix is not \"add a unique constraint.\" The fix is making the side effect and the key record atomic in the same transaction.",
+        "We moved the charge creation and the idempotency key insert into one Postgres transaction. The unique constraint on the key becomes the guard. Second request hits the constraint, reads the existing charge_id, returns it. No duplicate. Which side effect have you seen duplicated in production, email, webhook, inventory decrement, something else?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific retry failure paired with a testable idempotency invariant and a targeted final question will earn more saves and replies than broad backend debate hooks.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 13263,
+      "ids": [
+        "18154010767563608",
+        "18123278422729741",
+        "18565244443076287",
+        "18136764892735056",
+        "18108726434262832"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 13260
+  "last_views": 13263
 }
