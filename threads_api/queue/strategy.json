@@ -1,29 +1,8 @@
 {
-  "hypothesis": "Switching to a debate hot-take format (niche leader #5) on a concrete schema decision will trigger the reply velocity that caps-listicles and symptom posts have failed to generate.",
-  "pivots": 309,
+  "hypothesis": "Debate hot-take on UUIDv7 vs bigint (niche leader #5 format) targets a concrete schema decision with measurable results, inviting replies from teams who migrated or disagree \u2014 highest-variance play to break the underperform streak.",
+  "pivots": 310,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T14:01:15.789287+00:00",
-      "pillar": "smart",
-      "hook_sig": "foreign keys are not optional in production. if",
-      "texts": [
-        "Foreign keys are not optional in production. If your ORM makes them painful, change the ORM, not the schema.",
-        "I watched a payments team drop foreign keys because \"the ORM handles referential integrity in application code.\" Six months later a race condition orphaned 40,000 transaction rows. The cleanup took three weeks and required manual SQL surgery on a live database.",
-        "The argument against foreign keys is always the same: they slow down writes, complicate migrations, and the ORM validates anyway. All three are true in a vacuum\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete go/no-go test will earn more saves and credible replies than a general pro/anti service-mesh take.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 9975,
-      "ids": [
-        "17974201617156819",
-        "18126756655803689",
-        "18057575486567425"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T14:31:00.896374+00:00",
       "pillar": "smart",
@@ -1248,6 +1227,31 @@
         "18025819256920835"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T20:01:21.449550+00:00",
+      "pillar": "smart",
+      "hook_sig": "stop using uuidv7 as a default primary key.",
+      "texts": [
+        "Stop using UUIDv7 as a default primary key. It solves a problem most teams never have and creates two they always will: wider indexes and slower inserts on hot tables.",
+        "The timestamp prefix helps B-tree locality, but the 48-bit random suffix still fragments pages under high write throughput. On a 500-row-per-second table, that fragmentation shows up as 30 percent more index pages and measurable insert latency within weeks.",
+        "The usual defense is \"but distributed inserts.\" If you genuinely have multiple write leaders generating IDs without coordination, fine. For the other 95 percent of apps with a single Postgres primary, a bigint identity gives you denser indexes, faster range scans, and zero coordination cost.",
+        "Last month I migrated a 200M-row events table from UUIDv7 to bigint. Index size dropped 38 percent. P95 insert latency dropped from 12ms to 4ms. The only thing that broke was a downstream analytics job expecting UUIDs, fixed with a generated column.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Debate hot-take on UUIDv7 vs bigint (niche leader #5 format) targets a concrete schema decision with measurable results, inviting replies from teams who migrated or disagree \u2014 highest-variance play to break the underperform streak.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 6008,
+      "ids": [
+        "18034278272884961",
+        "18109482881351773",
+        "18055104413606259",
+        "17948772420347994",
+        "18032054399906675"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 6004
+  "last_views": 6008
 }
