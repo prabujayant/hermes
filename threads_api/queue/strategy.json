@@ -1,33 +1,8 @@
 {
   "hypothesis": "A precise correction with actionable diagnostics will earn more useful replies than a blanket pool-size claim.",
-  "pivots": 272,
+  "pivots": 273,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T15:31:10.875349+00:00",
-      "pillar": "smart",
-      "hook_sig": "costly-mistake rule: a timeout after capture is not",
-      "texts": [
-        "costly-mistake rule: a timeout after capture is not proof the charge failed; reconcile before retrying",
-        "the gateway returns a 504 on capture. your code sees timeout, assumes failure, retries the capture. the first request actually succeeded. customer gets charged twice. this is not theoretical. it happens every day on Stripe, Adyen, Braintree.",
-        "the rule: one stable idempotency key per logical charge attempt. on timeout, do NOT retry the capture. instead, poll GET /charges/{id} or wait for the webhook. only retry when the provider explicitly returns FAILED or the charge is absent after the idempotency window expires.",
-        "every retry library defaults to retrying on 5xx and timeout. they treat \"unknown\" as \"safe to retry.\" it is not safe. the only safe retry is one the provider guarantees is idempotent and you have verified the prior attempt did not settle.",
-        "why does the entire ecosystem default to the dangerous behavior? Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete reconciliation rule for ambiguous payment outcomes will earn more saves and follows than a failure anecdote alone. End with a specific question about how readers handle uncertain outcomes.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 15322,
-      "ids": [
-        "17941756446101562",
-        "18098000969556901",
-        "18134599204699905",
-        "18129226303796609",
-        "18114629594039473"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T16:01:14.382450+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18632707516044694"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T00:31:02.292531+00:00",
+      "pillar": "smart",
+      "hook_sig": "things hiring managers can't tell from your resume",
+      "texts": [
+        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
+        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
+        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
+        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A precise correction with actionable diagnostics will earn more useful replies than a blanket pool-size claim.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 12846,
+      "ids": [
+        "18142805914520478",
+        "18099749783083044",
+        "18131155444778476",
+        "17906796783595900",
+        "18638291155043070"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 12791
+  "last_views": 12846
 }
