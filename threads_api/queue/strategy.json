@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Specific production symptoms paired with a practical way to isolate the cause will earn more saves and useful replies than broad engineering hot takes.",
-  "pivots": 308,
+  "hypothesis": "Switching to a debate hot-take format (niche leader #5) on a concrete schema decision will trigger the reply velocity that caps-listicles and symptom posts have failed to generate.",
+  "pivots": 309,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T13:31:01.071104+00:00",
-      "pillar": "smart",
-      "hook_sig": "decision test: before adopting a service mesh, measure",
-      "texts": [
-        "decision test: before adopting a service mesh, measure whether these three failure modes actually exist. most teams skip this and pay for complexity they never needed.",
-        "i watched a platform team spend six months rolling out Istio across twelve services. the mesh added four milliseconds per hop, config drift caused two SEV-2s, and the actual failure modes they feared (cascading retries, noisy neighbors, zone failures) never materialized in their traffic patterns.",
-        "the three failure modes worth measuring:\n1. cascading retries from downstream timeouts - check your retry budgets and p99 latency correlation\n2. noisy neighbor contention - measure request queue depth and CPU steal time under load\n3. zone-level blast radius - simulate single-zone loss and track error rate spread",
-        "run the test on one service for two weeks. instrument the raw metrics without mesh. if the failure modes dont appear in your actual traffic, you have data to defer adoption. if they do, you have a business case. comment with the one metric that would change your mind.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete go/no-go test will earn more saves and credible replies than a general pro/anti service-mesh take.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 9892,
-      "ids": [
-        "17910638694555590",
-        "17908331886329629",
-        "18103606031575415",
-        "18382006909235912",
-        "18130630963768846"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T14:01:15.789287+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "17986766834888605"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T19:31:02.150024+00:00",
+      "pillar": "smart",
+      "hook_sig": "uuid primary keys are a premature optimization for",
+      "texts": [
+        "UUID primary keys are a premature optimization for 99 percent of applications. Integer IDs with a separate UUID column for external APIs scales better, costs less, and avoids the write amplification that kills high-throughput tables. Prove me wrong.",
+        "The clustering key determines physical row order. UUIDv4 scatters inserts across the entire B-tree, forcing page splits and bloating the buffer pool. A 100M row table with UUIDv4 PK can be 2-3x larger than the same table with a bigint identity column.",
+        "Yes, UUIDs solve distributed ID generation. But most teams never need distributed writes. They adopt UUIDs \"just in case\" and pay the storage, memory, and CPU tax forever. The fix is trivial: bigint PK for clustering, UUID column with a unique index for external references.",
+        "Postgres 15+ makes this painless with generated identity columns and UUIDv7 (time-ordered) if you truly need sortable UUIDs. But default to integer PKs until you have a documented reason not to. The burden of proof is on the UUID advocate.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Switching to a debate hot-take format (niche leader #5) on a concrete schema decision will trigger the reply velocity that caps-listicles and symptom posts have failed to generate.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 6004,
+      "ids": [
+        "18091744280197393",
+        "17975230077156469",
+        "18122848055289114",
+        "18398844313205208",
+        "18025819256920835"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 6001
+  "last_views": 6004
 }

@@ -428,7 +428,8 @@
     "kubernetes is a career optimization tool disguised as",
     "most teams running kubernetes don't have a platform",
     "i spent three weeks chasing \"too many connections\"",
-    "your query shows 2.3 seconds in pg_stat_statements. the"
+    "your query shows 2.3 seconds in pg_stat_statements. the",
+    "uuid primary keys are a premature optimization for"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
