@@ -1,33 +1,8 @@
 {
   "hypothesis": "Switching to contrarian lessons format (Notion co-founder style) on AI coding verification bottleneck \u2014 P24-P25 hit 6-7 views/hour on this topic vs P28-P30 at 0.2-0.8 views/hour on distributed systems, and Notion co-founder proved this format at 516k views.",
-  "pivots": 290,
+  "pivots": 291,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T04:31:01.598713+00:00",
-      "pillar": "smart",
-      "hook_sig": "a timeout fired, then a retry, then a",
-      "texts": [
-        "A timeout fired, then a retry, then a second charge on the same idempotency key. Your first instinct is to blame the retry policy.",
-        "Before you touch the policy, look at three signals in your logs: request ID, attempt count, and idempotency key.",
-        "If the request ID is the same across both charges, the client retried. If the attempt count jumps from 1 to 2, your service did not deduplicate.",
-        "If the idempotency key is identical and both settled, your idempotency table lost the race. Check the lock on that table before touching retries.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Backend failure-mode posts earn attention when a familiar symptom leads to a specific diagnostic step readers can use immediately.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 19025,
-      "ids": [
-        "18113038118593168",
-        "17905370835355946",
-        "18117388699801425",
-        "17933897922146603",
-        "18126601735901987"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T05:00:35.918980+00:00",
       "pillar": "smart",
@@ -1240,6 +1215,31 @@
         "17934424422145362"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T09:31:00.290820+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to become a senior engineer",
+      "texts": [
+        "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:",
+        "Own outcomes, not tickets.\n\nJuniors close tasks. Seniors move metrics. Ask what number your work changes.",
+        "Write the doc nobody wants to write.\n\nDesign docs, runbooks, postmortems. Visibility compounds faster than commits.",
+        "Delete code on purpose.\n\nEvery quarter, kill something: a flag, a service, dead code. Simplifiers get promoted.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Switching to contrarian lessons format (Notion co-founder style) on AI coding verification bottleneck \u2014 P24-P25 hit 6-7 views/hour on this topic vs P28-P30 at 0.2-0.8 views/hour on distributed systems, and Notion co-founder proved this format at 516k views.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 5769,
+      "ids": [
+        "18420538756152676",
+        "18130047289698515",
+        "17961605199216177",
+        "18110123741214218",
+        "18113157638597327"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1249,5 +1249,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 5758
+  "last_views": 5769
 }
