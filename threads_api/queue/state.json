@@ -412,7 +412,8 @@
     "most ai coding advice assumes the model writes",
     "ai code review is the new bottleneck. not",
     "if you want to become a senior engineer",
-    "if you want behavioral rounds to remember you,"
+    "if you want behavioral rounds to remember you,",
+    "your orm is not your schema. treating it"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

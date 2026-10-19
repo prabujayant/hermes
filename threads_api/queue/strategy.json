@@ -1,33 +1,8 @@
 {
   "hypothesis": "Switching to contrarian lessons format (Notion co-founder style) on AI coding verification bottleneck \u2014 P24-P25 hit 6-7 views/hour on this topic vs P28-P30 at 0.2-0.8 views/hour on distributed systems, and Notion co-founder proved this format at 516k views.",
-  "pivots": 292,
+  "pivots": 293,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T05:31:00.139594+00:00",
-      "pillar": "smart",
-      "hook_sig": "a gateway timeout on a payment capture is",
-      "texts": [
-        "A gateway timeout on a payment capture is not a failure signal. It is a question mark. The request left your server, hit the network, and the response never came back. The charge could be sitting in authorized, captured, or failed. You have no idea until you ask the provider.",
-        "Most teams treat timeout as failure and immediately retry with the same idempotency key. That works if the original request never reached the provider. It creates a duplicate charge if the request succeeded and only the response was lost. The idempotency key protects against your retries, not against the provider having already processed the first attempt.",
-        "The fix is a single extra call before any retry. Call the provider's transaction status endpoint with the original request ID or your idempotency key. Stripe: retrieve PaymentIntent. Adyen: getPaymentDetails. Braintree: findTransaction. Check the status field. Only retry if it is genuinely failed or missing. If it is captured or settled, reconcile and move on.",
-        "This check costs one round trip and saves you from the reconciliation nightmare of duplicate settlements, angry customers, and chargeback fees. It also gives you the exact failure reason if the charge actually failed, card declined, insufficient funds, fraud block, so you can surface the right message to the user instead of a generic \"try again.\"",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Backend failure-mode posts earn more attention when they pair an ambiguous symptom with a specific check that prevents a costly action.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 19526,
-      "ids": [
-        "17995265037043126",
-        "18453816799120768",
-        "18443864446131947",
-        "17937739662389348",
-        "18194095042401442"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T06:01:14.772257+00:00",
       "pillar": "smart",
@@ -1240,6 +1215,31 @@
         "18108979343626160"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T10:31:01.255548+00:00",
+      "pillar": "smart",
+      "hook_sig": "your orm is not your schema. treating it",
+      "texts": [
+        "Your ORM is not your schema. Treating it like one is why your migrations break in production.",
+        "Last quarter a team shipped a \"quick\" nullable column via their ORM. Six weeks later the same column caused a full table lock on 50M rows during a deploy. The ORM had silently added a default value that rewrote the entire table. No one reviewed the generated SQL.",
+        "\"Just let the ORM handle it\" works until it doesn't. The ORM optimizes for developer speed, not database safety. It will choose convenience over correctness every time. Your schema is the contract. The ORM is just one client.",
+        "Rule: every migration gets reviewed as raw SQL before it touches staging. If you cannot read the DDL your ORM generates, you do not own your schema. What is the last migration you actually read?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Switching to contrarian lessons format (Notion co-founder style) on AI coding verification bottleneck \u2014 P24-P25 hit 6-7 views/hour on this topic vs P28-P30 at 0.2-0.8 views/hour on distributed systems, and Notion co-founder proved this format at 516k views.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 5791,
+      "ids": [
+        "18077793485744051",
+        "17894120235439738",
+        "18343375177249108",
+        "18143671366717896",
+        "17912114835510323"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1249,5 +1249,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 5776
+  "last_views": 5791
 }
