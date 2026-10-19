@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Pivot to contrarian lessons format (Notion co-founder style) on PostgreSQL connection pooling \u2014 proven 516k views for niche leader, matches backend pillar, changes only format from failed caps-listicles while keeping high-signal topic.",
-  "pivots": 297,
+  "hypothesis": "Pivot to story-confession format (P26, P28) with concrete Postgres production lesson, replacing failing caps-listicle hooks.",
+  "pivots": 298,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T08:01:14.228525+00:00",
-      "pillar": "smart",
-      "hook_sig": "i let an orm manage schema migrations on",
-      "texts": [
-        "I let an ORM manage schema migrations on a billing service for eighteen months. Zero incidents. Then a single `alter column` generated a lock that froze payments for forty minutes. The migration took twelve seconds. The lock waited on a long-running analytics query nobody knew existed.",
-        "The ORM wrapped the DDL in a transaction. Postgres took an `ACCESS EXCLUSIVE` lock. The analytics query held `ACCESS SHARE`. Queue formed. Every `INSERT` into `payments` stacked up. P99 latency went from eighty milliseconds to twenty-three seconds. Revenue dipped. On-call got paged.",
-        "We rolled back. The fix was manual: `SET lock_timeout = '2s'` before the migration, run outside a transaction, retry with exponential backoff. The ORM could not express this. Its abstraction leaked at the worst possible moment, production, under load, with money moving.",
-        "ORMs are not the enemy. Hidden lock behavior is. If you cannot name the lock type your migration takes and what it blocks, you do not own your schema. You are borrowing it from a library that assumes a quiet database.",
-        "What is the longest migration lock you have accidentally held in production? Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Concrete ORM failure story with specific lock mechanics will trigger debate from both ORM defenders and raw-SQL advocates, driving replies and profile clicks.",
-      "breakout": "",
-      "followers": 282,
-      "views_total": 7972,
-      "ids": [
-        "18110038292595974",
-        "18076807874734142",
-        "18135450259675040",
-        "18118775299998354",
-        "18184737754422018"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T08:31:00.487906+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18117716716779558"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T13:01:20.495264+00:00",
+      "pillar": "smart",
+      "hook_sig": "--- i spent three weeks chasing a phantom",
+      "texts": [
+        "---\nI spent three weeks chasing a phantom bug in Postgres connection pooling. The app kept throwing \"too many connections\" at random. Not during load tests, not on Mondays. Random.",
+        "I checked every config file, every pooler setting, every connection limit. All green. The connections were being held open by something I could not see.",
+        "The twist: the leak only happened when the model ran a specific query pattern. AI-generated code that opened connections but never closed them, because the retry logic fired on a timeout that never actually happened.",
+        "The fix was not tuning pool sizes. It was adding idempotency keys to every mutating query and killing retries that had no business retrying. I wrote a tiny middleware that rejected duplicate requests at the gateway level.",
+        "Most AI coding advice assumes the model writes clean code that follows your patterns. It does not. You need guardrails, not generators.\nFollow @owlsky17 so you don't miss the next one.\n---"
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Pivot to story-confession format (P26, P28) with concrete Postgres production lesson, replacing failing caps-listicle hooks.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 5840,
+      "ids": [
+        "18113641961124834",
+        "18109231870917646",
+        "18132096814827692",
+        "18133806796671033",
+        "18119142382967526"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 5828
+  "last_views": 5840
 }
