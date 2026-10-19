@@ -398,7 +398,8 @@
     "most engineers treat ai coding assistants as autocomplete",
     "ai writes code faster than you can review",
     "i shipped a feature last week using an",
-    "your distributed system is a premature optimization. the"
+    "your distributed system is a premature optimization. the",
+    "most teams reach for distributed locks the moment"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

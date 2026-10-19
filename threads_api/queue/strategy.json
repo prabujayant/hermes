@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A contrarian debate hook challenging distributed systems orthodoxy will trigger high-reply engagement from backend engineers defending their architecture choices, beating the 3.8 views/h median by targeting the identity-driven debate format that drove 481 views on the foreign keys post.",
-  "pivots": 278,
+  "hypothesis": "A precise backend tradeoff with a useful principle and a specific comment prompt will outperform another broad debate hook.",
+  "pivots": 279,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-17T18:31:04.719353+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- i shipped a retry loop that retried",
-      "texts": [
-        "---\nI shipped a retry loop that retried on every gateway timeout. Then an $847 charge hit twice, 27 hours apart, both idempotent under the same key, both settled by the gateway.",
-        "Timeouts are not failures. They are question marks. The gateway accepted the charge, the network dropped the ack, and your code sees nothing. Retrying blindly just doubles the bet on a coin flip you never meant to place.",
-        "The only safe retry rule I ship now: before you retry a capture, call the gateway's status-check endpoint with the same idempotency key. If it returns settled, stop. If it returns pending, retry. If it returns unknown, escalate to a human and hold the funds.",
-        "I used to trust exponential backoff and idempotency keys as enough. They protect against duplicates only when you know which side dropped the packet. Without a status check, you're gambling on the gateway's internal state. Most teams never instrument this path.",
-        "Follow @owlsky17 so you don't miss the next one.\n---"
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "A concise status-check-then-retry rule will earn more saves and follows than a timeout anecdote alone.",
-      "breakout": "none",
-      "followers": 282,
-      "views_total": 16542,
-      "ids": [
-        "18099056795639559",
-        "18033175442899894",
-        "17937875175126943",
-        "18105204221298082",
-        "18136562617640889"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-17T19:01:12.737888+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,33 @@
         "18009797336778166"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-19T03:31:01.839949+00:00",
+      "pillar": "smart",
+      "hook_sig": "most teams reach for distributed locks the moment",
+      "texts": [
+        "Most teams reach for distributed locks the moment they see duplicate job risk. The lock becomes a single point of contention, a latency tax on every worker, and a new failure mode when the lock service blips. The operational reality: locks fail open or fail closed, both burn you.",
+        "The contrarian move: design the handler so a duplicate execution is harmless. Idempotency keys on the job payload, deterministic side effects, exactly-once semantics built into the business logic not the infrastructure. A duplicate charge is a bug. A duplicate idempotent write is a non-event.",
+        "This shifts the tradeoff. You pay once at write time: a unique constraint, a deduplication table, a natural key that survives retries. You save forever on coordination overhead, lock latency, and the 3am page when the lock manager dies. The handler becomes re-runnable by default, which is what you actually need for reliability.",
+        "Teams draw the line at \"too hard to make idempotent.\" Email sends, third-party webhooks, legacy APIs without idempotency keys. That is where the lock debate actually lives. Not on every job. Not on the happy path. Only on the irreducible external side effect you cannot deduplicate.",
+        "Where does your team draw the line? Which job types force you to reach for a lock instead of an idempotency key?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A precise backend tradeoff with a useful principle and a specific comment prompt will outperform another broad debate hook.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 13234,
+      "ids": [
+        "18355972954216813",
+        "17996053539021086",
+        "17900110434391719",
+        "18190990669404425",
+        "18151715572594533",
+        "17963705475228723"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 13222
+  "last_views": 13234
 }
