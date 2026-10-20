@@ -433,7 +433,8 @@
     "stop using uuidv7 as a default primary key.",
     "uuidv7 is not automatically better than bigint. choose",
     "ai coding assistants don't make you a senior",
-    "most \"senior engineer\" advice assumes you write code."
+    "most \"senior engineer\" advice assumes you write code.",
+    "if you want to pass system design interviews,"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
