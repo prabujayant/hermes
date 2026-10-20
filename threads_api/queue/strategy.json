@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concise, usable review gate will draw more specific replies than a generic debate about AI code quality.",
-  "pivots": 320,
+  "hypothesis": "A specific AI-code review gate will earn more useful replies than a broad debate about code quality.",
+  "pivots": 321,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T19:30:59.487920+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want behavioral rounds to remember you,",
-      "texts": [
-        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
-        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
-        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
-        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Blunt debate hook on connection pooling (Format 5) with concrete before/after numbers will outpace caps-listicle median (3.9/h) by triggering reply-driven reach, citing P26's 96.2/h velocity on a similar contrarian statement.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 12405,
-      "ids": [
-        "17884096203522868",
-        "18093807092173437",
-        "18195690259399893",
-        "18114751685036214",
-        "17989280391119949"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T00:01:15.605389+00:00",
       "pillar": "smart",
@@ -1254,6 +1229,33 @@
         "17942215215099951"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T04:31:03.128399+00:00",
+      "pillar": "smart",
+      "hook_sig": "practical checklist: before merging ai-written code, verify the",
+      "texts": [
+        "practical checklist: before merging AI-written code, verify the behavior, failure paths, and tests yourself\n\nmost teams treat AI output as \"code that compiles.\" that is the wrong bar. the bar is: would you merge this if a junior wrote it at 2am without running it",
+        "start with behavior. run the feature end-to-end with the exact inputs the PR claims to handle. watch for silent truncation, wrong defaults, off-by-one pagination. AI loves happy paths",
+        "check failure paths. kill the network, fill the disk, send malformed JSON, hit the rate limit. AI rarely adds retries, timeouts, or idempotency keys unless you explicitly asked",
+        "read the tests like they are the spec. are they testing the contract or the implementation? do they cover the branch where the external service returns 500? if the test file is shorter than the implementation file, it is incomplete",
+        "which of these three catches the most bugs on your team: behavior, failure paths, or tests",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific AI-code review gate will earn more useful replies than a broad debate about code quality.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 6105,
+      "ids": [
+        "18350542093267691",
+        "17898569127398848",
+        "18423876427158318",
+        "18099583877093945",
+        "18630970936045628",
+        "18156891721517690"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1263,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 6096
+  "last_views": 6105
 }

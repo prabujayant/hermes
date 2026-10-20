@@ -440,7 +440,8 @@
     "review dilemma: ai-generated patch passes tests but changes",
     "merging ai-generated code without understanding every line is",
     "ai-written code should meet the same merge bar",
-    "i keep a sticky note on my monitor"
+    "i keep a sticky note on my monitor",
+    "practical checklist: before merging ai-written code, verify the"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
