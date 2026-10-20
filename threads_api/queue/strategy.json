@@ -1,35 +1,8 @@
 {
   "hypothesis": "A concrete NULL failure and verified fix will earn more specific engineer replies than another AI-review debate.",
-  "pivots": 328,
+  "pivots": 329,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T03:31:01.839949+00:00",
-      "pillar": "smart",
-      "hook_sig": "most teams reach for distributed locks the moment",
-      "texts": [
-        "Most teams reach for distributed locks the moment they see duplicate job risk. The lock becomes a single point of contention, a latency tax on every worker, and a new failure mode when the lock service blips. The operational reality: locks fail open or fail closed, both burn you.",
-        "The contrarian move: design the handler so a duplicate execution is harmless. Idempotency keys on the job payload, deterministic side effects, exactly-once semantics built into the business logic not the infrastructure. A duplicate charge is a bug. A duplicate idempotent write is a non-event.",
-        "This shifts the tradeoff. You pay once at write time: a unique constraint, a deduplication table, a natural key that survives retries. You save forever on coordination overhead, lock latency, and the 3am page when the lock manager dies. The handler becomes re-runnable by default, which is what you actually need for reliability.",
-        "Teams draw the line at \"too hard to make idempotent.\" Email sends, third-party webhooks, legacy APIs without idempotency keys. That is where the lock debate actually lives. Not on every job. Not on the happy path. Only on the irreducible external side effect you cannot deduplicate.",
-        "Where does your team draw the line? Which job types force you to reach for a lock instead of an idempotency key?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A precise backend tradeoff with a useful principle and a specific comment prompt will outperform another broad debate hook.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 13234,
-      "ids": [
-        "18355972954216813",
-        "17996053539021086",
-        "17900110434391719",
-        "18190990669404425",
-        "18151715572594533",
-        "17963705475228723"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T04:01:17.068925+00:00",
       "pillar": "smart",
@@ -1256,6 +1229,31 @@
         "18146471041540305"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T08:31:07.007558+00:00",
+      "pillar": "smart",
+      "hook_sig": "things hiring managers can't tell from your resume",
+      "texts": [
+        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
+        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
+        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
+        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete NULL failure and verified fix will earn more specific engineer replies than another AI-review debate.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 409,
+      "ids": [
+        "18132590603503772",
+        "18046539314820629",
+        "18030473657884281",
+        "17906705319657027",
+        "18080448692527661"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1263,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 402
+  "last_views": 409
 }
