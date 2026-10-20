@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Confession-format production story on JSONB misuse (new topic, proven statement/contrarian pillar) will outperform AI-review debate threads by earning replies from engineers who've lived this pain, citing P23-P30 underperformance on AI topic and P402 UUIDv4 story success.",
-  "pivots": 324,
+  "hypothesis": "A specific, useful SQL production confession will draw more engineer replies than another AI-review debate thread.",
+  "pivots": 325,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T01:30:59.849807+00:00",
-      "pillar": "smart",
-      "hook_sig": "most engineers treat ai coding assistants as autocomplete",
-      "texts": [
-        "Most engineers treat AI coding assistants as autocomplete on steroids. They are wrong. The real shift is not faster typing, it is moving the bottleneck from syntax to architecture. If you still review PRs line by line you are already behind.",
-        "I watched a senior engineer spend forty minutes arguing about a variable name while the AI had already generated the correct abstraction layer, the tests, and the migration script. The human ego fought the tool instead of directing it. That is the new junior mistake.",
-        "The teams shipping fastest right now do not write code. They write specs, constraints, and acceptance criteria. They let the model fill the implementation, then they stress test the edges. The skill that matters is taste, not keystrokes.",
-        "Stop asking if the code compiles. Start asking if the design survives a requirement change next week. The AI will give you five implementations in the time you debate one. Your job is to pick the one that does not rot.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Debate hot take on AI-assisted engineering (format #5) targets high-reply engagement from both skeptics and adopters, citing P30's 32.1/h velocity proof that contrarian career posts outperform tactical threads and P27's 22.0/h showing payment failure stories drive replies.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 12976,
-      "ids": [
-        "17892170238616266",
-        "18147983020495509",
-        "18461861314186583",
-        "18114035909037603",
-        "17920551027445226"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T02:01:11.976801+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,31 @@
         "17897204190611328"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T06:27:22.506077+00:00",
+      "pillar": "smart",
+      "hook_sig": "i treated jsonb as a schema escape hatch.",
+      "texts": [
+        "I treated JSONB as a schema escape hatch. Three months later the migration took two weeks of downtime and cost us a major client renewal.",
+        "The feature flag system stored every rule as a JSONB blob. Flexible, fast to ship, zero migrations. Until marketing needed to query \"all users who saw variant B in the last 30 days across ten thousand flags.\"",
+        "A simple SELECT became a full-table scan with jsonb_path_exists on every row. Indexes couldn't help because the keys lived inside the blob. The query timed out. The dashboard froze. The client saw a blank screen during their board meeting.",
+        "We extracted the queryable fields into real columns, added partial indexes, and rewrote the access layer. The same query now returns in 40ms. The JSONB column stays for the truly unstructured payloads, but never again for data we need to filter.",
+        "What is the most expensive JSONB shortcut you have shipped and had to unwind?\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific, useful SQL production confession will draw more engineer replies than another AI-review debate thread.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 6132,
+      "ids": [
+        "18500467582096755",
+        "17905881723350626",
+        "18100652027561426",
+        "18016667402747616",
+        "18097848932435454"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 6127
+  "last_views": 6132
 }
