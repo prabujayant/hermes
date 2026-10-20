@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Debate hot take on AI vs senior judgment (format #5) taps a live controversy with high reply potential, pivots off the UUID/infra losing streak, and targets the career pillar where caps-listicles proved 481-893 view ceilings.",
-  "pivots": 312,
+  "hypothesis": "Pivot from debate hot take (format #5) to contrarian lessons (format #4) on AI-era senior skills \u2014 proven 516k views for Notion co-founder, matches our career pillar where caps-listicles hit 481-893 views, cites P23-P30 infrastructure streak as the losing topic family to exit.",
+  "pivots": 313,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T15:31:01.939553+00:00",
-      "pillar": "smart",
-      "hook_sig": "most engineers think idempotency keys solve payment races.",
-      "texts": [
-        "Most engineers think idempotency keys solve payment races. They don't, not when the network partitions between your service and the payment gateway.",
-        "The common advice: generate a UUID, send it as Idempotency-Key, retry on 5xx. The gateway deduplicates, you're safe. That works until the gateway accepts the charge but the ACK never makes it back to you.",
-        "Your service times out, retries with the same key. The gateway sees a duplicate and returns the original success. But your local transaction already rolled back. Now the customer is charged, your order row shows failed, and reconciliation finds a mismatch three days later.",
-        "The invariant that actually works: persist the gateway's response before you acknowledge the customer. Write the charge_id, status, and raw response to an append-only ledger in the same transaction that marks the order paid. If the ledger row exists, the charge is final. No ledger row, no charge.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A contrarian lesson on a specific payment race with a concrete invariant will outperform general AI failure stories by targeting backend engineers who own billing flows and crave battle-tested patterns.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 10892,
-      "ids": [
-        "18131354449795104",
-        "18423269470157220",
-        "18021149909948892",
-        "18093070061675984",
-        "18032960930883409"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T16:01:18.409187+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "18009827642978414"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T00:31:02.304472+00:00",
+      "pillar": "smart",
+      "hook_sig": "most \"senior engineer\" advice assumes you write code.",
+      "texts": [
+        "Most \"senior engineer\" advice assumes you write code. In 2025 the leverage moved to reviewing, steering, and killing bad AI suggestions before they ship. The title didn't change. The job did.",
+        "I watched a staff engineer approve a PR that added a distributed cache for a feature flag toggle. The AI suggested it. He merged it. The cache invalidation bug took three days to unwind. He wrote zero lines. He failed the review.",
+        "Lesson 1: If you cannot explain the failure mode of an AI-generated abstraction in thirty seconds, you are not reviewing. You are rubber-stamping. Start treating every AI suggestion as a junior dev PR you must dissect.",
+        "Lesson 2: The highest-leverage skill is now prompt architecture, constraining the model so it proposes boring, reversible code. Stop asking for \"best practices.\" Ask for \"the simplest thing that passes the test and reverts cleanly.\"",
+        "Lesson 3: Your calendar should have more \"AI output review\" blocks than \"coding\" blocks. If it doesn't, you are optimizing the wrong loop. The follow CTA: Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Pivot from debate hot take (format #5) to contrarian lessons (format #4) on AI-era senior skills \u2014 proven 516k views for Notion co-founder, matches our career pillar where caps-listicles hit 481-893 views, cites P23-P30 infrastructure streak as the losing topic family to exit.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 6032,
+      "ids": [
+        "18026065388870430",
+        "18142994269609939",
+        "18069414965780712",
+        "18098346476543562",
+        "17903461503656381"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 6031
+  "last_views": 6032
 }
