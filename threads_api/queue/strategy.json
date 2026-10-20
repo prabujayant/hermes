@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete, honest decision rule on UUIDv7 versus bigint can earn replies from engineers with real migration experience and outperform broad infrastructure hot takes.",
-  "pivots": 311,
+  "hypothesis": "Debate hot take on AI vs senior judgment (format #5) taps a live controversy with high reply potential, pivots off the UUID/infra losing streak, and targets the career pillar where caps-listicles proved 481-893 view ceilings.",
+  "pivots": 312,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T15:01:13.618426+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to pass system design interviews,",
-      "texts": [
-        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
-        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
-        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
-        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific payment race plus the invariant that prevents it will earn more engineer replies and saves than a general AI-code failure",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 10624,
-      "ids": [
-        "18136907422629248",
-        "17937607065382952",
-        "18129677620859561",
-        "18149159863483499",
-        "17906122956570485"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T15:31:01.939553+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "18154106506567140"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T00:01:18.859870+00:00",
+      "pillar": "smart",
+      "hook_sig": "ai coding assistants don't make you a senior",
+      "texts": [
+        "AI coding assistants don't make you a senior engineer. They make you a faster junior. Change my mind.",
+        "The senior leap isn't syntax speed. It's judgment: knowing what not to build, spotting the design that survives load, owning the failure domain. Copilot writes the happy path. You still own the 2am page.",
+        "I've seen devs ship 3x features with Cursor but still panic when the database locks up. The tool didn't teach them backpressure, idempotency, or how to say no to a bad req. Those reps only come from scars.",
+        "The market pays for reliability judgment, not keystroke velocity. If your interview prep is \"prompt engineering,\" you're optimizing the wrong variable. What's the last production incident you debugged without AI?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Debate hot take on AI vs senior judgment (format #5) taps a live controversy with high reply potential, pivots off the UUID/infra losing streak, and targets the career pillar where caps-listicles proved 481-893 view ceilings.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 6031,
+      "ids": [
+        "17883545805528430",
+        "18116984005824597",
+        "17929048137182423",
+        "18390380857161713",
+        "18009827642978414"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 6014
+  "last_views": 6031
 }
