@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Switching from caps-listicle to statement format (proven winner type) with a concrete production story will outperform generic AI debates by earning replies from leads who've shipped AI bugs, citing P27-P30 underperformance on",
-  "pivots": 323,
+  "hypothesis": "Confession-format production story on JSONB misuse (new topic, proven statement/contrarian pillar) will outperform AI-review debate threads by earning replies from engineers who've lived this pain, citing P23-P30 underperformance on AI topic and P402 UUIDv4 story success.",
+  "pivots": 324,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T01:01:12.829676+00:00",
-      "pillar": "smart",
-      "hook_sig": "senior engineers who lean on ai coding assistants",
-      "texts": [
-        "Senior engineers who lean on AI coding assistants for production logic are building technical debt they cannot explain. The model does not own the on-call rotation, you do.",
-        "Last quarter our team reverted three features written with heavy AI assist. Each passed review, each passed tests, each failed under load in ways the author could not debug because they never wrote the critical path.",
-        "The pattern is always the same: the assistant suggests a plausible abstraction, the engineer accepts it, the abstraction leaks at scale, and the engineer lacks the mental model to fix it without a rewrite.",
-        "If you cannot whiteboard the data flow, the failure modes, and the rollback plan without the chat window open, you are not engineering, you are transcribing. Change my mind.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Debate hot take on AI-assisted engineering will trigger high-reply engagement from both sides, driving algorithmic reach beyond the median 3.8 views/h, citing P30's 32.1/h as proof that contrarian career posts outperform tactical threads.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 12880,
-      "ids": [
-        "18110622296183350",
-        "17956989573256480",
-        "18107830784247133",
-        "18113206070162081",
-        "18372403831245082"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T01:30:59.849807+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,31 @@
         "17923225425224794"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T05:57:56.889038+00:00",
+      "pillar": "smart",
+      "hook_sig": "i shipped a feature flag system backed by",
+      "texts": [
+        "I shipped a feature flag system backed by a single JSONB column in Postgres. Three months later that column was 40 percent of our database size and every deploy locked the table for minutes.",
+        "The flags table had 12 million rows. Each row stored the full flag config as JSONB because \"it's flexible.\" No indexes on the flag keys inside the blob. No partitioning. Just a growing heap of text that the planner had to scan for every lookup.",
+        "At peak traffic a simple flag check took 800 milliseconds. The fix wasn't rewriting the flag service. It was extracting the hot keys into real columns, adding a partial index on the active flags, and moving the archive flags to a separate table. Lookup dropped to 2 milliseconds.",
+        "Flexible schema is a prototype tool. In production it becomes a performance trap you pay for with every query. Model the access pattern first. Add JSONB only for the truly dynamic tail.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Confession-format production story on JSONB misuse (new topic, proven statement/contrarian pillar) will outperform AI-review debate threads by earning replies from engineers who've lived this pain, citing P23-P30 underperformance on AI topic and P402 UUIDv4 story success.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 6127,
+      "ids": [
+        "18113874992465894",
+        "18087657314698949",
+        "18478060588118811",
+        "18055341323588265",
+        "17897204190611328"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 6125
+  "last_views": 6127
 }
