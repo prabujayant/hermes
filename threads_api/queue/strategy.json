@@ -1,33 +1,8 @@
 {
   "hypothesis": "Pivot from debate hot take (format #5) to contrarian lessons (format #4) on AI-era senior skills \u2014 proven 516k views for Notion co-founder, matches our career pillar where caps-listicles hit 481-893 views, cites P23-P30 infrastructure streak as the losing topic family to exit.",
-  "pivots": 314,
+  "pivots": 315,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T16:31:04.022730+00:00",
-      "pillar": "smart",
-      "hook_sig": "we shipped a retry wrapper on the payments",
-      "texts": [
-        "We shipped a retry wrapper on the payments service that retried on every gateway timeout. The model wrote clean code, unit tests passed, and we called it done. Three hours later an $847 charge hit a customer twice, 27 hours apart. The logs showed two successful POSTs with different request IDs.",
-        "The retry loop generated a fresh idempotency key on every attempt. Gateway saw two distinct keys, processed both, and we had no invariant to catch it. The race window was not network latency, it was the 27-hour gap between the original timeout and the scheduled retry job picking it up.",
-        "Invariant that would have prevented it: every retry attempt for a given logical payment must present the same idempotency key to the gateway. Not a new key, not a derived key, the exact key the client sent on the first try. Store it on the payment row, read it on retry, fail fast if missing.",
-        "We added a unique constraint on (payment_id, idempotency_key) at the gateway integration layer and a pre-retry assertion that the stored key matches the original. Duplicate charges dropped to zero. The test is now a single line: assert retry_call.idempotency_key == original_call.idempotency_key.",
-        "What invariant do you enforce on your payment retries to guarantee exactly-once charging? Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete payment race paired with a testable invariant will earn more saves and specific backend-engineer replies than general AI failure stories.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 11265,
-      "ids": [
-        "18186564628412109",
-        "18127585639889252",
-        "17971555032170634",
-        "18114677210518970",
-        "17916538278460834"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T17:01:12.923215+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "17913609969541297"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T01:31:02.989850+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want behavioral rounds to remember you,",
+      "texts": [
+        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
+        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
+        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
+        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Pivot from debate hot take (format #5) to contrarian lessons (format #4) on AI-era senior skills \u2014 proven 516k views for Notion co-founder, matches our career pillar where caps-listicles hit 481-893 views, cites P23-P30 infrastructure streak as the losing topic family to exit.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 6052,
+      "ids": [
+        "18117305009074540",
+        "18031901837889311",
+        "18106018649209813",
+        "18108876428218480",
+        "18096450734406925"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 6045
+  "last_views": 6052
 }
