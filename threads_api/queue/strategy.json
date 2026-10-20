@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific AI-code review gate will earn more useful replies than a broad debate about code quality.",
-  "pivots": 321,
+  "hypothesis": "A contrarian lesson on a specific AI-code review gate (design note requirement) will outperform broad AI quality debates by earning concrete replies from leads who have felt this pain, citing P27-P28 underperformance on generic takes.",
+  "pivots": 322,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T00:01:15.605389+00:00",
-      "pillar": "smart",
-      "hook_sig": "most teams pick a connection pool number from",
-      "texts": [
-        "Most teams pick a connection pool number from a blog post or a default config. The database does not care about your config. It cares about active sessions, buffer memory, and lock contention. A larger pool often means more queueing, not more throughput.",
-        "The symptom looks like latency spikes under load. You add connections. Latency gets worse. The real limit is usually CPU cores or disk IOPS on the primary. Each extra connection consumes a private buffer and a process slot. Past the saturation point you trade throughput for context switches.",
-        "Measure before you size. Run a controlled ramp test: fix the pool at a low number, drive load until p99 latency doubles, record the active session count at that knee. That number is your ceiling. Size the pool at 70 to 80 percent of the knee with headroom for maintenance tasks.",
-        "If you cannot run a ramp test, start with a pool equal to CPU cores times two for OLTP. Watch pg_stat_activity or performance_schema for wait events. If you see \"ClientRead\" or \"lock wait\" dominating, the pool is too large. Cut it until the waits drop.",
-        "What pool size are you running and what signal told you it was right? Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A precise correction with actionable diagnostics will earn more useful replies than a blanket pool-size claim.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 12791,
-      "ids": [
-        "17974915779171728",
-        "18385956013233225",
-        "17978131665132502",
-        "18120062567066455",
-        "18632707516044694"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T00:31:02.292531+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,31 @@
         "18156891721517690"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T05:01:15.748280+00:00",
+      "pillar": "smart",
+      "hook_sig": "i stopped reviewing ai-generated code line by line.",
+      "texts": [
+        "I stopped reviewing AI-generated code line by line. It wastes hours and teaches nothing. The gate that actually works: require the author to explain the change in their own words, then run the tests they wrote. If they cannot explain it, the PR waits. No exceptions.",
+        "Last month a junior opened a PR with a clean refactor. Tests passed. I asked what the retry logic actually handles. They said \"the AI added it.\" We dug in. The retry wrapped a non-idempotent payment call. The AI hallucinated safety. The bug would have charged customers twice.",
+        "The rule is simple. Every AI-assisted PR must include a one-paragraph design note from the human. What changed, why, and what could break. No design note, no review. This shifts the burden back to the engineer where it belongs. The model writes. The engineer owns.",
+        "Since enforcing this, our revert rate dropped forty percent. Review time per PR dropped thirty percent. Juniors level up faster because they must understand what they ship. The AI stays a tool. The engineer stays the decision maker.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A contrarian lesson on a specific AI-code review gate (design note requirement) will outperform broad AI quality debates by earning concrete replies from leads who have felt this pain, citing P27-P28 underperformance on generic takes.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 6122,
+      "ids": [
+        "18219580402345995",
+        "17944474293366531",
+        "18146537320604697",
+        "18116766329080115",
+        "18126842695893655"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 6105
+  "last_views": 6122
 }
