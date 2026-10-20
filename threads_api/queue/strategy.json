@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A debate hot take on AI code merge standards will generate more replies than the UUID/Kubernetes threads (P23-P30) by targeting a daily pain point every engineer faces.",
-  "pivots": 318,
+  "hypothesis": "A clear AI-code review standard will earn more replies than a generic debate because engineers can share the checks they require before approving a diff.",
+  "pivots": 319,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T18:31:05.483829+00:00",
-      "pillar": "smart",
-      "hook_sig": "stop setting your database connection pool to 100",
-      "texts": [
-        "Stop setting your database connection pool to 100 because \"more connections equal more throughput.\" That is the single biggest lie in backend tuning. Most OLTP workloads peak at 8 to 16 active connections. The rest sit idle holding locks and bloating memory.",
-        "We ran a payments service on Postgres with a pool of 100. P99 latency was 1.2 seconds. Dropped the pool to 12, added a small queue, and P99 fell to 45 milliseconds. The database stopped thrashing on context switches. Throughput doubled because transactions actually committed instead of waiting on lock queues.",
-        "The rule: size your pool to CPU cores times two, plus a tiny buffer for headroom. If you need more concurrency, fix the query, add an index, or shard. A big pool is a band aid that hides the real problem and makes incidents harder to debug.",
-        "Your pool of 50 on a 4 core box is not \"safe.\" It is a latency bomb. Prove me wrong: show me a production workload where 50 idle connections beat 12 with a queue.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A blunt debate hook on connection pooling (Format 5) with concrete before/after numbers will outpace the caps-listicle median (3.9/h) by triggering reply-driven reach, citing P2",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 12204,
-      "ids": [
-        "17951377992302127",
-        "17962863249238191",
-        "18093510608447400",
-        "18095230916426448",
-        "18107510041963722"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T19:01:12.862564+00:00",
       "pillar": "smart",
@@ -1254,6 +1229,31 @@
         "17972942790160973"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T03:31:04.769181+00:00",
+      "pillar": "smart",
+      "hook_sig": "ai-written code should meet the same merge bar",
+      "texts": [
+        "AI-written code should meet the same merge bar as human code but reviewers must demand evidence for every assumption the model made. No more accepting \"the tests pass\" as proof of correctness.",
+        "The rule: every AI-generated PR must include a decision log. Not comments. A short markdown block listing the architectural choices the model picked, the alternatives it rejected, and why. Reviewers reject the PR if the log is missing or vague.",
+        "Example from last week. Model added a Redis cache layer for a read-heavy endpoint. Decision log showed it considered in-memory cache, rejected it due to multi-instance invalidation complexity, chose Redis with TTL based on p99 latency targets. Review took ten minutes. Approved.",
+        "Same endpoint, different PR. Model swapped the ORM query for raw SQL. No decision log. Reviewer asked why. Author said \"it was faster.\" Benchmark showed two percent gain on cold cache, zero on warm. PR rejected. The model optimized the wrong thing because no one forced it to show its work.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A clear AI-code review standard will earn more replies than a generic debate because engineers can share the checks they require before approving a diff.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 6090,
+      "ids": [
+        "18102232202649941",
+        "18100001060552567",
+        "17999940719820555",
+        "18101488874635881",
+        "17881935924629235"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1263,5 +1263,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 6077
+  "last_views": 6090
 }
