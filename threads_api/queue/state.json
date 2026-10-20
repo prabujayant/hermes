@@ -436,7 +436,8 @@
     "most \"senior engineer\" advice assumes you write code.",
     "if you want to pass system design interviews,",
     "if you want behavioral rounds to remember you,",
-    "ai wrote the patch. the tests pass. ci"
+    "ai wrote the patch. the tests pass. ci",
+    "review dilemma: ai-generated patch passes tests but changes"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete AI-era engineering judgment scenario will earn more useful replies than infrastructure hot takes.",
-  "pivots": 316,
+  "hypothesis": "A specific merge decision will draw more useful replies than broad claims about AI coding",
+  "pivots": 317,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T17:29:31.467090+00:00",
-      "pillar": "smart",
-      "hook_sig": "a payment request hit our gateway. the network",
-      "texts": [
-        "A payment request hit our gateway. The network hiccuped for 2.3 seconds. Our client saw a timeout and threw. The logs showed the request never left our server. We retried. The customer got charged twice. The first request had actually committed. The timeout was a lie.",
-        "The gateway had already processed the charge. Our database had the transaction row. But the response never made it back through the load balancer. Our retry wrapper saw a 504 and blindly re-sent. No idempotency key. No deduplication. Just a second POST that looked identical to the first. The ledger now had two rows for one purchase.",
-        "This is the ambiguous timeout trap. You cannot distinguish \"request failed before commit\" from \"request succeeded but response died.\" Retrying without an invariant assumes the former. Production proves the latter happens often enough to drain accounts. The only safe move is making every retry carry proof it is the same logical operation.",
-        "The invariant: every mutating call must carry a client-generated idempotency key the server stores and checks before any side effect. On timeout you retry with the same key. The server sees the key, finds the completed row, returns the original result. No double charge. No manual reconciliation. What retry rule does your team enforce for ambiguous timeouts?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific post-commit timeout sequence plus a clear idempotency invariant will earn more saves and useful backend replies than broad retry advice.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 11588,
-      "ids": [
-        "18077813420546734",
-        "18626977459027255",
-        "18152317651580762",
-        "18015733556956902",
-        "18341542612262453"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T18:01:19.128248+00:00",
       "pillar": "smart",
@@ -1254,6 +1229,31 @@
         "18082061939713444"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T02:31:06.284218+00:00",
+      "pillar": "smart",
+      "hook_sig": "review dilemma: ai-generated patch passes tests but changes",
+      "texts": [
+        "review dilemma: AI-generated patch passes tests but changes error handling; what would make you block the merge?",
+        "the PR looks clean. green CI. the AI replaced a try-catch that logged and re-threw with a custom error class that wraps the original. semantically equivalent on paper. but the new class strips the stack trace in production unless you configure the serializer exactly right.",
+        "senior engineer flagged it in review. not because it fails. because the error-handling contract changed without a migration plan. downstream services expect the old error shape in their catch blocks. the AI didn't know that. the tests didn't catch it because they mock the error boundary.",
+        "my rule: if an AI patch touches error handling, logging, retries, or timeouts, it needs a human who has been on call for that service. passing tests is table stakes. the merge decision is about blast radius, not correctness.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A specific merge decision will draw more useful replies than broad claims about AI coding",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 6067,
+      "ids": [
+        "18174272056409913",
+        "18021030194939436",
+        "17914528002530739",
+        "18091074257239319",
+        "18112173554272903"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1263,5 +1263,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 6064
+  "last_views": 6067
 }
