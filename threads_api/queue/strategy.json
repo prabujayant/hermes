@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete NULL failure and verified fix will earn more specific engineer replies than another AI-review debate.",
-  "pivots": 329,
+  "hypothesis": "A minimal, verified NULL failure with a safer alternative will earn more specific engineer replies than another AI-review debate.",
+  "pivots": 330,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T04:01:17.068925+00:00",
-      "pillar": "smart",
-      "hook_sig": "a client timeout does not tell you whether",
-      "texts": [
-        "a client timeout does not tell you whether the payment failed. it only tells you the response never arrived. the charge may have succeeded, the gateway may have crashed, the network may have eaten the ack. treating timeout as failure causes duplicate charges. treating timeout as success causes lost revenue. the only safe move is retry with the same idempotency key.",
-        "we saw this in production last quarter. payment request hits stripe. charge succeeds. network drops the 200 response. our client sees a timeout after 30 seconds. the retry logic kicks in but generates a fresh idempotency key because the key lived in the request scope. stripe honors both. customer gets charged twice. refund flow triggers. support ticket spikes. trust erodes.",
-        "the fix was moving idempotency key generation outside the request boundary. generate it when the order is created, store it with the order record, pass the same key on every retry. now a timeout triggers a retry with the identical key. stripe deduplicates. exactly one charge posts. the principle: idempotency keys must survive process restarts, deployments, and client retries. they belong in durable storage, not memory.",
-        "most teams put the key in a header or request body generated at call time. that works for read retries. for payments it fails because the client cannot distinguish timeout from failure. where does your idempotency key live, and can it survive a client crash between the first attempt and the retry?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A precise failure-mode lesson with an actionable invariant and a targeted comment prompt will beat broad backend debate hooks.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 13244,
-      "ids": [
-        "17964493929216770",
-        "18222503101341872",
-        "17994992432842202",
-        "18118581460992368",
-        "18647628970016021"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T04:31:01.395040+00:00",
       "pillar": "smart",
@@ -1254,6 +1229,31 @@
         "18080448692527661"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T09:01:20.105024+00:00",
+      "pillar": "smart",
+      "hook_sig": "i spent three hours debugging a missing-row mystery",
+      "texts": [
+        "I spent three hours debugging a missing-row mystery only to find a single NULL in a lookup table. NOT IN returns zero rows when the subquery has NULL. Here is the smallest repro that bit me.",
+        "create table orders (id int, status text);\ncreate table cancelled (order_id int);\ninsert into orders values (1,'open'),(2,'shipped');\ninsert into cancelled values (1), (NULL);\nselect * from orders where id not in (select order_id from cancelled);\n-- returns nothing, not the shipped row",
+        "The ANSI spec says NOT IN (NULL) evaluates to UNKNOWN, so every row filters out. Most engineers expect the opposite. The fix is not a workaround, it is the correct operator.",
+        "select * from orders o where not exists (select 1 from cancelled c where c.order_id = o.id);\n-- returns the shipped row as intended\nNOT EXISTS is null-safe by design. Works the same in Postgres, MySQL, SQL Server, Oracle.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A minimal, verified NULL failure with a safer alternative will earn more specific engineer replies than another AI-review debate.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 412,
+      "ids": [
+        "18208643995371984",
+        "18236275732319164",
+        "18039097043844992",
+        "18487434292128781",
+        "18642410638035635"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1263,5 +1263,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 409
+  "last_views": 412
 }
