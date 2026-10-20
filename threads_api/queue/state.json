@@ -446,7 +446,8 @@
     "the biggest ai code review failure isn't bad",
     "i shipped a feature flag system backed by",
     "i treated jsonb as a schema escape hatch.",
-    "silent failure warning: one null in a not"
+    "silent failure warning: one null in a not",
+    "silent data bug: one null in a not"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

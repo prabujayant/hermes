@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A precise SQL footgun with its fix will earn more engineer replies than another AI-review debate;",
-  "pivots": 326,
+  "hypothesis": "A precise NOT IN/NULL example with a NOT EXISTS fix will earn more specific engineer replies than another AI-review debate.",
+  "pivots": 327,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T02:31:09.564176+00:00",
-      "pillar": "smart",
-      "hook_sig": "i shipped a feature last week using an",
-      "texts": [
-        "I shipped a feature last week using an AI assistant. The prompting took 20 minutes. The review took three hours. I caught a race condition the model missed, a migration it generated backward, and a test that passed but asserted the wrong thing. The code looked clean. The logic was wrong.",
-        "Most engineers blame prompting when AI slows them down. They tweak system prompts, swap models, add context files. The real bottleneck is usually review. The model writes plausible code faster than you can verify it. Every minute saved prompting costs ten in review if you don't have a filter.",
-        "My diagnostic: track where time goes for five AI-assisted tasks. Log minutes spent prompting, minutes reviewing, minutes fixing bugs the model introduced, minutes rewriting because the task was underspecified. The column with the highest total is your bottleneck. Mine was review by 4x.",
-        "Run the audit this week. Three questions: which stage ate the most time, what specific failure mode repeated, and what guardrail would have caught it earlier. Reply with your biggest bottleneck, review, rework, or unclear tasks, and I'll share the guardrail that cut my review time in half.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific AI-coding bottleneck diagnostic will earn more qualified replies than a general workflow question",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 13173,
-      "ids": [
-        "18097616975417422",
-        "18092310278679424",
-        "17922082128442458",
-        "18174982426456120",
-        "17879791875632084"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T03:01:15.217473+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,31 @@
         "18143927125517801"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T07:31:03.339508+00:00",
+      "pillar": "smart",
+      "hook_sig": "silent data bug: one null in a not",
+      "texts": [
+        "silent data bug: one NULL in a NOT IN subquery can make your filter return no rows",
+        "the query looks correct. you write where id not in (select user_id from banned_users). the subquery returns 1, 2, null. suddenly zero rows match. not because of logic. because null makes the whole predicate unknown, and unknown filters out.",
+        "this burned me on a billing job. we excluded test accounts with not in (select id from test_accounts). a migration left one row with id null. the job silently processed nothing for three days. no error. no alert. just missing revenue.",
+        "the fix is not in (select id from test_accounts where id is not null). or switch to not exists which ignores nulls by design. or add a check constraint so the column can never be null. pick one. never trust not in on a nullable column.",
+        "what is the weirdest silent data bug you have shipped? Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A precise NOT IN/NULL example with a NOT EXISTS fix will earn more specific engineer replies than another AI-review debate.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 394,
+      "ids": [
+        "17883663717529161",
+        "17959394193015319",
+        "17912912658511401",
+        "17877454053574083",
+        "18096118469149792"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 389
+  "last_views": 394
 }
