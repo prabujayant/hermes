@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A minimal, verified NULL failure with a safer alternative will earn more specific engineer replies than another AI-review debate.",
-  "pivots": 331,
+  "hypothesis": "Switching from AI review debate to a concrete NULL failure story using Matt Pocock's pain-concept-fix format will beat the 1-10 view streak (P23-P30) because all-time winners on SQL schema (481, 402 views) prove this pillar converts.",
+  "pivots": 332,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T05:01:14.414080+00:00",
-      "pillar": "smart",
-      "hook_sig": "most teams treat retries as free safety. they",
-      "texts": [
-        "Most teams treat retries as free safety. They are not. A timeout does not mean the write failed. It means the client does not know. Retrying blindly turns a blip into duplicate charges, double bookings, or corrupted state.",
-        "The payment request hit our gateway. The charge succeeded. The network hiccuped on the response. Our client saw a timeout and retried. The gateway charged again. No idempotency key. Two receipts. One angry customer. The on-call rotation owned that cleanup for weeks.",
-        "Adding a retry policy with exponential backoff feels responsible. It is not. Without a durable idempotency key scoped to the business operation, backoff only spaces out the duplicates. The database still sees two independent inserts. The bug compounds silently until reconciliation screams.",
-        "The invariant that makes retries safe: exactly one commit per idempotency key, enforced at the database with a unique constraint. Generate the key once per user action. Store it before the external call. Reject duplicates on insert. The gateway, the queue, the worker all honor the same key. No second write can commit.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A precise retry failure lesson with an actionable idempotency invariant and a targeted comment prompt will earn more saves and replies than broad backend debate hooks.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 13256,
-      "ids": [
-        "18116514071077101",
-        "18588085204070024",
-        "18110149301233566",
-        "17914589934510797",
-        "17866359783675380"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T05:31:01.007087+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18131372368866131",
         "17913227256472544",
         "17987355000108874"
+      ],
+      "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T10:01:17.579647+00:00",
+      "pillar": "smart",
+      "hook_sig": "i spent six hours chasing a ghost bug",
+      "texts": [
+        "I spent six hours chasing a ghost bug where `WHERE status != 'cancelled'` silently dropped 40 percent of rows. The culprit was NULL hiding in plain sight.",
+        "NULL is not a value, it is the absence of one. Any comparison with NULL yields UNKNOWN, not TRUE or FALSE. So `status != 'cancelled'` evaluates to UNKNOWN for NULL rows and they vanish from the result set.",
+        "The fix is explicit: `WHERE status != 'cancelled' OR status IS NULL`. Or better, make the column `NOT NULL DEFAULT 'active'` so the domain is closed and the optimizer can use indexes cleanly.",
+        "I now treat nullable boolean or status columns as a schema smell. If a column has three states, model it as an enum or a tinyint with a check constraint. NULL becomes a design decision, not an accident.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Switching from AI review debate to a concrete NULL failure story using Matt Pocock's pain-concept-fix format will beat the 1-10 view streak (P23-P30) because all-time winners on SQL schema (481, 402 views) prove this pillar converts.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 417,
+      "ids": [
+        "17888270334485146",
+        "18120682297979788",
+        "18134933444505645",
+        "18120153983321402",
+        "18414685711081856"
       ],
       "pivoted": true
     }
