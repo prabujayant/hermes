@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A contrarian lesson on a specific AI-code review gate (design note requirement) will outperform broad AI quality debates by earning concrete replies from leads who have felt this pain, citing P27-P28 underperformance on generic takes.",
-  "pivots": 322,
+  "hypothesis": "Switching from caps-listicle to statement format (proven winner type) with a concrete production story will outperform generic AI debates by earning replies from leads who've shipped AI bugs, citing P27-P30 underperformance on",
+  "pivots": 323,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T00:31:02.292531+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "texts": [
-        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
-        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
-        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
-        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A precise correction with actionable diagnostics will earn more useful replies than a blanket pool-size claim.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 12846,
-      "ids": [
-        "18142805914520478",
-        "18099749783083044",
-        "18131155444778476",
-        "17906796783595900",
-        "18638291155043070"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T01:01:12.829676+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,31 @@
         "18126842695893655"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T05:31:03.736270+00:00",
+      "pillar": "smart",
+      "hook_sig": "the biggest ai code review failure isn't bad",
+      "texts": [
+        "The biggest AI code review failure isn't bad logic, it's approving code you cannot explain to a junior engineer at 3am when the pager fires. If you don't understand the why, you don't own the change.",
+        "Last month a senior on my team approved an AI-written retry wrapper. Tests passed, CI green, looked clean. Production melted down because the AI silently swallowed 5xx errors and retried forever, no backoff, no circuit breaker, no alerting. The senior had never seen that pattern fail.",
+        "AI generates code that compiles and passes tests. It does not generate code that fails gracefully. The review gate that matters is not \"does this work\" but \"how does this behave when the network lies, the disk fills, or the dependency vanishes.\"",
+        "New rule on my team: every AI-generated PR must include a failure-mode comment written by the human. Three scenarios where this breaks and what the operator sees. No comment, no merge. Review time dropped, incident rate dropped more.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Switching from caps-listicle to statement format (proven winner type) with a concrete production story will outperform generic AI debates by earning replies from leads who've shipped AI bugs, citing P27-P30 underperformance on",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 6125,
+      "ids": [
+        "18118190914996448",
+        "18110561354063475",
+        "17931702894419904",
+        "18052398221807385",
+        "17923225425224794"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 6122
+  "last_views": 6125
 }
