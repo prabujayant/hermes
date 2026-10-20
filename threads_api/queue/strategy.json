@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A clear AI-code review standard will earn more replies than a generic debate because engineers can share the checks they require before approving a diff.",
-  "pivots": 319,
+  "hypothesis": "A concise, usable review gate will draw more specific replies than a generic debate about AI code quality.",
+  "pivots": 320,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T19:01:12.862564+00:00",
-      "pillar": "smart",
-      "hook_sig": "your connection pool of 100 is choking the",
-      "texts": [
-        "Your connection pool of 100 is choking the database. Cut it to 12 and throughput doubles. The math is simple: each connection holds a buffer, each buffer eats RAM, and context switching burns CPU. Most teams size pools by gut feel, not Little's Law.",
-        "We ran a payments service at 5k RPS with a pool of 100. P99 latency sat at 1.2s. Dropped it to 12, added a retry queue, and P99 fell to 180ms. The database went from 90% CPU wait to 40%. Zero code changes, one config line.",
-        "The formula is not max_connections. It is (core_count * 2) + effective_spindle_count. For Aurora Postgres on db.r6g.xlarge that is 12. For RDS on i3.2xlarge it is 16. Every connection above that number is negative throughput.",
-        "Your ORM defaults lied to you. Hikari defaults to 10. Node pg defaults to 10. Java apps ship with 50. None of them know your hardware. Measure saturation with pg_stat_activity wait_event_type, not application metrics. Change my mind.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Blunt debate hook on connection pooling (Format 5) with concrete before/after numbers will outpace caps-listicle median (3.9/h) by triggering reply-driven reach, citing P26's 96.2/h velocity on a similar contrarian statement.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 12307,
-      "ids": [
-        "18473695906113115",
-        "17923135704225225",
-        "17990528939859623",
-        "18132605800776220",
-        "17913189078492944"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T19:30:59.487920+00:00",
       "pillar": "smart",
@@ -1254,6 +1229,31 @@
         "17881935924629235"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T04:01:11.364116+00:00",
+      "pillar": "smart",
+      "hook_sig": "i keep a sticky note on my monitor",
+      "texts": [
+        "I keep a sticky note on my monitor with three gates. No AI diff gets merged until all three pass.",
+        "Gate 1: Behavior. Run the feature manually with the exact inputs a user would hit. Watch the happy path, then feed it garbage, empty strings, nulls, 10MB payloads. If the AI hallucinated a happy-path-only implementation, it fails here.",
+        "Gate 2: Failure modes. Ask: what happens when the network times out? When the DB locks? When the third-party API returns 500? The AI usually assumes success. Your job is to find every `try` block that swallows exceptions and every missing retry policy.",
+        "Gate 3: Tests. Not \"does it pass the suite.\" Write one test that would have caught the bug the AI *didn't* write. If you can't think of one, you don't understand the change well enough to approve it.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concise, usable review gate will draw more specific replies than a generic debate about AI code quality.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 6096,
+      "ids": [
+        "18577536022078119",
+        "18466512424187336",
+        "18357731341247344",
+        "18118558483785971",
+        "17942215215099951"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1263,5 +1263,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 6090
+  "last_views": 6096
 }
