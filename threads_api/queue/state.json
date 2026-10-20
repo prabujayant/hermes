@@ -450,7 +450,8 @@
     "silent data bug: one null in a not",
     "one null in a not in subquery makes",
     "things hiring managers can't tell from your resume",
-    "i spent three hours debugging a missing-row mystery"
+    "i spent three hours debugging a missing-row mystery",
+    "most database indexing advice assumes 2015 hardware. ssds,"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

@@ -1,33 +1,8 @@
 {
   "hypothesis": "A minimal, verified NULL failure with a safer alternative will earn more specific engineer replies than another AI-review debate.",
-  "pivots": 330,
+  "pivots": 331,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T04:31:01.395040+00:00",
-      "pillar": "smart",
-      "hook_sig": "most ai coding advice assumes the model is",
-      "texts": [
-        "Most AI coding advice assumes the model is a fancy autocomplete. That assumption shipped bugs to production last week. Here is what changed.",
-        "The model does not know your latency budget. It does not know your retry policy. It does not know that the idempotency key lives in Redis with a 24 hour TTL. When you prompt \"write the payment handler,\" it writes happy-path code that passes tests and charges customers twice under network partition. The fix is not better prompts. The fix is treating the model like a junior architect who submits PRs you must review for systemic invariants, not syntax.",
-        "Stop asking the model to generate code from scratch. Ask it to propose three approaches with trade-offs, then you pick one and have it implement only the tricky middle. You keep the architecture decisions. The model fills the boilerplate. This cuts review time in half because the risky logic never leaves your head. The fastest engineers I know never let the model touch the state machine.",
-        "The highest leverage use of AI is not writing code. It is simulating the reviewer who will wake up at 3am. Paste your diff and ask: what fails when the network drops, when the queue backs up, when the clock skews? The model catches race conditions humans miss because it has read every bug report on GitHub. But you must prompt for failure modes, not features.",
-        "Follow @owlsky17 so you don't miss the next"
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A precise failure-mode lesson with an actionable invariant and a targeted comment prompt will beat broad backend debate hooks.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 13249,
-      "ids": [
-        "17866339719677630",
-        "18177576235439845",
-        "18199648024376754",
-        "18100106426645300",
-        "17967342063191952"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T05:01:14.414080+00:00",
       "pillar": "smart",
@@ -1254,6 +1229,27 @@
         "18642410638035635"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T09:31:01.353126+00:00",
+      "pillar": "smart",
+      "hook_sig": "most database indexing advice assumes 2015 hardware. ssds,",
+      "texts": [
+        "Most database indexing advice assumes 2015 hardware. SSDs, parallel vacuum, and covering indexes changed the rules but the tutorials did not update. Here is what actually moves the needle now.",
+        "Lesson one. Stop indexing every foreign key by default. On modern Postgres a covering index on the query filter columns often eliminates the join entirely. I dropped three FK indexes last quarter and write throughput jumped twenty percent with zero plan regressions.",
+        "Lesson two. Partial indexes beat full indexes on high\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A minimal, verified NULL failure with a safer alternative will earn more specific engineer replies than another AI-review debate.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 417,
+      "ids": [
+        "18131372368866131",
+        "17913227256472544",
+        "17987355000108874"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1263,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 412
+  "last_views": 417
 }
