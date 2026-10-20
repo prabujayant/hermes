@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Switching from AI review debate (P23-P30) to Matt Pocock's pain-concept-fix format on a concrete Postgres index failure because SQL schema statement winners (481, 402 views) prove this pillar and format convert.",
-  "pivots": 334,
+  "hypothesis": "Switched format from Matt Pocock pain-concept-fix to Notion co-founder contrarian lessons on Postgres indexing, keeping SQL pillar proven by P1 (481 views) and P2 (402 views).",
+  "pivots": 335,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T06:31:00.205512+00:00",
-      "pillar": "smart",
-      "hook_sig": "a payment gateway returns 200 ok but the",
-      "texts": [
-        "A payment gateway returns 200 OK but the network drops the response before your client sees it. Your retry logic fires. The gateway processes the same charge twice. The customer sees two identical line items on their statement. The bug is not in the gateway. It is in assuming the network is reliable.",
-        "The invariant is simple: one idempotency key must guarantee exactly one side effect. Not at-least-once. Not at-most-once. Exactly once. The key travels with the request. The gateway checks it before any state change. If the key exists, return the original result. If not, execute and store the result against that key.",
-        "Most teams generate a UUID client-side and send it in an Idempotency-Key header. That works until the client crashes after sending but before persisting the key locally. The retry sends a new UUID. The gateway sees a new key. Duplicate charge. The fix: derive the key from immutable request fields, amount, currency, customer_id, order_id, so retries naturally carry the same key.",
-        "Testing this requires simulating the exact failure: send request, drop response, verify retry with same key returns original result, verify no second charge created. Unit tests miss the network layer. Integration tests with a fault-injecting proxy catch it. What is the smallest test harness you have used to prove idempotency under real network failure?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete lost-response payment retry, paired with a testable idempotency invariant and a specific final question, will earn more saves and replies than broad backend debate hooks.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 13264,
-      "ids": [
-        "17911815486492927",
-        "18071321069764690",
-        "18109073018094310",
-        "18229532662328063",
-        "17920068057239809"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T07:01:19.805531+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18147987388577407"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T11:27:22.573510+00:00",
+      "pillar": "smart",
+      "hook_sig": "most postgres indexing advice you read is outdated,",
+      "texts": [
+        "Most Postgres indexing advice you read is outdated, here is what actually works in production now",
+        "Lesson 1: covering indexes are not free, they double write latency on high churn tables, I learned this when a 200GB index melted our replication lag",
+        "Lesson 2: partial indexes beat full indexes for soft delete patterns, a where deleted at is null clause saves 80 percent index size and keeps plans stable",
+        "Lesson 3: correlation matters more than cardinality for bitmap scans, a column with 10k distinct values but perfect physical order beats a uuid column every time",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Switched format from Matt Pocock pain-concept-fix to Notion co-founder contrarian lessons on Postgres indexing, keeping SQL pillar proven by P1 (481 views) and P2 (402 views).",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 452,
+      "ids": [
+        "18125755021920164",
+        "18107107439352014",
+        "17952388281289731",
+        "18137020219654163",
+        "18081598817348592"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 449
+  "last_views": 452
 }
