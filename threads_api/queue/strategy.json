@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Pivot from debate hot take (format #5) to contrarian lessons (format #4) on AI-era senior skills \u2014 proven 516k views for Notion co-founder, matches our career pillar where caps-listicles hit 481-893 views, cites P23-P30 infrastructure streak as the losing topic family to exit.",
-  "pivots": 315,
+  "hypothesis": "A concrete AI-era engineering judgment scenario will earn more useful replies than infrastructure hot takes.",
+  "pivots": 316,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-18T17:01:12.923215+00:00",
-      "pillar": "smart",
-      "hook_sig": "most payment retry advice obsesses over idempotency keys.",
-      "texts": [
-        "Most payment retry advice obsesses over idempotency keys. The real invariant is simpler and harder to test: a retry must return the original response, not a new one.",
-        "Our gateway timed out on a $3,200 charge. The client retried. The gateway had actually succeeded. We charged twice. Idempotency key was present. The retry path generated a new request id.",
-        "The invariant: retry handler returns the exact response bytes from the first attempt. No new gateway call. No new transaction id. The client gets the original success or the original failure, never a second outcome.",
-        "We test this by injecting a 5-second delay before the gateway responds, firing the retry at 3 seconds, and asserting the response body matches byte-for-byte. Most implementations fail this test. What does your test suite assert?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete timeout-and-retry sequence plus an explicit idempotency invariant will earn more saves and specific backend replies than broad AI failure stories.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 11387,
-      "ids": [
-        "18023520044712643",
-        "18118386377059767",
-        "18381564820239590",
-        "17950804560054998",
-        "18149316349563499"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-18T17:29:31.467090+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,33 @@
         "18096450734406925"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T02:01:20.767829+00:00",
+      "pillar": "smart",
+      "hook_sig": "ai wrote the patch. the tests pass. ci",
+      "texts": [
+        "AI wrote the patch. The tests pass. CI is green. You have three minutes before the deploy window closes. What do you actually read before hitting approve?",
+        "Most reviewers skim the diff for syntax, maybe check variable names. That is how a hallucinated retry loop ships to prod and DDOSes your own payment gateway at 2am.",
+        "Start with the contract: inputs, outputs, side effects. Does the function signature match the spec? Are idempotency keys handled? Does it call external services without timeouts? The code can look clean and still violate the boundary.",
+        "Next, the failure modes AI misses: partial writes, race conditions, pagination bugs, cursor leakage, silent truncation. Search the diff for \"await\", \"try\", \"catch\", \"return\". If you do not see explicit error handling, assume it swallows exceptions.",
+        "Last, the ownership question: who owns this logic six months from now? If the author cannot explain the invariant in one sentence, the patch is not ready. Approve the PR, but leave a comment: \"Walk me through the retry boundary.\" That question builds seniors.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete AI-era engineering judgment scenario will earn more useful replies than infrastructure hot takes.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 6064,
+      "ids": [
+        "18107152127249089",
+        "18118488932007332",
+        "18098608424107967",
+        "18641590627047694",
+        "18063288488632560",
+        "18082061939713444"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1263,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 6052
+  "last_views": 6064
 }
