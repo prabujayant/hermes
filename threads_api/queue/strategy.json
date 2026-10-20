@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A specific, useful SQL production confession will draw more engineer replies than another AI-review debate thread.",
-  "pivots": 325,
+  "hypothesis": "A precise SQL footgun with its fix will earn more engineer replies than another AI-review debate;",
+  "pivots": 326,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T02:01:11.976801+00:00",
-      "pillar": "smart",
-      "hook_sig": "ai writes code faster than you can review",
-      "texts": [
-        "AI writes code faster than you can review it. The bottleneck didn't disappear, it moved downstream. Teams shipping 3x more PRs are drowning in review debt they didn't have six months ago.",
-        "Last sprint our team merged 47 PRs. Two engineers spent 18 hours just reading diffs. The AI wrote clean code, passed tests, followed patterns. But the logic was subtle, the edge cases were buried, and the reviewer had to reconstruct intent from scratch.",
-        "Test this on your team: track review time per PR for the last 20 merges. Split by AI-assisted vs human-written. If the median review time for AI PRs exceeds human PRs by more than 30 percent, the tool is slowing you down, not speeding you up.",
-        "The fix isn't less AI. It's smaller PRs, stricter conventions, and review checklists that catch what the model misses. What changed on your team when AI adoption crossed 50 percent of commits?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A useful AI-coding workflow diagnostic will earn more qualified replies than a general pro/anti hot take.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 13088,
-      "ids": [
-        "18137777242652801",
-        "18153660424554779",
-        "18137834281722862",
-        "18348045877285871",
-        "18127035928859737"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T02:31:09.564176+00:00",
       "pillar": "smart",
@@ -1256,6 +1231,31 @@
         "18097848932435454"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T07:01:16.061042+00:00",
+      "pillar": "smart",
+      "hook_sig": "silent failure warning: one null in a not",
+      "texts": [
+        "silent failure warning: one NULL in a NOT IN subquery can make every candidate row disappear\n\nmost developers learn NOT IN as \"give me rows not in this list.\" they never learn that a single NULL in the subquery flips the entire result to empty. no error. no warning. just zero rows returned.",
+        "the trap: three-valued logic. when the subquery returns (1, 2, NULL) and you check WHERE id NOT IN (1, 2, NULL), the database evaluates id <> 1 AND id <> 2 AND id <> NULL. that last comparison is UNKNOWN, not TRUE. UNKNOWN combined with AND becomes UNKNOWN. the row gets filtered out. every row gets filtered out.",
+        "reproduce it in thirty seconds:\n\nCREATE TABLE users (id int);\nCREATE TABLE blocked (user_id int);\nINSERT INTO users VALUES (1), (2), (3);\nINSERT INTO blocked VALUES (1), (NULL);\n\nSELECT * FROM users WHERE id NOT IN (SELECT user_id FROM blocked);\n-- returns zero rows. user 2 and 3 vanished.",
+        "the fix is not \"avoid NULLs.\" the fix is NOT EXISTS or LEFT JOIN ... WHERE right IS NULL. both handle NULLs correctly because they never compare directly to NULL.\n\nNOT EXISTS (SELECT 1 FROM blocked WHERE blocked.user_id = users.id)\nLEFT JOIN blocked ON blocked.user_id = users.id WHERE blocked.user_id IS NULL\n\nboth return users 2 and 3 as expected.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A precise SQL footgun with its fix will earn more engineer replies than another AI-review debate;",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 389,
+      "ids": [
+        "18112131487879603",
+        "18092047679202039",
+        "17941430712376442",
+        "18482916985117401",
+        "18143927125517801"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1265,5 +1265,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 6132
+  "last_views": 389
 }
