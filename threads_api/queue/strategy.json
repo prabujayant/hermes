@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Switching from AI review debate (P23-P30) to a concrete NULL failure story using Matt Pocock's pain-concept-fix format because SQL schema winners (481,",
-  "pivots": 333,
+  "hypothesis": "Switching from AI review debate (P23-P30) to Matt Pocock's pain-concept-fix format on a concrete Postgres index failure because SQL schema statement winners (481, 402 views) prove this pillar and format convert.",
+  "pivots": 334,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T06:01:14.392604+00:00",
-      "pillar": "smart",
-      "hook_sig": "a payment request timed out at the gateway.",
-      "texts": [
-        "A payment request timed out at the gateway. The client retried. The gateway had already processed the first one. Customer charged twice. The logs showed two successful POSTs with the same idempotency key, because the middleware generated a new key per retry attempt.",
-        "The invariant that should have held: for any idempotency key, the side effect executes exactly once regardless of how many times the request arrives. Not \"at most once.\" Exactly once. If your system cannot distinguish \"not processed\" from \"processed but response lost,\" the invariant is broken.",
-        "Test it tomorrow: send the same idempotency key twice with a 500ms gap. Check your database, one charge row or two? If two, your idempotency layer is decorative. The fix is not \"add a unique constraint.\" The fix is making the side effect and the key record atomic in the same transaction.",
-        "We moved the charge creation and the idempotency key insert into one Postgres transaction. The unique constraint on the key becomes the guard. Second request hits the constraint, reads the existing charge_id, returns it. No duplicate. Which side effect have you seen duplicated in production, email, webhook, inventory decrement, something else?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific retry failure paired with a testable idempotency invariant and a targeted final question will earn more saves and replies than broad backend debate hooks.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 13263,
-      "ids": [
-        "18154010767563608",
-        "18123278422729741",
-        "18565244443076287",
-        "18136764892735056",
-        "18108726434262832"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T06:31:00.205512+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "17890592979653787"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-20T11:01:16.089751+00:00",
+      "pillar": "smart",
+      "hook_sig": "i spent three hours watching a healthy postgres",
+      "texts": [
+        "I spent three hours watching a healthy Postgres primary hit 100% CPU because one missing composite index turned a 5ms query into a sequential scan on 50 million rows. The query plan looked fine in staging. In production it melted the instance.",
+        "The concept is simple: Postgres chooses plans based on statistics, not data distribution. A query filtering on (tenant_id, status, created_at) with an index on (tenant_id, created_at) still scans every status value for that tenant. Statistics say \"tenant_id is selective\", they don't know status='pending' returns 90% of rows.",
+        "The fix was a single index: CREATE INDEX CONCURRENTLY ON events (tenant_id, status, created_at) WHERE status IN ('pending', 'processing'); Partial indexes shrink the B-tree by 80% and give the planner exact cardinality for the hot path. CPU dropped from 100% to 12% in minutes.",
+        "Most teams add more read replicas or increase instance size. The planner was begging for the right index shape all along. Run EXPLAIN (ANALYZE, BUFFERS) on your slowest query, look for \"Rows Removed by Filter\" in the millions. That is your missing index.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Switching from AI review debate (P23-P30) to Matt Pocock's pain-concept-fix format on a concrete Postgres index failure because SQL schema statement winners (481, 402 views) prove this pillar and format convert.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 449,
+      "ids": [
+        "18423058171152931",
+        "18093754967168258",
+        "17953097079318544",
+        "17959673739255338",
+        "18147987388577407"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 424
+  "last_views": 449
 }
