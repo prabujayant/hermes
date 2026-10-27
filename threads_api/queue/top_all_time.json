@@ -1,0 +1,850 @@
+{
+ "generated_at": "2026-10-27",
+ "source": "Threads API, all 500 top-level posts fetched, 498 with views",
+ "selection": "50 all-time most-viewed posts, ranked by views",
+ "summary": {
+  "sample": 50,
+  "views_total": 25727,
+  "views_max": 6133,
+  "hook_chars_min": 45,
+  "hook_chars_median": 97,
+  "hook_chars_max": 296,
+  "formats": {
+   "caps_if_you_want": 23,
+   "caps_things": 12,
+   "sentence_statement": 10,
+   "sentence_story": 3,
+   "sentence_question": 1,
+   "caps_other": 1
+  },
+  "primary_topics": {
+   "career_senior": 25,
+   "system_design_interviews": 12,
+   "sql_postgres_orm": 9,
+   "leetcode": 2,
+   "ai_coding": 2
+  },
+  "topic_hits": {
+   "career_senior": 25,
+   "system_design_interviews": 21,
+   "sql_postgres_orm": 13,
+   "leetcode": 2,
+   "ai_coding": 2
+  }
+ },
+ "posts": [
+  {
+   "rank": 1,
+   "id": "18095481140662705",
+   "views": 6133,
+   "likes": 13,
+   "replies": 12,
+   "date": "2026-10-15",
+   "permalink": "https://www.threads.com/@owlsky17/post/DegihA4leZP",
+   "format": "sentence_statement",
+   "topic": "sql_postgres_orm",
+   "topics": [
+    "sql_postgres_orm"
+   ],
+   "hook_chars": 174,
+   "text": "Stop using UUIDs as primary keys in high-write tables. They fragment the buffer pool, bloat indexes 4x, and turn range scans into random I/O. Your p99 latency pays the price."
+  },
+  {
+   "rank": 2,
+   "id": "18640002385040807",
+   "views": 901,
+   "likes": 8,
+   "replies": 4,
+   "date": "2026-10-16",
+   "permalink": "https://www.threads.com/@owlsky17/post/Dejmx30jsxD",
+   "format": "caps_if_you_want",
+   "topic": "system_design_interviews",
+   "topics": [
+    "system_design_interviews"
+   ],
+   "hook_chars": 97,
+   "text": "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:"
+  },
+  {
+   "rank": 3,
+   "id": "18095660204411867",
+   "views": 829,
+   "likes": 1,
+   "replies": 4,
+   "date": "2026-10-15",
+   "permalink": "https://www.threads.com/@owlsky17/post/Deglwhnm1BR",
+   "format": "sentence_story",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior",
+    "sql_postgres_orm"
+   ],
+   "hook_chars": 280,
+   "text": "I used UUIDv4 for every primary key on a payments service because \"distributed systems need it.\" Two years later the buffer pool was 80 percent index pages. The table had 120 million rows. The primary key index alone was 18 GB. A BIGINT version of the same workload sat at 4.2 GB."
+  },
+  {
+   "rank": 4,
+   "id": "18116894228094389",
+   "views": 759,
+   "likes": 9,
+   "replies": 4,
+   "date": "2026-10-11",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeXva09j5gg",
+   "format": "caps_if_you_want",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior"
+   ],
+   "hook_chars": 94,
+   "text": "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:"
+  },
+  {
+   "rank": 5,
+   "id": "18076654166457117",
+   "views": 620,
+   "likes": 0,
+   "replies": 4,
+   "date": "2026-10-17",
+   "permalink": "https://www.threads.com/@owlsky17/post/DelNNUkkXYV",
+   "format": "caps_if_you_want",
+   "topic": "system_design_interviews",
+   "topics": [
+    "system_design_interviews"
+   ],
+   "hook_chars": 97,
+   "text": "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:"
+  },
+  {
+   "rank": 6,
+   "id": "18453068356123934",
+   "views": 574,
+   "likes": 3,
+   "replies": 4,
+   "date": "2026-10-17",
+   "permalink": "https://www.threads.com/@owlsky17/post/Dela076HNXU",
+   "format": "caps_if_you_want",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior"
+   ],
+   "hook_chars": 94,
+   "text": "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:"
+  },
+  {
+   "rank": 7,
+   "id": "18356197162172699",
+   "views": 541,
+   "likes": 0,
+   "replies": 4,
+   "date": "2026-10-12",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeYjfRVlnI0",
+   "format": "caps_things",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior",
+    "system_design_interviews"
+   ],
+   "hook_chars": 84,
+   "text": "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):"
+  },
+  {
+   "rank": 8,
+   "id": "18199944079376554",
+   "views": 524,
+   "likes": 4,
+   "replies": 4,
+   "date": "2026-10-16",
+   "permalink": "https://www.threads.com/@owlsky17/post/Dejp6vAGxeb",
+   "format": "caps_if_you_want",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior"
+   ],
+   "hook_chars": 94,
+   "text": "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:"
+  },
+  {
+   "rank": 9,
+   "id": "17898509175655971",
+   "views": 499,
+   "likes": 1,
+   "replies": 4,
+   "date": "2026-10-16",
+   "permalink": "https://www.threads.com/@owlsky17/post/Dei93S7lmdk",
+   "format": "caps_if_you_want",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior"
+   ],
+   "hook_chars": 94,
+   "text": "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:"
+  },
+  {
+   "rank": 10,
+   "id": "18055777100802554",
+   "views": 493,
+   "likes": 1,
+   "replies": 4,
+   "date": "2026-10-13",
+   "permalink": "https://www.threads.com/@owlsky17/post/DebfusVluzS",
+   "format": "caps_things",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior",
+    "system_design_interviews"
+   ],
+   "hook_chars": 84,
+   "text": "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):"
+  },
+  {
+   "rank": 11,
+   "id": "18125063905908059",
+   "views": 487,
+   "likes": 2,
+   "replies": 4,
+   "date": "2026-10-11",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeV3I30FUP1",
+   "format": "caps_things",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior"
+   ],
+   "hook_chars": 45,
+   "text": "THINGS THAT QUIETLY KILL ENGINEERING CAREERS:"
+  },
+  {
+   "rank": 12,
+   "id": "17936722527384416",
+   "views": 483,
+   "likes": 2,
+   "replies": 4,
+   "date": "2026-10-15",
+   "permalink": "https://www.threads.com/@owlsky17/post/Degs33UEaCn",
+   "format": "caps_if_you_want",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior"
+   ],
+   "hook_chars": 94,
+   "text": "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:"
+  },
+  {
+   "rank": 13,
+   "id": "17974201617156819",
+   "views": 481,
+   "likes": 0,
+   "replies": 2,
+   "date": "2026-10-18",
+   "permalink": "https://www.threads.com/@owlsky17/post/Deo2gS-GyER",
+   "format": "sentence_statement",
+   "topic": "sql_postgres_orm",
+   "topics": [
+    "sql_postgres_orm"
+   ],
+   "hook_chars": 108,
+   "text": "Foreign keys are not optional in production. If your ORM makes them painful, change the ORM, not the schema."
+  },
+  {
+   "rank": 14,
+   "id": "18492921718106433",
+   "views": 463,
+   "likes": 2,
+   "replies": 4,
+   "date": "2026-10-11",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeVUxW1kZ9a",
+   "format": "caps_if_you_want",
+   "topic": "system_design_interviews",
+   "topics": [
+    "system_design_interviews"
+   ],
+   "hook_chars": 97,
+   "text": "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:"
+  },
+  {
+   "rank": 15,
+   "id": "18153481792537202",
+   "views": 462,
+   "likes": 1,
+   "replies": 4,
+   "date": "2026-10-14",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeeSOxLm-eJ",
+   "format": "caps_if_you_want",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior"
+   ],
+   "hook_chars": 94,
+   "text": "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:"
+  },
+  {
+   "rank": 16,
+   "id": "18252235015308156",
+   "views": 456,
+   "likes": 3,
+   "replies": 6,
+   "date": "2026-10-10",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeUk5rlifrS",
+   "format": "caps_things",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior",
+    "system_design_interviews"
+   ],
+   "hook_chars": 84,
+   "text": "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):"
+  },
+  {
+   "rank": 17,
+   "id": "18128437187491866",
+   "views": 438,
+   "likes": 2,
+   "replies": 4,
+   "date": "2026-10-12",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeYEsZTG4Mb",
+   "format": "caps_if_you_want",
+   "topic": "system_design_interviews",
+   "topics": [
+    "system_design_interviews"
+   ],
+   "hook_chars": 97,
+   "text": "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:"
+  },
+  {
+   "rank": 18,
+   "id": "18192615634409709",
+   "views": 402,
+   "likes": 2,
+   "replies": 5,
+   "date": "2026-10-17",
+   "permalink": "https://www.threads.com/@owlsky17/post/DelQ6xwFu7F",
+   "format": "sentence_statement",
+   "topic": "sql_postgres_orm",
+   "topics": [
+    "sql_postgres_orm"
+   ],
+   "hook_chars": 237,
+   "text": "---\nThe dumbest SQL regression I shipped wasn't a missing index. It was a UUIDv4 primary key on a high-write table, used as the clustering key. The buffer pool churned so hard we dropped from 50k writes/sec to single digits within hours."
+  },
+  {
+   "rank": 19,
+   "id": "18012431198992971",
+   "views": 400,
+   "likes": 2,
+   "replies": 4,
+   "date": "2026-10-14",
+   "permalink": "https://www.threads.com/@owlsky17/post/DedbTe0G3ug",
+   "format": "sentence_story",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior",
+    "sql_postgres_orm"
+   ],
+   "hook_chars": 296,
+   "text": "I spent years reaching for Redis locks every time I saw a race condition. Then a senior engineer showed me a version column and a single UPDATE statement. No external lock service, no TTL tuning, no double-charge bugs. Here is the pattern and how to roll it out without breaking existing writers."
+  },
+  {
+   "rank": 20,
+   "id": "18133035724673920",
+   "views": 397,
+   "likes": 1,
+   "replies": 4,
+   "date": "2026-10-11",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeW8CMwkeCA",
+   "format": "caps_if_you_want",
+   "topic": "system_design_interviews",
+   "topics": [
+    "system_design_interviews"
+   ],
+   "hook_chars": 97,
+   "text": "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:"
+  },
+  {
+   "rank": 21,
+   "id": "17907432627330711",
+   "views": 380,
+   "likes": 2,
+   "replies": 4,
+   "date": "2026-10-13",
+   "permalink": "https://www.threads.com/@owlsky17/post/DebIitymzBR",
+   "format": "caps_if_you_want",
+   "topic": "system_design_interviews",
+   "topics": [
+    "system_design_interviews"
+   ],
+   "hook_chars": 97,
+   "text": "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:"
+  },
+  {
+   "rank": 22,
+   "id": "17909656800486401",
+   "views": 372,
+   "likes": 3,
+   "replies": 4,
+   "date": "2026-10-16",
+   "permalink": "https://www.threads.com/@owlsky17/post/Dej3lGMlkDx",
+   "format": "caps_if_you_want",
+   "topic": "leetcode",
+   "topics": [
+    "leetcode",
+    "system_design_interviews"
+   ],
+   "hook_chars": 101,
+   "text": "IF YOU WANT TO CRACK CODING INTERVIEWS, STOP PRACTICING RANDOMLY.\n\nMEMORIZE THESE 5 PATTERNS INSTEAD:"
+  },
+  {
+   "rank": 23,
+   "id": "17983888974093614",
+   "views": 372,
+   "likes": 1,
+   "replies": 4,
+   "date": "2026-10-11",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeWWHiZmy1J",
+   "format": "caps_things",
+   "topic": "ai_coding",
+   "topics": [
+    "ai_coding"
+   ],
+   "hook_chars": 69,
+   "text": "THINGS AI CODING ASSISTANTS CAN'T TELL YOU (SO VERIFY THEM YOURSELF):"
+  },
+  {
+   "rank": 24,
+   "id": "18640454632046213",
+   "views": 371,
+   "likes": 3,
+   "replies": 4,
+   "date": "2026-10-17",
+   "permalink": "https://www.threads.com/@owlsky17/post/DempxKHCQC2",
+   "format": "caps_if_you_want",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior"
+   ],
+   "hook_chars": 94,
+   "text": "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:"
+  },
+  {
+   "rank": 25,
+   "id": "18117343829064899",
+   "views": 368,
+   "likes": 2,
+   "replies": 4,
+   "date": "2026-10-14",
+   "permalink": "https://www.threads.com/@owlsky17/post/Dee7f1aFQJl",
+   "format": "caps_if_you_want",
+   "topic": "system_design_interviews",
+   "topics": [
+    "system_design_interviews"
+   ],
+   "hook_chars": 97,
+   "text": "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:"
+  },
+  {
+   "rank": 26,
+   "id": "17976497964137189",
+   "views": 364,
+   "likes": 0,
+   "replies": 4,
+   "date": "2026-10-14",
+   "permalink": "https://www.threads.com/@owlsky17/post/Ded9evllu4G",
+   "format": "sentence_question",
+   "topic": "sql_postgres_orm",
+   "topics": [
+    "sql_postgres_orm"
+   ],
+   "hook_chars": 90,
+   "text": "the ORM-versus-SQL debate misses the real question: which queries deserve handwritten SQL?"
+  },
+  {
+   "rank": 27,
+   "id": "18112748717333584",
+   "views": 359,
+   "likes": 1,
+   "replies": 4,
+   "date": "2026-10-16",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeiXQqMkS6N",
+   "format": "caps_if_you_want",
+   "topic": "system_design_interviews",
+   "topics": [
+    "system_design_interviews"
+   ],
+   "hook_chars": 97,
+   "text": "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:"
+  },
+  {
+   "rank": 28,
+   "id": "18144718837594344",
+   "views": 351,
+   "likes": 1,
+   "replies": 4,
+   "date": "2026-10-16",
+   "permalink": "https://www.threads.com/@owlsky17/post/Dei2V0akSJQ",
+   "format": "caps_things",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior",
+    "system_design_interviews"
+   ],
+   "hook_chars": 84,
+   "text": "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):"
+  },
+  {
+   "rank": 29,
+   "id": "18132175273743033",
+   "views": 340,
+   "likes": 3,
+   "replies": 4,
+   "date": "2026-10-14",
+   "permalink": "https://www.threads.com/@owlsky17/post/DedNtl4mtA4",
+   "format": "caps_if_you_want",
+   "topic": "system_design_interviews",
+   "topics": [
+    "system_design_interviews"
+   ],
+   "hook_chars": 97,
+   "text": "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:"
+  },
+  {
+   "rank": 30,
+   "id": "18109020269336095",
+   "views": 336,
+   "likes": 0,
+   "replies": 4,
+   "date": "2026-10-11",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeXawQpj7Eh",
+   "format": "caps_things",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior",
+    "system_design_interviews"
+   ],
+   "hook_chars": 84,
+   "text": "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):"
+  },
+  {
+   "rank": 31,
+   "id": "18094522898441059",
+   "views": 334,
+   "likes": 0,
+   "replies": 4,
+   "date": "2026-10-17",
+   "permalink": "https://www.threads.com/@owlsky17/post/Dekx8FSjqAW",
+   "format": "caps_if_you_want",
+   "topic": "leetcode",
+   "topics": [
+    "leetcode"
+   ],
+   "hook_chars": 84,
+   "text": "IF YOU WANT TO MASTER DYNAMIC PROGRAMMING, STOP FEARING IT.\n\nMEMORIZE THESE 5 STEPS:"
+  },
+  {
+   "rank": 32,
+   "id": "18137254615632006",
+   "views": 331,
+   "likes": 4,
+   "replies": 7,
+   "date": "2026-10-14",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeencyRFHeh",
+   "format": "sentence_statement",
+   "topic": "ai_coding",
+   "topics": [
+    "ai_coding"
+   ],
+   "hook_chars": 162,
+   "text": "Most developers using AI coding assistants are shipping slower not faster. The autocomplete feels like speed but the review burden eats the gains. Change my mind."
+  },
+  {
+   "rank": 33,
+   "id": "17993535150063331",
+   "views": 318,
+   "likes": 2,
+   "replies": 4,
+   "date": "2026-10-16",
+   "permalink": "https://www.threads.com/@owlsky17/post/DejfmNXlInv",
+   "format": "caps_if_you_want",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior",
+    "system_design_interviews"
+   ],
+   "hook_chars": 91,
+   "text": "IF YOU WANT TO DESIGN LIKE A SENIOR, STOP DRAWING BOXES FIRST.\n\nMEMORIZE THESE 5 QUESTIONS:"
+  },
+  {
+   "rank": 34,
+   "id": "18154219219525801",
+   "views": 313,
+   "likes": 0,
+   "replies": 4,
+   "date": "2026-10-18",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeoJvtdm-ea",
+   "format": "sentence_statement",
+   "topic": "sql_postgres_orm",
+   "topics": [
+    "sql_postgres_orm"
+   ],
+   "hook_chars": 122,
+   "text": "ORMs are fine until you stop inspecting the SQL they generate. The bottleneck is not the abstraction, it is the blindness."
+  },
+  {
+   "rank": 35,
+   "id": "17992081263114645",
+   "views": 311,
+   "likes": 0,
+   "replies": 4,
+   "date": "2026-10-15",
+   "permalink": "https://www.threads.com/@owlsky17/post/DehLtv5lax9",
+   "format": "caps_things",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior",
+    "system_design_interviews"
+   ],
+   "hook_chars": 84,
+   "text": "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):"
+  },
+  {
+   "rank": 36,
+   "id": "18129766907497836",
+   "views": 306,
+   "likes": 0,
+   "replies": 4,
+   "date": "2026-10-15",
+   "permalink": "https://www.threads.com/@owlsky17/post/DehdM-cmwXA",
+   "format": "caps_things",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior"
+   ],
+   "hook_chars": 45,
+   "text": "THINGS THAT QUIETLY KILL ENGINEERING CAREERS:"
+  },
+  {
+   "rank": 37,
+   "id": "18148592947482918",
+   "views": 304,
+   "likes": 0,
+   "replies": 6,
+   "date": "2026-10-15",
+   "permalink": "https://www.threads.com/@owlsky17/post/DegwGTwnMZb",
+   "format": "caps_other",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior",
+    "sql_postgres_orm"
+   ],
+   "hook_chars": 183,
+   "text": "POSTGRES ON A SINGLE NODE HANDLES 100K WRITES PER SECOND IF YOU TUNE IT RIGHT. MOST TEAMS REACH FOR CASSANDRA OR SCYLLA BECAUSE THEY NEVER BOTHERED TO BENCHMARK THEIR ACTUAL WORKLOAD."
+  },
+  {
+   "rank": 38,
+   "id": "18114218474037422",
+   "views": 301,
+   "likes": 2,
+   "replies": 4,
+   "date": "2026-10-15",
+   "permalink": "https://www.threads.com/@owlsky17/post/DegpM2dla1a",
+   "format": "caps_if_you_want",
+   "topic": "system_design_interviews",
+   "topics": [
+    "system_design_interviews"
+   ],
+   "hook_chars": 97,
+   "text": "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:"
+  },
+  {
+   "rank": 39,
+   "id": "18225523213338548",
+   "views": 294,
+   "likes": 0,
+   "replies": 4,
+   "date": "2026-10-13",
+   "permalink": "https://www.threads.com/@owlsky17/post/DebmidVG3qq",
+   "format": "caps_things",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior"
+   ],
+   "hook_chars": 45,
+   "text": "THINGS THAT QUIETLY KILL ENGINEERING CAREERS:"
+  },
+  {
+   "rank": 40,
+   "id": "17933389851406827",
+   "views": 293,
+   "likes": 0,
+   "replies": 4,
+   "date": "2026-10-16",
+   "permalink": "https://www.threads.com/@owlsky17/post/DekWUNbGZNq",
+   "format": "sentence_statement",
+   "topic": "sql_postgres_orm",
+   "topics": [
+    "sql_postgres_orm"
+   ],
+   "hook_chars": 235,
+   "text": "---\nThe dumbest performance bug I've seen in production wasn't a missing index. It was a UUIDv4 primary key on a high-write table being used as the clustering key, which turned every insert into random I/O across 12 shards of Postgres."
+  },
+  {
+   "rank": 41,
+   "id": "18103808978194846",
+   "views": 293,
+   "likes": 2,
+   "replies": 6,
+   "date": "2026-10-10",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeTttiUm4Gf",
+   "format": "sentence_story",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior"
+   ],
+   "hook_chars": 95,
+   "text": "I used to think senior engineers wrote better code. Then I saw what they actually optimize for."
+  },
+  {
+   "rank": 42,
+   "id": "18125872771859046",
+   "views": 285,
+   "likes": 0,
+   "replies": 6,
+   "date": "2026-10-18",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeoQnJaFveo",
+   "format": "sentence_statement",
+   "topic": "sql_postgres_orm",
+   "topics": [
+    "sql_postgres_orm"
+   ],
+   "hook_chars": 281,
+   "text": "An ORM transaction held a row lock for 47 seconds while waiting on an external HTTP call. The lock chain: UPDATE users SET last_login=now() WHERE id=123 -> SELECT FOR UPDATE on orders -> HTTP POST to payment gateway -> COMMIT. Every concurrent login for that user queued behind it."
+  },
+  {
+   "rank": 43,
+   "id": "18343392172285452",
+   "views": 282,
+   "likes": 0,
+   "replies": 5,
+   "date": "2026-10-15",
+   "permalink": "https://www.threads.com/@owlsky17/post/DegfIwXFsox",
+   "format": "sentence_statement",
+   "topic": "sql_postgres_orm",
+   "topics": [
+    "sql_postgres_orm"
+   ],
+   "hook_chars": 190,
+   "text": "Stop using UUIDs as primary keys. They destroy write performance, bloat indexes by 4x, and you almost certainly don't need them. Your database is paying a tax for a scale you will never hit."
+  },
+  {
+   "rank": 44,
+   "id": "17940652383385518",
+   "views": 268,
+   "likes": 0,
+   "replies": 5,
+   "date": "2026-10-15",
+   "permalink": "https://www.threads.com/@owlsky17/post/DehV37QIG8Q",
+   "format": "sentence_statement",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior",
+    "sql_postgres_orm"
+   ],
+   "hook_chars": 138,
+   "text": "If API p99 is rising while Postgres CPU stays low, check pool wait time before adding database capacity. Most teams scale the wrong layer."
+  },
+  {
+   "rank": 45,
+   "id": "18498737971101391",
+   "views": 261,
+   "likes": 0,
+   "replies": 4,
+   "date": "2026-10-17",
+   "permalink": "https://www.threads.com/@owlsky17/post/DelDUsAjd-o",
+   "format": "sentence_statement",
+   "topic": "sql_postgres_orm",
+   "topics": [
+    "sql_postgres_orm"
+   ],
+   "hook_chars": 129,
+   "text": "production-cost reveal: a UUIDv4 index can hurt write performance, but here is how to measure whether it matters in your workload"
+  },
+  {
+   "rank": 46,
+   "id": "18130260721704322",
+   "views": 260,
+   "likes": 1,
+   "replies": 4,
+   "date": "2026-10-12",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeZnN1pFaRv",
+   "format": "caps_if_you_want",
+   "topic": "system_design_interviews",
+   "topics": [
+    "system_design_interviews"
+   ],
+   "hook_chars": 97,
+   "text": "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:"
+  },
+  {
+   "rank": 47,
+   "id": "18077697917480511",
+   "views": 258,
+   "likes": 0,
+   "replies": 4,
+   "date": "2026-10-17",
+   "permalink": "https://www.threads.com/@owlsky17/post/DemmYYalHI5",
+   "format": "caps_if_you_want",
+   "topic": "system_design_interviews",
+   "topics": [
+    "system_design_interviews"
+   ],
+   "hook_chars": 97,
+   "text": "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:"
+  },
+  {
+   "rank": 48,
+   "id": "18088706270249455",
+   "views": 255,
+   "likes": 0,
+   "replies": 4,
+   "date": "2026-10-11",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeVpX7-Dd_1",
+   "format": "caps_if_you_want",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior"
+   ],
+   "hook_chars": 94,
+   "text": "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:"
+  },
+  {
+   "rank": 49,
+   "id": "18194099362393118",
+   "views": 253,
+   "likes": 0,
+   "replies": 4,
+   "date": "2026-10-14",
+   "permalink": "https://www.threads.com/@owlsky17/post/DeeBYL7G1Jz",
+   "format": "caps_things",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior",
+    "system_design_interviews"
+   ],
+   "hook_chars": 84,
+   "text": "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):"
+  },
+  {
+   "rank": 50,
+   "id": "18131226337666966",
+   "views": 252,
+   "likes": 1,
+   "replies": 4,
+   "date": "2026-10-18",
+   "permalink": "https://www.threads.com/@owlsky17/post/DenkNB9m40r",
+   "format": "caps_things",
+   "topic": "career_senior",
+   "topics": [
+    "career_senior"
+   ],
+   "hook_chars": 45,
+   "text": "THINGS THAT QUIETLY KILL ENGINEERING CAREERS:"
+  }
+ ]
+}

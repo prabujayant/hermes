@@ -1,7 +1,8 @@
 """Template-bank content engine for the hourly auto-poster.
 
 Every thread produced here must satisfy queue/STYLE.md:
-caps hook, sentence-case value replies, follow-CTA last post,
+one of the four locked hook formulas (caps listicle or sentence-case
+technical), sentence-case value replies, follow-CTA last post,
 each post <= 500 chars. No post counters.
 """
 
@@ -109,9 +110,23 @@ def validate_thread(posts):
         if re.search(r"\d+/\d+", post):
             problems.append(f"post {i}: counters like 1/5 are not allowed")
     if posts:
-        letters = [c for c in posts[0] if c.isalpha()]
-        if letters and sum(c.isupper() for c in letters) / len(letters) < 0.7:
-            problems.append("hook is not ALL CAPS")
+        hook = posts[0].strip()
+        letters = [c for c in hook if c.isalpha()]
+        caps_ratio = (
+            sum(c.isupper() for c in letters) / len(letters)
+            if letters else 0
+        )
+        if caps_ratio >= 0.7:
+            if len(hook) < 45:
+                problems.append(
+                    "ALL-CAPS hook is too short; 45+ chars, state the "
+                    "outcome and the bad habit"
+                )
+        elif len(hook) < 45:
+            problems.append(
+                "sentence-case hook is too short; use an ALL-CAPS listicle "
+                "or a full 45+ character claim with a mechanism"
+            )
     if posts and FOLLOW_CTA not in posts[-1]:
         problems.append(f"last post missing {FOLLOW_CTA!r} CTA")
     return problems

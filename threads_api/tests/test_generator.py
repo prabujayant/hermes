@@ -18,7 +18,7 @@ BANK_DIR = Config.ROOT / "queue" / "bank"
 
 
 def good_thread(n=5):
-    posts = ["HOOK LINE HERE"]
+    posts = ["IF YOU WANT TO PASS THIS TEST, STOP USING SHORT HOOKS."]
     for i in range(2, n):
         posts.append(f"Value point number {i}.")
     posts.append("Follow @owlsky17 so you don't miss the next one.")
@@ -54,6 +54,24 @@ def test_validation_catches_style_violations():
     assert any("counter" in p for p in validate_thread(bad_counters))
 
 
+def test_validation_accepts_sentence_case_technical_hook():
+    thread = good_thread()
+    thread[0] = (
+        "Stop using UUIDs as primary keys in high-write tables. "
+        "They fragment the buffer pool and turn range scans into random I/O."
+    )
+    assert validate_thread(thread) == []
+
+
+def test_validation_accepts_caps_listicle_hook():
+    thread = good_thread()
+    thread[0] = (
+        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING "
+        "TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:"
+    )
+    assert validate_thread(thread) == []
+
+
 def test_hook_signature_stable():
     assert hook_signature("IF YOU WANT X STOP Y MEMORIZE THESE 5 THINGS") == (
         "if you want x stop y memorize these"
@@ -71,9 +89,9 @@ def test_rotation_cycles_pillars_without_repeating_hooks(tmp_path):
                     {
                         "pillar": pillar,
                         "posts": [
-                            f"SECOND HOOK FOR {pillar.upper()} HERE"
-                        ]
-                        + good_thread()[1:],
+                            f"IF YOU WANT TO WIN AT {pillar.upper()}, "
+                            "STOP USING SHORT HOOKS."
+                        ] + good_thread()[1:],
                     },
                 ]
             ),

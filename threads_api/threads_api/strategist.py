@@ -9,13 +9,16 @@ decides, Nemotron writes, free fallbacks behind both):
   3. PIVOT: 2+ consecutive underperformers -> the prompt orders a
      strategy change (new angle/format/topic), recorded in state.
 
-The model has freedom to experiment: only API-hard constraints are
-enforced (<=500 chars, 2-7 posts, follow CTA). Hook style, topics
-and formats are its playground — views are the judge.
+The model chooses topics and angles, but the owner has locked the
+format: queue/STYLE.md, derived from the 50 all-time most-viewed posts,
+controls hook shapes, thread structure, and the CTA. Pivots may change
+only the subject or angle, never the format. API-hard constraints are
+also enforced (<=500 chars, 2-7 posts, follow CTA).
 """
 
 import datetime
 import json
+from collections import Counter
 from pathlib import Path
 
 from .config import Config
@@ -25,6 +28,8 @@ from .insights import engagement_of, views_of
 STRATEGY_PATH = Config.ROOT / "queue" / "strategy.json"
 NICHE_PATH = Config.ROOT / "queue" / "niche_leaders.md"
 NICHE_POSTS_PATH = Config.ROOT / "queue" / "niche_posts.json"
+STYLE_PATH = Config.ROOT / "queue" / "STYLE.md"
+TOP_ALL_TIME_PATH = Config.ROOT / "queue" / "top_all_time.json"
 
 # The account's niche. Every thread must live inside one of these.
 # Anything else (politics, crypto, general motivation, unrelated
@@ -68,6 +73,37 @@ def load_owner_brief(path=None):
             continue
         kept.append(line.rstrip())
     return "\n".join(kept).strip()
+
+
+def load_style_guide(path=None):
+    """Locked house style, derived from the all-time top 50.
+
+    This is the owner's permanent style lock: the hourly generator must
+    read it on every run, not just the manual ``write-thread`` command.
+    """
+    try:
+        text = Path(path or STYLE_PATH).read_text(encoding="utf-8")
+    except OSError:
+        return ""
+    return text.strip()
+
+
+def load_top_all_time(limit=10, path=None):
+    """Durable cache of the 50 most-viewed posts, ranked by views.
+
+    The hourly run must not re-fetch 500 posts to rediscover its best
+    formats. This file is a snapshot; refresh it deliberately when the
+    all-time ranking changes.
+    """
+    try:
+        data = json.loads(Path(path or TOP_ALL_TIME_PATH).read_text(
+            encoding="utf-8"))
+    except (ValueError, OSError):
+        return []
+    posts = data.get("posts", []) if isinstance(data, dict) else data
+    posts = [p for p in posts if isinstance(p, dict)]
+    posts.sort(key=lambda p: -(p.get("views") or 0))
+    return posts[:limit]
 
 
 def load_niche_posts(path=None, limit=8):
@@ -307,6 +343,139 @@ def classify_hook_type(text):
     return "statement"
 
 
+FORMAT_TARGETS = {
+    "caps_if_you_want": 4,
+    "caps_things": 3,
+    "sentence_statement": 2,
+    "sentence_story": 1,
+}
+FORMAT_LABELS = {
+    "caps_if_you_want": "CAPS IF YOU WANT",
+    "caps_things": "CAPS THINGS",
+    "sentence_statement": "sentence-case statement",
+    "sentence_story": "sentence-case story",
+}
+TOPIC_TARGETS = {
+    "career": 4,
+    "system-design": 3,
+    "sql": 2,
+    "flex": 1,
+}
+TOPIC_LABELS = {
+    "career": "career/senior",
+    "system-design": "system design/interviews",
+    "sql": "SQL/Postgres/ORM",
+    "flex": "backend/LeetCode flex",
+}
+TOPIC_KEYWORDS = {
+    "career": (
+        "senior", "career", "hiring", "resume", "manager", "years",
+        "engineer faster", "promotion", "job", "salary", "layoff",
+        "on-call", "team", "interviewer",
+    ),
+    "sql": (
+        "postgres", "sql", "orm", "uuid", "ulid", "ksuid", "index",
+        "indexes", "database", "query", "queries", "foreign key",
+        "redis", "innodb", "transaction", "jsonb", "bigint",
+        "buffer pool", "b-tree", "table",
+    ),
+    "flex": (
+        "leetcode", "dynamic programming", "coding interview",
+        "algorithm", "data structure", "ai ", "ai-", "coding assistant",
+        "copilot", "llm", "agent", "ai-written", "ai-generated",
+    ),
+    "system-design": (
+        "system design", "interview", "interviews", "design", "kafka",
+        "architecture", "scalab", "load balanc", "microservice",
+        "monolith",
+    ),
+}
+
+
+def classify_locked_format(text):
+    """Map a hook to one of the four locked formats."""
+    text = (text or "").strip()
+    upper = text.upper()
+    letters = [c for c in text if c.isalpha()]
+    caps = (
+        bool(letters)
+        and sum(c.isupper() for c in letters) / len(letters) > 0.7
+    )
+    if caps:
+        if upper.startswith("THINGS"):
+            return "caps_things"
+        if upper.startswith(("IF YOU WANT", "STOP")):
+            return "caps_if_you_want"
+        return "caps_if_you_want"
+    first = text.split()
+    if first and first[0].lower() in ("i", "my", "we", "our"):
+        return "sentence_story"
+    return "sentence_statement"
+
+
+def classify_topic_family(text):
+    """Primary topic family for style-balance accounting."""
+    lowered = (text or "").lower()
+    for topic in ("career", "sql", "flex", "system-design"):
+        if any(needle in lowered for needle in TOPIC_KEYWORDS[topic]):
+            return topic
+    return "flex"
+
+
+def style_balance(strategy, window=10):
+    """Recommend this hour's locked slot from the last N threads.
+
+    The account drifts when the model repeats its latest winning
+    template. This line makes the 7/3 format mix and 4/3/2/1 topic mix
+    explicit instead of relying on the model to count.
+    """
+    history = [
+        entry for entry in strategy.get("history", [])
+        if isinstance(entry, dict) and entry.get("texts")
+    ]
+    recent = history[-window:]
+    count = len(recent)
+    if not count:
+        return (
+            "STYLE BALANCE: no posted history yet. Start with CAPS IF YOU "
+            "WANT on career/senior, then follow the 10-thread rotation in "
+            "HOUSE STYLE."
+        )
+    formats = Counter(
+        classify_locked_format(entry["texts"][0]) for entry in recent
+    )
+    topics = Counter(
+        classify_topic_family(entry["texts"][0]) for entry in recent
+    )
+
+    def pick(targets, counts):
+        return max(
+            targets,
+            key=lambda key: (
+                targets[key] * count / 10 - counts.get(key, 0),
+                -counts.get(key, 0),
+            ),
+        )
+
+    fmt = pick(FORMAT_TARGETS, formats)
+    topic = pick(TOPIC_TARGETS, topics)
+    fmt_txt = ", ".join(
+        f"{FORMAT_LABELS[key]} {formats.get(key, 0)}"
+        for key in FORMAT_TARGETS
+    )
+    topic_txt = ", ".join(
+        f"{TOPIC_LABELS[key]} {topics.get(key, 0)}"
+        for key in TOPIC_TARGETS
+    )
+    return (
+        f"STYLE BALANCE (last {count} threads): formats {fmt_txt}; topics "
+        f"{topic_txt}. This hour's slot: {FORMAT_LABELS[fmt]} on "
+        f"{TOPIC_LABELS[topic]}. The TOPIC must stay in that family and the "
+        "HOOK must use that format. Pick a fresh subject inside it; do not "
+        "repeat the last subject."
+    )
+
+
 def all_time_winners(posts, now=None, limit=6):
     """Top posts by raw views across everything fetched, any age over
     3h. These are the proven types the loop must imitate."""
@@ -479,9 +648,10 @@ def build_prompt(scorecard, strategy, progress=None, posts=None):
     """Strategist prompt: scorecard in, thread + hypothesis out."""
     lines = [
         f"MISSION: reach {VIEWS_GOAL:,} views and {FOLLOWERS_GOAL:,} "
-        "followers. Be maximally aggressive: bold hooks, sharp debates, "
-        "high-volume testing. NEVER fake numbers, deceive, spam, or "
-        "harass. Win on hooks, formats, and volume.",
+        "followers. Be maximally aggressive inside the locked house style: "
+        "proven hooks, sharper angles, high-volume testing. NEVER fake "
+        "numbers, deceive, spam, or harass. Win on hooks, formats, and "
+        "volume.",
     ]
     if progress:
         followers = progress.get("followers")
@@ -504,11 +674,12 @@ def build_prompt(scorecard, strategy, progress=None, posts=None):
             f"You need {pace.get('followers_per_day_needed', 0):,.0f} new "
             f"followers/day and {pace.get('views_per_day_needed', 0):,.0f} "
             "views/day from here. Steady singles will NOT get there. "
-            "Swing for fences: pick the highest-variance play available "
-            "(hot debate, breaking niche news, contrarian lesson, open "
-            "loop), not the safest one. If anything broke in the niche "
-            "in the last 48h (new model, outage, layoffs, viral debate), "
-            "ride it this hour."
+            "Swing for fences inside the locked formats: pick the "
+            "highest-variance subject that fits the house style (career, "
+            "system design, SQL/Postgres), not the safest one. A sharper "
+            "angle on a proven format beats a new format. If anything broke "
+            "in the niche in the last 48h (new model, outage, layoffs, viral "
+            "debate), ride it this hour only if it fits the locked style."
         )
     lines += [
         f"Measured posts: {scorecard['sample_size']} "
@@ -526,9 +697,10 @@ def build_prompt(scorecard, strategy, progress=None, posts=None):
     all_time = scorecard.get("all_time", [])
     if all_time:
         lines.append(
-            "ALL-TIME WINNERS (your proven types — new threads must match "
-            "one of these types; name which in CHANGE. On PIVOT runs the "
-            "format ban above still governs hook shape):"
+            "ALL-TIME WINNERS (recent measured sample - new threads must "
+            "match one of these types; name which in CHANGE). The locked "
+            "all-time top 50 reference below is authoritative when this "
+            "sample disagrees:"
         )
         for winner in all_time:
             lines.append(
@@ -550,7 +722,8 @@ def build_prompt(scorecard, strategy, progress=None, posts=None):
         "1. One unusually useful original post beats filler: a sharp "
         "hook plus a concrete takeaway, example, or diagram. "
         "2. Think in series: when a topic pops, plan follow-ups that "
-        "deepen it, each ending with a question people want to answer. "
+        "deepen it; value posts may end with a question people want to "
+        "answer, but the final post is always the follow CTA. "
         "3. Replies earn reach: favor angles that invite specific "
         "comments, and keep the follow CTA earning the follow. "
         "4. Seven-day tests only: double down solely on posts beating "
@@ -591,9 +764,9 @@ def build_prompt(scorecard, strategy, progress=None, posts=None):
     brief = load_niche_brief()
     if brief:
         lines.append(
-            "NICHE LEADERS - imitate as-is. Pick ONE leader format below "
-            "and copy its hook shape, structure, and pacing exactly, "
-            "applied to our pillars. Do not blend formats:\n" + brief
+            "NICHE LEADERS - mine for topics, angles, and freshness only. "
+            "HOUSE STYLE controls format, hook shape, and thread structure; "
+            "where this brief conflicts, HOUSE STYLE wins:\n" + brief
         )
     owner = load_owner_brief()
     if owner:
@@ -602,9 +775,9 @@ def build_prompt(scorecard, strategy, progress=None, posts=None):
     proof = load_niche_posts()
     if proof:
         lines.append(
-            "NICHE PROOF - real posts, real numbers. The top earner sets "
-            "the bar: imitate its format mechanics exactly for your "
-            "pillar and topic:"
+            "NICHE PROOF - real posts, real numbers. Use these as topic and "
+            "angle evidence only; the locked HOUSE STYLE controls format "
+            "mechanics:"
         )
         for entry in proof:
             views = entry.get("views")
@@ -643,29 +816,53 @@ def build_prompt(scorecard, strategy, progress=None, posts=None):
     if scorecard["pivot"]:
         lines.append(
             "PIVOT MODE: the current strategy is failing. Change AT MOST "
-            "ONE factor (topic, hook style, format, or switch to an "
-            "untested niche-leader format from the brief) versus the "
-            "current hypothesis, keep everything else. Explain the change "
-            "in one line and cite the specific post IDs that prove it."
+            "ONE factor: the topic or angle. The house style is LOCKED: "
+            "same four hook formulas, same 5-post structure, same CTA, "
+            "even on a pivot. Do not switch to debate, question, or an "
+            "untested format. Explain the topic change in one line and cite "
+            "the specific post IDs that prove it."
         )
     elif not scorecard["ready"]:
         lines.append(
             "WARM-UP: too few measured posts to judge strategy. Post your "
-            "best guess from the playbook and say which factor you chose."
+            "best guess inside the locked style and say which topic family "
+            "you chose."
         )
     else:
         lines.append(
             "Double down on what works, vary topics so hooks never repeat. "
-            "Change at most one factor. One line on why, citing post IDs."
+            "Change at most one factor (topic or angle); format stays "
+            "locked. One line on why, citing post IDs."
+        )
+    proof = load_top_all_time(10)
+    if proof:
+        lines.append(
+            "LOCKED TOP-10 ALL-TIME HOOKS (reference only; never reuse or "
+            "closely paraphrase these lines. Copy the shape, not the words):"
+        )
+        for item in proof:
+            lines.append(
+                f"- {item.get('views', 0):,} views "
+                f"[{item.get('format', '?')} / {item.get('topic', '?')}]: "
+                f"{ascii_clean((item.get('text') or '')[:220])}"
+            )
+    style = load_style_guide()
+    if style:
+        lines.append(
+            "HOUSE STYLE - LOCKED FROM THE 50 ALL-TIME MOST-VIEWED POSTS. "
+            "This is not a suggestion. Topic and angle may vary; format may "
+            "not. Where any instruction above conflicts with this section, "
+            "this section wins:\n" + style
         )
     lines.append(
         "Output: first your thread as EXACTLY 5 posts separated by a line "
-        "with exactly --- and nothing else (every post <=500 chars). "
-        "CRITICAL: do NOT number the posts, do NOT write counters like "
-        "1/5 or 2/5 anywhere, just write the post text. Use plain ASCII "
-        "only: no em dashes, no en dashes, no fancy unicode, commas and "
-        "plain hyphens only. The LAST post is always exactly the follow "
-        "CTA: 'Follow @owlsky17 so you don't miss the next one.' "
+        "with exactly --- and nothing else (every post <=500 chars). Post 1 "
+        "is one locked hook formula. Posts 2-4 are value posts. Post 5 is "
+        "the follow CTA. CRITICAL: do NOT number the posts, do NOT write "
+        "counters like 1/5 or 2/5 anywhere, just write the post text. Use "
+        "plain ASCII only: no em dashes, no en dashes, no fancy unicode, "
+        "commas and plain hyphens only. The LAST post must contain the "
+        "follow CTA: 'Follow @owlsky17 so you don't miss the next one.' "
         "After the posts, on its own final line: HYPOTHESIS: <one line>."
     )
     return "\n".join(lines)
@@ -728,13 +925,14 @@ def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
         "direction. Do NOT write the thread, only the plan.",
         f"Mission: {VIEWS_GOAL:,} views and {FOLLOWERS_GOAL:,} followers. "
         "Aggressive but honest: never fake, deceive, spam, or harass.",
-        "YOUR FREEDOM, granted by the owner: you decide WHEN to post "
-        "(answer NO to sit out a dead hour) and HOW to post (any topic, "
-        "hook, or format). It lasts as long as views and followers come: "
-        "every judged thread is scored, sustained misses narrow you back "
-        "to proven formats. TAKEOVER ORDERS: prefer one unusually useful "
-        "original post over filler; think in follow-up series; favor "
-        "angles that invite specific comments.",
+        "YOUR JOB: choose the topic and angle. The house style is LOCKED "
+        "by the owner and is not yours to change: no new hook shape, no "
+        "new format, no new thread structure. Pick the subject inside the "
+        "locked mix. PIVOT means change the subject or angle, never the "
+        "format. You still decide WHEN to post (answer NO to sit out a "
+        "dead hour). TAKEOVER ORDERS: prefer one unusually useful original "
+        "post over filler; think in follow-up series; favor angles that "
+        "invite specific comments.",
     ]
     if progress and progress.get("followers") is not None:
         lines.append(
@@ -753,14 +951,18 @@ def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
             f"{ascii_clean(item['text'][:120])}"
         )
     lines.append(f"Current hypothesis: {ascii_clean(strategy['hypothesis'])}")
+    balance = style_balance(strategy)
+    if balance:
+        lines.append(balance)
     if scorecard.get("pivot"):
         recent = [ascii_clean(i["text"][:70]) for i in judged[-3:]]
         lines.append(
             "PIVOT MODE CONFIRMED. Your last directions kept the same "
             "topic family: " + " | ".join(recent) + ". "
-            "This run is BANNED from caps-listicle hooks and from these "
-            "topics. Use a story, question, debate, or confession format "
-            "on a DIFFERENT topic family."
+            "This run changes the topic or angle only. The locked formats "
+            "are still mandatory: choose a caps listicle or a sentence-case "
+            "technical post from HOUSE STYLE. Do not change the format to "
+            "force novelty. Different subject family, same winning shape."
         )
     lines.append(
         "Reply with ONLY these lines, no extra text:\n"
@@ -772,12 +974,39 @@ def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
         "use it, but then BREAKOUT below is REQUIRED>\n"
         "BREAKOUT: <none, or: why this off-pillar topic will go viral + "
         "which niche-proof entry it imitates>\n"
-        "HOOK: <hook formula name + one-line shape, e.g. 'debate hot take: "
-        "monoliths beat microservices for most teams'>\n"
-        "CHANGE: <what changes vs current hypothesis, or 'none'>\n"
+        "HOOK: <locked format + one-line shape. Use 'CAPS IF YOU WANT: ...', "
+        "'CAPS THINGS: ...', 'SENTENCE STATEMENT: ...', or "
+        "'SENTENCE STORY: ...'>\n"
+        "CHANGE: <topic or angle change vs current hypothesis, or 'none'. "
+        "Format changes are forbidden>\n"
         "HYPOTHESIS: <updated one-line hypothesis>\n"
-        "Style is fully yours: any hook shape, any format, any structure. "
-        "Only hard rules: plain ASCII, no counters, follow CTA last."
+        "Style is LOCKED: only the four formulas in HOUSE STYLE, always 5 "
+        "posts (hook, 3 value, CTA), always follow CTA last. Plain ASCII, "
+        "no counters, no new formats."
+    )
+    proof = load_top_all_time(10)
+    if proof:
+        lines.append(
+            "TOP-10 ALL-TIME PROOF (reference only; never reuse these "
+            "hooks or their opening phrases):"
+        )
+        for item in proof:
+            lines.append(
+                f"- {item.get('views', 0):,} views "
+                f"[{item.get('format', '?')} / {item.get('topic', '?')}]: "
+                f"{ascii_clean((item.get('text') or '')[:180])}"
+            )
+    style = load_style_guide()
+    if style:
+        lines.append(
+            "HOUSE STYLE - LOCKED FROM THE 50 ALL-TIME MOST-VIEWED POSTS. "
+            "Topic and angle may vary; format may not. Where any instruction "
+            "above conflicts with this section, this section wins:\n" + style
+        )
+    lines.append(
+        "FINAL FORMAT REMINDER: return ONLY the lines POST, TOPIC, BREAKOUT, "
+        "HOOK, CHANGE, HYPOTHESIS. No thread text. The HOOK line must name "
+        "one of the four locked formats."
     )
     raw = llm_chat(
         [{"role": "system",

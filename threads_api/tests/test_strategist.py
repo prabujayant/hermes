@@ -74,7 +74,8 @@ def test_prompt_includes_niche_leaders_brief(tmp_path):
         posts = [_post("winner", 500, 5)]
         prompt = build_prompt(evaluate(posts), {"hypothesis": "x"})
         assert "LEADER FORMAT XYZ" in prompt
-        assert "imitate as-is" in prompt.lower()
+        assert "mine for topics" in prompt.lower()
+        assert "HOUSE STYLE" in prompt
     finally:
         st.NICHE_PATH = real_path
 
@@ -165,7 +166,7 @@ def test_topic_overlap_detects_rewrites():
     assert hook_too_similar(c, []) is False
 
 
-def test_decide_prompt_bans_last_format_on_pivot():
+def test_decide_prompt_keeps_style_locked_on_pivot():
     from threads_api.strategist import decide_direction
 
     seen = {}
@@ -173,7 +174,8 @@ def test_decide_prompt_bans_last_format_on_pivot():
     def fake_chat(messages, max_tokens=400, temperature=0.7, model=None):
         seen["prompt"] = messages[-1]["content"]
         return ("POST: YES go\nTOPIC: backend caching\n"
-                "HOOK: story format\nCHANGE: new format\n"
+                "HOOK: SENTENCE STORY: cache stampede\n"
+                "CHANGE: new angle\n"
                 "HYPOTHESIS: stories win")
 
     scorecard = {"sample_size": 5, "median_vph": 5.0, "streak": 3,
@@ -184,7 +186,80 @@ def test_decide_prompt_bans_last_format_on_pivot():
                       "under": True},
                  ]}
     decide_direction(fake_chat, ["m"], scorecard, {"hypothesis": "x"})
-    assert "BANNED from caps-listicle" in seen["prompt"]
+    assert "PIVOT MODE CONFIRMED" in seen["prompt"]
+    assert "locked formats are still mandatory" in seen["prompt"]
+    assert "BANNED from caps-listicle" not in seen["prompt"]
+    assert "HOUSE STYLE - LOCKED" in seen["prompt"]
+
+
+def test_prompt_includes_locked_house_style():
+    posts = [_post("winner", 500, 5)]
+    prompt = build_prompt(evaluate(posts), {"hypothesis": "x"})
+    assert "HOUSE STYLE - LOCKED FROM THE 50 ALL-TIME MOST-VIEWED POSTS" in prompt
+    assert "IF YOU WANT" in prompt
+    assert "THINGS" in prompt
+    assert "Never fake numbers" in prompt
+    assert "LOCKED TOP-10 ALL-TIME HOOKS" in prompt
+
+
+def test_top_all_time_cache_has_fifty_ranked_posts():
+    from threads_api.strategist import load_top_all_time
+
+    top = load_top_all_time(limit=50)
+    assert len(top) == 50
+    assert top[0]["views"] == 6133
+    assert "UUID" in top[0]["text"]
+    assert all(a["views"] >= b["views"] for a, b in zip(top, top[1:]))
+    assert {p["format"] for p in top} >= {
+        "caps_if_you_want", "caps_things",
+        "sentence_statement", "sentence_story",
+    }
+
+
+def test_style_balance_starts_with_caps_career():
+    from threads_api.strategist import style_balance
+
+    line = style_balance({"history": []})
+    assert "CAPS IF YOU WANT" in line
+    assert "career/senior" in line
+
+
+def test_style_balance_moves_off_a_caps_only_run():
+    from threads_api.strategist import style_balance
+
+    hook = (
+        "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP "
+        "COUNTING YEARS."
+    )
+    history = [{"texts": [hook]} for _ in range(10)]
+    line = style_balance({"history": history})
+    assert "CAPS THINGS" in line
+    assert "system design/interviews" in line
+
+
+def test_style_balance_pushes_the_missing_story_slot():
+    from threads_api.strategist import style_balance
+
+    career_if = (
+        "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP "
+        "COUNTING YEARS."
+    )
+    career_things = (
+        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME "
+        "(SO PROVE THEM IN THE INTERVIEW):"
+    )
+    sql_statement = (
+        "Stop using UUIDs as primary keys in high-write tables. They "
+        "fragment the buffer pool and turn range scans into random I/O."
+    )
+    history = (
+        [{"texts": [career_if]}] * 4
+        + [{"texts": [career_things]}] * 3
+        + [{"texts": [sql_statement]}] * 3
+    )
+    line = style_balance({"history": history})
+    assert "sentence-case story" in line
+    assert "system design/interviews" in line
 
 
 def test_all_time_winners_rank_by_views_and_label_types():

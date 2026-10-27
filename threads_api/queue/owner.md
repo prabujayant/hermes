@@ -21,3 +21,6 @@ CHANNELS:
 # 5. Hard constraints (topics to never touch, claims to never make):
 CONSTRAINTS:
 - Never fake numbers, credentials, or employment history.
+
+# 6. Style lock (do not change):
+- Follow queue/STYLE.md exactly. It is locked from the 50 all-time most-viewed posts. Topic and angle may change; format may not.

@@ -166,6 +166,7 @@ def _cmd_post_smart(args):
         evaluate,
         finalize_thread,
         load_strategy,
+        load_top_all_time,
         record_run,
         save_strategy,
         track_progress,
@@ -245,6 +246,10 @@ def _cmd_post_smart(args):
             f"TOPIC: {direction['topic']}\n"
             f"HOOK: {direction['hook']}\n"
             f"CHANGE: {direction['change']}\n"
+            "\nThe direction controls topic and angle only. HOUSE STYLE "
+            "controls format. If the direction's hook shape is not one of "
+            "the four locked formulas, rewrite the hook into the closest "
+            "locked formula without changing the topic.\n"
         )
         if direction.get("breakout"):
             print(f"BREAKOUT play: {direction['breakout'][:150]}")
@@ -266,17 +271,20 @@ def _cmd_post_smart(args):
     if pivoted:
         prompt += (
             "\nPIVOT RUN: the last threads stayed in one topic family. "
-            "Do NOT write another caps-listicle hook on the same theme. "
-            "Use a story, question, debate, or confession format."
+            "Change the subject or angle only. The locked house style "
+            "stays: same four hook formulas, 5 posts, follow CTA last. "
+            "Do not switch formats."
         )
 
     system = (
         "You are the writer for a Threads account posting software "
         "engineering content. Your strategist (Luna) gives the direction; "
         "you OBEY it exactly as given: same topic, same hook shape, same "
-        "change. Within that obedience you have FULL freedom of "
-        "expression: voice, examples, stories, structure, rhythm. "
-        "Your only goal is views. Follow the output format exactly."
+        "change. The house style is locked by the owner: same four hook "
+        "formulas, 5-post structure, and follow CTA. Within that lock you "
+        "vary the subject, examples, numbers, and phrasing. Never change "
+        "the format. Your only goal is views. Follow the output format "
+        "exactly."
     )
     raw = llm_chat(
         [{"role": "system", "content": system},
@@ -287,6 +295,10 @@ def _cmd_post_smart(args):
     )
     print(f"Strategist model: {llm_module.last_model}")
     taken_sigs = {hook_signature(p.get("text") or "") for p in posts}
+    taken_sigs |= {
+        hook_signature(p.get("text") or "")
+        for p in load_top_all_time(limit=50)
+    }
     taken_sigs |= set(load_state().get("recent_hooks", []))
     recent_hooks = [
         h.get("hook_sig", "") for h in strategy.get("history", [])
@@ -465,7 +477,12 @@ def _load_style_guide():
     try:
         return path.read_text(encoding="utf-8")
     except OSError:
-        return "Hook ALL CAPS, no counters; replies sentence case; last post follows @owlsky17."
+        return (
+            "Locked from the all-time top 50: 7 of 10 threads are ALL-CAPS "
+            "listicles (IF YOU WANT / THINGS), 3 of 10 are sentence-case "
+            "technical statements or stories. 5 posts: hook, 3 value posts, "
+            "follow CTA. No counters. Plain ASCII."
+        )
 
 
 def _cmd_write_thread(args):
