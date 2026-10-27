@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A practical dependency-failure checklist will prompt readers to name which dependency they would test first.",
-  "pivots": 338,
+  "hypothesis": "Specific examples of measurable impact and broader ownership will prompt readers to name the strongest proof in their own promotion case.",
+  "pivots": 339,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T08:31:02.965337+00:00",
-      "pillar": "smart",
-      "hook_sig": "most ai coding advice assumes the model writes",
-      "texts": [
-        "Most AI coding advice assumes the model writes code and you review it. That model is broken. The real workflow is you architect, the model drafts, you verify, the model fixes, you ship. The bottleneck moved from typing to verification.",
-        "I learned this shipping a payment reconciliation job last month. The model wrote the happy path in 30 seconds. I spent four hours crafting property-based tests that caught three silent data-corruption bugs the model called \"edge cases.\" Verification is now the skill.",
-        "Lesson 1: Stop asking for code. Ask for test strategies first. \"Write property-based tests for a payment idempotency key generator\" produces better outcomes than \"write a payment idempotency key generator.\" The tests become the spec the model codes against.",
-        "Lesson 2: Treat every model output as a PR from a junior who hallucinates APIs. Read the diff. Run the tests. Check the error paths. The model does not know your schema, your retry policies, or your compliance requirements. You do. That is the job now.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Switching to contrarian lessons format (Notion co-founder style) on AI coding verification bottleneck \u2014 P24-P25 hit 6-7 views/hour on this topic vs P28-P30 at 0.2-0.8 views/hour on distributed systems, and Notion co-founder proved this format at 516k views.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5751,
-      "ids": [
-        "18071604275761878",
-        "17946730947357141",
-        "17949194661344047",
-        "18014872427971574",
-        "18128980792846256"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T09:01:17.218404+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18194231728392959"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-27T20:01:10.807840+00:00",
+      "pillar": "smart",
+      "hook_sig": "things that make your promotion case credible (beyond",
+      "texts": [
+        "THINGS THAT MAKE YOUR PROMOTION CASE CREDIBLE (BEYOND A LIST OF SHIPPED TICKETS):",
+        "Design docs that prevent rewrites.\n\nA senior engineer writes the doc that stops three teams from building the same thing twice. The artifact is the design. The outcome is months of wasted work that never happened.",
+        "Runbooks that let anyone on-call sleep.\n\nYou codified the failure modes, the commands, and the escalation path. The next incident resolves in five minutes instead of an hour. That reliability scales you.",
+        "Postmortems that change the system, not the blame.\n\nYou traced the root cause to a missing constraint, a bad default, or a silent dependency. The fix shipped. The same class of failure cannot recur. That is ownership.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific examples of measurable impact and broader ownership will prompt readers to name the strongest proof in their own promotion case.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 93,
+      "ids": [
+        "18122561170939575",
+        "18374145835244305",
+        "18118707352799046",
+        "18138071788649171",
+        "18075382592769769"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 71
+  "last_views": 93
 }
