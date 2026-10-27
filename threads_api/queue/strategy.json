@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Engineers earn trust by showing the measurement that ruled out a tempting component and the complexity that choice avoided.",
-  "pivots": 341,
+  "hypothesis": "Promotion cases earn trust when they connect engineering work to durable outcomes, not just a list of tasks completed.",
+  "pivots": 342,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T10:01:18.945675+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want behavioral rounds to remember you,",
-      "texts": [
-        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
-        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
-        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
-        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Switching to contrarian lessons format (Notion co-founder style) on AI coding verification bottleneck \u2014 P24-P25 hit 6-7 views/hour on this topic vs P28-P30 at 0.2-0.8 views/hour on distributed systems, and Notion co-founder proved this format at 516k views.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5776,
-      "ids": [
-        "18269463139305309",
-        "18114637937115119",
-        "17953438845316943",
-        "18251783044309639",
-        "18108979343626160"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T10:31:01.255548+00:00",
       "pillar": "smart",
@@ -1254,6 +1229,31 @@
         "18119946448956574"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-27T23:01:18.780721+00:00",
+      "pillar": "smart",
+      "hook_sig": "things a promotion committee can't tell from your",
+      "texts": [
+        "THINGS A PROMOTION COMMITTEE CAN'T TELL FROM YOUR TICKET HISTORY (SO SHOW THEM IN YOUR PROMOTION PACKET):",
+        "Scope you defined before a single ticket existed.\n\nThe committee sees JIRA-1247 shipped. They do not see that you wrote the RFC that killed three duplicate projects, aligned two teams on one data model, and cut six months of wasted work. Include the design doc link and the metric it moved.",
+        "Risk you caught while the feature was still a sketch.\n\nTickets record what launched. They hide the schema change you flagged in review that would have locked the payments table for hours at peak. Screenshot the PR comment, the EXPLAIN ANALYZE you ran, and the alternative you proposed that shipped instead.",
+        "People you unblocked without being asked.\n\nClosed tickets show your output. They miss the morning you rewrote the flaky integration test suite so five engineers stopped losing an hour a day. Quote the Slack thread where the team measured the time saved. That is staff-signal evidence.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Promotion cases earn trust when they connect engineering work to durable outcomes, not just a list of tasks completed.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 115,
+      "ids": [
+        "18066059957535028",
+        "17971750935160835",
+        "18208140415330108",
+        "18176596384450406",
+        "18081706499351669"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1263,5 +1263,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 109
+  "last_views": 115
 }
