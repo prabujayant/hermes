@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Promotion cases stand out when engineers show what they chose not to build, the evidence behind that choice, and the cost or risk avoided.",
-  "pivots": 340,
+  "hypothesis": "Engineers earn trust by showing the measurement that ruled out a tempting component and the complexity that choice avoided.",
+  "pivots": 341,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T09:31:00.290820+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to become a senior engineer",
-      "texts": [
-        "IF YOU WANT TO BECOME A SENIOR ENGINEER FASTER, STOP COUNTING YEARS.\n\nMEMORIZE THESE 5 LEVERS:",
-        "Own outcomes, not tickets.\n\nJuniors close tasks. Seniors move metrics. Ask what number your work changes.",
-        "Write the doc nobody wants to write.\n\nDesign docs, runbooks, postmortems. Visibility compounds faster than commits.",
-        "Delete code on purpose.\n\nEvery quarter, kill something: a flag, a service, dead code. Simplifiers get promoted.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Switching to contrarian lessons format (Notion co-founder style) on AI coding verification bottleneck \u2014 P24-P25 hit 6-7 views/hour on this topic vs P28-P30 at 0.2-0.8 views/hour on distributed systems, and Notion co-founder proved this format at 516k views.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5769,
-      "ids": [
-        "18420538756152676",
-        "18130047289698515",
-        "17961605199216177",
-        "18110123741214218",
-        "18113157638597327"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T10:01:18.945675+00:00",
       "pillar": "smart",
@@ -1254,6 +1229,31 @@
         "17890051410620572"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-27T22:01:20.728612+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to design systems that handle",
+      "texts": [
+        "IF YOU WANT TO DESIGN SYSTEMS THAT HANDLE 10X LOAD, STOP ADDING CACHES BEFORE YOU CAN NAME THE BOTTLENECK. MEMORIZE THESE 3 CHECKS:",
+        "Measure the p99 latency breakdown before writing a single cache key. Instrument the request path: network, serialization, database, external calls. If the database is 5ms and network is 50ms, a Redis layer saves 5ms and adds operational complexity. The bottleneck stays the network.",
+        "Run a load test with caching disabled. Compare throughput and latency at 1x, 5x, and 10x target load. If the database CPU saturates at 3x but the app servers idle, the database is the constraint. If the app servers saturate first, caching the database does nothing. Data beats assumptions.",
+        "Calculate the cache hit rate required to move the bottleneck. If 90% of requests hit a cold key, the cache adds latency without relief. Model the working set size, access pattern, and eviction policy. A 10M row hot set with 80% cache hit still hammers the database on 2M misses. Prove the math first.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Engineers earn trust by showing the measurement that ruled out a tempting component and the complexity that choice avoided.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 109,
+      "ids": [
+        "18120739889051075",
+        "18108626879362826",
+        "18116893469083228",
+        "18152469460558143",
+        "18119946448956574"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1263,5 +1263,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 106
+  "last_views": 109
 }
