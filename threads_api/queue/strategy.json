@@ -1,29 +1,8 @@
 {
-  "hypothesis": "Specific examples of measurable impact and broader ownership will prompt readers to name the strongest proof in their own promotion case.",
-  "pivots": 339,
+  "hypothesis": "Promotion cases stand out when engineers show what they chose not to build, the evidence behind that choice, and the cost or risk avoided.",
+  "pivots": 340,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T09:01:17.218404+00:00",
-      "pillar": "smart",
-      "hook_sig": "ai code review is the new bottleneck. not",
-      "texts": [
-        "AI code review is the new bottleneck. Not writing code, not testing, not deployments. The teams shipping 3x more PRs with AI are drowning in review debt they cannot clear. The model writes faster than any human can verify.",
-        "I watched a senior engineer spend four hours reviewing a PR that took twenty minutes to prompt. The model missed a race condition on a payment idempotency key. The review caught it. But the next PR had a similar gap. And the next. The review queue is now the critical path.",
-        "The old model: human writes, human reviews. Bottleneck was writing. The new model: AI writes, human reviews. Bottleneck moved downstream. Most teams have not adjusted staffing, tooling, or\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Switching to contrarian lessons format (Notion co-founder style) on AI coding verification bottleneck \u2014 P24-P25 hit 6-7 views/hour on this topic vs P28-P30 at 0.2-0.8 views/hour on distributed systems, and Notion co-founder proved this format at 516k views.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5758,
-      "ids": [
-        "18417063628080667",
-        "18110024852196514",
-        "17934424422145362"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T09:31:00.290820+00:00",
       "pillar": "smart",
@@ -1250,6 +1229,31 @@
         "18075382592769769"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-27T21:01:17.191266+00:00",
+      "pillar": "smart",
+      "hook_sig": "things that show senior judgment even when you",
+      "texts": [
+        "THINGS THAT SHOW SENIOR JUDGMENT EVEN WHEN YOU SHIP NO NEW FEATURE:",
+        "Kill a migrating feature flag that has been live for six months. The old path is stable, the new path has zero adoption, and the flag adds branching complexity to every deploy. Removing it cuts three conditional paths and eliminates a whole class of rollback risk.",
+        "Reject a rewrite that promises cleaner code but zero user impact. The existing module has two known bugs, both fixed in hotfixes last quarter. A rewrite introduces unknown bugs, consumes two sprints, and delays the feature that actually moves revenue. Senior judgment is saying no and shipping the feature instead.",
+        "Stop a premature abstraction before it spreads. Three callers use a helper differently. A shared interface would force two of them into awkward shapes and create a leaky contract. Copy the logic, let each caller evolve, and extract only when the pattern proves stable across six months.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Promotion cases stand out when engineers show what they chose not to build, the evidence behind that choice, and the cost or risk avoided.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 106,
+      "ids": [
+        "18151431583529322",
+        "17876874525650309",
+        "18090350372267807",
+        "18286620682294572",
+        "17890051410620572"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1263,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 93
+  "last_views": 106
 }
