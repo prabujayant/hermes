@@ -2,11 +2,10 @@ name: Threads hourly post
 # Publishes one bank thread per hour via threads_api post-hourly.
 
 on:
-  schedule:
-    # Twice hourly as backup (primary trigger is the external pinger).
-    # The 25-min guard keeps overlapping attempts from double-posting.
-    - cron: "7 * * * *"
-    - cron: "37 * * * *"
+  # Single hourly trigger: the external cron pinger (cron-job.org) calls
+  # workflow_dispatch at :00. GitHub's built-in schedule is intentionally
+  # disabled so this workflow starts at most once per hour. The 25-min
+  # guard still protects against overlapping manual runs double-posting.
   workflow_dispatch:
     inputs:
       force:
