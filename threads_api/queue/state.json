@@ -455,7 +455,8 @@
     "i spent six hours chasing a ghost bug",
     "i spent four hours debugging why my customer",
     "i spent three hours watching a healthy postgres",
-    "most postgres indexing advice you read is outdated,"
+    "most postgres indexing advice you read is outdated,",
+    "kubernetes is overkill for teams under fifty engineers."
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

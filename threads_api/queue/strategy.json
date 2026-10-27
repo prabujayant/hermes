@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Switched format from Matt Pocock pain-concept-fix to Notion co-founder contrarian lessons on Postgres indexing, keeping SQL pillar proven by P1 (481 views) and P2 (402 views).",
-  "pivots": 335,
+  "hypothesis": "Pivot topic from Postgres indexing to infrastructure architecture debate using niche-leader format #5 (debate hot takes), keeping the contrarian statement hook that drove 11k views on the monolith post and 481 views on P1.",
+  "pivots": 336,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T07:01:19.805531+00:00",
-      "pillar": "smart",
-      "hook_sig": "sql puzzle: why does adding one null to",
-      "texts": [
-        "SQL puzzle: why does adding one NULL to a NOT IN subquery make every row disappear?",
-        "create table users (id int, name text);\ncreate table orders (id int, user_id int);\n\ninsert into users values (1, 'alice'), (2, 'bob'), (3, 'carol');\ninsert into orders values (10, 1), (20, 2);\n\nselect name from users where id not in (select user_id from orders);\n-- returns carol",
-        "insert into orders values (30, null);\n\nselect name from users where id not in (select user_id from orders);\n-- returns zero rows",
-        "the invariant: NOT IN (subquery) means id <> every value in the subquery. in three-valued logic, id <> null is unknown, not true. unknown filters the row out. the fix is NOT EXISTS or add where user_id is not null to the subquery.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A practical SQL gotcha with a verifiable explanation will earn more saves and replies than broad backend",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 5747,
-      "ids": [
-        "17966128905198144",
-        "17925866532439802",
-        "18089879075260395",
-        "18138059083641805",
-        "18132379177760339"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T07:31:02.093489+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18081598817348592"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-27T17:09:14.226658+00:00",
+      "pillar": "smart",
+      "hook_sig": "kubernetes is overkill for teams under fifty engineers.",
+      "texts": [
+        "Kubernetes is overkill for teams under fifty engineers. The cognitive tax of operating a cluster, debugging networking, and tuning autoscaling exceeds the value for ninety percent of products. Most teams adopt it because vendors and conferences sell the dream, not because their traffic demands it.",
+        "I watched a ten-person startup burn six months configuring EKS, Helm charts, and service meshes for a CRUD app that peaked at two hundred requests per second. Their PostgreSQL instance handled the load on a db.r6g.large. The cluster added zero capacity and infinite operational surface area.",
+        "The alternative is boring and effective: a single Postgres database, a managed Redis, and a stateless API layer on Cloud Run, Fargate, or even a few EC2 instances behind an ALB. Deploy with GitHub Actions. Observe with CloudWatch or Datadog. Roll back in seconds. Zero cluster upgrades at 2am.",
+        "Teams that stay on boring infrastructure ship features while their peers debug CNI plugins. The complexity budget should go to product risk, not platform risk. What is the largest traffic you have served on boring infrastructure without Kubernetes?",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Pivot topic from Postgres indexing to infrastructure architecture debate using niche-leader format #5 (debate hot takes), keeping the contrarian statement hook that drove 11k views on the monolith post and 481 views on P1.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 51,
+      "ids": [
+        "18105554507368739",
+        "18109840913240931",
+        "18220255615351729",
+        "18095320475175087",
+        "18631539043065043"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 452
+  "last_views": 51
 }
