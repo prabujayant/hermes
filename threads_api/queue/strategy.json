@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete reliability angle in the locked caps listicle format may earn specific discussion about which dependency fails first.",
-  "pivots": 337,
+  "hypothesis": "A practical dependency-failure checklist will prompt readers to name which dependency they would test first.",
+  "pivots": 338,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T08:01:16.001218+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to pass system design interviews,",
-      "texts": [
-        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
-        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
-        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
-        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Contrarian lessons on AI coding (format #4) will outperform distributed systems topics because P24-P27 hit 7-16 views/hour vs P28-P30 at 0.3-0.9 views/hour, and the Notion co-founder proved this format at 516k views.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5751,
-      "ids": [
-        "18117142274021104",
-        "18433087861198962",
-        "18119331530093771",
-        "18108337523189289",
-        "18131895787798949"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T08:31:02.965337+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18212152342323379"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-27T19:01:16.548019+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to design systems that survive",
+      "texts": [
+        "IF YOU WANT TO DESIGN SYSTEMS THAT SURVIVE DEPENDENCY FAILURES, STOP DRAWING ONLY THE HAPPY PATH.\n\nMEMORIZE THESE 5 FAILURE CHECKS:",
+        "Set timeout budgets before you write client code.\n\nA 30-second default timeout turns a slow dependency into a cascade that kills your thread pool. Define connect, read, and total budgets per call site. Measure p99 latency in staging and set timeouts at 2x that number. Retries without budgets multiply the damage.",
+        "Circuit breakers protect the caller, not the callee.\n\nWrap every external call with a breaker that trips on error rate or latency threshold. Open state fails fast and saves your resources. Half-open probes with a single request before closing. Log every state transition so you see flapping in production, not in postmortems.",
+        "Bulkhead your dependency pools so one slow service cannot starve the rest.\n\nSeparate thread pools, connection pools, and queue limits per downstream. A payment gateway meltdown should not block your search autocomplete. Size each pool for the dependency's documented capacity, not your peak traffic. Monitor pool saturation as a top-level alert.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A practical dependency-failure checklist will prompt readers to name which dependency they would test first.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 71,
+      "ids": [
+        "17951975238054122",
+        "18193841542399796",
+        "18064504523554701",
+        "18124042046291813",
+        "18194231728392959"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 62
+  "last_views": 71
 }
