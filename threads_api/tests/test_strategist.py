@@ -221,7 +221,7 @@ def test_style_balance_starts_with_caps_career():
 
     line = style_balance({"history": []})
     assert "CAPS IF YOU WANT" in line
-    assert "career/senior" in line
+    assert "career" in line
 
 
 def test_style_balance_moves_off_a_caps_only_run():
@@ -234,7 +234,7 @@ def test_style_balance_moves_off_a_caps_only_run():
     history = [{"texts": [hook]} for _ in range(10)]
     line = style_balance({"history": history})
     assert "CAPS THINGS" in line
-    assert "system design/interviews" in line
+    assert "system-design" in line
 
 
 def test_style_balance_pushes_the_missing_story_slot():
@@ -259,7 +259,7 @@ def test_style_balance_pushes_the_missing_story_slot():
     )
     line = style_balance({"history": history})
     assert "sentence-case story" in line
-    assert "system design/interviews" in line
+    assert "system-design" in line
 
 
 def test_all_time_winners_rank_by_views_and_label_types():

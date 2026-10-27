@@ -370,10 +370,9 @@ def _cmd_post_smart(args):
     ) + [hook_signature(thread[0])]
     save_state(bank_state)
 
-    if hypothesis and not direction:
-        # No brain direction this run: writer's echo leads. Otherwise the
-        # brain's hypothesis (set above) stands authoritative and the
-        # writer's HYPOTHESIS line was format scaffolding only.
+    if hypothesis and not (direction or {}).get("hypothesis"):
+        # Brain gave no hypothesis (or failed entirely): the writer's
+        # echo leads. Otherwise the brain's hypothesis is authoritative.
         strategy["hypothesis"] = hypothesis[:300]
     record_run(strategy, "smart", thread, ids, run_at, pivoted,
                model=llm_module.last_model,

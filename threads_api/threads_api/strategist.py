@@ -362,10 +362,10 @@ TOPIC_TARGETS = {
     "flex": 1,
 }
 TOPIC_LABELS = {
-    "career": "career/senior",
-    "system-design": "system design/interviews",
-    "sql": "SQL/Postgres/ORM",
-    "flex": "backend/LeetCode flex",
+    "career": "career",
+    "system-design": "system-design",
+    "sql": "sql",
+    "flex": "backend/leetcode",
 }
 TOPIC_KEYWORDS = {
     "career": (
@@ -470,9 +470,9 @@ def style_balance(strategy, window=10):
     return (
         f"STYLE BALANCE (last {count} threads): formats {fmt_txt}; topics "
         f"{topic_txt}. This hour's slot: {FORMAT_LABELS[fmt]} on "
-        f"{TOPIC_LABELS[topic]}. The TOPIC must stay in that family and the "
-        "HOOK must use that format. Pick a fresh subject inside it; do not "
-        "repeat the last subject."
+        f"{TOPIC_LABELS[topic]}. The TOPIC line must start with that pillar "
+        "name and the HOOK must use that format. Pick a fresh subject inside "
+        "it; do not repeat the last subject."
     )
 
 
@@ -913,7 +913,7 @@ def repair_thread(posts):
 
 
 def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
-                     max_tokens=400, temperature=0.7):
+                     max_tokens=800, temperature=0.7):
     """Brain call: strategy direction only, no thread text.
 
     Returns {topic, hook, change, hypothesis}. Raises ValueError when
@@ -1026,11 +1026,20 @@ def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
     topic = field("TOPIC")
     pillar = topic.strip().split()[0].lower().rstrip(":") \
         if topic.strip() else ""
+    pillar = pillar.split("/")[0].split(",")[0]
     breakout = ""
     try:
         breakout = field("BREAKOUT")
     except ValueError:
         breakout = ""
+    try:
+        change = field("CHANGE")
+    except ValueError:
+        change = "none"
+    try:
+        hypothesis = field("HYPOTHESIS")
+    except ValueError:
+        hypothesis = ""
     if pillar not in ALLOWED_PILLARS:
         if not breakout or breakout.lower().startswith("none"):
             raise ValueError(
@@ -1044,8 +1053,8 @@ def decide_direction(llm_chat, models, scorecard, strategy, progress=None,
         "breakout": breakout,
         "topic": topic,
         "hook": field("HOOK"),
-        "change": field("CHANGE"),
-        "hypothesis": field("HYPOTHESIS"),
+        "change": change,
+        "hypothesis": hypothesis,
     }
 
 
