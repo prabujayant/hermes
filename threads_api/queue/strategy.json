@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Pivot topic from Postgres indexing to infrastructure architecture debate using niche-leader format #5 (debate hot takes), keeping the contrarian statement hook that drove 11k views on the monolith post and 481 views on P1.",
-  "pivots": 336,
+  "hypothesis": "A concrete reliability angle in the locked caps listicle format may earn specific discussion about which dependency fails first.",
+  "pivots": 337,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T07:31:02.093489+00:00",
-      "pillar": "smart",
-      "hook_sig": "most ai coding advice you read is six",
-      "texts": [
-        "Most AI coding advice you read is six months stale. The models changed, the tooling changed, the failure modes changed. Here is what actually holds up after shipping production features with assistants every day since January.",
-        "Lesson 1: Context window size is a trap. Feeding the whole repo makes the model hallucinate architecture that does not exist. The winning move is a hand-curated 200-line spec file that describes the exact interfaces, invariants, and error contracts the model must respect. The spec becomes the source of truth, not the codebase.",
-        "Lesson 2: Review velocity is the new bottleneck. You can generate three PRs in the time it takes to properly review one. The fix is not faster review, it is smaller generated diffs. Prompt for one function, one migration, one config change at a time. Treat the assistant like a junior who needs tight scope and immediate feedback.",
-        "Lesson 3: The model does not own the on-call rotation. You do. Every generated line that you cannot explain in a 3am incident is a liability. If the assistant writes a retry policy, you must know the backoff curve, the idempotency key strategy, and the exact failure modes it covers. No exceptions.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Contrarian lessons on AI coding (format #4) will outperform distributed systems topics because P24-P27 hit 7-16 views/hour vs P28-P30 at 0.3-0.9 views/hour, and the Notion co-founder proved this format at 516k views.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5749,
-      "ids": [
-        "17928844140182181",
-        "18107046182615180",
-        "18077114963449949",
-        "18098408123395685",
-        "17986421136091616"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T08:01:16.001218+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18631539043065043"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-27T18:01:17.365366+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want your system design to survive",
+      "texts": [
+        "IF YOU WANT YOUR SYSTEM DESIGN TO SURVIVE A DEPENDENCY FAILURE, STOP ASSUMING EVERY SERVICE STAYS AVAILABLE. MEMORIZE THESE 5 FAILURE MOVES:",
+        "Set timeouts on every external call and retry with exponential backoff\n\nA missing timeout hangs your thread pool until the dependency recovers. Exponential backoff with jitter prevents thundering herd when the dependency comes back.",
+        "Wrap remote calls in a circuit breaker that trips after repeated failures\n\nWhen the breaker opens, fail fast and skip the call entirely. This protects your service from wasting resources on a down dependency and gives the dependency room to recover.",
+        "Design fallback responses so the user sees degraded function instead of an error\n\nCache the last good response, return a stale read, or show a static placeholder. The interviewer wants to see you optimize for user experience during partial outages.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete reliability angle in the locked caps listicle format may earn specific discussion about which dependency fails first.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 62,
+      "ids": [
+        "18093296117678606",
+        "18105827255568736",
+        "17873595876649486",
+        "17893410486444579",
+        "18212152342323379"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 51
+  "last_views": 62
 }
