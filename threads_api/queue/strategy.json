@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Specific examples of why an apparently indexed JSONB query still scans the table can earn saves from Postgres developers.",
-  "pivots": 361,
+  "hypothesis": "Concrete choices about what to preserve and shed during dependency failures can help candidates explain resilience beyond drawing boxes.",
+  "pivots": 362,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T00:01:18.859870+00:00",
-      "pillar": "smart",
-      "hook_sig": "ai coding assistants don't make you a senior",
-      "texts": [
-        "AI coding assistants don't make you a senior engineer. They make you a faster junior. Change my mind.",
-        "The senior leap isn't syntax speed. It's judgment: knowing what not to build, spotting the design that survives load, owning the failure domain. Copilot writes the happy path. You still own the 2am page.",
-        "I've seen devs ship 3x features with Cursor but still panic when the database locks up. The tool didn't teach them backpressure, idempotency, or how to say no to a bad req. Those reps only come from scars.",
-        "The market pays for reliability judgment, not keystroke velocity. If your interview prep is \"prompt engineering,\" you're optimizing the wrong variable. What's the last production incident you debugged without AI?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Debate hot take on AI vs senior judgment (format #5) taps a live controversy with high reply potential, pivots off the UUID/infra losing streak, and targets the career pillar where caps-listicles proved 481-893 view ceilings.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 6031,
-      "ids": [
-        "17883545805528430",
-        "18116984005824597",
-        "17929048137182423",
-        "18390380857161713",
-        "18009827642978414"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T00:31:02.304472+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "18450788188130052"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T19:01:15.935373+00:00",
+      "pillar": "smart",
+      "hook_sig": "things your system design diagram can't show (so",
+      "texts": [
+        "THINGS YOUR SYSTEM DESIGN DIAGRAM CAN'T SHOW (SO DEFEND THEM IN THE INTERVIEW):",
+        "What happens when the payment gateway times out at Black Friday traffic. Your diagram shows a happy path. The interviewer wants to hear which user-facing feature you kill first and how you keep checkout alive.",
+        "How you decide between degrading search relevance versus dropping analytics events when the ML service melts. Draw the latency budget. Show the circuit breaker config. Name the metric that triggers the shed.",
+        "That your cache warming strategy survives a cold start after a regional outage. Diagram the TTL cascade. Explain the backoff. Prove you have run the chaos experiment and measured the recovery window.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Concrete choices about what to preserve and shed during dependency failures can help candidates explain resilience beyond drawing boxes.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 306,
+      "ids": [
+        "18127149740477907",
+        "18136990732647434",
+        "17909737353589362",
+        "17914068216489044",
+        "18132082975693409"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 300
+  "last_views": 306
 }

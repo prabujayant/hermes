@@ -481,7 +481,8 @@
     "if you want to pass system design interviews,",
     "reviewing every important change yourself makes you a",
     "i wrapped a payment confirmation in a transaction",
-    "a gin index on jsonb does not speed"
+    "a gin index on jsonb does not speed",
+    "things your system design diagram can't show (so"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
