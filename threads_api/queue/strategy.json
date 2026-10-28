@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete account of how external calls inside Postgres transactions create lock contention will beat broad reliability advice without relying on invented metrics.",
-  "pivots": 348,
+  "hypothesis": "A concrete guide to bounded queues and overload control will outperform broad scaling advice by showing how to prevent backlog from turning a spike into prolonged failure.",
+  "pivots": 349,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T13:31:04.446988+00:00",
-      "pillar": "smart",
-      "hook_sig": "production confession: i blamed a slow query; the",
-      "texts": [
-        "production confession: I blamed a slow query; the real problem was a transaction nobody had closed",
-        "the dashboard showed p95 latency climbing from 40ms to 2.3s over four hours. the usual suspects: missing index, plan regression, lock contention. I spent two hours EXPLAIN ANALYZE-ing the hot path, adding a partial index, watching latency barely budge. the query looked fine on paper.",
-        "then I checked pg_stat_activity and found a session idle in transaction from the batch job that ran at 02:00. it had opened a cursor, processed 50k rows, then crashed before COMMIT. the transaction stayed open for six hours. every UPDATE on that table created dead tuples vacuum could not clean.",
-        "autovacuum ran three times but skipped the table because the old snapshot pinned the horizon. table bloat grew 400 percent. the fix was a single pg_terminate_backend call. latency dropped to 45ms in seconds. the index I added was useless.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 5842,
-      "ids": [
-        "18178874800445342",
-        "17975404679939908",
-        "17891438190456493",
-        "18097021490442037",
-        "18135275803740877"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T14:01:19.381644+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "18021378314945654"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T06:01:14.898193+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to design systems that recover",
+      "texts": [
+        "IF YOU WANT TO DESIGN SYSTEMS THAT RECOVER FROM TRAFFIC SPIKES, STOP TREATING QUEUES AS EXTRA CAPACITY.\n\nMEMORIZE THESE 5 MOVES:",
+        "Set a hard queue bound and reject early.\n\nAn unbounded queue turns a traffic spike into an OOM crash. A bounded queue with HTTP 429 or 503 lets the caller retry with backoff. The queue length becomes a signal, not a buffer.",
+        "Admit work at the edge before it touches state.\n\nA gateway that checks concurrency limits, rate limits, and dependency health can shed load in milliseconds. Once a request holds a database connection or a row lock, the cost of rejection has already been paid.",
+        "Reserve recovery capacity in every tier.\n\nRun workers at 70 percent utilization so the remaining 30 percent can drain the queue when the spike ends. If every tier runs hot, the system stays in overload until manual intervention.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete guide to bounded queues and overload control will outperform broad scaling advice by showing how to prevent backlog from turning a spike into prolonged failure.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 235,
+      "ids": [
+        "18140784541716201",
+        "17967543960198044",
+        "18112585492987965",
+        "17986015136895561",
+        "18103343498379027"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 213
+  "last_views": 235
 }

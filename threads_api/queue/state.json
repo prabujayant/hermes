@@ -468,7 +468,8 @@
     "a webhook consumer is not retry-safe just because",
     "retries do not make a write safe. without",
     "an idempotency key without a unique index is",
-    "a payment service held a row lock on"
+    "a payment service held a row lock on",
+    "if you want to design systems that recover"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
