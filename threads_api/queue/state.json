@@ -471,7 +471,8 @@
     "a payment service held a row lock on",
     "if you want to design systems that recover",
     "a missing index on a foreign key column",
-    "things that quietly kill a system design interview:"
+    "things that quietly kill a system design interview:",
+    "if you want to design caches that survive"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

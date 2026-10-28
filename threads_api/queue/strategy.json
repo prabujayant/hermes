@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete system-design interview failure mode may outperform another database or retry-safety post by showing how unbounded queue growth turns a traffic spike into sustained latency.",
-  "pivots": 351,
+  "hypothesis": "A practical hot-key checklist may outperform another retry or queue failure post by giving system-design candidates concrete ways to spot and mitigate uneven traffic.",
+  "pivots": 352,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T15:01:23.763053+00:00",
-      "pillar": "smart",
-      "hook_sig": "most teams add distributed tracing before they have",
-      "texts": [
-        "Most teams add distributed tracing before they have a single alert that wakes the right person at 3am. The tooling budget went to spans, the on-call rotation still gets paged for disk full.",
-        "A real failure mode: checkout latency spikes 400ms. Your traces show 47 spans across 6 services. Your alert fires on p99 > 500ms. The pager goes to the whole backend team. Nobody knows which service owns the regression. You spend 40 minutes correlating dashboards.",
-        "The fix was a 5-line alert on the payment service error rate. It would have fired 3 minutes after deploy. The tracing stack cost $2k/month and two sprints to instrument. The alert cost ten minutes and catches the next five incidents.",
-        "Observability vendors sell you the ability to ask any question. Production needs you to answer the only question that matters: what broke and who owns it. Name the observability tool you regret adding and what alert replaced it.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete, defensible backend hot take will earn more replies than broad caps-listicles after the recent underperforming streak.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 5872,
-      "ids": [
-        "18124237898312556",
-        "18145110139558813",
-        "17911253895550378",
-        "18040135793646756",
-        "18023586362946487"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T15:31:05.426883+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "18108012322980923"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T09:01:18.871174+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to design caches that survive",
+      "texts": [
+        "IF YOU WANT TO DESIGN CACHES THAT SURVIVE REAL TRAFFIC, STOP ASSUMING REQUESTS ARE EVENLY DISTRIBUTED. MEMORIZE THESE 5 HOT-KEY CHECKS:",
+        "Measure key-frequency distribution before you cache.\n\nA single user id or product sku can absorb 80 percent of requests. Log the top-10 keys per minute and graph their share. If the head exceeds 30 percent, your cache tier is a hot-key amplifier, not a shield.",
+        "Protect the backend with local L2 and request coalescing.\n\nA 10ms in-process TTL on the hottest key cuts origin load by orders of magnitude. Coalesce concurrent misses so only one request fetches while the rest wait. The pattern turns a thundering herd into a single round trip.",
+        "Size eviction windows to the skew, not the dataset.\n\nLRU on a flat keyspace evicts the wrong data when one key dominates. Use segmented LRU or LFU with a tiny hot segment for the top 0.1 percent of keys. The cold segment absorbs churn without evicting the head.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A practical hot-key checklist may outperform another retry or queue failure post by giving system-design candidates concrete ways to spot and mitigate uneven traffic.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 204,
+      "ids": [
+        "18117964181045285",
+        "18115546168855526",
+        "17882188383630244",
+        "18131170666813123",
+        "17916744447550030"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 198
+  "last_views": 204
 }
