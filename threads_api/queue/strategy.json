@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete SQL-level fix for duplicate writes (unique constraint on idempotency key) will outperform broad reliability advice because it gives a copy-pasteable solution to a silent data-corruption bug that hits every payments/webhook team. Pivot from system design/career to SQL/Postgres/ORM per rota",
-  "pivots": 347,
+  "hypothesis": "A concrete account of how external calls inside Postgres transactions create lock contention will beat broad reliability advice without relying on invented metrics.",
+  "pivots": 348,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T13:01:20.495264+00:00",
-      "pillar": "smart",
-      "hook_sig": "--- i spent three weeks chasing a phantom",
-      "texts": [
-        "---\nI spent three weeks chasing a phantom bug in Postgres connection pooling. The app kept throwing \"too many connections\" at random. Not during load tests, not on Mondays. Random.",
-        "I checked every config file, every pooler setting, every connection limit. All green. The connections were being held open by something I could not see.",
-        "The twist: the leak only happened when the model ran a specific query pattern. AI-generated code that opened connections but never closed them, because the retry logic fired on a timeout that never actually happened.",
-        "The fix was not tuning pool sizes. It was adding idempotency keys to every mutating query and killing retries that had no business retrying. I wrote a tiny middleware that rejected duplicate requests at the gateway level.",
-        "Most AI coding advice assumes the model writes clean code that follows your patterns. It does not. You need guardrails, not generators.\nFollow @owlsky17 so you don't miss the next one.\n---"
-      ],
-      "model": "poolside/laguna-s-2.1:free",
-      "hypothesis": "Pivot to story-confession format (P26, P28) with concrete Postgres production lesson, replacing failing caps-listicle hooks.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5840,
-      "ids": [
-        "18113641961124834",
-        "18109231870917646",
-        "18132096814827692",
-        "18133806796671033",
-        "18119142382967526"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T13:31:04.446988+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "18118921217097643"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T05:01:15.835133+00:00",
+      "pillar": "smart",
+      "hook_sig": "a payment service held a row lock on",
+      "texts": [
+        "A payment service held a row lock on the orders table while calling a fraud-check API. The API averaged 800ms but occasionally spiked to 12s. During the spike 200 writers queued behind the single lock. P99 write latency jumped from 4ms to 9s.",
+        "The lock was acquired by UPDATE orders SET status='pending' WHERE id=?. The transaction stayed open while the HTTP client waited for the fraud response. Every concurrent order for the same user blocked on that row. No deadlock, just a convoy.",
+        "The queue depth metric on the database connection pool showed the real damage. Normal pool wait was 2ms. During the fraud API outage it hit 8.4s. The application looked healthy, CPU low, query time 2ms, but every request sat in the pool queue.",
+        "Move the external call outside the transaction. Write the order with status='fraud_check_pending', commit, then call the API. On response, update to 'approved' or 'rejected' in a new short transaction. The row lock now lasts 3ms instead of 800ms.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete account of how external calls inside Postgres transactions create lock contention will beat broad reliability advice without relying on invented metrics.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 213,
+      "ids": [
+        "18091707488238492",
+        "18092700446212632",
+        "18168232543473114",
+        "18067304399788520",
+        "18021378314945654"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 162
+  "last_views": 213
 }
