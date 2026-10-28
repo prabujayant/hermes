@@ -1,33 +1,8 @@
 {
-  "hypothesis": "First-person production pain with measured before/after numbers drives saves and profile clicks; the external-call-in-transaction pattern is a known senior-engineer trap that invites \"seen this\" replies.",
-  "pivots": 360,
+  "hypothesis": "Specific examples of why an apparently indexed JSONB query still scans the table can earn saves from Postgres developers.",
+  "pivots": 361,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T20:31:07.190572+00:00",
-      "pillar": "smart",
-      "hook_sig": "uuidv7 is not automatically better than bigint. choose",
-      "texts": [
-        "UUIDv7 is not automatically better than bigint. Choose based on write patterns, index size, and ID-generation needs.",
-        "Most teams pick UUIDv7 for global uniqueness without coordination. But if your writes are single-region and high-volume, sequential bigint avoids the 16-byte index bloat and keeps the B-tree right-heavy. The page splits on random UUIDv4 killed our ingest throughput. UUIDv7 fixes the clustering, but the width penalty remains.",
-        "Index size matters more than people admit. A 16-byte key doubles the internal pages versus 8-byte bigint. On a 500M-row events table that meant 40 GB extra RAM for the hot index. We measured 15 percent slower range scans and 2x buffer pool pressure. If you never shard, bigint wins on density.",
-        "ID generation is the hidden decision factor. UUIDv7 lets clients generate IDs offline, great for mobile sync or event sourcing. Bigint needs a central sequence or hi-lo allocator. We migrated a billing ledger from UUIDv4 to bigint with a 64-bit snowflake shard ID embedded. Zero coordination, half the storage. What migration path did you take and what surprised you?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete, honest decision rule on UUIDv7 versus bigint can earn replies from engineers with real migration experience and outperform broad infrastructure hot takes.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 6014,
-      "ids": [
-        "17880679845549164",
-        "18125782774683507",
-        "18600516010065978",
-        "17974396518155622",
-        "18154106506567140"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T00:01:18.859870+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,25 @@
         "17988495647878372"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T18:01:20.206120+00:00",
+      "pillar": "smart",
+      "hook_sig": "a gin index on jsonb does not speed",
+      "texts": [
+        "A GIN index on JSONB does not speed up every JSONB filter. Queries using ->> may need an expression index, or Postgres can scan every row.",
+        "GIN indexes optimize containment and existence operators like @> and ?. The ->> operator extracts text, which Postgres cannot map to the\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific examples of why an apparently indexed JSONB query still scans the table can earn saves from Postgres developers.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 300,
+      "ids": [
+        "17902424640604747",
+        "18450788188130052"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 288
+  "last_views": 300
 }
