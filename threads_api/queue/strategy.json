@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Engineers increase their impact by spreading review context and decision-making instead of becoming the sole gatekeeper.",
-  "pivots": 359,
+  "hypothesis": "First-person production pain with measured before/after numbers drives saves and profile clicks; the external-call-in-transaction pattern is a known senior-engineer trap that invites \"seen this\" replies.",
+  "pivots": 360,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T20:01:21.449550+00:00",
-      "pillar": "smart",
-      "hook_sig": "stop using uuidv7 as a default primary key.",
-      "texts": [
-        "Stop using UUIDv7 as a default primary key. It solves a problem most teams never have and creates two they always will: wider indexes and slower inserts on hot tables.",
-        "The timestamp prefix helps B-tree locality, but the 48-bit random suffix still fragments pages under high write throughput. On a 500-row-per-second table, that fragmentation shows up as 30 percent more index pages and measurable insert latency within weeks.",
-        "The usual defense is \"but distributed inserts.\" If you genuinely have multiple write leaders generating IDs without coordination, fine. For the other 95 percent of apps with a single Postgres primary, a bigint identity gives you denser indexes, faster range scans, and zero coordination cost.",
-        "Last month I migrated a 200M-row events table from UUIDv7 to bigint. Index size dropped 38 percent. P95 insert latency dropped from 12ms to 4ms. The only thing that broke was a downstream analytics job expecting UUIDs, fixed with a generated column.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Debate hot-take on UUIDv7 vs bigint (niche leader #5 format) targets a concrete schema decision with measurable results, inviting replies from teams who migrated or disagree \u2014 highest-variance play to break the underperform streak.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 6008,
-      "ids": [
-        "18034278272884961",
-        "18109482881351773",
-        "18055104413606259",
-        "17948772420347994",
-        "18032054399906675"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T20:31:07.190572+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "17987028765088572"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T17:01:24.363356+00:00",
+      "pillar": "smart",
+      "hook_sig": "i wrapped a payment confirmation in a transaction",
+      "texts": [
+        "I wrapped a payment confirmation in a transaction that called a fraud-check API. The HTTP request took 12 seconds. During that hold the row lock on the orders table blocked every new checkout. Revenue dropped 18 percent in the hour before we killed the deploy.",
+        "The lock is not released until the transaction commits or rolls back. Postgres holds row-level locks for the full duration. An external call turns a millisecond critical section into seconds of serialization. No index or hardware fixes that.",
+        "We moved the fraud check before BEGIN. The service writes a pending order, calls the API, then opens a short transaction to flip the status. Lock hold dropped from 12 seconds to 3 milliseconds. Checkout p99 latency fell from 8.4 seconds to 42 milliseconds.",
+        "If the external service is down you still need idempotency and a retry queue. The pattern is: reserve locally, call out, confirm locally. Never let the database wait on the network.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "First-person production pain with measured before/after numbers drives saves and profile clicks; the external-call-in-transaction pattern is a known senior-engineer trap that invites \"seen this\" replies.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 288,
+      "ids": [
+        "17992479630112902",
+        "18129546707481522",
+        "18085974179708160",
+        "18188814865407138",
+        "17988495647878372"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 282
+  "last_views": 288
 }
