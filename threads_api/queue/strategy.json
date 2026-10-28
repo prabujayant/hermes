@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Promotion cases earn trust when they connect engineering work to durable outcomes, not just a list of tasks completed.",
-  "pivots": 342,
+  "hypothesis": "Reading input constraints first helps candidates eliminate unsuitable approaches before they write code.",
+  "pivots": 343,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T10:31:01.255548+00:00",
-      "pillar": "smart",
-      "hook_sig": "your orm is not your schema. treating it",
-      "texts": [
-        "Your ORM is not your schema. Treating it like one is why your migrations break in production.",
-        "Last quarter a team shipped a \"quick\" nullable column via their ORM. Six weeks later the same column caused a full table lock on 50M rows during a deploy. The ORM had silently added a default value that rewrote the entire table. No one reviewed the generated SQL.",
-        "\"Just let the ORM handle it\" works until it doesn't. The ORM optimizes for developer speed, not database safety. It will choose convenience over correctness every time. Your schema is the contract. The ORM is just one client.",
-        "Rule: every migration gets reviewed as raw SQL before it touches staging. If you cannot read the DDL your ORM generates, you do not own your schema. What is the last migration you actually read?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Switching to contrarian lessons format (Notion co-founder style) on AI coding verification bottleneck \u2014 P24-P25 hit 6-7 views/hour on this topic vs P28-P30 at 0.2-0.8 views/hour on distributed systems, and Notion co-founder proved this format at 516k views.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5791,
-      "ids": [
-        "18077793485744051",
-        "17894120235439738",
-        "18343375177249108",
-        "18143671366717896",
-        "17912114835510323"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T11:01:14.528120+00:00",
       "pillar": "smart",
@@ -1254,6 +1229,31 @@
         "18081706499351669"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T00:01:18.133885+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to solve leetcode mediums faster,",
+      "texts": [
+        "IF YOU WANT TO SOLVE LEETCODE MEDIUMS FASTER, STOP CODING BEFORE YOU READ THE CONSTRAINTS.\n\nMEMORIZE THESE 5 CLUES:",
+        "N squared with N up to 2000 means O(N^2) passes. N up to 10^5 kills quadratic. Count the zeros before you pick two pointers or a hash map.",
+        "Space limit of O(1) rules out hash maps and recursion stacks. If the array is sorted or can be sorted in place, two pointers or binary search becomes the only legal move.",
+        "Values bounded by 10^4 or 10^5 invite counting sort, bucket sort, or frequency arrays. A 10^9 bound kills counting and forces comparison-based or bitwise tricks.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Reading input constraints first helps candidates eliminate unsuitable approaches before they write code.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 124,
+      "ids": [
+        "18133043635780784",
+        "17952816600320121",
+        "18655338919049973",
+        "18119896909973754",
+        "17875656327638148"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1263,5 +1263,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 115
+  "last_views": 124
 }
