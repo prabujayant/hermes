@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A practical hot-key checklist may outperform another retry or queue failure post by giving system-design candidates concrete ways to spot and mitigate uneven traffic.",
-  "pivots": 352,
+  "hypothesis": "A practical guide to documenting scope, measurable impact, and leverage may prompt useful discussion from engineers preparing promotion cases.",
+  "pivots": 353,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T15:31:05.426883+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want your side project to survive,",
-      "texts": [
-        "IF YOU WANT YOUR SIDE PROJECT TO SURVIVE, STOP ADDING FEATURES.\n\nMEMORIZE THESE 5 RULES:",
-        "Ship to one user first.\n\nYourself counts. Real usage teaches more than ten planned features.",
-        "Boring tech wins weekends.\n\nMonolith, Postgres, one host. Excitement is for work hours.",
-        "Log progress in public.\n\nWeekly demos beat yearly launches. Accountability ships products.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete, defensible backend hot take will earn more replies than broad caps-listicles after the recent underperforming streak.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5928,
-      "ids": [
-        "18115296584021471",
-        "17922841614445373",
-        "17992046571107065",
-        "17873515182639465",
-        "18118690010039620"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T16:01:17.821632+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "17916744447550030"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T10:01:17.679866+00:00",
+      "pillar": "smart",
+      "hook_sig": "things a promotion packet can't prove from your",
+      "texts": [
+        "THINGS A PROMOTION PACKET CAN'T PROVE FROM YOUR TICKET COUNT (SO SHOW THE OUTCOME):",
+        "Scope that spans teams and quarters\n\nA ticket shows a task finished. A design doc that aligns three teams on a migration path shows you operate at staff level. Include the doc and the decision log.",
+        "Metrics you moved, not tickets you closed\n\nJuniors report completed work. Seniors report changed numbers: latency cut 40%, error rate halved, on-call pages dropped to zero. Attach the dashboards.",
+        "Judgment when the happy path breaks\n\nThe packet must show how you handled the incident that wasn't in the sprint. Your runbook update, the rollback call, the postmortem you led. That is the signal.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A practical guide to documenting scope, measurable impact, and leverage may prompt useful discussion from engineers preparing promotion cases.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 219,
+      "ids": [
+        "18467906428189644",
+        "18110901701628722",
+        "17946425985086782",
+        "18173717329415570",
+        "18117303299096572"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 204
+  "last_views": 219
 }
