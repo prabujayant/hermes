@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Switching to a sentence-case technical statement on a high-impact SQL/Postgres operational topic (connection pool wait time) will break the underperform streak because the all-time top post (6,133 views) uses this exact formula on a similar mechanism-driven subject.",
-  "pivots": 344,
+  "hypothesis": "A precise backend reliability lesson may earn more engagement than another underperforming system-design or career angle.",
+  "pivots": 345,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T11:31:06.463381+00:00",
-      "pillar": "smart",
-      "hook_sig": "most backend advice you read assumes 2015 constraints.",
-      "texts": [
-        "Most backend advice you read assumes 2015 constraints. Single-threaded event loops, synchronous ORMs, and manual connection pooling were the default. The hardware changed, the runtimes changed, the failure modes changed. Here is what actually holds up after shipping on modern Node, Go, and Postgres in production.",
-        "The \"stateless service\" dogma ignores that your database connection pool is state. Every cold start pays a handshake tax. Every deploy drains the pool. Pin connections to the process lifecycle, reuse them across requests, and watch p99 latency drop 40 percent without a single code change.",
-        "\"Just add an index\" is the new \"just add a cache.\" Partial indexes on boolean flags, expression indexes on JSONB paths, and covering indexes that eliminate heap fetches do more for throughput than read replicas. Run `EXPLAIN ANALYZE` on your slowest query, then build the index that makes the plan disappear.",
-        "Distributed tracing is not observability. It is a map of where you wasted time. The signal that prevents incidents is structured logs with correlation IDs, error budgets tied to SLOs, and alerts that fire on symptom not cause. Traces are for postmortems. Logs are for 3am pages.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Pivot from debate hot takes to contrarian lessons format (Notion co-founder style) on backend engineering fundamentals \u2014 proven 516k views for niche leader, matches all-time winner pillar, changes only format while keeping high-signal topic.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5808,
-      "ids": [
-        "18181155334430286",
-        "17890390017653798",
-        "18122401849998211",
-        "18496356898109429",
-        "17977129421930454"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T12:01:19.918980+00:00",
       "pillar": "smart",
@@ -1254,6 +1229,31 @@
         "17987011673892021"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T02:01:14.752267+00:00",
+      "pillar": "smart",
+      "hook_sig": "a webhook consumer is not retry-safe just because",
+      "texts": [
+        "A webhook consumer is not retry-safe just because its handler is idempotent. Record the event ID before side effects, or a retry can repeat the charge, email, or job.",
+        "Persist the incoming event ID with a unique constraint before any external call. If the insert succeeds, you own the event. If it conflicts, the work is already done or in flight. Skip the handler entirely.",
+        "Store the idempotency key in the same transaction that creates the side-effect record. A charges table with a unique provider_event_id column turns duplicate webhooks into harmless constraint violations. No distributed lock needed.",
+        "At-least-once delivery is the contract. Exactly-once is your responsibility. The pattern is idempotent write, then side effect, then ack. Reverse the order and a retry becomes a double charge.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A precise backend reliability lesson may earn more engagement than another underperforming system-design or career angle.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 149,
+      "ids": [
+        "17962732343998414",
+        "18099994790436867",
+        "18384359839224748",
+        "18145801636717180",
+        "18343824871257953"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1263,5 +1263,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 137
+  "last_views": 149
 }
