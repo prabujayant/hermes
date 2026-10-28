@@ -1,33 +1,8 @@
 {
   "hypothesis": "Engineers build trust during incidents by stating what they know, choosing reversible actions, and communicating the next decision point.",
-  "pivots": 357,
+  "pivots": 358,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T19:01:20.281475+00:00",
-      "pillar": "smart",
-      "hook_sig": "your query shows 2.3 seconds in pg_stat_statements. the",
-      "texts": [
-        "Your query shows 2.3 seconds in pg_stat_statements. The application logs show 2.3 seconds. You optimize the index, rewrite the CTE, swap the join order. Nothing changes. The query was not slow. It was blocked.",
-        "I learned this during an outage at 2am. The dashboard screamed \"slow query\" on a simple select by primary key. Explain analyze showed 0.4ms. The same query ran in 2.3 seconds from the app. The difference was not planning. It was a forgotten transaction in a background worker holding a row lock for four minutes while it called a flaky third party API.",
-        "Postgres reports lock wait time inside the query duration. pg_stat_statements does not split it. The fix is not better indexes. It is checking pg_locks and pg_stat_activity while the query runs. Look for wait_event_type = Lock and wait_event = transactionid. That row tells you exactly who is holding the lock and since when.",
-        "Run this when a query feels slower than explain analyze says:\n\nselect pid, state, wait_event_type, wait_event, query_start, backend_xmin\nfrom pg_stat_activity\nwhere wait_event_type = 'Lock'\nand query_start < now() - interval '5 seconds';\n\nThe backend_xmin is the transaction ID of the blocker. Join it to pg_locks to see the relation and tuple. You now have the culprit in one query.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Specific production symptoms paired with a practical way to isolate the cause will earn more saves and useful replies than broad engineering hot takes.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 6001,
-      "ids": [
-        "17990459517104278",
-        "18095539532151111",
-        "18127429904308423",
-        "18102244439527618",
-        "17986766834888605"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T19:31:02.150024+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "18071097131779251"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T15:01:20.590225+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to pass system design interviews,",
+      "texts": [
+        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
+        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
+        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
+        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Engineers build trust during incidents by stating what they know, choosing reversible actions, and communicating the next decision point.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 275,
+      "ids": [
+        "18142633025499704",
+        "18193095175397244",
+        "18361329241221033",
+        "18032098229683223",
+        "17965760700246410"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 268
+  "last_views": 275
 }
