@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Reading input constraints first helps candidates eliminate unsuitable approaches before they write code.",
-  "pivots": 343,
+  "hypothesis": "Switching to a sentence-case technical statement on a high-impact SQL/Postgres operational topic (connection pool wait time) will break the underperform streak because the all-time top post (6,133 views) uses this exact formula on a similar mechanism-driven subject.",
+  "pivots": 344,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T11:01:14.528120+00:00",
-      "pillar": "smart",
-      "hook_sig": "ai coding assistants are making junior engineers worse,",
-      "texts": [
-        "AI coding assistants are making junior engineers worse, not better. The verification step they skip is exactly where intuition gets built.",
-        "When the model writes the code, the engineer never wrestles with the syntax, the edge cases, the why. They just accept. That acceptance muscle atrophies the debugging instinct.",
-        "Last week a junior on my team shipped a bug that Copilot suggested. The fix was a one-line null check. They had never seen that pattern fail because the model always handled it. Now they know. But only because it broke in prod.",
-        "If you are senior, use the model as a tireless pair programmer you constantly challenge. If you are junior, turn it off for the first implementation. Prove you can build it, then ask the model to review. Change my mind.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Switched format from contrarian lessons to debate hot takes on AI coding verification (P24-P25 proved topic velocity, niche leaders confirm debate format drives highest replies).",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5796,
-      "ids": [
-        "18199708009389132",
-        "18024743879864937",
-        "18130659994700607",
-        "18073818398485572",
-        "17913381426501159"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T11:31:06.463381+00:00",
       "pillar": "smart",
@@ -1254,6 +1229,31 @@
         "17875656327638148"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T01:01:17.835407+00:00",
+      "pillar": "smart",
+      "hook_sig": "high connection pool wait time masquerades as database",
+      "texts": [
+        "High connection pool wait time masquerades as database latency. The query runs in 2ms but sits in queue for 200ms. Scaling the database won't fix the queue.",
+        "Your application opens a pool of 20 connections. A slow downstream service holds each connection for 500ms. Requests pile up waiting for a free slot. Postgres CPU stays at 10 percent because the work never reaches it. The bottleneck is the pool, not the database.",
+        "I saw this on a checkout service. P99 API latency was 1.2s. Postgres p99 query time was 3ms. Pool wait time was 1.1s. Doubled the pool size from 20 to 40. P99 dropped to 15ms. No schema change, no index, no hardware upgrade. Just the pool.",
+        "Check pool wait time before you provision a larger instance. In Postgres use pg_stat_activity with state 'idle in transaction' and your client pool metrics. If wait time exceeds query time, the fix is in the pool config or the downstream call, not the database.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Switching to a sentence-case technical statement on a high-impact SQL/Postgres operational topic (connection pool wait time) will break the underperform streak because the all-time top post (6,133 views) uses this exact formula on a similar mechanism-driven subject.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 137,
+      "ids": [
+        "18115839482031751",
+        "17964080841230440",
+        "18133112635684456",
+        "18356990905219535",
+        "17987011673892021"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1263,5 +1263,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 124
+  "last_views": 137
 }

@@ -463,7 +463,8 @@
     "things that show senior judgment even when you",
     "if you want to design systems that handle",
     "things a promotion committee can't tell from your",
-    "if you want to solve leetcode mediums faster,"
+    "if you want to solve leetcode mediums faster,",
+    "high connection pool wait time masquerades as database"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
