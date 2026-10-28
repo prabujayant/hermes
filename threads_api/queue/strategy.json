@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A precise backend reliability lesson may earn more engagement than another underperforming system-design or career angle.",
-  "pivots": 345,
+  "hypothesis": "A concrete lesson about preventing duplicate writes may earn more engagement than broad reliability advice.",
+  "pivots": 346,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T12:01:19.918980+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "texts": [
-        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
-        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
-        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
-        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Pivot from debate hot takes to contrarian lessons format (Notion co-founder style) on backend engineering fundamentals \u2014 proven 516k views for niche leader, matches all-time winner pillar, changes only format while keeping high-signal topic.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5823,
-      "ids": [
-        "17958074124017933",
-        "17906769243664640",
-        "18118503581097506",
-        "18372640489212173",
-        "17939452602379025"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T12:31:05.410399+00:00",
       "pillar": "smart",
@@ -1254,6 +1229,31 @@
         "18343824871257953"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T03:01:17.924663+00:00",
+      "pillar": "smart",
+      "hook_sig": "retries do not make a write safe. without",
+      "texts": [
+        "Retries do not make a write safe. Without an idempotency key and durable deduplication, a timeout can turn one payment request into two charges.",
+        "The client generates a unique key per user action and sends it with every retry. The server checks the key before executing. If a result exists, return it. If not, execute once, store the result keyed to the idempotency key, then return.",
+        "Store the idempotency key with the outcome, not the request body. A hash of the request changes when the client retries with a corrected payload. Key the result to the user action, not the bytes on the wire.",
+        "Keys need a TTL tied to the business window. A payment key lives for days. A like-button key lives for minutes. Clean up with a background job. Do not let the table grow unbounded or lookups will become the new bottleneck.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete lesson about preventing duplicate writes may earn more engagement than broad reliability advice.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 156,
+      "ids": [
+        "17915208075470461",
+        "17913538230493318",
+        "18112494983238727",
+        "18446894116134356",
+        "17873472282640253"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1263,5 +1263,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 149
+  "last_views": 156
 }
