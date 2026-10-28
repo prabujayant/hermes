@@ -469,7 +469,8 @@
     "retries do not make a write safe. without",
     "an idempotency key without a unique index is",
     "a payment service held a row lock on",
-    "if you want to design systems that recover"
+    "if you want to design systems that recover",
+    "a missing index on a foreign key column"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete guide to bounded queues and overload control will outperform broad scaling advice by showing how to prevent backlog from turning a spike into prolonged failure.",
-  "pivots": 349,
+  "hypothesis": "A sentence-case technical statement on a concrete Postgres locking failure (missing FK index) will outperform recent career threads by delivering a specific, debuggable mechanism with measured numbers, matching the 481-view FK winner and 6,133-view UUID winner patterns.",
+  "pivots": 350,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T14:01:19.381644+00:00",
-      "pillar": "smart",
-      "hook_sig": "most teams implement distributed tracing before they have",
-      "texts": [
-        "Most teams implement distributed tracing before they have a single service worth tracing. The dashboards look impressive. The ROI is zero.",
-        "I watched a 12-person team spend six months wiring Jaeger across seven services. They caught exactly one bug that logs couldn't show. The fix took twenty minutes.",
-        "What actually reduces MTTR at that scale: structured logs with correlation IDs, a shared logging library, and one person who owns the on-call runbook. Cost: two sprints. Not six months.",
-        "\"but we need it for when we scale\" is the same energy as buying a Formula 1 pit crew for your daily commute. Build the observability that solves today's incidents. Add the rest when the pain demands it.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Switching from caps-listicle to debate hot take format (niche leader #5) on observability overengineering \u2014 proven high-reply format, fresh topic vs. interview/career fatigue, cites P23-P30 underperform streak as pivot trigger.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5859,
-      "ids": [
-        "18638508334051088",
-        "18152364295535602",
-        "18054033713610422",
-        "18025498394876111",
-        "18394063837160544"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T14:31:05.141034+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "18103343498379027"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T07:01:13.177484+00:00",
+      "pillar": "smart",
+      "hook_sig": "a missing index on a foreign key column",
+      "texts": [
+        "A missing index on a foreign key column locks the parent table during deletes. Postgres takes a ShareLock on the referenced table. Your unrelated inserts queue behind a single cascade.",
+        "Postgres checks referential integrity by scanning the child table. Without an index on the FK column that scan becomes sequential. The ShareLock blocks concurrent inserts on the parent. A single delete on a 10M-row child table can stall the parent for seconds.",
+        "I saw this on an orders table referencing users. The user_id column had no index. A cleanup job deleted 50K old orders. The users table froze for 12 seconds. New signups timed out. Adding the index dropped the lock time to 40ms.",
+        "The fix is one CREATE INDEX CONCURRENTLY. No migration lock. No downtime. But most ORMs do not add FK indexes by default. Check pg_stat_user_indexes for seq scans on FK columns. That is your backlog.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A sentence-case technical statement on a concrete Postgres locking failure (missing FK index) will outperform recent career threads by delivering a specific, debuggable mechanism with measured numbers, matching the 481-view FK winner and 6,133-view UUID winner patterns.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 193,
+      "ids": [
+        "18167196223516742",
+        "18116559923117551",
+        "18075082190764339",
+        "17971951488176722",
+        "18137376160643665"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 235
+  "last_views": 193
 }
