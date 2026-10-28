@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Practical incident behaviors that show sound judgment under uncertainty may prompt engineers to share the habits their teams trust most.",
-  "pivots": 354,
+  "hypothesis": "Promotion cases are more credible when engineers connect cross-team work to a verifiable outcome.",
+  "pivots": 355,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T16:31:03.967486+00:00",
-      "pillar": "smart",
-      "hook_sig": "kubernetes is a career optimization tool disguised as",
-      "texts": [
-        "Kubernetes is a career optimization tool disguised as infrastructure. Most teams spending six figures on EKS clusters would ship faster, sleep better, and spend less on Fly.io or Railway. The complexity tax is paid in 3am pages, not cloud bills.",
-        "I watched a ten-person startup burn eight months configuring service meshes, Helm charts, and GitOps pipelines for a CRUD app that serves 200 requests per second. Their p99 latency is worse than a $5 VPS with nginx and Postgres. The resume-driven architecture is the product.",
-        "The honest answer to \"why Kubernetes\" is never technical. It is: investors expect it, hiring managers screen for it, and conference talks reward it. Technical merit entered the chat zero times. If your CTO cannot explain the migration trigger in one sentence, you are building their next job, not your product.",
-        "Run the numbers: managed Postgres, a load balancer, and three app instances on any PaaS handles 99 percent of B2B SaaS traffic patterns. The remaining one percent earns the right to graduate. Start there. Stay there until pain forces your hand.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Pivot to debate hot take format (format 5) attacking Kubernetes sacred cow \u2014 mirrors own 11k-view contrarian win on microservices, replaces failed caps-listicles P24-P30 with high-reply challenge structure.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5956,
-      "ids": [
-        "18098705888435333",
-        "17998549884040108",
-        "17954645556277042",
-        "17951474604292877",
-        "18057820322797850"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T17:01:16.023710+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "18357213124174830"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T12:01:22.756960+00:00",
+      "pillar": "smart",
+      "hook_sig": "i spent two years optimizing only my team's",
+      "texts": [
+        "I spent two years optimizing only my team's services. My promotion packet showed zero cross-team impact. The committee said no scope. I led a cache-layer migration across three teams, cut p99 latency 40 percent. Next review: promoted to staff.",
+        "Local optimizations look like busy work to committees. They see tickets closed, not systems improved. A 20 percent speedup on one service disappears in the noise. Cross-team work forces you to negotiate, measure, and ship something leadership can point at.",
+        "Pick a problem that spans boundaries: shared library upgrades, platform migrations, observability gaps. Define the metric before you start. Get two other teams to co-own the goal. Write the design doc, run the rollout, publish the dashboard. The packet writes itself.",
+        "My migration doc had three numbers: baseline p99, target p99, and rollout timeline. The dashboard showed each team's latency drop week by week. The promo packet quoted the doc and the dashboard. No narrative fluff. Just dates, owners, and the 40 percent number.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Promotion cases are more credible when engineers connect cross-team work to a verifiable outcome.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 257,
+      "ids": [
+        "18128992669828047",
+        "18014389346985948",
+        "18091248710686688",
+        "18129905821845823",
+        "18111196679144259"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 232
+  "last_views": 257
 }
