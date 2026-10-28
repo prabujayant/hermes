@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Promotion cases are more credible when engineers connect cross-team work to a verifiable outcome.",
-  "pivots": 355,
+  "hypothesis": "Engineers build trust in code review by making others faster without taking over their decisions.",
+  "pivots": 356,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T17:01:16.023710+00:00",
-      "pillar": "smart",
-      "hook_sig": "most teams running kubernetes don't have a platform",
-      "texts": [
-        "Most teams running Kubernetes don't have a platform team. That's not brave, it's a production incident waiting to happen.",
-        "You inherit a cluster someone else stood up. No one owns the control plane upgrades. No one tunes the scheduler. No one understands the CNI failure modes until a pod gets stuck in CrashLoopBackOff at 2am.",
-        "The \"managed\" in EKS/GKE/AKS only covers the control plane. The data plane, nodes, networking, storage, security, observability, is still yours. And it's a full-time job for 3-5 senior engineers minimum.",
-        "If you're a team of 8 engineers and 2 of you are now \"the Kubernetes people,\" you've effectively lost 25% of your product velocity to infrastructure undifferentiated heavy lifting. Change my mind.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Pivot hook from \"career optimization tool\" to \"platform team requirement\" debate angle \u2014 same format 5 debate hot take on Kubernetes, different sacred cow attack vector, cites P23-P30 underperform streak proving caps-listicle fatigue.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5968,
-      "ids": [
-        "18032255642886140",
-        "18218603662352000",
-        "18212420752367345",
-        "18076497500754495",
-        "18124931362930832"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T17:31:02.380160+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "18111196679144259"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T13:01:20.438129+00:00",
+      "pillar": "smart",
+      "hook_sig": "things that quietly damage your reputation in code",
+      "texts": [
+        "THINGS THAT QUIETLY DAMAGE YOUR REPUTATION IN CODE REVIEW:",
+        "Nitpick formatting while missing logic bugs.\n\nThe team learns your reviews are noise. The real defects ship because you spent thirty minutes on brace style.",
+        "Approve with \"LGTM\" on code you cannot explain.\n\nWhen production breaks, the author cannot defend it and you cannot debug it. Trust evaporates in the postmortem.",
+        "Block merges for preferences, not correctness.\n\nVariable names, early returns, helper extraction. If the tests pass and the design holds, the diff is ready. Your ego is not a gate.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Engineers build trust in code review by making others faster without taking over their decisions.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 261,
+      "ids": [
+        "18453125440122536",
+        "18106220660346789",
+        "17937801450400688",
+        "18108975539351620",
+        "17921314518244566"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 257
+  "last_views": 261
 }
