@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Engineers compare offers more accurately when they separate guaranteed pay, equity terms, and role expectations instead of relying on headline compensation.",
-  "pivots": 364,
+  "hypothesis": "Promotion cases are stronger when they show measurable impact, wider scope, and evidence that others rely on your work.",
+  "pivots": 365,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T01:31:02.989850+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want behavioral rounds to remember you,",
-      "texts": [
-        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
-        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
-        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
-        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Pivot from debate hot take (format #5) to contrarian lessons (format #4) on AI-era senior skills \u2014 proven 516k views for Notion co-founder, matches our career pillar where caps-listicles hit 481-893 views, cites P23-P30 infrastructure streak as the losing topic family to exit.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 6052,
-      "ids": [
-        "18117305009074540",
-        "18031901837889311",
-        "18106018649209813",
-        "18108876428218480",
-        "18096450734406925"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T02:01:20.767829+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18287457046288072"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T22:01:11.029147+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want your promotion case to survive",
+      "texts": [
+        "IF YOU WANT YOUR PROMOTION CASE TO SURVIVE CALIBRATION, STOP COLLECTING PRAISE.\n\nMEMORIZE THESE 5 PROOFS:",
+        "Cross-team scope that changed a metric you do not own.\n\nA cache-layer migration you led cut p99 latency 40 percent for three downstream services. The design doc, rollout plan, and incident runbook are linked in your packet. Calibration committees verify scope through artifacts, not attestations.",
+        "Quantified impact tied to a business number the org tracks.\n\nYour query rewrite reduced database CPU 25 percent during peak, deferring a $180K annual read-replica purchase. The before/after dashboards, the rollback plan, and the cost model are in the appendix. Vague \"performance improvements\" get discounted; dollar equivalents survive.",
+        "Failure narratives that prove judgment under pressure.\n\nThe payment-api outage where you identified the lock contention in 12 minutes, coordinated the hotfix, and wrote the postmortem that added a circuit breaker. The timeline, the diff, and the follow-up tickets show you operate at the next level when production burns. Calibration reads for signal in chaos.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Promotion cases are stronger when they show measurable impact, wider scope, and evidence that others rely on your work.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 353,
+      "ids": [
+        "18127026485296273",
+        "18398575339201051",
+        "17914108890500349",
+        "18626109439065152",
+        "17910135576575681"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 336
+  "last_views": 353
 }
