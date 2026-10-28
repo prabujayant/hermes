@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A sentence-case technical statement on a concrete Postgres locking failure (missing FK index) will outperform recent career threads by delivering a specific, debuggable mechanism with measured numbers, matching the 481-view FK winner and 6,133-view UUID winner patterns.",
-  "pivots": 350,
+  "hypothesis": "A concrete system-design interview failure mode may outperform another database or retry-safety post by showing how unbounded queue growth turns a traffic spike into sustained latency.",
+  "pivots": 351,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T14:31:05.141034+00:00",
-      "pillar": "smart",
-      "hook_sig": "things that quietly kill engineering careers:",
-      "texts": [
-        "THINGS THAT QUIETLY KILL ENGINEERING CAREERS:",
-        "Never asking questions.\n\nSilent confusion ships bugs. The fastest engineers ask the dumb question on day one.",
-        "Avoiding code review feedback.\n\nDefensiveness freezes growth. Treat every comment as free mentoring.",
-        "Staying comfortable one level too long.\n\nIf you are the expert in every room, you are in the wrong rooms.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Switching from caps-listicle to debate hot take format (niche leader #5) on observability overengineering \u2014 proven high-reply format, fresh topic vs. interview/career fatigue, cites P23-P30 underperform streak as pivot trigger.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5863,
-      "ids": [
-        "18342861361274864",
-        "18133104808779626",
-        "18078959444663922",
-        "18099657140434728",
-        "17977957173123368"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T15:01:23.763053+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "18137376160643665"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T08:01:13.577991+00:00",
+      "pillar": "smart",
+      "hook_sig": "things that quietly kill a system design interview:",
+      "texts": [
+        "THINGS THAT QUIETLY KILL A SYSTEM DESIGN INTERVIEW: ASSUMING A QUEUE CAN ABSORB OVERLOAD FOREVER",
+        "Unbounded queues turn traffic spikes into memory pressure. A 10k msg/sec burst with 1KB payloads fills 10MB/sec. In 30 seconds the consumer OOMs before the scaler reacts. Name the max queue depth and the rejection policy in the design.",
+        "Backpressure is not a config flag. It is a contract between producer and consumer. HTTP 429, TCP window zero, or explicit credit-based flow control. If you cannot draw the signal path from full queue to slowed producer, the design has a hole.",
+        "Interviewers probe the failure mode. What happens when the DLQ fills? When the consumer crashes mid-batch? When the scaler hits the instance limit? Show the circuit breaker, the load shed threshold, and the alert that pages you before customers notice.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one.\n---"
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete system-design interview failure mode may outperform another database or retry-safety post by showing how unbounded queue growth turns a traffic spike into sustained latency.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 198,
+      "ids": [
+        "18109095599256819",
+        "18133333612749747",
+        "18646079032043480",
+        "17954053689322427",
+        "18108012322980923"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 193
+  "last_views": 198
 }
