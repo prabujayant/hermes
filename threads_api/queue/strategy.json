@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Engineers build trust during incidents by stating what they know, choosing reversible actions, and communicating the next decision point.",
-  "pivots": 358,
+  "hypothesis": "Engineers increase their impact by spreading review context and decision-making instead of becoming the sole gatekeeper.",
+  "pivots": 359,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T19:31:02.150024+00:00",
-      "pillar": "smart",
-      "hook_sig": "uuid primary keys are a premature optimization for",
-      "texts": [
-        "UUID primary keys are a premature optimization for 99 percent of applications. Integer IDs with a separate UUID column for external APIs scales better, costs less, and avoids the write amplification that kills high-throughput tables. Prove me wrong.",
-        "The clustering key determines physical row order. UUIDv4 scatters inserts across the entire B-tree, forcing page splits and bloating the buffer pool. A 100M row table with UUIDv4 PK can be 2-3x larger than the same table with a bigint identity column.",
-        "Yes, UUIDs solve distributed ID generation. But most teams never need distributed writes. They adopt UUIDs \"just in case\" and pay the storage, memory, and CPU tax forever. The fix is trivial: bigint PK for clustering, UUID column with a unique index for external references.",
-        "Postgres 15+ makes this painless with generated identity columns and UUIDv7 (time-ordered) if you truly need sortable UUIDs. But default to integer PKs until you have a documented reason not to. The burden of proof is on the UUID advocate.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Switching to a debate hot-take format (niche leader #5) on a concrete schema decision will trigger the reply velocity that caps-listicles and symptom posts have failed to generate.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 6004,
-      "ids": [
-        "18091744280197393",
-        "17975230077156469",
-        "18122848055289114",
-        "18398844313205208",
-        "18025819256920835"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T20:01:21.449550+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "17965760700246410"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T16:01:18.007484+00:00",
+      "pillar": "smart",
+      "hook_sig": "reviewing every important change yourself makes you a",
+      "texts": [
+        "Reviewing every important change yourself makes you a team bottleneck. It centralizes context and delays feedback. The team ships at the speed of your review queue.",
+        "Designate code owners per subsystem.\n\nA single owner reviews changes in their area within four hours. Others can approve but the owner merges. Context stays distributed. The queue never piles on one person.",
+        "Set a review SLA and automate reminders.\n\nFlag PRs open longer than two hours. The author pings the owner in the team channel. If the owner is blocked, they delegate. Median review time drops from six hours to forty minutes.",
+        "Publish a lightweight review checklist.\n\nTests pass, migrations are backward compatible, logging covers the new path, no secrets in diff. Reviewers check the list, not every line. Consistency scales. Senior engineers stop re-explaining the same patterns.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Engineers increase their impact by spreading review context and decision-making instead of becoming the sole gatekeeper.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 282,
+      "ids": [
+        "18112531682178773",
+        "17948381307347752",
+        "18226869400331749",
+        "18059608061797781",
+        "17987028765088572"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 275
+  "last_views": 282
 }
