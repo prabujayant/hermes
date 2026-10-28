@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A practical guide to documenting scope, measurable impact, and leverage may prompt useful discussion from engineers preparing promotion cases.",
-  "pivots": 353,
+  "hypothesis": "Practical incident behaviors that show sound judgment under uncertainty may prompt engineers to share the habits their teams trust most.",
+  "pivots": 354,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T16:01:17.821632+00:00",
-      "pillar": "smart",
-      "hook_sig": "microservices are a premature optimization for 95 percent",
-      "texts": [
-        "Microservices are a premature optimization for 95 percent of teams, a well-modulated monolith with Postgres scales farther than you think, change my mind",
-        "At my last job we ran 200k requests per second on a single Ruby on Rails monolith backed by Postgres, zero service mesh, zero distributed tracing",
-        "Each service boundary forces you to solve network partitions, retries, and schema migrations that a monolith handles with ACID transactions",
-        "If you have a clear bounded context that truly needs independent scaling, extract it, otherwise keep it simple and ship faster, what is the biggest monolith you have seen survive production scale",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Switch to debate hot take format (format 5) because caps-listicles P24-P30 underperform and own contrarian post 11k views proves debate works.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5942,
-      "ids": [
-        "18019213532968157",
-        "18119328820952638",
-        "18426842011151875",
-        "18133536202761318",
-        "18442028251177650"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T16:31:03.967486+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "18117303299096572"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T11:01:16.788053+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to earn trust during an",
+      "texts": [
+        "IF YOU WANT TO EARN TRUST DURING AN INCIDENT, STOP PRETENDING YOU KNOW THE CAUSE.\n\nMEMORIZE THESE 5 MOVES:",
+        "State what you know, what you don't, and what you're checking next.\n\nEngineers who say \"I don't know yet but I'm looking at X, Y, Z\" get pulled into the war room. Engineers who guess wrong get pulled aside later.",
+        "Make the smallest reversible decision that buys time.\n\nRoll back the last deploy. Fail over the replica. Throttle the noisy tenant. A blunt 5-minute mitigation beats a precise 5-hour fix while the page is red.",
+        "Write the timeline while it happens, not after.\n\nOne line per observation: timestamp, signal, action, result. The postmortem writes itself. The stakeholders stay informed. You stop repeating status in every channel.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Practical incident behaviors that show sound judgment under uncertainty may prompt engineers to share the habits their teams trust most.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 232,
+      "ids": [
+        "18157787950519228",
+        "18081081632377520",
+        "17952609411282183",
+        "18136874140710541",
+        "18357213124174830"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 219
+  "last_views": 232
 }
