@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Concrete choices about what to preserve and shed during dependency failures can help candidates explain resilience beyond drawing boxes.",
-  "pivots": 362,
+  "hypothesis": "Candidates can make stronger system-design tradeoffs when they trace how load affects one constrained resource before proposing broad scaling.",
+  "pivots": 363,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T00:31:02.304472+00:00",
-      "pillar": "smart",
-      "hook_sig": "most \"senior engineer\" advice assumes you write code.",
-      "texts": [
-        "Most \"senior engineer\" advice assumes you write code. In 2025 the leverage moved to reviewing, steering, and killing bad AI suggestions before they ship. The title didn't change. The job did.",
-        "I watched a staff engineer approve a PR that added a distributed cache for a feature flag toggle. The AI suggested it. He merged it. The cache invalidation bug took three days to unwind. He wrote zero lines. He failed the review.",
-        "Lesson 1: If you cannot explain the failure mode of an AI-generated abstraction in thirty seconds, you are not reviewing. You are rubber-stamping. Start treating every AI suggestion as a junior dev PR you must dissect.",
-        "Lesson 2: The highest-leverage skill is now prompt architecture, constraining the model so it proposes boring, reversible code. Stop asking for \"best practices.\" Ask for \"the simplest thing that passes the test and reverts cleanly.\"",
-        "Lesson 3: Your calendar should have more \"AI output review\" blocks than \"coding\" blocks. If it doesn't, you are optimizing the wrong loop. The follow CTA: Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Pivot from debate hot take (format #5) to contrarian lessons (format #4) on AI-era senior skills \u2014 proven 516k views for Notion co-founder, matches our career pillar where caps-listicles hit 481-893 views, cites P23-P30 infrastructure streak as the losing topic family to exit.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 6032,
-      "ids": [
-        "18026065388870430",
-        "18142994269609939",
-        "18069414965780712",
-        "18098346476543562",
-        "17903461503656381"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T01:01:13.727600+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,35 @@
         "18132082975693409"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T20:01:13.375307+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to explain what breaks at",
+      "texts": [
+        "IF YOU WANT TO EXPLAIN WHAT BREAKS AT 10X SCALE, STOP ADDING SERVERS TO EVERY BOX.\n\nMEMORIZE THESE 5 SIGNALS:",
+        "Load balancer latency climbs first. When p99 of the LB itself rises, the backend is already saturated and queues are backing up upstream.",
+        "Database connection exhaustion. Not query slowness, just pool wait time. Check pg_stat_activity and pool wait stats before touching indexes.",
+        "Lock contention on a single hot row. Cache hit rate on the working set drops and threads start waiting on the same rows instead of doing work.",
+        "Cache hit ratio cratering under skewed access. Evenly distributed caches lie; real traffic hits a few keys and eviction kills throughput.",
+        "Replication lag on the primary. Write amplification shows up here before CPU or disk saturation, because the replica falls behind from sheer WAL volume.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "Candidates can make stronger system-design tradeoffs when they trace how load affects one constrained resource before proposing broad scaling.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 318,
+      "ids": [
+        "17963455947239457",
+        "18110404538189817",
+        "18120698876089482",
+        "18131988151839308",
+        "18255730573309118",
+        "18500518648099503",
+        "18127631806866143"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 306
+  "last_views": 318
 }
