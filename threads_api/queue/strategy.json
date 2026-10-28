@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Candidates can make stronger system-design tradeoffs when they trace how load affects one constrained resource before proposing broad scaling.",
-  "pivots": 363,
+  "hypothesis": "Engineers compare offers more accurately when they separate guaranteed pay, equity terms, and role expectations instead of relying on headline compensation.",
+  "pivots": 364,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T01:01:13.727600+00:00",
-      "pillar": "smart",
-      "hook_sig": "if you want to pass system design interviews,",
-      "texts": [
-        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
-        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
-        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
-        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Pivot from debate hot take (format #5) to contrarian lessons (format #4) on AI-era senior skills \u2014 proven 516k views for Notion co-founder, matches our career pillar where caps-listicles hit 481-893 views, cites P23-P30 infrastructure streak as the losing topic family to exit.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 6045,
-      "ids": [
-        "18099781394532073",
-        "18425420899158411",
-        "17864318001693559",
-        "17952141753278958",
-        "17913609969541297"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T01:31:02.989850+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18127631806866143"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T21:01:23.660811+00:00",
+      "pillar": "smart",
+      "hook_sig": "things to check before you accept a software",
+      "texts": [
+        "THINGS TO CHECK BEFORE YOU ACCEPT A SOFTWARE ENGINEERING OFFER:",
+        "On-call rotation and incident load.\n\nAsk for the last six months of pages per engineer. A team waking up twice a week ships differently than one waking up twice a quarter. The pager tax compounds into technical debt you inherit.",
+        "Code review depth and merge velocity.\n\nPull the last 20 PRs. Median time to first review? Comments per PR? If reviews are rubber stamps or take three days, you inherit slow feedback loops and hidden context. Fast, rigorous review is a culture signal, not a perk.",
+        "Internal mobility and title calibration.\n\nAsk how many engineers moved teams or levels in the last year. A flat org with no internal transfers means your growth depends on external hires. Calibration matters: if staff engineers do senior work, your promo packet fights ghost criteria.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Engineers compare offers more accurately when they separate guaranteed pay, equity terms, and role expectations instead of relying on headline compensation.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 336,
+      "ids": [
+        "18142206988622283",
+        "18121981889068502",
+        "17997805434048807",
+        "18119195437996050",
+        "18287457046288072"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 318
+  "last_views": 336
 }
