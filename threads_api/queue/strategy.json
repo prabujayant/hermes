@@ -1,35 +1,8 @@
 {
-  "hypothesis": "Promotion cases are stronger when they show measurable impact, wider scope, and evidence that others rely on your work.",
-  "pivots": 365,
+  "hypothesis": "Pivot to SQL/Postgres pillar with a high-variance hook on connection pool waits (Formula 1 caps-listicle), citing P30's system-design diagram angle but shifting to measurable pool metrics that drive p99.",
+  "pivots": 366,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T02:01:20.767829+00:00",
-      "pillar": "smart",
-      "hook_sig": "ai wrote the patch. the tests pass. ci",
-      "texts": [
-        "AI wrote the patch. The tests pass. CI is green. You have three minutes before the deploy window closes. What do you actually read before hitting approve?",
-        "Most reviewers skim the diff for syntax, maybe check variable names. That is how a hallucinated retry loop ships to prod and DDOSes your own payment gateway at 2am.",
-        "Start with the contract: inputs, outputs, side effects. Does the function signature match the spec? Are idempotency keys handled? Does it call external services without timeouts? The code can look clean and still violate the boundary.",
-        "Next, the failure modes AI misses: partial writes, race conditions, pagination bugs, cursor leakage, silent truncation. Search the diff for \"await\", \"try\", \"catch\", \"return\". If you do not see explicit error handling, assume it swallows exceptions.",
-        "Last, the ownership question: who owns this logic six months from now? If the author cannot explain the invariant in one sentence, the patch is not ready. Approve the PR, but leave a comment: \"Walk me through the retry boundary.\" That question builds seniors.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete AI-era engineering judgment scenario will earn more useful replies than infrastructure hot takes.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 6064,
-      "ids": [
-        "18107152127249089",
-        "18118488932007332",
-        "18098608424107967",
-        "18641590627047694",
-        "18063288488632560",
-        "18082061939713444"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T02:31:06.284218+00:00",
       "pillar": "smart",
@@ -1250,6 +1223,31 @@
         "17910135576575681"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T23:01:15.009681+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to fix p99 latency, stop",
+      "texts": [
+        "IF YOU WANT TO FIX P99 LATENCY, STOP IGNORING CONNECTION POOL WAITS.\n\nMEMORIZE THESE 5 MOVES:",
+        "Pool wait time masks as database slowness.\n\nPostgres CPU sits at 15 percent while your API p99 climbs. The queue is the bottleneck, not the query.",
+        "Size the pool for concurrency, not cores.\n\nA 32-core box with 100 active connections needs a pool of 50-80, not 32. Measure active sessions, not hardware.",
+        "Kill long-held connections before they starve the pool.\n\nSet statement_timeout and idle_in_transaction_session_timeout. A single stuck request blocks every caller behind it.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one.\n---"
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Pivot to SQL/Postgres pillar with a high-variance hook on connection pool waits (Formula 1 caps-listicle), citing P30's system-design diagram angle but shifting to measurable pool metrics that drive p99.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 368,
+      "ids": [
+        "18467396398185892",
+        "17957559711335764",
+        "18656242291024337",
+        "17889079215486262",
+        "18000550812041499"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 353
+  "last_views": 368
 }

@@ -485,7 +485,8 @@
     "things your system design diagram can't show (so",
     "if you want to explain what breaks at",
     "things to check before you accept a software",
-    "if you want your promotion case to survive"
+    "if you want your promotion case to survive",
+    "if you want to fix p99 latency, stop"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
