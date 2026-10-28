@@ -466,7 +466,8 @@
     "if you want to solve leetcode mediums faster,",
     "high connection pool wait time masquerades as database",
     "a webhook consumer is not retry-safe just because",
-    "retries do not make a write safe. without"
+    "retries do not make a write safe. without",
+    "an idempotency key without a unique index is"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

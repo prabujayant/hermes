@@ -1,35 +1,8 @@
 {
-  "hypothesis": "A concrete lesson about preventing duplicate writes may earn more engagement than broad reliability advice.",
-  "pivots": 346,
+  "hypothesis": "A concrete SQL-level fix for duplicate writes (unique constraint on idempotency key) will outperform broad reliability advice because it gives a copy-pasteable solution to a silent data-corruption bug that hits every payments/webhook team. Pivot from system design/career to SQL/Postgres/ORM per rota",
+  "pivots": 347,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T12:31:05.410399+00:00",
-      "pillar": "smart",
-      "hook_sig": "most connection pooling advice you read assumes 2015",
-      "texts": [
-        "Most connection pooling advice you read assumes 2015 traffic patterns. The defaults that worked at 100 QPS become the bottleneck at 10k QPS. Here are 5 lessons we learned the hard way scaling Postgres at a payments company.",
-        "1. The default pool size of 10-20 connections wastes CPU on context switching. At scale we run 2-3x CPU cores per instance. More connections than that and the kernel spends more time scheduling than executing queries.",
-        "2. Prepared statement caching breaks silently when schema changes. We lost 40% throughput one deploy because the pool held stale plans. Now every deploy cycles the pool with a 30-second drain window. Zero surprises since.",
-        "3. Idle-in-transaction connections are silent killers. A single forgotten `BEGIN` without `COMMIT` holds a slot and blocks vacuum. We added a 10-second `idle_in_transaction_session_timeout` and alert on any connection exceeding it.",
-        "4. PgBouncer in transaction mode breaks advisory locks and `LISTEN/NOTIFY`. We learned this during a Friday incident when the job queue stalled. Session mode costs more memory but preserves semantics. Worth it for correctness.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Pivot to contrarian lessons format (Notion co-founder style) on PostgreSQL connection pooling \u2014 proven 516k views for niche leader, matches backend pillar, changes only format from failed caps-listicles while keeping high-signal topic.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 5828,
-      "ids": [
-        "18081053471442927",
-        "17899917165611564",
-        "17907006930663698",
-        "18000301431010366",
-        "18173769403457668",
-        "18117716716779558"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T13:01:20.495264+00:00",
       "pillar": "smart",
@@ -1254,6 +1227,31 @@
         "17873472282640253"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T04:01:13.348232+00:00",
+      "pillar": "smart",
+      "hook_sig": "an idempotency key without a unique index is",
+      "texts": [
+        "An idempotency key without a unique index is theater. The check-then-insert race window lasts microseconds but duplicates persist for years. A single unique constraint on the key column makes exactly-once semantics a database guarantee, not an application hope.",
+        "The race is simple: select where key exists, if not found insert. Two requests hit that gap simultaneously. Both see empty. Both insert. You now have two charges, two emails, two shipments. No application retry logic fixes this because the bug is the missing constraint.",
+        "Add a unique index on the idempotency key column. Insert with on conflict do nothing. The database serializes the winners. The second request gets a duplicate key error, treats it as success, and returns the existing row. Zero application coordination required.",
+        "The constraint also survives process crashes, network partitions, and deployed bugs that forget the check. If the column is a UUIDv7 or ULID, the index stays append-friendly. If it is a random UUID, accept the page splits or switch to a BIGINT sequence for the key.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete SQL-level fix for duplicate writes (unique constraint on idempotency key) will outperform broad reliability advice because it gives a copy-pasteable solution to a silent data-corruption bug that hits every payments/webhook team. Pivot from system design/career to SQL/Postgres/ORM per rota",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 162,
+      "ids": [
+        "18121315477933802",
+        "18395747290205757",
+        "18113730398164435",
+        "17980171101129965",
+        "18118921217097643"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1263,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 156
+  "last_views": 162
 }
