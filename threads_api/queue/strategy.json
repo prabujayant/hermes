@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Engineers build trust in code review by making others faster without taking over their decisions.",
-  "pivots": 356,
+  "hypothesis": "Engineers build trust during incidents by stating what they know, choosing reversible actions, and communicating the next decision point.",
+  "pivots": 357,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-19T17:31:02.380160+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent three weeks chasing \"too many connections\"",
-      "texts": [
-        "I spent three weeks chasing \"too many connections\" errors that only appeared at 2am. Not during load tests, not during deploys. The logs showed healthy pool sizes. The dashboards showed nothing. It was a leak disguised as saturation.",
-        "The first signal that separated leak from saturation: connection count climbing while active queries stayed flat. A saturated pool maxes out because work piles up. A leak climbs because connections vanish into idle transactions nobody closed. Check pg_stat_activity for idle in transaction.",
-        "Second signal: the age of your oldest idle transaction. Saturation creates fresh contention. Leaks create fossils. I found a 14-hour idle transaction holding a connection hostage because a background job swallowed an exception and never returned the client to the pool.",
-        "Third signal: pool wait queue behavior. Saturation shows steady queue growth under load. Leaks show sporadic spikes when the pool finally exhausts, then drops when the reaper runs. The pattern is jagged, not smooth. That jaggedness is your fingerprint.\n\nWhat metric do you check first when the pool alarms fire?",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Specific production debugging guidance will earn more saves and useful replies than broad platform-team hot takes; put the CTA last.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 5979,
-      "ids": [
-        "17902556919374581",
-        "17976313985933716",
-        "17905299051351386",
-        "18035796212911974",
-        "18381546985301021"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-19T19:01:20.281475+00:00",
       "pillar": "smart",
@@ -1252,6 +1227,31 @@
         "17921314518244566"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-28T14:01:16.712853+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to build trust during incidents,",
+      "texts": [
+        "IF YOU WANT TO BUILD TRUST DURING INCIDENTS, STOP TREATING EVERY ALERT AS A CODE CHANGE.\n\nMEMORIZE THESE 5 MOVES:",
+        "Verify the signal before you touch the system.\n\nMost alerts are noise or self-healing. Check dashboards, logs, and recent deploys first. A five-minute pause prevents a thirty-minute rollback.",
+        "Contain the blast radius before you chase the root cause.\n\nTurn off the feature flag, drain the pool, or shed load. Stabilize the user experience while the system is still breathing. Diagnosis comes after the patient is stable.",
+        "Say what you are doing and why in the incident channel.\n\n\"Rolling back deploy 442 because error rate jumped to 12% on /checkout\" lets others parallelize. Silence forces teammates to guess and duplicate work.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Engineers build trust during incidents by stating what they know, choosing reversible actions, and communicating the next decision point.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 268,
+      "ids": [
+        "18194891788401443",
+        "18378813508300569",
+        "18153389293471767",
+        "17926697088200613",
+        "18071097131779251"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1261,5 +1261,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 261
+  "last_views": 268
 }
