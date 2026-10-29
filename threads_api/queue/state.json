@@ -497,7 +497,8 @@
     "if you want to keep a cache from",
     "things that quietly break read-after-write consistency:",
     "if you want your queues to drain under",
-    "if you want to design multi-region systems, stop"
+    "if you want to design multi-region systems, stop",
+    "things that quietly keep valuable engineering work from"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }

@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Concrete RTO, RPO, and split-brain tradeoffs will draw more useful system-design discussion than queue-overload advice.",
-  "pivots": 377,
+  "hypothesis": "Specific promotion-barrier advice will draw more useful career discussion than another systems tradeoff.",
+  "pivots": 378,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T08:01:19.717336+00:00",
-      "pillar": "smart",
-      "hook_sig": "one null in a not in subquery makes",
-      "texts": [
-        "One NULL in a NOT IN subquery makes every row vanish. I learned this the hard way on a production delete that wiped a whole table.",
-        "create table users (id int, name text);\ncreate table logs (user_id int);\n\ninsert into users values (1, 'alice'), (2, 'bob'), (3, 'carol');\ninsert into logs values (1), (NULL);\n\ndelete from users where id not in (select user_id from logs);",
-        "The delete removes alice, bob, and carol. All three rows gone. Because NULL in the subquery makes NOT IN evaluate to UNKNOWN for every row, and UNKNOWN is not TRUE.",
-        "The fix: use NOT EXISTS. It treats NULL as a value that simply does not match.\n\ndelete from users u where not exists (select 1 from logs l where l.user_id = u.id);\n\nThis deletes only bob and carol. Alice stays because her id exists in logs.",
-        "What edge case with NOT IN or NOT EXISTS burned you? Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete NULL failure and verified fix will earn more specific engineer replies than another AI-review debate.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 402,
-      "ids": [
-        "18117986644958725",
-        "18172513702461396",
-        "17953708638276786",
-        "17953104219083242",
-        "18146471041540305"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T08:31:07.007558+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "18644228488029780"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-29T11:01:18.385934+00:00",
+      "pillar": "smart",
+      "hook_sig": "things that quietly keep valuable engineering work from",
+      "texts": [
+        "THINGS THAT QUIETLY KEEP VALUABLE ENGINEERING WORK FROM COUNTING TOWARD PROMOTION:",
+        "Invisible prevention work.\n\nFixing flaky tests, paying down debt, adding observability, and hardening failure paths prevent outages that never happen. Promotion packets reward shipped features and resolved incidents, not the disasters that did not occur.",
+        "Glue work that scales the team.\n\nBuilding internal tooling, improving CI/CD, documenting runbooks, and unblocking teammates multiply everyone's output. The impact shows up in other people's tickets. Your packet shows zero tickets closed.",
+        "Execution excellence on the wrong problem.\n\nA perfectly engineered, well-tested, observable service that solves a low-value problem still earns a \"meets expectations.\" Promotions follow business impact, not craft quality in isolation. The project choice matters more than the implementation.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific promotion-barrier advice will draw more useful career discussion than another systems tradeoff.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 317,
+      "ids": [
+        "17889587796478932",
+        "17974321959149128",
+        "18026561780864871",
+        "18642617791025961",
+        "18087651932319082"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 284
+  "last_views": 317
 }
