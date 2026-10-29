@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A practical checkout consistency failure mode will earn more specific engagement than another retry or database post.",
-  "pivots": 373,
+  "hypothesis": "A concrete cache failure mode with practical mitigations will invite more specific engagement than another checkout or retry post.",
+  "pivots": 374,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T05:57:56.889038+00:00",
-      "pillar": "smart",
-      "hook_sig": "i shipped a feature flag system backed by",
-      "texts": [
-        "I shipped a feature flag system backed by a single JSONB column in Postgres. Three months later that column was 40 percent of our database size and every deploy locked the table for minutes.",
-        "The flags table had 12 million rows. Each row stored the full flag config as JSONB because \"it's flexible.\" No indexes on the flag keys inside the blob. No partitioning. Just a growing heap of text that the planner had to scan for every lookup.",
-        "At peak traffic a simple flag check took 800 milliseconds. The fix wasn't rewriting the flag service. It was extracting the hot keys into real columns, adding a partial index on the active flags, and moving the archive flags to a separate table. Lookup dropped to 2 milliseconds.",
-        "Flexible schema is a prototype tool. In production it becomes a performance trap you pay for with every query. Model the access pattern first. Add JSONB only for the truly dynamic tail.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Confession-format production story on JSONB misuse (new topic, proven statement/contrarian pillar) will outperform AI-review debate threads by earning replies from engineers who've lived this pain, citing P23-P30 underperformance on AI topic and P402 UUIDv4 story success.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 6127,
-      "ids": [
-        "18113874992465894",
-        "18087657314698949",
-        "18478060588118811",
-        "18055341323588265",
-        "17897204190611328"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T06:27:22.506077+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "18385160926226276"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-29T07:01:18.804590+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to keep a cache from",
+      "texts": [
+        "IF YOU WANT TO KEEP A CACHE FROM TAKING DOWN YOUR DATABASE, STOP TREATING TTL AS A LOAD-SHEDDING PLAN. MEMORIZE THESE 5 MOVES:",
+        "Stagger TTLs with jitter so hot keys never expire in sync.\n\nA fixed 300-second TTL on a key hit 50K times per minute creates a synchronized stampede when it expires. Add random jitter of 0-60 seconds per key instance. The rebuild load spreads across a minute instead of hitting the database in a single thundering herd.",
+        "Refresh hot keys probabilistically before TTL expires.\n\nTrack request rate per key. When a key exceeds 100 requests per second, start an async rebuild at 80 percent of its remaining TTL. The background worker fetches fresh data while the stale value serves traffic. Rebuild latency drops from p99 to near zero, and the database never sees the spike.",
+        "Coalesce concurrent misses with a single-flight lock.\n\nFirst cache miss acquires a distributed lock (Redis SETNX with 5-second TTL). That request rebuilds the value. All other waiters block on the lock and read the fresh entry when it lands. Ten thousand concurrent requests for the same key become one database call. For ultra-hot keys, add a 100-millisecond local in-memory cache to absorb the tail.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one.\n---"
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete cache failure mode with practical mitigations will invite more specific engagement than another checkout or retry post.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 254,
+      "ids": [
+        "18031577906856045",
+        "18098398832427985",
+        "17904881043671050",
+        "17916172125499079",
+        "18080387501740872"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 438
+  "last_views": 254
 }
