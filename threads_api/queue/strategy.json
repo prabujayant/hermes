@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete replica-lag failure mode and practical consistency options will prompt more specific engagement than another retry or cache post.",
-  "pivots": 375,
+  "hypothesis": "A concrete queue-overload angle with measurable capacity tradeoffs will invite more useful system-design discussion than another consistency post.",
+  "pivots": 376,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T07:01:16.061042+00:00",
-      "pillar": "smart",
-      "hook_sig": "silent failure warning: one null in a not",
-      "texts": [
-        "silent failure warning: one NULL in a NOT IN subquery can make every candidate row disappear\n\nmost developers learn NOT IN as \"give me rows not in this list.\" they never learn that a single NULL in the subquery flips the entire result to empty. no error. no warning. just zero rows returned.",
-        "the trap: three-valued logic. when the subquery returns (1, 2, NULL) and you check WHERE id NOT IN (1, 2, NULL), the database evaluates id <> 1 AND id <> 2 AND id <> NULL. that last comparison is UNKNOWN, not TRUE. UNKNOWN combined with AND becomes UNKNOWN. the row gets filtered out. every row gets filtered out.",
-        "reproduce it in thirty seconds:\n\nCREATE TABLE users (id int);\nCREATE TABLE blocked (user_id int);\nINSERT INTO users VALUES (1), (2), (3);\nINSERT INTO blocked VALUES (1), (NULL);\n\nSELECT * FROM users WHERE id NOT IN (SELECT user_id FROM blocked);\n-- returns zero rows. user 2 and 3 vanished.",
-        "the fix is not \"avoid NULLs.\" the fix is NOT EXISTS or LEFT JOIN ... WHERE right IS NULL. both handle NULLs correctly because they never compare directly to NULL.\n\nNOT EXISTS (SELECT 1 FROM blocked WHERE blocked.user_id = users.id)\nLEFT JOIN blocked ON blocked.user_id = users.id WHERE blocked.user_id IS NULL\n\nboth return users 2 and 3 as expected.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A precise SQL footgun with its fix will earn more engineer replies than another AI-review debate;",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 389,
-      "ids": [
-        "18112131487879603",
-        "18092047679202039",
-        "17941430712376442",
-        "18482916985117401",
-        "18143927125517801"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T07:31:03.339508+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "18104098601562418"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-29T09:01:14.429101+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want your queues to drain under",
+      "texts": [
+        "IF YOU WANT YOUR QUEUES TO DRAIN UNDER LOAD, STOP IGNORING BACKPRESSURE SIGNALS.\n\nMEMORIZE THESE 5 CONTROL MOVES:",
+        "Set a hard max queue depth and reject new work at the edge.\n\nA bounded queue turns unbounded latency into explicit 429s. The client can retry with backoff. An unbounded queue turns a spike into an OOM kill that takes the whole node down.",
+        "Scale consumers by observed drain rate, not by queue length.\n\nQueue length is a lagging indicator. Drain rate (messages/sec processed) tells you if you are catching up. Add consumers only when drain rate exceeds arrival rate for a sustained window, otherwise you just add more contention.",
+        "Shed load before the database feels the spike.\n\nA circuit breaker that trips on p99 latency or error rate protects the downstream store. Returning a degraded response (stale cache, empty list) is better than letting the retry storm amplify the outage. The queue is a shock absorber, not a storage tank.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete queue-overload angle with measurable capacity tradeoffs will invite more useful system-design discussion than another consistency post.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 273,
+      "ids": [
+        "18059580311643660",
+        "18467836969186783",
+        "18601601083071592",
+        "17885135184524030",
+        "18113768509879309"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 261
+  "last_views": 273
 }
