@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Pivot to SQL/Postgres pillar (proven 0.5/h median vs 0.2/h career) using Formula 3 statement hook; all-time winners P1 (6,133 views), P3 (829 views), and 481-view FK post confirm high-variance reach for index sizing and key-type lessons.",
-  "pivots": 371,
+  "hypothesis": "A concrete failure mode in payment-system design may earn more specific engagement than another SQL or career post.",
+  "pivots": 372,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T05:01:15.748280+00:00",
-      "pillar": "smart",
-      "hook_sig": "i stopped reviewing ai-generated code line by line.",
-      "texts": [
-        "I stopped reviewing AI-generated code line by line. It wastes hours and teaches nothing. The gate that actually works: require the author to explain the change in their own words, then run the tests they wrote. If they cannot explain it, the PR waits. No exceptions.",
-        "Last month a junior opened a PR with a clean refactor. Tests passed. I asked what the retry logic actually handles. They said \"the AI added it.\" We dug in. The retry wrapped a non-idempotent payment call. The AI hallucinated safety. The bug would have charged customers twice.",
-        "The rule is simple. Every AI-assisted PR must include a one-paragraph design note from the human. What changed, why, and what could break. No design note, no review. This shifts the burden back to the engineer where it belongs. The model writes. The engineer owns.",
-        "Since enforcing this, our revert rate dropped forty percent. Review time per PR dropped thirty percent. Juniors level up faster because they must understand what they ship. The AI stays a tool. The engineer stays the decision maker.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A contrarian lesson on a specific AI-code review gate (design note requirement) will outperform broad AI quality debates by earning concrete replies from leads who have felt this pain, citing P27-P28 underperformance on generic takes.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 6122,
-      "ids": [
-        "18219580402345995",
-        "17944474293366531",
-        "18146537320604697",
-        "18116766329080115",
-        "18126842695893655"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T05:31:03.736270+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "18111333407218311"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-29T05:01:13.461909+00:00",
+      "pillar": "smart",
+      "hook_sig": "retrying a payment request without an idempotency key",
+      "texts": [
+        "Retrying a payment request without an idempotency key can charge a customer twice. A timeout does not tell the client whether the first attempt committed.",
+        "The idempotency key is a client-generated token sent with every mutating request. The server stores the key with the response after the first successful execution. Any retry with the same key returns the stored response instead of re-executing the business logic.",
+        "Keys must be scoped to the business operation, not the HTTP request. Use a stable identifier like `order-12345-payment` rather than a random UUID per attempt. Store the key, response payload, and status code in a dedicated table with a unique index on the key and a TTL of 24 to 48 hours.",
+        "Common failure: generating a new key on every retry. The client must persist the key before the first send and reuse it on every retry. Another failure: releasing the key too early. Keep it until the payment reaches a terminal state so late retries after a network partition still deduplicate.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete failure mode in payment-system design may earn more specific engagement than another SQL or career post.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 428,
+      "ids": [
+        "18111963698184640",
+        "18116400749275480",
+        "17907084582666304",
+        "18019401593952404",
+        "17954276472307237"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 413
+  "last_views": 428
 }
