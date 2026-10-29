@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Specific proof of scope, influence, and measurable outcomes can help engineers make a stronger promotion case and invite useful comments.",
-  "pivots": 367,
+  "hypothesis": "A concrete migration story with before/after numbers on a proven high-variance topic (UUID write amplification) will outperform recent career threads by targeting the SQL/Postgres pillar where the 6,133-view winner lives.",
+  "pivots": 368,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T03:01:17.730937+00:00",
-      "pillar": "smart",
-      "hook_sig": "merging ai-generated code without understanding every line is",
-      "texts": [
-        "Merging AI-generated code without understanding every line is malpractice, not productivity. The model does not own the production incident, you do.",
-        "Last week a junior merged a Claude refactor that passed all tests. Three days later the payment retry logic charged 200 customers twice. The bug was a single inverted condition the model hallucinated and the reviewer missed because \"the tests pass.\"",
-        "Code review is not a syntax check. It is the last line of defense before your architecture meets reality. If you cannot explain why the change works, you are not reviewing, you are rubber-stamping.",
-        "New rule on my team: if you merge a patch you cannot whiteboard from memory, you own the rollback plan. No exceptions. Change my mind.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A debate hot take on AI code merge standards will generate more replies than the UUID/Kubernetes threads (P23-P30) by targeting a daily pain point every engineer faces.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 6077,
-      "ids": [
-        "18148129021565106",
-        "18109536833227518",
-        "18168187855484230",
-        "18089900792264960",
-        "17972942790160973"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T03:31:04.769181+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18140327854723569"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-29T01:01:15.240768+00:00",
+      "pillar": "smart",
+      "hook_sig": "switching a 50m row events table from uuidv4",
+      "texts": [
+        "Switching a 50M row events table from UUIDv4 to UUIDv7 cut index size 35 percent and dropped p99 insert latency from 18ms to 4ms. UUIDv7 preserves insert locality like BIGINT but keeps global uniqueness. The sort order changed everything.",
+        "UUIDv4 writes land on random index pages. Every insert dirties a new page. The buffer pool churns. UUIDv7 embeds a timestamp prefix so new rows append to the right edge of the index. The working set stays small. Same global uniqueness, sequential writes.",
+        "The primary key index dropped from 22GB to 14GB. Buffer pool hit rate jumped from 87 percent to 96 percent. Write throughput doubled without adding hardware. The migration took one maintenance window with a concurrent index build and a brief rename swap.",
+        "UUIDv7 requires Postgres 17 or the uuid-ossp extension. If you are on an older version, ULID or a BIGINT identity column gives the same locality. The lesson is not the specific type. It is that insert order dictates index shape, and index shape dictates p99.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete migration story with before/after numbers on a proven high-variance topic (UUID write amplification) will outperform recent career threads by targeting the SQL/Postgres pillar where the 6,133-view winner lives.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 395,
+      "ids": [
+        "18118264601093563",
+        "17878932573567462",
+        "18110312255123302",
+        "18235880329323729",
+        "17992203851859160"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 384
+  "last_views": 395
 }
