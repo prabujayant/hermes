@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Specific promotion-barrier advice will draw more useful career discussion than another systems tradeoff.",
-  "pivots": 378,
+  "hypothesis": "A candid story about defining ownership and outcomes up front may prompt more specific career discussion than promotion advice",
+  "pivots": 379,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T08:31:07.007558+00:00",
-      "pillar": "smart",
-      "hook_sig": "things hiring managers can't tell from your resume",
-      "texts": [
-        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
-        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
-        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
-        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
-        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concrete NULL failure and verified fix will earn more specific engineer replies than another AI-review debate.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 409,
-      "ids": [
-        "18132590603503772",
-        "18046539314820629",
-        "18030473657884281",
-        "17906705319657027",
-        "18080448692527661"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T09:01:20.105024+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "18087651932319082"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-29T12:01:17.330085+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to pass system design interviews,",
+      "texts": [
+        "IF YOU WANT TO PASS SYSTEM DESIGN INTERVIEWS, STOP LISTING TECHNOLOGIES.\n\nMEMORIZE THESE 5 MOVES:",
+        "Start with requirements, not Kafka.\n\nUsers, scale, latency. Numbers first. The interviewer wants your thinking, not your stack.",
+        "Draw the happy path, then break it.\n\nOne box diagram, then ask what dies first. Bottlenecks earn more points than buzzwords.",
+        "Always close with tradeoffs.\n\nWhy this over that, and what breaks at 10x. Seniors choose and defend.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "poolside/laguna-s-2.1:free",
+      "hypothesis": "A candid story about defining ownership and outcomes up front may prompt more specific career discussion than promotion advice",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 326,
+      "ids": [
+        "17872975419645556",
+        "18098751575115530",
+        "17991641583073549",
+        "17996346599843351",
+        "18172368310461282"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 317
+  "last_views": 326
 }
