@@ -4,6 +4,9 @@ Single source of truth for the skip policy, shared by cli.py and the
 GitHub workflow (which runs this *before* pip install so no-op hours
 cost ~20s of runner time instead of ~2min).
 
+A ``queue/PAUSED`` file stops publishing without disabling the hourly
+trigger. Delete the file to resume.
+
 Exit codes: 0 = run, 2 = skip.
 """
 
@@ -14,11 +17,24 @@ from pathlib import Path
 
 MIN_GAP_MINUTES = 25
 MAX_PER_DAY = 40
+# A file next to posted.jsonl stops all publishing until it is removed.
+PAUSE_FILE = "PAUSED"
 
 
 def should_run(posted_log, now=None,
                min_gap_minutes=MIN_GAP_MINUTES, max_per_day=MAX_PER_DAY):
     """Return (run: bool, reason: str)."""
+    posted_log = Path(posted_log)
+    pause_file = posted_log.with_name(PAUSE_FILE)
+    if pause_file.exists():
+        try:
+            note = pause_file.read_text(encoding="utf-8").strip().splitlines()
+        except OSError:
+            note = []
+        reason = f"paused by {pause_file}"
+        if note:
+            reason += f": {note[0]}"
+        return False, reason
     now = now or datetime.datetime.now(datetime.timezone.utc)
     today = now.date().isoformat()
     last = None

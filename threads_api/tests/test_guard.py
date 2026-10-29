@@ -49,6 +49,21 @@ def test_daily_cap_means_skip(tmp_path):
     assert "cap" in reason
 
 
+def test_pause_file_means_skip_until_removed(tmp_path):
+    log = tmp_path / "posted.jsonl"
+    pause = tmp_path / "PAUSED"
+    pause.write_text("automation paused\n", encoding="utf-8")
+    run, reason = should_run(log)
+    assert run is False
+    assert "paused" in reason
+    assert "automation paused" in reason
+    assert main([str(log)]) == 2
+
+    pause.unlink()
+    run, _ = should_run(log)
+    assert run is True
+
+
 def test_bad_lines_ignored(tmp_path):
     log = tmp_path / "posted.jsonl"
     log.write_text("not json\n{}\n", encoding="utf-8")

@@ -37,7 +37,10 @@ jobs:
         working-directory: threads_api
         run: |
           set +e
-          if [ "${{ inputs.force }}" = "true" ]; then
+          if [ -f queue/PAUSED ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "PAUSED: $(head -n 1 queue/PAUSED)"
+          elif [ "${{ inputs.force }}" = "true" ]; then
             echo "skip=false" >> "$GITHUB_OUTPUT"
           else
             python -m threads_api.guard queue/posted.jsonl
