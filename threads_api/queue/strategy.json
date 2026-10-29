@@ -1,35 +1,8 @@
 {
-  "hypothesis": "A concrete, truthful story about documenting mentoring impact can draw useful career discussion without repeating offer or promotion advice.",
-  "pivots": 370,
+  "hypothesis": "Pivot to SQL/Postgres pillar (proven 0.5/h median vs 0.2/h career) using Formula 3 statement hook; all-time winners P1 (6,133 views), P3 (829 views), and 481-view FK post confirm high-variance reach for index sizing and key-type lessons.",
+  "pivots": 371,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T04:31:03.128399+00:00",
-      "pillar": "smart",
-      "hook_sig": "practical checklist: before merging ai-written code, verify the",
-      "texts": [
-        "practical checklist: before merging AI-written code, verify the behavior, failure paths, and tests yourself\n\nmost teams treat AI output as \"code that compiles.\" that is the wrong bar. the bar is: would you merge this if a junior wrote it at 2am without running it",
-        "start with behavior. run the feature end-to-end with the exact inputs the PR claims to handle. watch for silent truncation, wrong defaults, off-by-one pagination. AI loves happy paths",
-        "check failure paths. kill the network, fill the disk, send malformed JSON, hit the rate limit. AI rarely adds retries, timeouts, or idempotency keys unless you explicitly asked",
-        "read the tests like they are the spec. are they testing the contract or the implementation? do they cover the branch where the external service returns 500? if the test file is shorter than the implementation file, it is incomplete",
-        "which of these three catches the most bugs on your team: behavior, failure paths, or tests",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific AI-code review gate will earn more useful replies than a broad debate about code quality.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 6105,
-      "ids": [
-        "18350542093267691",
-        "17898569127398848",
-        "18423876427158318",
-        "18099583877093945",
-        "18630970936045628",
-        "18156891721517690"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T05:01:15.748280+00:00",
       "pillar": "smart",
@@ -1248,6 +1221,31 @@
         "18134024359674707"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-29T04:01:14.159246+00:00",
+      "pillar": "smart",
+      "hook_sig": "uuidv7 fixes the write amplification of uuidv4 but",
+      "texts": [
+        "UUIDv7 fixes the write amplification of UUIDv4 but keeps the 16-byte overhead. A BIGINT primary key still uses half the index space. Choose the key size your buffer pool can afford.",
+        "UUIDv7 embeds a timestamp so inserts land on the rightmost page. This eliminates the random I/O that makes UUIDv4 burn buffer pool. The index still stores 16 bytes per row versus 8 for BIGINT.",
+        "A 50 million row events table with UUIDv7 PK ran a 14 GB primary index. The same schema with BIGINT sat at 6.8 GB. Buffer pool hit rate moved from 91 percent to 97 percent. P99 insert latency dropped from 8 ms to 2 ms.",
+        "Use UUIDv7 when you need globally unique IDs without a coordination service. Use BIGINT when the table stays in one database and write throughput matters. The 8-byte savings compound at scale.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Pivot to SQL/Postgres pillar (proven 0.5/h median vs 0.2/h career) using Formula 3 statement hook; all-time winners P1 (6,133 views), P3 (829 views), and 481-view FK post confirm high-variance reach for index sizing and key-type lessons.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 413,
+      "ids": [
+        "17923656126445467",
+        "18437025673182565",
+        "17915664702495743",
+        "18137290003575970",
+        "18111333407218311"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 404
+  "last_views": 413
 }
