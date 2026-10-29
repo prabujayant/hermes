@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Career promotion levers with concrete, assignable actions (design docs, runbooks, metric ownership) will outperform recent system-design threads because P30 (promotion evidence) hit 2.0 views/h vs 0.2-1.2 for systems topics, and career/senior owns 25 of the all-time top 50.",
-  "pivots": 382,
+  "hypothesis": "A concrete, testable approach to design disagreement may draw more specific comments than broad promotion advice.",
+  "pivots": 383,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T10:31:02.693904+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent four hours debugging why my customer",
-      "texts": [
-        "I spent four hours debugging why my customer segmentation query returned zero rows. The logic was sound, indexes were perfect, explain analyze looked clean. Then I found it: a single NULL in the exclusion list turned my NOT IN into a black hole.",
-        "NOT IN with a subquery that returns NULL evaluates to UNKNOWN for every row. Not false, UNKNOWN. And UNKNOWN rows get filtered out. This isn't a bug, it's three-valued logic working exactly as specified. Most of us learn NOT IN as \"not in this list\" and never read the fine print.",
-        "The fix is NOT EXISTS with a correlated subquery. It handles NULLs correctly because EXISTS only cares about row existence, not value comparison.\n\n```sql\n-- broken\nSELECT * FROM customers\nWHERE id NOT IN (SELECT customer_id FROM excluded);\n\n-- fixed\nSELECT * FROM customers c\nWHERE NOT EXISTS (SELECT 1 FROM excluded e WHERE e.customer_id = c.id);\n```",
-        "The excluded table had one row where customer_id was NULL from a bad import. That one NULL made NOT IN return UNKNOWN for all 2.3 million customers. NOT EXISTS ignored it and returned the correct 2.1 million. Same intent, radically different semantics.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Switching from AI review debate (P23-P30) to a concrete NULL failure story using Matt Pocock's pain-concept-fix format because SQL schema winners (481,",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 424,
-      "ids": [
-        "18439847056178164",
-        "17910867087554143",
-        "18637251664055326",
-        "18108043247100817",
-        "17890592979653787"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T11:01:16.089751+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18642650200005154"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-29T16:01:16.805666+00:00",
+      "pillar": "smart",
+      "hook_sig": "design reviews stall when objections sound like taste.",
+      "texts": [
+        "Design reviews stall when objections sound like taste. Tie each one to a failure mode and a test, or the loudest opinion wins.",
+        "Convert vague concerns into specific failure modes before the review ends. A comment like \"this feels brittle\" becomes \"if the payment provider adds a required field, the deserializer throws and the order drops.\" The test: add a contract test that fails when the provider schema changes without a version bump.",
+        "Require a reproduction path for every blocking objection. \"This cache key scheme will collide\" is not actionable until someone writes the two requests that produce the same key and shows the data corruption. If no one can write the failing test in ten minutes, the objection drops to a follow-up ticket.",
+        "Capture the decision and its test in the design doc before the meeting closes. A line like \"Decision: use optimistic locking with version column. Test: concurrent update test must fail without retry logic\" turns opinion into a checkpoint. The next reviewer sees the test, not the debate.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete, testable approach to design disagreement may draw more specific comments than broad promotion advice.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 396,
+      "ids": [
+        "18017327195747732",
+        "18110810189217517",
+        "18032182157909852",
+        "18097956602415387",
+        "18126557017681473"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 368
+  "last_views": 396
 }
