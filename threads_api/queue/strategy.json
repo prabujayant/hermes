@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete migration story with before/after numbers on a proven high-variance topic (UUID write amplification) will outperform recent career threads by targeting the SQL/Postgres pillar where the 6,133-view winner lives.",
-  "pivots": 368,
+  "hypothesis": "Practical retry guidance can earn specific comments from engineers who have seen cascading failures, while shifting back to the scheduled system-design pillar.",
+  "pivots": 369,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T03:31:04.769181+00:00",
-      "pillar": "smart",
-      "hook_sig": "ai-written code should meet the same merge bar",
-      "texts": [
-        "AI-written code should meet the same merge bar as human code but reviewers must demand evidence for every assumption the model made. No more accepting \"the tests pass\" as proof of correctness.",
-        "The rule: every AI-generated PR must include a decision log. Not comments. A short markdown block listing the architectural choices the model picked, the alternatives it rejected, and why. Reviewers reject the PR if the log is missing or vague.",
-        "Example from last week. Model added a Redis cache layer for a read-heavy endpoint. Decision log showed it considered in-memory cache, rejected it due to multi-instance invalidation complexity, chose Redis with TTL based on p99 latency targets. Review took ten minutes. Approved.",
-        "Same endpoint, different PR. Model swapped the ORM query for raw SQL. No decision log. Reviewer asked why. Author said \"it was faster.\" Benchmark showed two percent gain on cold cache, zero on warm. PR rejected. The model optimized the wrong thing because no one forced it to show its work.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A clear AI-code review standard will earn more replies than a generic debate because engineers can share the checks they require before approving a diff.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 6090,
-      "ids": [
-        "18102232202649941",
-        "18100001060552567",
-        "17999940719820555",
-        "18101488874635881",
-        "17881935924629235"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T04:01:11.364116+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "17992203851859160"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-29T02:01:15.166092+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to design reliable services, stop",
+      "texts": [
+        "IF YOU WANT TO DESIGN RELIABLE SERVICES, STOP TREATING RETRIES AS FREE.\n\nMEMORIZE THESE 5 RETRY RULES:",
+        "Exponential backoff with jitter prevents thundering herds.\n\nA fixed 100ms retry across 1000 clients creates a synchronized hammer. Add full jitter: sleep random(0, 2^attempt * base). The retry curve flattens and the downstream survives.",
+        "Idempotency keys turn retries from dangerous to safe.\n\nGenerate a UUIDv7 per client operation. Store the key with the result for 24 hours. Duplicate requests return the cached response. No double charges, no duplicate rows, no reconciliation jobs.",
+        "Retry budgets cap the blast radius.\n\nAllow 10% of traffic to retry, not 100%. Track per-dependency budgets in a token bucket. When the bucket empties, fail fast. The caller sees a clean error instead of a cascading timeout.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Practical retry guidance can earn specific comments from engineers who have seen cascading failures, while shifting back to the scheduled system-design pillar.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 400,
+      "ids": [
+        "18080574230546667",
+        "17992887129063085",
+        "18028018097870925",
+        "17918132604261980",
+        "17965055331213712"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 395
+  "last_views": 400
 }
