@@ -1,33 +1,8 @@
 {
   "hypothesis": "A concrete, testable approach to design disagreement may draw more specific comments than broad promotion advice.",
-  "pivots": 383,
+  "pivots": 384,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T11:01:16.089751+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent three hours watching a healthy postgres",
-      "texts": [
-        "I spent three hours watching a healthy Postgres primary hit 100% CPU because one missing composite index turned a 5ms query into a sequential scan on 50 million rows. The query plan looked fine in staging. In production it melted the instance.",
-        "The concept is simple: Postgres chooses plans based on statistics, not data distribution. A query filtering on (tenant_id, status, created_at) with an index on (tenant_id, created_at) still scans every status value for that tenant. Statistics say \"tenant_id is selective\", they don't know status='pending' returns 90% of rows.",
-        "The fix was a single index: CREATE INDEX CONCURRENTLY ON events (tenant_id, status, created_at) WHERE status IN ('pending', 'processing'); Partial indexes shrink the B-tree by 80% and give the planner exact cardinality for the hot path. CPU dropped from 100% to 12% in minutes.",
-        "Most teams add more read replicas or increase instance size. The planner was begging for the right index shape all along. Run EXPLAIN (ANALYZE, BUFFERS) on your slowest query, look for \"Rows Removed by Filter\" in the millions. That is your missing index.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "Switching from AI review debate (P23-P30) to Matt Pocock's pain-concept-fix format on a concrete Postgres index failure because SQL schema statement winners (481, 402 views) prove this pillar and format convert.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 449,
-      "ids": [
-        "18423058171152931",
-        "18093754967168258",
-        "17953097079318544",
-        "17959673739255338",
-        "18147987388577407"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T11:27:22.573510+00:00",
       "pillar": "smart",
@@ -1250,6 +1225,31 @@
         "18126557017681473"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-29T17:01:16.786717+00:00",
+      "pillar": "smart",
+      "hook_sig": "things hiring managers can't tell from your resume",
+      "texts": [
+        "THINGS HIRING MANAGERS CAN'T TELL FROM YOUR RESUME (SO PROVE THEM IN THE INTERVIEW):",
+        "How you debug when prod is on fire.\n\nWalk through logs, metrics, and your first three commands. Process beats claims.",
+        "Whether you unblock others.\n\nOne story about the runbook you wrote or the junior you mentored beats five teamwork bullets.",
+        "Whether your numbers are real.\n\np95 800ms to 480ms with one index, verified over two weeks. Specifics get interviews.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete, testable approach to design disagreement may draw more specific comments than broad promotion advice.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 401,
+      "ids": [
+        "18154197244541203",
+        "18099774584210975",
+        "18139654048713283",
+        "18092883410213394",
+        "18118446748804823"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1259,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 396
+  "last_views": 401
 }
