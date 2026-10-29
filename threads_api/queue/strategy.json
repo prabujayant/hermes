@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Pivot to SQL/Postgres pillar with a high-variance hook on connection pool waits (Formula 1 caps-listicle), citing P30's system-design diagram angle but shifting to measurable pool metrics that drive p99.",
-  "pivots": 366,
+  "hypothesis": "Specific proof of scope, influence, and measurable outcomes can help engineers make a stronger promotion case and invite useful comments.",
+  "pivots": 367,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T02:31:06.284218+00:00",
-      "pillar": "smart",
-      "hook_sig": "review dilemma: ai-generated patch passes tests but changes",
-      "texts": [
-        "review dilemma: AI-generated patch passes tests but changes error handling; what would make you block the merge?",
-        "the PR looks clean. green CI. the AI replaced a try-catch that logged and re-threw with a custom error class that wraps the original. semantically equivalent on paper. but the new class strips the stack trace in production unless you configure the serializer exactly right.",
-        "senior engineer flagged it in review. not because it fails. because the error-handling contract changed without a migration plan. downstream services expect the old error shape in their catch blocks. the AI didn't know that. the tests didn't catch it because they mock the error boundary.",
-        "my rule: if an AI patch touches error handling, logging, retries, or timeouts, it needs a human who has been on call for that service. passing tests is table stakes. the merge decision is about blast radius, not correctness.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A specific merge decision will draw more useful replies than broad claims about AI coding",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 6067,
-      "ids": [
-        "18174272056409913",
-        "18021030194939436",
-        "17914528002530739",
-        "18091074257239319",
-        "18112173554272903"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T03:01:17.730937+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "18000550812041499"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-29T00:01:16.114682+00:00",
+      "pillar": "smart",
+      "hook_sig": "things promotion committees can't infer from your ticket",
+      "texts": [
+        "THINGS PROMOTION COMMITTEES CAN'T INFER FROM YOUR TICKET HISTORY (SO SHOW THEM IN YOUR PROMOTION PACKET):",
+        "Scope you expanded without being asked.\n\nA senior engineer rewrites the migration script so the next three teams avoid the same schema lock. The packet shows the before and after query plans, the hours saved per deploy, and the teams who adopted it.",
+        "Technical judgment you exercised under pressure.\n\nYou chose eventual consistency for the notification pipeline because the alternative was a distributed lock that added 200ms p99. The packet includes the load test that proved the tradeoff, the incident it prevented, and the decision log the team still references.",
+        "Friction you removed for everyone else.\n\nYou built the local test harness that cut integration feedback from 12 minutes to 40 seconds. The packet has the adoption graph, the onboarding time drop for new hires, and the three bugs caught in CI that would have reached prod.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Specific proof of scope, influence, and measurable outcomes can help engineers make a stronger promotion case and invite useful comments.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 384,
+      "ids": [
+        "18080320367399095",
+        "17885972427510832",
+        "17911935240304434",
+        "18028753442702396",
+        "18140327854723569"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 368
+  "last_views": 384
 }
