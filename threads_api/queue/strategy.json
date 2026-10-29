@@ -1,29 +1,8 @@
 {
-  "hypothesis": "Switching to a SQL\u2011focused caps listicle on primary\u2011key choices targets a high\u2011performing pillar (Postgres/ORM) that has been absent from the last 8 threads, raising reach variance while keeping the locked format.",
-  "pivots": 380,
+  "hypothesis": "A concrete, honest career lesson breaks the recent systems-topic run and gives readers a specific way to strengthen their promotion evidence.",
+  "pivots": 381,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T09:31:01.353126+00:00",
-      "pillar": "smart",
-      "hook_sig": "most database indexing advice assumes 2015 hardware. ssds,",
-      "texts": [
-        "Most database indexing advice assumes 2015 hardware. SSDs, parallel vacuum, and covering indexes changed the rules but the tutorials did not update. Here is what actually moves the needle now.",
-        "Lesson one. Stop indexing every foreign key by default. On modern Postgres a covering index on the query filter columns often eliminates the join entirely. I dropped three FK indexes last quarter and write throughput jumped twenty percent with zero plan regressions.",
-        "Lesson two. Partial indexes beat full indexes on high\n\nFollow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A minimal, verified NULL failure with a safer alternative will earn more specific engineer replies than another AI-review debate.",
-      "breakout": "",
-      "followers": 283,
-      "views_total": 417,
-      "ids": [
-        "18131372368866131",
-        "17913227256472544",
-        "17987355000108874"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T10:01:17.579647+00:00",
       "pillar": "smart",
@@ -1246,6 +1225,31 @@
         "18144200575523733"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-29T14:01:17.308521+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want behavioral rounds to remember you,",
+      "texts": [
+        "IF YOU WANT BEHAVIORAL ROUNDS TO REMEMBER YOU, STOP RECITING YOUR RESUME.\n\nMEMORIZE THESE 5 STORY RULES:",
+        "One story per question, 90 seconds max.\n\nSituation, action, result. Rambling loses the room before the result lands.",
+        "Lead with the conflict.\n\nWhat was hard, who disagreed, what was at stake. Tension is what makes stories stick.",
+        "End with what you would repeat.\n\nThe lesson proves growth. Anyone can survive a mess; seniors extract the rule.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete, honest career lesson breaks the recent systems-topic run and gives readers a specific way to strengthen their promotion evidence.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 365,
+      "ids": [
+        "18340997995259472",
+        "18138121699633360",
+        "18405691441200555",
+        "18058676390565594",
+        "18059853401561337"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1259,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 348
+  "last_views": 365
 }
