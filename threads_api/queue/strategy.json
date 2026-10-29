@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A concrete queue-overload angle with measurable capacity tradeoffs will invite more useful system-design discussion than another consistency post.",
-  "pivots": 376,
+  "hypothesis": "Concrete RTO, RPO, and split-brain tradeoffs will draw more useful system-design discussion than queue-overload advice.",
+  "pivots": 377,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T07:31:03.339508+00:00",
-      "pillar": "smart",
-      "hook_sig": "silent data bug: one null in a not",
-      "texts": [
-        "silent data bug: one NULL in a NOT IN subquery can make your filter return no rows",
-        "the query looks correct. you write where id not in (select user_id from banned_users). the subquery returns 1, 2, null. suddenly zero rows match. not because of logic. because null makes the whole predicate unknown, and unknown filters out.",
-        "this burned me on a billing job. we excluded test accounts with not in (select id from test_accounts). a migration left one row with id null. the job silently processed nothing for three days. no error. no alert. just missing revenue.",
-        "the fix is not in (select id from test_accounts where id is not null). or switch to not exists which ignores nulls by design. or add a check constraint so the column can never be null. pick one. never trust not in on a nullable column.",
-        "what is the weirdest silent data bug you have shipped? Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A precise NOT IN/NULL example with a NOT EXISTS fix will earn more specific engineer replies than another AI-review debate.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 394,
-      "ids": [
-        "17883663717529161",
-        "17959394193015319",
-        "17912912658511401",
-        "17877454053574083",
-        "18096118469149792"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T08:01:19.717336+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "18113768509879309"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-29T10:01:17.059001+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to design multi-region systems, stop",
+      "texts": [
+        "IF YOU WANT TO DESIGN MULTI-REGION SYSTEMS, STOP ASSUMING FAILOVER IS INSTANT.\n\nMEMORIZE THESE 5 TRADEOFFS:",
+        "Synchronous replication caps write latency at the speed of light between regions.\n\nA 50ms round trip means every commit waits 50ms. At 10K writes per second that is 500 seconds of cumulative stall per second. Async replication removes the wait but introduces a replication lag window where failover loses data.",
+        "DNS-based failover relies on TTL expiration and client resolver caches.\n\nA 60-second TTL with sticky resolvers can leave 30 percent of traffic hitting the dead region for five minutes. Health-check-driven load balancers cut this to seconds but add a control-plane dependency that itself must be multi-region.",
+        "Stateful services need a split-brain policy before the partition happens.\n\nQuorum requires a majority of nodes. In a two-region deployment that means one region is primary and the other cannot promote alone. Three regions solve quorum but triple the replication cost and operational surface.",
+        "Follow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Concrete RTO, RPO, and split-brain tradeoffs will draw more useful system-design discussion than queue-overload advice.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 284,
+      "ids": [
+        "18037022279907191",
+        "17905892985600088",
+        "18099146045210002",
+        "18284424445293241",
+        "18644228488029780"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 273
+  "last_views": 284
 }
