@@ -492,7 +492,8 @@
     "if you want to design reliable services, stop",
     "i mentored a junior engineer through six production",
     "uuidv7 fixes the write amplification of uuidv4 but",
-    "retrying a payment request without an idempotency key"
+    "retrying a payment request without an idempotency key",
+    "things that quietly break checkout after a payment"
   ],
   "last_run": "2026-10-08T06:18:02.273309+00:00"
 }
