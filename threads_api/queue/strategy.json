@@ -1,33 +1,8 @@
 {
-  "hypothesis": "Practical retry guidance can earn specific comments from engineers who have seen cascading failures, while shifting back to the scheduled system-design pillar.",
-  "pivots": 369,
+  "hypothesis": "A concrete, truthful story about documenting mentoring impact can draw useful career discussion without repeating offer or promotion advice.",
+  "pivots": 370,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T04:01:11.364116+00:00",
-      "pillar": "smart",
-      "hook_sig": "i keep a sticky note on my monitor",
-      "texts": [
-        "I keep a sticky note on my monitor with three gates. No AI diff gets merged until all three pass.",
-        "Gate 1: Behavior. Run the feature manually with the exact inputs a user would hit. Watch the happy path, then feed it garbage, empty strings, nulls, 10MB payloads. If the AI hallucinated a happy-path-only implementation, it fails here.",
-        "Gate 2: Failure modes. Ask: what happens when the network times out? When the DB locks? When the third-party API returns 500? The AI usually assumes success. Your job is to find every `try` block that swallows exceptions and every missing retry policy.",
-        "Gate 3: Tests. Not \"does it pass the suite.\" Write one test that would have caught the bug the AI *didn't* write. If you can't think of one, you don't understand the change well enough to approve it.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A concise, usable review gate will draw more specific replies than a generic debate about AI code quality.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 6096,
-      "ids": [
-        "18577536022078119",
-        "18466512424187336",
-        "18357731341247344",
-        "18118558483785971",
-        "17942215215099951"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T04:31:03.128399+00:00",
       "pillar": "smart",
@@ -1248,6 +1223,31 @@
         "17965055331213712"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-29T03:01:15.481016+00:00",
+      "pillar": "smart",
+      "hook_sig": "i mentored a junior engineer through six production",
+      "texts": [
+        "I mentored a junior engineer through six production incidents in one quarter. The work was easy to miss until I documented the outcome: mean time to resolve dropped from 47 minutes to 12 minutes, and zero escalations reached the on-call lead.",
+        "The metric that made it visible was not hours spent pairing. It was the change in the junior engineer's first-response accuracy. Before: 30 percent of their initial hypotheses matched the root cause. After: 78 percent. That number lives in the runbook now.",
+        "Most mentoring stays invisible because it is measured in advice given. Switch to advice adopted. Track the specific decisions the mentee makes differently after your input. A design doc they rewrote. A query they re-indexed. A rollback they initiated without asking.",
+        "When the promotion packet lands, the committee sees a table: incident count, MTTR before, MTTR after, escalation rate before, escalation rate after. The story writes itself. The mentor's name is in the acknowledgment section with data attached.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "A concrete, truthful story about documenting mentoring impact can draw useful career discussion without repeating offer or promotion advice.",
+      "breakout": "none",
+      "followers": 283,
+      "views_total": 404,
+      "ids": [
+        "18123609800005322",
+        "18106374956114346",
+        "18123486227318401",
+        "18119155544320660",
+        "18134024359674707"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1257,5 +1257,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 400
+  "last_views": 404
 }
