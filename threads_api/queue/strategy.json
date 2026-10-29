@@ -1,33 +1,8 @@
 {
-  "hypothesis": "A candid story about defining ownership and outcomes up front may prompt more specific career discussion than promotion advice",
-  "pivots": 379,
+  "hypothesis": "Switching to a SQL\u2011focused caps listicle on primary\u2011key choices targets a high\u2011performing pillar (Postgres/ORM) that has been absent from the last 8 threads, raising reach variance while keeping the locked format.",
+  "pivots": 380,
   "streak": 0,
   "history": [
-    {
-      "run_at": "2026-10-20T09:01:20.105024+00:00",
-      "pillar": "smart",
-      "hook_sig": "i spent three hours debugging a missing-row mystery",
-      "texts": [
-        "I spent three hours debugging a missing-row mystery only to find a single NULL in a lookup table. NOT IN returns zero rows when the subquery has NULL. Here is the smallest repro that bit me.",
-        "create table orders (id int, status text);\ncreate table cancelled (order_id int);\ninsert into orders values (1,'open'),(2,'shipped');\ninsert into cancelled values (1), (NULL);\nselect * from orders where id not in (select order_id from cancelled);\n-- returns nothing, not the shipped row",
-        "The ANSI spec says NOT IN (NULL) evaluates to UNKNOWN, so every row filters out. Most engineers expect the opposite. The fix is not a workaround, it is the correct operator.",
-        "select * from orders o where not exists (select 1 from cancelled c where c.order_id = o.id);\n-- returns the shipped row as intended\nNOT EXISTS is null-safe by design. Works the same in Postgres, MySQL, SQL Server, Oracle.",
-        "Follow @owlsky17 so you don't miss the next one."
-      ],
-      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-      "hypothesis": "A minimal, verified NULL failure with a safer alternative will earn more specific engineer replies than another AI-review debate.",
-      "breakout": "none",
-      "followers": 283,
-      "views_total": 412,
-      "ids": [
-        "18208643995371984",
-        "18236275732319164",
-        "18039097043844992",
-        "18487434292128781",
-        "18642410638035635"
-      ],
-      "pivoted": true
-    },
     {
       "run_at": "2026-10-20T09:31:01.353126+00:00",
       "pillar": "smart",
@@ -1246,6 +1221,31 @@
         "18172368310461282"
       ],
       "pivoted": true
+    },
+    {
+      "run_at": "2026-10-29T13:01:18.954950+00:00",
+      "pillar": "smart",
+      "hook_sig": "if you want to reduce index bloat in",
+      "texts": [
+        "IF YOU WANT TO REDUCE INDEX BLOAT IN POSTGRES, STOP DEFAULTING TO UUIDV4. MEMORIZE THESE 3 KEY STRATEGIES:",
+        "Use BIGINT for high-write tables\n\nA 64-bit integer keeps the primary key index compact, lets InnoDB cluster inserts sequentially, and cuts buffer-pool pressure by up to 75 percent compared with random UUIDv4.",
+        "Adopt UUIDv7 for ordered inserts\n\nUUIDv7 embeds a timestamp in the most significant bits, so new rows land on the right-most index pages. Write amplification drops to near-sequential levels while retaining global uniqueness.",
+        "Consider ULID for distributed id generation\n\nULID packs 128 bits with a 48-bit timestamp and 80 bits of randomness, sorts lexicographically, and fits in a single Postgres uuid column without the fragmentation of pure random UUIDs.",
+        "I post daily breakdowns like this for backend, SQL, and interviews.\n\nFollow @owlsky17 so you don't miss the next one."
+      ],
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "hypothesis": "Switching to a SQL\u2011focused caps listicle on primary\u2011key choices targets a high\u2011performing pillar (Postgres/ORM) that has been absent from the last 8 threads, raising reach variance while keeping the locked format.",
+      "breakout": "",
+      "followers": 283,
+      "views_total": 348,
+      "ids": [
+        "17954494266299076",
+        "18133427608690813",
+        "17891917419618624",
+        "18023176271937114",
+        "18144200575523733"
+      ],
+      "pivoted": true
     }
   ],
   "chief_strategist": {
@@ -1255,5 +1255,5 @@
     "since": "2026-10-10"
   },
   "last_followers": 283,
-  "last_views": 326
+  "last_views": 348
 }
